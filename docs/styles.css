@@ -270,6 +270,7 @@ a:hover {
     overflow: hidden;
     background: var(--code-bg);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
 }
 
 .code-header {
@@ -279,10 +280,73 @@ a:hover {
     background: rgba(255,255,255,0.1);
 }
 
+.code-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+}
+
+.code-dot:nth-child(2) {
+    background: #ffbd2e;
+}
+
+.code-dot:nth-child(3) {
+    background: #27c93f;
+}
+
 .code-content {
+    position: relative;
     padding: 1.5rem;
     font-size: 0.95rem;
     line-height: 1.5;
+}
+
+.code-content pre {
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+
+.code-content code {
+    font-family: 'Fira Code', monospace;
+    white-space: pre;
+}
+
+.copy-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    color: #e6e6e6;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    z-index: 10;
+}
+
+.code-content:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.copy-button:active {
+    transform: translateY(0);
+}
+
+.copy-button i {
+    font-size: 1rem;
 }
 
 /* Documentation Layout */

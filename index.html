@@ -8,6 +8,7 @@
     <meta property="og:title" content="camote-utils">
     <meta property="og:description" content="A modern TypeScript utility library for common programming tasks">
     <meta property="og:type" content="website">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="docs/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
@@ -115,17 +116,32 @@
             font-family: 'Fira Code', monospace;
             color: #e6e6e6;
             overflow-x: auto;
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 2.7rem;
+            right: 2.5rem;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .copy-button i {
+            font-size: 1.25rem;
+            color: #e6e6e6;
         }
 
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
-            background: var(--primary);
-            color: white;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
             font-size: 0.875rem;
-            margin: 0.25rem;
-            transition: transform 0.2s ease;
+            margin: 0.5rem 0 1rem;
         }
 
         .badge:hover {
@@ -237,6 +253,13 @@
             font-size: 1.5rem;
             font-weight: 500;
         }
+        
+        pre {
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+            color: #e6e6e6;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
@@ -274,6 +297,9 @@
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
+                        <button class="copy-button" onclick="copyCode(this)">
+                            <i class="fas fa-copy"></i>
+                        </button>
                         <pre><code class="language-bash">npm install camote-utils</code></pre>
                     </div>
                 </div>
@@ -306,6 +332,9 @@
                     <div class="code-dot"></div>
                 </div>
                 <div class="code-content">
+                    <button class="copy-button" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i>
+                    </button>
                     <pre><code class="language-typescript">import { humanReadableNumber, formatCurrency } from 'camote-utils';
 
 // Format large numbers
@@ -356,6 +385,27 @@ console.log(formatCurrency(1234.56, 'USD')); // "$1,234.56"</code></pre>
                 console.error('Failed to fetch download count:', error);
                 document.getElementById('download-count').textContent = '...';
             }
+        }
+
+        // Copy code function
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Change button icon temporarily
+                const icon = button.querySelector('i');
+                icon.classList.remove('fa-copy');
+                icon.classList.add('fa-check');
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    icon.classList.remove('fa-check');
+                    icon.classList.add('fa-copy');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
         }
 
         // Fetch download count when page loads
