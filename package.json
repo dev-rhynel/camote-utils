@@ -1,0 +1,41 @@
+{
+  "name": "@rhynel/camote",
+  "version": "1.1.0",
+  "description": "A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-rhynel/camote.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dev-rhynel/camote/issues"
+  },
+  "homepage": "https://github.com/dev-rhynel/camote#readme",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "algorithms",
+    "typescript",
+    "data-structures",
+    "formatting",
+    "utilities",
+    "string-formatting",
+    "number-formatting",
+    "text-manipulation",
+    "currency-formatting",
+    "file-size-formatting"
+  ],
+  "author": "rhynel",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.5",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  }
+}
