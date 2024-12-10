@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - @rhynel/camote</title>
+    <meta name="description" content="Documentation for @rhynel/camote TypeScript utility library">
+    <meta property="og:title" content="@rhynel/camote Documentation">
+    <meta property="og:description" content="Documentation for @rhynel/camote TypeScript utility library">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="back-link">
+            <a href="../index.html" class="doc-button">
+                <i class="fas fa-arrow-left"></i>Back to Main Page
+            </a>
+        </div>
+        <div class="nav-group">
+            <h3>Getting Started</h3>
+            <ul class="nav-links">
+                <li><a href="#installation" class="active">Installation</a></li>
+                <li><a href="#quickstart">Quick Start</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <h3>Number Utilities</h3>
+            <ul class="nav-links">
+                <li><a href="#humanReadableNumber">humanReadableNumber</a></li>
+                <li><a href="#formatCurrency">formatCurrency</a></li>
+                <li><a href="#formatPercentage">formatPercentage</a></li>
+                <li><a href="#formatFileSize">formatFileSize</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <h3>String Utilities</h3>
+            <ul class="nav-links">
+                <li><a href="#slugify">slugify</a></li>
+                <li><a href="#camelCase">camelCase</a></li>
+                <li><a href="#kebabCase">kebabCase</a></li>
+                <li><a href="#snakeCase">snakeCase</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-group">
+            <h3>Advanced</h3>
+            <ul class="nav-links">
+                <li><a href="#typescript">TypeScript Usage</a></li>
+                <li><a href="#browser">Browser Support</a></li>
+                <li><a href="#contributing">Contributing</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <h1>@rhynel/camote Documentation</h1>
+        <p class="badge">v1.0.0</p>
+
+        <section id="installation">
+            <h2>Installation</h2>
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-bash">npm install @rhynel/camote</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="quickstart">
+            <h2>Quick Start</h2>
+            <p>Import the functions you need:</p>
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-typescript">import { humanReadableNumber, formatCurrency } from '@rhynel/camote';</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="humanReadableNumber">
+            <h2>humanReadableNumber</h2>
+            <p>Converts a number into a human-readable string with appropriate suffixes (K, M, B, T).</p>
+            
+            <h3>Syntax</h3>
+            <div class="code-window">
+                <div class="code-content">
+                    <pre><code class="language-typescript">function humanReadableNumber(
+    value: number,
+    options?: {
+        precision?: number;
+        format?: 'short' | 'long';
+    }
+): string</code></pre>
+                </div>
+            </div>
+
+            <h3>Parameters</h3>
+            <ul>
+                <li><code>value</code>: The number to format</li>
+                <li><code>options</code> (optional):
+                    <ul>
+                        <li><code>precision</code>: Number of decimal places (default: 2)</li>
+                        <li><code>format</code>: Output format - 'short' (K, M, B) or 'long' (thousand, million, billion)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Examples</h3>
+            <div class="code-window">
+                <div class="code-content">
+                    <pre><code class="language-typescript">humanReadableNumber(1234);       // "1.23K"
+humanReadableNumber(1234567);    // "1.23M"
+humanReadableNumber(1234567890); // "1.23B"
+
+// With options
+humanReadableNumber(1234, { precision: 1 });           // "1.2K"
+humanReadableNumber(1234, { format: 'long' });         // "1.23 thousand"
+humanReadableNumber(1234567, { format: 'long' });      // "1.23 million"</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="formatCurrency">
+            <h2>formatCurrency</h2>
+            <p>Formats a number as a currency string using the specified locale and currency code.</p>
+            
+            <h3>Syntax</h3>
+            <div class="code-window">
+                <div class="code-content">
+                    <pre><code class="language-typescript">function formatCurrency(
+    value: number,
+    currency: string = 'USD',
+    locale: string = 'en-US'
+): string</code></pre>
+                </div>
+            </div>
+
+            <h3>Parameters</h3>
+            <ul>
+                <li><code>value</code>: The number to format</li>
+                <li><code>currency</code>: ISO 4217 currency code (default: 'USD')</li>
+                <li><code>locale</code>: BCP 47 language tag (default: 'en-US')</li>
+            </ul>
+
+            <h3>Examples</h3>
+            <div class="code-window">
+                <div class="code-content">
+                    <pre><code class="language-typescript">formatCurrency(1234.56);                    // "$1,234.56"
+formatCurrency(1234.56, 'EUR');             // "€1,234.56"
+formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
+formatCurrency(1234.56, 'GBP', 'en-GB');    // "£1,234.56"</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="typescript">
+            <h2>TypeScript Usage</h2>
+            <p>This library is written in TypeScript and includes type definitions. No additional @types packages are needed.</p>
+            
+            <div class="code-window">
+                <div class="code-content">
+                    <pre><code class="language-typescript">import { humanReadableNumber, CurrencyOptions } from '@rhynel/camote';
+
+// Type checking works out of the box
+const options: CurrencyOptions = {
+    currency: 'USD',
+    locale: 'en-US'
+};
+
+const formatted = formatCurrency(1234.56, options);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="browser">
+            <h2>Browser Support</h2>
+            <p>This library is compatible with all modern browsers and Node.js environments. It's built using ES2018+ features and includes necessary polyfills for older environments.</p>
+            
+            <div class="code-window">
+                <div class="code-content">
+                    <pre><code class="language-html">&lt;script src="https://unpkg.com/@rhynel/camote"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const { humanReadableNumber } = window.camote;
+    console.log(humanReadableNumber(1234567)); // "1.23M"
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="contributing">
+            <h2>Contributing</h2>
+            <p>We welcome contributions! Please follow these steps:</p>
+            <ol>
+                <li>Fork the repository</li>
+                <li>Create a feature branch</li>
+                <li>Make your changes</li>
+                <li>Run tests with <code>npm test</code></li>
+                <li>Submit a pull request</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/rhynel/camote" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.npmjs.com/package/@rhynel/camote" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-npm"></i>
+            </a>
+        </div>
+        <p class="updated-time">Last updated: December 11, 2024</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-html.min.js"></script>
+</body>
+</html>
