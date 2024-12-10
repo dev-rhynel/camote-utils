@@ -1,13 +1,14 @@
-# @rhynel/camote
+# camote-utils
 
-A comprehensive TypeScript utility library featuring advanced string and number formatting functions.
+A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms.
 
-> Last updated: 2024-12-11T03:32:49+08:00
+[![npm version](https://img.shields.io/npm/v/camote-utils.svg)](https://www.npmjs.com/package/camote-utils)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Installation
 
 ```bash
-npm install @rhynel/camote
+npm install camote-utils
 ```
 
 ## Usage
@@ -23,7 +24,7 @@ import {
   formatFileSize,
   formatCurrency,
   formatDecimals
-} from '@rhynel/camote';
+} from 'camote-utils';
 
 // Human readable numbers
 console.log(humanReadableNumber(1234));     // "1.2K"
@@ -73,7 +74,7 @@ import {
   format,
   reverse,
   clean
-} from '@rhynel/camote';
+} from 'camote-utils';
 
 // Capitalize strings
 console.log(capitalize("hello"));  // "Hello"
@@ -115,31 +116,16 @@ console.log(clean("  hello   world  "));  // "hello world"
 
 ## Features
 
-- Comprehensive number formatting utilities:
-  - Human-readable numbers (K, M, B suffixes)
-  - Comma-separated numbers
-  - Percentage formatting
-  - Ordinal numbers (1st, 2nd, 3rd)
-  - File size formatting (KB, MB, GB)
-  - Currency formatting with locale support
-  - Decimal place formatting with rounding options
+- 🚀 **Fast & Lightweight**: Optimized for performance
+- 💪 **Type-Safe**: Written in TypeScript with full type definitions
+- 🔧 **Easy to Use**: Simple, intuitive API
+- 🌍 **Internationalization**: Support for multiple locales
+- 📦 **Tree-Shakeable**: Import only what you need
 
-- Advanced string manipulation functions:
-  - Case conversions (camelCase, kebab-case, snake_case)
-  - URL-friendly slug generation
-  - Word counting
-  - String padding with flexible positioning
-  - Template string formatting
-  - String reversal
-  - Whitespace cleaning
+## Documentation
 
-- Development features:
-  - Written in TypeScript with full type definitions
-  - Comprehensive test suite with 58+ unit tests
-  - Zero dependencies
-  - Modern ES2018+ compatible
-  - Well-documented with examples
+Visit our [documentation](https://dev-rhynel.github.io/camote-utils/) for detailed API references and examples.
 
 ## License
 
-MIT
+MIT © [Rhynel](https://github.com/dev-rhynel)

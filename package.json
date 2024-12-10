@@ -1,21 +1,26 @@
 {
-  "name": "@rhynel/camote",
-  "version": "1.1.0",
+  "name": "camote-utils",
+  "version": "1.0.2",
   "description": "A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dev-rhynel/camote.git"
+    "url": "https://github.com/dev-rhynel/camote-utils.git"
   },
   "bugs": {
-    "url": "https://github.com/dev-rhynel/camote/issues"
+    "url": "https://github.com/dev-rhynel/camote-utils/issues"
   },
-  "homepage": "https://github.com/dev-rhynel/camote#readme",
+  "homepage": "https://github.com/dev-rhynel/camote-utils#readme",
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run build"
   },
   "keywords": [
     "algorithms",
@@ -27,10 +32,13 @@
     "number-formatting",
     "text-manipulation",
     "currency-formatting",
-    "file-size-formatting"
+    "file-size-formatting",
+    "camote",
+    "camote-utils"
   ],
-  "author": "rhynel",
+  "author": "Rhynel",
   "license": "MIT",
+  "private": false,
   "devDependencies": {
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.5",
