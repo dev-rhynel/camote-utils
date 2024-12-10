@@ -140,7 +140,8 @@ a:hover {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
-    margin: 1rem 0 2rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
     position: relative;
     z-index: 10;
 }
@@ -149,29 +150,52 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
     padding: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    font-size: 0.95rem;
     transition: var(--transition);
+    text-decoration: none;
 }
 
 .hero-stat:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
 }
 
 .hero-stat i {
-    font-size: 1.1rem;
-}
-
-.hero-stat a {
-    color: white;
-    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    width: 1.2rem;
+    text-align: center;
 }
 
 .hero-stat .count {
     font-weight: 600;
+    color: #fff;
+    min-width: 3rem;
+    text-align: right;
+}
+
+.hero-stat .stat-period {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+.hero-stat .version {
+    font-weight: 600;
+    color: #fff;
+}
+
+.hero-stat a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.hero-stat a:hover {
+    color: #fff;
 }
 
 /* Layout */
@@ -466,6 +490,97 @@ footer {
 .updated-time {
     font-size: 0.875rem;
     opacity: 0.7;
+}
+
+/* Contributors Section */
+.contributors {
+    padding: 3rem 0;
+    background: var(--code-bg);
+}
+
+.contributors h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.contributors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.contributor {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    text-decoration: none;
+    color: #fff;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.contributor:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.contributor img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.contributor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.contributor-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contributor-count {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 640px) {
+    .contributors {
+        padding: 2rem 0;
+    }
+    
+    .contributors h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .contributor {
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .contributor img {
+        width: 28px;
+        height: 28px;
+    }
 }
 
 /* Responsive Design */
