@@ -205,15 +205,60 @@
             transform: translateY(0);
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+
+        .hero-icon {
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-stat i {
+            font-size: 1.5rem;
+        }
+
+        .hero-stat .count {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
     <main>
         <section class="hero">
             <div class="container">
+                <div class="hero-icon">
+                    <img src="https://github.com/user-attachments/assets/9302d4b2-38fd-4869-97b2-72616b22682f" alt="@rhynel/camote icon" class="logo">
+                </div>
                 <h1>@rhynel/camote</h1>
                 <p class="badge">v1.0.0</p>
                 <p class="hero-description">A modern TypeScript utility library for common programming tasks</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <i class="fas fa-download"></i>
+                        <span id="download-count" class="count">...</span> downloads
+                    </div>
+                    <div class="hero-stat">
+                        <i class="fab fa-npm"></i>
+                        <a href="https://www.npmjs.com/package/@rhynel/camote" target="_blank">npm package</a>
+                    </div>
+                </div>
                 <div class="hero-buttons">
                     <a href="docs/documentation.html" class="doc-button">
                         <i class="fas fa-book"></i>View Documentation
@@ -288,5 +333,33 @@ console.log(formatCurrency(1234.56, 'USD')); // "$1,234.56"</code></pre>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script>
+        // Fetch NPM download count
+        async function fetchDownloadCount() {
+            try {
+                const response = await fetch('https://api.npmjs.org/downloads/point/last-month/@rhynel/camote');
+                const data = await response.json();
+                const count = data.downloads;
+                
+                // Format the number
+                let formattedCount;
+                if (count >= 1000000) {
+                    formattedCount = (count / 1000000).toFixed(1) + 'M';
+                } else if (count >= 1000) {
+                    formattedCount = (count / 1000).toFixed(1) + 'k';
+                } else {
+                    formattedCount = count;
+                }
+                
+                document.getElementById('download-count').textContent = formattedCount;
+            } catch (error) {
+                console.error('Failed to fetch download count:', error);
+                document.getElementById('download-count').textContent = '...';
+            }
+        }
+
+        // Fetch download count when page loads
+        fetchDownloadCount();
+    </script>
 </body>
 </html>
