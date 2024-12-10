@@ -65,11 +65,25 @@ a:hover {
     opacity: 0.1;
 }
 
+/* Hero Icon Animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
 .hero-icon {
     margin-bottom: 3rem;
     display: flex;
     justify-content: center;
     position: relative;
+    animation: float 3s ease-in-out infinite;
 }
 
 .hero-icon .logo {
