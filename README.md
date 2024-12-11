@@ -73,7 +73,8 @@ import {
   pad,
   format,
   reverse,
-  clean
+  clean,
+  pluralize
 } from 'camote-utils';
 
 // Capitalize strings
@@ -112,6 +113,13 @@ console.log(reverse("hello"));  // "olleh"
 
 // Clean whitespace
 console.log(clean("  hello   world  "));  // "hello world"
+
+// Pluralization
+console.log(pluralize('cat', 1));              // "cat"
+console.log(pluralize('cat', 2));              // "cats"
+console.log(pluralize('baby', 2));             // "babies"
+console.log(pluralize('box', 2));              // "boxes"
+console.log(pluralize('child', 2, 'children')); // "children"
 ```
 
 ## Features

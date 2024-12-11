@@ -137,6 +137,7 @@ a:hover {
 }
 
 .hero-stats {
+
     display: flex;
     gap: 2.5rem;
     justify-content: center;

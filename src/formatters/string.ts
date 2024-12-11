@@ -173,3 +173,44 @@ export const reverse = (str: string): string => {
 export const clean = (str: string): string => {
   return str.trim().replace(/\s+/g, " ")
 }
+
+/**
+ * Pluralizes a word based on count or returns custom plural form
+ * @param word - The singular form of the word
+ * @param count - The count to determine pluralization (optional)
+ * @param customPlural - Custom plural form (optional)
+ * @returns The pluralized or singular word based on count
+ * @example
+ * pluralize("cat", 1)              // "cat"
+ * pluralize("cat", 2)              // "cats"
+ * pluralize("baby", 2)             // "babies"
+ * pluralize("box", 2)              // "boxes"
+ * pluralize("child", 2, "children") // "children"
+ * pluralize("person", undefined, "people") // "people"
+ */
+export const pluralize = (
+  word: string,
+  count?: number,
+  customPlural?: string
+): string => {
+  // If count is 1, return singular form
+  if (count === 1) return word;
+  
+  // If custom plural is provided, use it
+  if (customPlural) return customPlural;
+  
+  // Basic English pluralization rules
+  if (word.endsWith('y')) {
+    // Consonant + y: change y to ies
+    if (!/[aeiou]y$/i.test(word)) {
+      return word.slice(0, -1) + 'ies';
+    }
+  } else if (word.endsWith('s') || word.endsWith('sh') || 
+             word.endsWith('ch') || word.endsWith('x') || 
+             word.endsWith('z')) {
+    return word + 'es';
+  }
+  
+  // Default: add 's'
+  return word + 's';
+}

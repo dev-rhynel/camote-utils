@@ -9,7 +9,8 @@ import {
   pad,
   format,
   reverse,
-  clean
+  clean,
+  pluralize 
 } from '../src/formatters/string'
 
 describe('String Formatters', () => {
@@ -172,4 +173,37 @@ describe('String Formatters', () => {
       expect(clean('')).toBe('')
     })
   })
+
+  describe('pluralize', () => {
+    test('returns singular form when count is 1', () => {
+      expect(pluralize('cat', 1)).toBe('cat');
+      expect(pluralize('dog', 1)).toBe('dog');
+    });
+  
+    test('uses custom plural form when provided', () => {
+      expect(pluralize('person', 2, 'people')).toBe('people');
+      expect(pluralize('child', 2, 'children')).toBe('children');
+    });
+  
+    test('handles words ending in y correctly', () => {
+      expect(pluralize('baby', 2)).toBe('babies');
+      expect(pluralize('toy', 2)).toBe('toys');  // y after vowel
+    });
+  
+    test('handles words requiring es suffix', () => {
+      expect(pluralize('box', 2)).toBe('boxes');
+      expect(pluralize('church', 2)).toBe('churches');
+      expect(pluralize('buzz', 2)).toBe('buzzes');
+    });
+  
+    test('adds s for regular plurals', () => {
+      expect(pluralize('cat', 2)).toBe('cats');
+      expect(pluralize('dog', 2)).toBe('dogs');
+    });
+  
+    test('uses plural form when count is undefined', () => {
+      expect(pluralize('cat')).toBe('cats');
+      expect(pluralize('person', undefined, 'people')).toBe('people');
+    });
+  });
 })

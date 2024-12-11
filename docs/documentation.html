@@ -179,6 +179,35 @@ kebabCase('hello world');    // "hello-world"
 snakeCase('hello world');    // "hello_world"</code></pre>
                 </div>
             </div>
+
+            <div class="content-block">
+                <h3>Pluralization</h3>
+                <p>
+                    The <code>pluralize</code> function helps you convert singular words to their plural form based on a count.
+                    It handles common English pluralization rules and supports custom plural forms.
+                </p>
+                <div class="code-block">
+                    <pre><code class="language-typescript">// Basic pluralization
+pluralize("cat", 1);              // "cat"
+pluralize("cat", 2);              // "cats"
+pluralize("baby", 2);             // "babies"
+pluralize("box", 2);              // "boxes"
+
+// Custom plural forms
+pluralize("child", 2, "children"); // "children"
+pluralize("person", 2, "people");  // "people"</code></pre>
+                </div>
+                <div class="api-details">
+                    <h4>Parameters</h4>
+                    <ul>
+                        <li><code>word</code> (string) - The singular form of the word</li>
+                        <li><code>count</code> (number, optional) - The count to determine pluralization</li>
+                        <li><code>customPlural</code> (string, optional) - Custom plural form</li>
+                    </ul>
+                    <h4>Returns</h4>
+                    <p>Returns the pluralized or singular word based on count.</p>
+                </div>
+            </div>
         </section>
 
         <section id="typescript">
