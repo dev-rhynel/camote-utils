@@ -133,3 +133,26 @@ export const formatDecimals = (
   
   return result.toFixed(decimals)
 }
+
+/**
+ * Calculates the final price after applying a discount
+ * @param originalPrice - The original price before discount
+ * @param discountAmount - The amount of discount to apply
+ * @param discountType - The type of discount ('%' for percentage, '$' for fixed amount)
+ * @returns The price after applying the discount, rounded to 2 decimal places
+ * @example
+ * calculateDiscountPrice(100, 20, '%')  // 80.00 (20% off)
+ * calculateDiscountPrice(100, 30, '$')  // 70.00 ($30 off)
+ * calculateDiscountPrice(100, 10)       // 90.00 (10% off)
+ */
+export const calculateDiscountPrice = (
+  originalPrice: number,
+  discountAmount: number,
+  discountType: '%' | '$' = '%'
+): number => {
+  const discountValue = discountType === '$' 
+    ? discountAmount 
+    : originalPrice * (discountAmount / 100)
+    
+  return parseFloat((originalPrice - discountValue).toFixed(2))
+}

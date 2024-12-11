@@ -24,13 +24,13 @@ import {
   formatOrdinal,
   formatFileSize,
   formatCurrency,
-  formatDecimals
+  formatDecimals,
+  calculateDiscountPrice
 } from 'camote-utils';
 
 // Human readable numbers
 console.log(humanReadableNumber(1234));     // "1.2K"
 console.log(humanReadableNumber(1500000));  // "1.5M"
-console.log(humanReadableNumber(1000000000)); // "1.0B"
 
 // Numbers with commas
 console.log(formatWithCommas(1234567));  // "1,234,567"
@@ -42,22 +42,25 @@ console.log(formatPercentage(0.1234, 1)); // "12.3%"
 // Ordinal numbers
 console.log(formatOrdinal(1));  // "1st"
 console.log(formatOrdinal(2));  // "2nd"
-console.log(formatOrdinal(3));  // "3rd"
-console.log(formatOrdinal(4));  // "4th"
 
 // File sizes
-console.log(formatFileSize(1024));        // "1.00 KB"
-console.log(formatFileSize(1234567));     // "1.18 MB"
-console.log(formatFileSize(1024 * 1024)); // "1.00 MB"
+console.log(formatFileSize(1024));     // "1.00 KB"
+console.log(formatFileSize(1234567));  // "1.18 MB"
 
 // Currency
-console.log(formatCurrency(1234.56));                    // "$1,234.56"
-console.log(formatCurrency(1234.56, 'EUR', 'de-DE'));   // "1.234,56 €"
+console.log(formatCurrency(1234.56));                  // "$1,234.56"
+console.log(formatCurrency(1234.56, 'EUR', 'de-DE')); // "1.234,56 €"
 
-// Decimal places with rounding
-console.log(formatDecimals(1.2345, 2));           // "1.23"
-console.log(formatDecimals(1.2345, 2, 'ceil'));   // "1.24"
-console.log(formatDecimals(1.2345, 2, 'floor'));  // "1.23"
+// Decimal places
+console.log(formatDecimals(1.2345, 2));         // "1.23"
+console.log(formatDecimals(1.2345, 2, 'ceil')); // "1.24"
+
+// Price calculations
+console.log(calculateDiscountPrice(100, 20));     // 80.00
+console.log(calculateDiscountPrice(50, 10, '%')); // 45.00
+console.log(calculateDiscountPrice(100, 30, '$')); // 70.00
+console.log(calculateDiscountPrice(75.50, 15, '%')); // 64.17
+console.log(calculateDiscountPrice(50.55, 10.55, '$')); // 40.00
 ```
 
 ### String Formatting

@@ -32,6 +32,7 @@
             <h3>API Reference</h3>
             <ul class="nav-links">
                 <li><a href="#number-formatting">Number Formatting</a></li>
+                <li><a href="#price-calculations">Price Calculations</a></li>
                 <li><a href="#currency-formatting">Currency Formatting</a></li>
                 <li><a href="#string-manipulation">String Manipulation</a></li>
             </ul>
@@ -83,43 +84,86 @@
 
         <section id="number-formatting">
             <h2>Number Formatting</h2>
-            <p>Converts a number into a human-readable string with appropriate suffixes (K, M, B, T).</p>
-            
-            <h3>Syntax</h3>
-            <div class="code-window">
-                <div class="code-content">
-                    <pre><code class="language-typescript">function formatNumber(
-    value: number,
-    options?: {
-        precision?: number;
-        format?: 'short' | 'long';
-    }
-): string</code></pre>
+            <div class="content-section">
+                <p>Comprehensive utilities for formatting numbers in various ways.</p>
+                
+                <div class="example-block">
+                    <h3>Basic Number Formatting</h3>
+                    <pre><code class="language-typescript">import { 
+  humanReadableNumber,
+  formatWithCommas,
+  formatPercentage,
+  formatOrdinal,
+  formatFileSize,
+  formatDecimals
+} from 'camote-utils';
+
+// Human readable numbers
+humanReadableNumber(1234);     // "1.2K"
+humanReadableNumber(1500000);  // "1.5M"
+
+// Numbers with commas
+formatWithCommas(1234567);  // "1,234,567"
+
+// Percentages
+formatPercentage(0.1234);    // "12%"
+formatPercentage(0.1234, 1); // "12.3%"
+
+// Ordinal numbers
+formatOrdinal(1);  // "1st"
+formatOrdinal(2);  // "2nd"
+
+// File sizes
+formatFileSize(1024);     // "1.00 KB"
+formatFileSize(1234567);  // "1.18 MB"
+
+// Decimal places
+formatDecimals(1.2345, 2);        // "1.23"
+formatDecimals(1.2345, 2, 'ceil'); // "1.24"</code></pre>
                 </div>
             </div>
+        </section>
 
-            <h3>Parameters</h3>
-            <ul>
-                <li><code>value</code>: The number to format</li>
-                <li><code>options</code> (optional):
+        <section id="price-calculations">
+            <h2>Price Calculations</h2>
+            <div class="content-section">
+                <p>Utilities for calculating prices with discounts. Supports both percentage and fixed amount discounts with precise decimal handling.</p>
+                
+                <div class="example-block">
+                    <h3>calculateDiscountPrice</h3>
+                    <p>Calculates the final price after applying a discount.</p>
+
+                    <h4>Parameters</h4>
                     <ul>
-                        <li><code>precision</code>: Number of decimal places (default: 2)</li>
-                        <li><code>format</code>: Output format - 'short' (K, M, B) or 'long' (thousand, million, billion)</li>
+                        <li><code>originalPrice: number</code> - The original price before discount</li>
+                        <li><code>discountAmount: number</code> - The amount of discount to apply</li>
+                        <li><code>discountType: '%' | '$' = '%'</code> - The type of discount (percentage or fixed amount, defaults to percentage)</li>
                     </ul>
-                </li>
-            </ul>
 
-            <h3>Examples</h3>
-            <div class="code-window">
-                <div class="code-content">
-                    <pre><code class="language-typescript">formatNumber(1234);       // "1.23K"
-formatNumber(1234567);    // "1.23M"
-formatNumber(1234567890); // "1.23B"
+                    <h4>Returns</h4>
+                    <p><code>number</code> - The price after applying the discount, rounded to 2 decimal places</p>
 
-// With options
-formatNumber(1234, { precision: 1 });           // "1.2K"
-formatNumber(1234, { format: 'long' });         // "1.23 thousand"
-formatNumber(1234567, { format: 'long' });      // "1.23 million"</code></pre>
+                    <h4>Examples</h4>
+                    <pre><code class="language-typescript">import { calculateDiscountPrice } from 'camote-utils';
+
+// Percentage discount (default)
+calculateDiscountPrice(100, 20);      // 80.00
+calculateDiscountPrice(50, 10, '%');  // 45.00
+
+// Fixed amount discount
+calculateDiscountPrice(100, 30, '$'); // 70.00
+
+// Precise decimal handling
+calculateDiscountPrice(75.50, 15, '%');    // 64.17
+calculateDiscountPrice(50.55, 10.55, '$'); // 40.00</code></pre>
+
+                    <h4>Notes</h4>
+                    <ul>
+                        <li>Defaults to percentage discount if no type is specified</li>
+                        <li>Results are automatically rounded to 2 decimal places</li>
+                        <li>Handles decimal inputs with precision</li>
+                        <li>Negative results are possible when fixed discount exceeds price</li>
+                    </ul>
                 </div>
             </div>
         </section>

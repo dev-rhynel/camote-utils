@@ -5,7 +5,8 @@ import {
   formatOrdinal,
   formatFileSize,
   formatCurrency,
-  formatDecimals
+  formatDecimals,
+  calculateDiscountPrice
 } from '../src/formatters/number'
 
 describe('Number Formatters', () => {
@@ -124,6 +125,43 @@ describe('Number Formatters', () => {
 
     it('should handle zero', () => {
       expect(formatDecimals(0, 2)).toBe('0.00')
+    })
+  })
+
+  describe('calculateDiscountPrice', () => {
+    test('should calculate percentage discount correctly', () => {
+      expect(calculateDiscountPrice(100, 20, '%')).toBe(80.00)
+      expect(calculateDiscountPrice(50, 10, '%')).toBe(45.00)
+      expect(calculateDiscountPrice(75.50, 15, '%')).toBe(64.17)
+    })
+
+    test('should calculate fixed amount discount correctly', () => {
+      expect(calculateDiscountPrice(100, 30, '$')).toBe(70.00)
+      expect(calculateDiscountPrice(50, 10, '$')).toBe(40.00)
+      expect(calculateDiscountPrice(75.50, 15.50, '$')).toBe(60.00)
+    })
+
+    test('should default to percentage discount when no type is specified', () => {
+      expect(calculateDiscountPrice(100, 10)).toBe(90.00)
+      expect(calculateDiscountPrice(50, 20)).toBe(40.00)
+      expect(calculateDiscountPrice(75.50, 25)).toBe(56.63)
+    })
+
+    test('should handle edge cases correctly', () => {
+      // 100% discount
+      expect(calculateDiscountPrice(100, 100, '%')).toBe(0.00)
+      // 0% discount
+      expect(calculateDiscountPrice(100, 0, '%')).toBe(100.00)
+      // Discount greater than price
+      expect(calculateDiscountPrice(50, 75, '$')).toBe(-25.00)
+      // Zero price
+      expect(calculateDiscountPrice(0, 20, '%')).toBe(0.00)
+    })
+
+    test('should round to 2 decimal places', () => {
+      expect(calculateDiscountPrice(100.33, 33.33, '%')).toBe(66.89)
+      expect(calculateDiscountPrice(50.55, 10.55, '$')).toBe(40.00)
+      expect(calculateDiscountPrice(75.99, 25)).toBe(56.99)
     })
   })
 })
