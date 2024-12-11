@@ -92,8 +92,10 @@
             background: var(--code-bg);
             border-radius: 0.5rem;
             padding: 1rem;
-            margin: 2rem 0;
+            margin: 2rem auto;
             position: relative;
+            max-width: 700px;
+            width: 90%;
         }
 
         .code-header {
@@ -395,13 +397,21 @@
                     <button class="copy-button" onclick="copyCode(this)">
                         <i class="fas fa-copy"></i>
                     </button>
-                    <pre><code class="language-typescript">import { humanReadableNumber, formatCurrency } from 'camote-utils';
+                    <pre><code class="language-typescript">import { humanReadableNumber, pluralize } from 'camote-utils';
 
 // Format large numbers
-console.log(humanReadableNumber(1234567)); // "1.23M"
+console.log(humanReadableNumber(1234567));      // "1.23M"
 
-// Format currency
-console.log(formatCurrency(1234.56, 'USD')); // "$1,234.56"</code></pre>
+// Basic pluralization
+console.log(pluralize("cat", 1));               // "cat"
+console.log(pluralize("cat", 2));               // "cats"
+console.log(pluralize("baby", 2));              // "babies"
+
+// Custom plural forms
+console.log(pluralize("child", 2, "children")); // "children"
+console.log(pluralize("person", 2, "people"));  // "people"
+
+</code></pre>
                 </div>
             </div>
         </section>
