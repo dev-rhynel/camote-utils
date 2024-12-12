@@ -26,7 +26,8 @@ import {
   pluralize,
   generateUuid,
   isUrl,
-  isUuid 
+  isUuid,
+  isDateWithinRange 
 } from 'camote-utils';
 
 // Format numbers
@@ -57,6 +58,11 @@ generateUuid();  // "123e4567-e89b-12d3-a456-426614174000"
 // Validate strings
 isUrl('https://example.com');  // true
 isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
+
+// Check if date is within range
+const startDate = new Date('2024-01-01');
+const endDate = new Date('2024-12-31');
+isDateWithinRange(startDate, endDate);  // true if current date is within range
 ```
 
 ## API Reference
@@ -167,8 +173,28 @@ toKebabCase('Hello World');  // "hello-world"
 Generates a UUID v4 string.
 
 ```typescript
-generateUuid();  // "123e4567-e89b-12d3-a456-426614174000"
+generateUuid();  // "123e4567-e29b-41d4-a716-446655440000"
 generateUuid();  // "550e8400-e29b-41d4-a716-446655440000"
+```
+
+### Date Validation
+
+#### isDateWithinRange(startDate: Date | null, endDate: Date | null): boolean
+Checks if the current date falls within a given date range. The start date is considered from the beginning of the day (00:00:00.000) and the end date is considered until the end of the day (23:59:59.999).
+
+```typescript
+// Check if current date is within range
+const startDate = new Date('2024-01-01');
+const endDate = new Date('2024-12-31');
+isDateWithinRange(startDate, endDate);  // true if current date is within range
+
+// Handle null dates
+isDateWithinRange(null, new Date());     // false
+isDateWithinRange(new Date(), null);     // false
+
+// Same day range
+const today = new Date();
+isDateWithinRange(today, today);         // true (considers full day)
 ```
 
 ### Checkers
@@ -185,7 +211,7 @@ isUrl('not-a-url');           // false
 Validates if a string is a valid UUID.
 
 ```typescript
-isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
+isUuid('123e4567-e29b-41d4-a716-446655440000');  // true
 isUuid('not-a-uuid');                             // false
 ```
 

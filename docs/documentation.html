@@ -64,6 +64,11 @@
                         <li><a href="#isUuid">isUuid</a></li>
                     </ul>
                 </li>
+                <li><a href="#date-validation">Date Validation</a>
+                    <ul>
+                        <li><a href="#isDateWithinRange">isDateWithinRange</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
 
@@ -365,6 +370,48 @@ isUrl('not-a-url');          // false</code></pre>
                     <h5>Examples:</h5>
                     <pre><code class="language-typescript">isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
 isUuid('not-a-uuid');                              // false</code></pre>
+                </section>
+            </section>
+
+            <section id="date-validation">
+                <h3>Date Validation</h3>
+                
+                <section id="isDateWithinRange">
+                    <h4>isDateWithinRange(startDate: Date | null, endDate: Date | null): boolean</h4>
+                    <p>Checks if the current date falls within a given date range.</p>
+                    
+                    <h5>Parameters:</h5>
+                    <ul>
+                        <li><code>startDate</code> (Date | null): The start date of the range</li>
+                        <li><code>endDate</code> (Date | null): The end date of the range</li>
+                    </ul>
+
+                    <h5>Returns:</h5>
+                    <p>boolean - true if current date is within the range, false otherwise</p>
+
+                    <h5>Details:</h5>
+                    <ul>
+                        <li>Start date is considered from the beginning of the day (00:00:00.000)</li>
+                        <li>End date is considered until the end of the day (23:59:59.999)</li>
+                        <li>Returns false if either date is null</li>
+                        <li>Same day ranges are supported</li>
+                    </ul>
+
+                    <h5>Example:</h5>
+                    <pre><code class="language-typescript">
+// Check if current date is within range
+const startDate = new Date('2024-01-01');
+const endDate = new Date('2024-12-31');
+isDateWithinRange(startDate, endDate);  // true if current date is within range
+
+// Handle null dates
+isDateWithinRange(null, new Date());     // false
+isDateWithinRange(new Date(), null);     // false
+
+// Same day range
+const today = new Date();
+isDateWithinRange(today, today);         // true (considers full day)
+                    </code></pre>
                 </section>
             </section>
         </section>
