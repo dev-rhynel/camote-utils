@@ -214,3 +214,175 @@ export const pluralize = (
   // Default: add 's'
   return word + 's';
 }
+
+/**
+ * Checks if a string is a valid URL
+ * @param str - The input string to validate
+ * @returns boolean indicating if the string is a valid URL
+ * @example
+ * isUrl("https://example.com") // true
+ * isUrl("not-a-url") // false
+ * isUrl("http://localhost:3000") // true
+ * isUrl("ftp://example.com") // true
+ */
+export const isUrl = (str: string): boolean => {
+  try {
+    const url = new URL(str);
+    // Check for valid protocol (must be http, https, or ftp)
+    if (!url.protocol || !['http:', 'https:', 'ftp:'].includes(url.protocol)) {
+      return false;
+    }
+    // Check for valid hostname
+    if (!url.hostname || url.hostname.length === 0) {
+      return false;
+    }
+    // Check for double slashes in path
+    if (url.pathname.includes('//')) {
+      return false;
+    }
+    // Check for malformed URLs
+    if (!str.match(/^(https?|ftp):\/\//i)) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Checks if a string is a valid UUID (v4)
+ * @param str - The input string to validate
+ * @returns boolean indicating if the string is a valid UUID
+ * @example
+ * isUuid("123e4567-e89b-12d3-a456-426614174000") // true
+ * isUuid("not-a-uuid") // false
+ */
+export const isUuid = (str: string): boolean => {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(str);
+}
+
+/**
+ * Converts a string to uppercase with optional locale support
+ * @param str - The input string
+ * @param locale - Optional locale for case conversion (e.g., 'tr-TR' for Turkish)
+ * @returns The uppercase string
+ * @example
+ * toUpperCase("hello") // "HELLO"
+ * toUpperCase("philippines", "en-PH") // "PHILIPPINES"
+ */
+export const toUpperCase = (str: string, locale?: string): string => {
+  return locale ? str.toLocaleUpperCase(locale) : str.toUpperCase()
+}
+
+/**
+ * Converts a string to lowercase with optional locale support
+ * @param str - The input string
+ * @param locale - Optional locale for case conversion (e.g., 'tr-TR' for Turkish)
+ * @returns The lowercase string
+ * @example
+ * toLowerCase("HELLO") // "hello"
+ * toLowerCase("PHILIPPINES", "en-PH") // "philippines"
+ */
+export const toLowerCase = (str: string, locale?: string): string => {
+  return locale ? str.toLocaleLowerCase(locale) : str.toLowerCase()
+}
+
+/**
+ * Removes a specified number of characters from the start of a string
+ * @param str - The input string
+ * @param count - Number of characters to remove from the start (default: 1)
+ * @returns The string with characters removed from the start
+ * @example
+ * chopStart("hello") // "ello"
+ * chopStart("hello", 2) // "llo"
+ * chopStart("hello", 10) // ""
+ */
+export const chopStart = (str: string, count: number = 1): string => {
+  if (!str || count <= 0) return str
+  return str.slice(count > str.length ? str.length : count)
+}
+
+/**
+ * Removes a specified number of characters from the end of a string
+ * @param str - The input string
+ * @param count - Number of characters to remove from the end (default: 1)
+ * @returns The string with characters removed from the end
+ * @example
+ * chopEnd("hello") // "hell"
+ * chopEnd("hello", 2) // "hel"
+ * chopEnd("hello", 10) // ""
+ */
+export const chopEnd = (str: string, count: number = 1): string => {
+  if (!str || count <= 0) return str
+  return str.slice(0, -(count > str.length ? str.length : count))
+}
+
+/**
+ * Checks if a string contains a substring
+ * @param str - The input string to search in
+ * @param searchStr - The substring to search for
+ * @param caseSensitive - Whether the search should be case-sensitive (default: true)
+ * @returns True if the substring is found, false otherwise
+ * @example
+ * contains("Hello World", "world", true) // false
+ * contains("Hello World", "world", false) // true
+ * contains("Hello World", "lo") // true
+ */
+export const contains = (str: string, searchStr: string, caseSensitive: boolean = true): boolean => {
+  if (!str || !searchStr) return false
+  if (!caseSensitive) {
+    return str.toLowerCase().includes(searchStr.toLowerCase())
+  }
+  return str.includes(searchStr)
+}
+
+/**
+ * Checks if two strings match exactly
+ * @param str1 - First string to compare
+ * @param str2 - Second string to compare
+ * @param caseSensitive - Whether the comparison should be case-sensitive (default: true)
+ * @returns True if the strings match exactly, false otherwise
+ * @example
+ * exactly("Hello", "Hello") // true
+ * exactly("Hello", "hello") // false
+ * exactly("Hello", "hello", false) // true
+ */
+export const exactly = (str1: string, str2: string, caseSensitive: boolean = true): boolean => {
+  if (str1 === undefined || str2 === undefined) return false
+  if (!caseSensitive) {
+    return str1.toLowerCase() === str2.toLowerCase()
+  }
+  return str1 === str2
+}
+
+/**
+ * Checks if all strings in an array match a condition
+ * @param strings - Array of strings to check
+ * @param condition - Function that tests each string
+ * @returns True if all strings match the condition, false otherwise
+ * @example
+ * all(['hello', 'world'], str => str.length > 3) // true
+ * all(['hi', 'world'], str => str.length > 3) // false
+ * all(['HELLO', 'WORLD'], str => str === str.toUpperCase()) // true
+ */
+export const all = (strings: string[], condition: (str: string) => boolean): boolean => {
+  if (!strings || !Array.isArray(strings) || !condition) return false
+  if (strings.length === 0) return false
+  return strings.every(str => typeof str === 'string' && condition(str))
+}
+
+/**
+ * Generates a UUID v4 (random) string
+ * @returns A UUID v4 string
+ * @example
+ * generateUuid() // "123e4567-e89b-12d3-a456-426614174000"
+ */
+export const generateUuid = (): string => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0
+    const v = c === 'x' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+}

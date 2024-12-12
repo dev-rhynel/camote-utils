@@ -10,7 +10,17 @@ import {
   format,
   reverse,
   clean,
-  pluralize 
+  pluralize,
+  isUrl,
+  isUuid,
+  toUpperCase,
+  toLowerCase,
+  chopStart,
+  chopEnd,
+  contains,
+  exactly,
+  all,
+  generateUuid
 } from '../src/formatters/string'
 
 describe('String Formatters', () => {
@@ -206,4 +216,244 @@ describe('String Formatters', () => {
       expect(pluralize('person', undefined, 'people')).toBe('people');
     });
   });
+
+  describe('isUuid', () => {
+    it('should return true for valid UUIDs', () => {
+      expect(isUuid('123e4567-e89b-12d3-a456-426614174000')).toBe(true)
+      expect(isUuid('550e8400-e29b-41d4-a716-446655440000')).toBe(true)
+      expect(isUuid('6ba7b810-9dad-41d4-80b4-00c04fd430c8')).toBe(true)
+    })
+
+    it('should return false for invalid UUIDs', () => {
+      expect(isUuid('not-a-uuid')).toBe(false)
+      expect(isUuid('http:/example.com')).toBe(false)
+      expect(isUuid('')).toBe(false)
+      expect(isUuid('123e4567-e89b-12d3-a456')).toBe(false)
+      expect(isUuid('123e4567-e89b-12d3-a456-42661417400')).toBe(false)
+      expect(isUuid('123e4567-e89b-12d3-a456-4266141740000')).toBe(false)
+    })
+  })
+
+  describe('toUpperCase', () => {
+    it('should convert string to uppercase', () => {
+      expect(toUpperCase('hello')).toBe('HELLO')
+      expect(toUpperCase('Hello World')).toBe('HELLO WORLD')
+    })
+
+    it('should handle empty string', () => {
+      expect(toUpperCase('')).toBe('')
+    })
+
+    it('should support locale-specific uppercase conversion', () => {
+      expect(toUpperCase('philippines', 'en-PH')).toBe('PHILIPPINES')
+    })
+  })
+
+  describe('toLowerCase', () => {
+    it('should convert string to lowercase', () => {
+      expect(toLowerCase('HELLO')).toBe('hello')
+      expect(toLowerCase('Hello World')).toBe('hello world')
+    })
+
+    it('should handle empty string', () => {
+      expect(toLowerCase('')).toBe('')
+    })
+
+    it('should support locale-specific lowercase conversion', () => {
+      expect(toLowerCase('PHILIPPINES', 'en-PH')).toBe('philippines')
+    })
+  })
+
+  describe('chopStart', () => {
+    it('should remove one character from start by default', () => {
+      expect(chopStart('hello')).toBe('ello')
+      expect(chopStart('world')).toBe('orld')
+    })
+
+    it('should remove specified number of characters from start', () => {
+      expect(chopStart('hello', 2)).toBe('llo')
+      expect(chopStart('world', 3)).toBe('ld')
+    })
+
+    it('should handle empty string', () => {
+      expect(chopStart('')).toBe('')
+    })
+
+    it('should handle count greater than string length', () => {
+      expect(chopStart('hello', 10)).toBe('')
+    })
+
+    it('should handle zero or negative count', () => {
+      expect(chopStart('hello', 0)).toBe('hello')
+      expect(chopStart('hello', -1)).toBe('hello')
+    })
+  })
+
+  describe('chopEnd', () => {
+    it('should remove one character from end by default', () => {
+      expect(chopEnd('hello')).toBe('hell')
+      expect(chopEnd('world')).toBe('worl')
+    })
+
+    it('should remove specified number of characters from end', () => {
+      expect(chopEnd('hello', 2)).toBe('hel')
+      expect(chopEnd('world', 3)).toBe('wo')
+    })
+
+    it('should handle empty string', () => {
+      expect(chopEnd('')).toBe('')
+    })
+
+    it('should handle count greater than string length', () => {
+      expect(chopEnd('hello', 10)).toBe('')
+    })
+
+    it('should handle zero or negative count', () => {
+      expect(chopEnd('hello', 0)).toBe('hello')
+      expect(chopEnd('hello', -1)).toBe('hello')
+    })
+  })
+
+  describe('contains', () => {
+    it('should find substring with case sensitivity by default', () => {
+      expect(contains('Hello World', 'World')).toBe(true)
+      expect(contains('Hello World', 'world')).toBe(false)
+      expect(contains('Hello World', 'lo')).toBe(true)
+    })
+
+    it('should find substring ignoring case when specified', () => {
+      expect(contains('Hello World', 'world', false)).toBe(true)
+      expect(contains('Hello World', 'HELLO', false)).toBe(true)
+      expect(contains('HELLO WORLD', 'hello', false)).toBe(true)
+    })
+
+    it('should handle empty strings', () => {
+      expect(contains('', 'test')).toBe(false)
+      expect(contains('test', '')).toBe(false)
+      expect(contains('', '')).toBe(false)
+    })
+
+    it('should return false for non-existing substrings', () => {
+      expect(contains('Hello World', 'xyz')).toBe(false)
+      expect(contains('Hello World', 'xyz', false)).toBe(false)
+    })
+  })
+
+  describe('exactly', () => {
+    it('should match exact strings with case sensitivity by default', () => {
+      expect(exactly('Hello', 'Hello')).toBe(true)
+      expect(exactly('Hello', 'hello')).toBe(false)
+      expect(exactly('World', 'World')).toBe(true)
+    })
+
+    it('should match strings ignoring case when specified', () => {
+      expect(exactly('Hello', 'hello', false)).toBe(true)
+      expect(exactly('WORLD', 'world', false)).toBe(true)
+      expect(exactly('HeLLo', 'hEllO', false)).toBe(true)
+    })
+
+    it('should handle empty strings', () => {
+      expect(exactly('', '')).toBe(true)
+      expect(exactly('', '', false)).toBe(true)
+      expect(exactly('test', '')).toBe(false)
+      expect(exactly('', 'test')).toBe(false)
+    })
+
+    it('should handle undefined values', () => {
+      expect(exactly(undefined as any, 'test')).toBe(false)
+      expect(exactly('test', undefined as any)).toBe(false)
+      expect(exactly(undefined as any, undefined as any)).toBe(false)
+    })
+
+    it('should handle different strings', () => {
+      expect(exactly('Hello', 'World')).toBe(false)
+      expect(exactly('Hello', 'World', false)).toBe(false)
+      expect(exactly('test', 'testing')).toBe(false)
+    })
+  })
+
+  describe('all', () => {
+    it('should return true when all strings match the condition', () => {
+      expect(all(['hello', 'world'], str => str.length > 3)).toBe(true)
+      expect(all(['HELLO', 'WORLD'], str => str === str.toUpperCase())).toBe(true)
+      expect(all(['abc', 'def'], str => str.length === 3)).toBe(true)
+    })
+
+    it('should return false when any string fails the condition', () => {
+      expect(all(['hi', 'world'], str => str.length > 3)).toBe(false)
+      expect(all(['HELLO', 'world'], str => str === str.toUpperCase())).toBe(false)
+      expect(all(['abc', 'defgh'], str => str.length === 3)).toBe(false)
+    })
+
+    it('should handle empty array', () => {
+      expect(all([], str => str.length > 0)).toBe(false)
+    })
+
+    it('should handle invalid inputs', () => {
+      expect(all(null as any, str => str.length > 0)).toBe(false)
+      expect(all(undefined as any, str => str.length > 0)).toBe(false)
+      expect(all(['test'], null as any)).toBe(false)
+      expect(all(['test'], undefined as any)).toBe(false)
+    })
+
+    it('should handle array with non-string elements', () => {
+      expect(all(['hello', 123 as any], str => str.length > 0)).toBe(false)
+      expect(all(['world', null as any], str => str.length > 0)).toBe(false)
+      expect(all(['test', undefined as any], str => str.length > 0)).toBe(false)
+    })
+
+    it('should work with complex conditions', () => {
+      expect(all(['hello', 'world'], str => str.includes('o'))).toBe(true)
+      expect(all(['test', 'text'], str => str.startsWith('te'))).toBe(true)
+      expect(all(['abc', 'def'], str => /^[a-z]+$/.test(str))).toBe(true)
+    })
+  })
+
+  describe('generateUuid', () => {
+    it('should generate valid UUID v4 strings', () => {
+      const uuid1 = generateUuid()
+      const uuid2 = generateUuid()
+
+      // Should be valid UUIDs
+      expect(isUuid(uuid1)).toBe(true)
+      expect(isUuid(uuid2)).toBe(true)
+
+      // Should be different UUIDs
+      expect(uuid1).not.toBe(uuid2)
+    })
+
+    it('should generate UUIDs with correct format', () => {
+      const uuid = generateUuid()
+      
+      // Check UUID v4 format
+      expect(uuid).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
+      
+      // Version should be 4
+      expect(uuid.charAt(14)).toBe('4')
+      
+      // Variant should be 8, 9, a, or b
+      expect('89ab').toContain(uuid.charAt(19))
+    })
+
+    it('should generate multiple unique UUIDs', () => {
+      const uuids = new Set(Array.from({ length: 1000 }, () => generateUuid()))
+      expect(uuids.size).toBe(1000) // All should be unique
+    })
+  })
+
+  describe('isUrl', () => {
+    it('should return true for valid URLs', () => {
+      expect(isUrl('https://example.com')).toBe(true)
+      expect(isUrl('http://localhost:3000')).toBe(true)
+      expect(isUrl('https://sub.domain.com/path?query=1#hash')).toBe(true)
+      expect(isUrl('ftp://ftp.example.com')).toBe(true)
+    })
+
+    it('should return false for invalid URLs', () => {
+      expect(isUrl('not-a-url')).toBe(false)
+      expect(isUrl('http:/example.com')).toBe(false)
+      expect(isUrl('')).toBe(false)
+      expect(isUrl('example.com')).toBe(false)
+    })
+  })
 })

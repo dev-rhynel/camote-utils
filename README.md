@@ -1,10 +1,6 @@
-# camote-utils
+# Camote Utils
 
-A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms.
-
-[![npm version](https://img.shields.io/npm/v/camote-utils.svg)](https://www.npmjs.com/package/camote-utils)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Total Downloads](https://img.shields.io/npm/dt/camote-utils.svg)](https://www.npmjs.com/package/camote-utils)
+A comprehensive TypeScript utility library for common string and number operations.
 
 ## Installation
 
@@ -12,132 +8,149 @@ A comprehensive TypeScript utility library featuring advanced string and number 
 npm install camote-utils
 ```
 
-## Usage
+## Basic Usage
+
+Import the functions you need:
+
+```typescript
+import { 
+  formatNumber, 
+  formatCurrency, 
+  pluralize,
+  generateUuid,
+  isUrl,
+  isUuid 
+} from 'camote-utils';
+
+// Format numbers
+formatNumber(1234);     // "1.2K"
+formatNumber(1500000);  // "1.5M"
+
+// Format currency
+formatCurrency(1234.56);                 // "$1,234.56"
+formatCurrency(1234.56, 'EUR');          // "€1,234.56"
+formatCurrency(1234.56, 'JPY', 'ja-JP'); // "¥1,235"
+
+// Pluralize words
+pluralize('cat', 1);              // "cat"
+pluralize('cat', 2);              // "cats"
+pluralize('child', 2, 'children'); // "children"
+
+// Generate UUID
+generateUuid();  // "123e4567-e89b-12d3-a456-426614174000"
+
+// Validate strings
+isUrl('https://example.com');  // true
+isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
+```
+
+## API Reference
 
 ### Number Formatting
 
-```typescript
-import {
-  humanReadableNumber,
-  formatWithCommas,
-  formatPercentage,
-  formatOrdinal,
-  formatFileSize,
-  formatCurrency,
-  formatDecimals,
-  calculateDiscountPrice
-} from 'camote-utils';
-
-// Human readable numbers
-console.log(humanReadableNumber(1234));     // "1.2K"
-console.log(humanReadableNumber(1500000));  // "1.5M"
-
-// Numbers with commas
-console.log(formatWithCommas(1234567));  // "1,234,567"
-
-// Percentages
-console.log(formatPercentage(0.1234));    // "12%"
-console.log(formatPercentage(0.1234, 1)); // "12.3%"
-
-// Ordinal numbers
-console.log(formatOrdinal(1));  // "1st"
-console.log(formatOrdinal(2));  // "2nd"
-
-// File sizes
-console.log(formatFileSize(1024));     // "1.00 KB"
-console.log(formatFileSize(1234567));  // "1.18 MB"
-
-// Currency
-console.log(formatCurrency(1234.56));                  // "$1,234.56"
-console.log(formatCurrency(1234.56, 'EUR', 'de-DE')); // "1.234,56 €"
-
-// Decimal places
-console.log(formatDecimals(1.2345, 2));         // "1.23"
-console.log(formatDecimals(1.2345, 2, 'ceil')); // "1.24"
-
-// Price calculations
-console.log(calculateDiscountPrice(100, 20));     // 80.00
-console.log(calculateDiscountPrice(50, 10, '%')); // 45.00
-console.log(calculateDiscountPrice(100, 30, '$')); // 70.00
-console.log(calculateDiscountPrice(75.50, 15, '%')); // 64.17
-console.log(calculateDiscountPrice(50.55, 10.55, '$')); // 40.00
-```
-
-### String Formatting
+#### formatNumber(number: number, options?: FormatNumberOptions): string
+Formats a number into a human-readable string with unit suffixes (K, M, B, T).
 
 ```typescript
-import {
-  capitalize,
-  truncate,
-  toCamelCase,
-  toKebabCase,
-  toSnakeCase,
-  slugify,
-  wordCount,
-  pad,
-  format,
-  reverse,
-  clean,
-  pluralize
-} from 'camote-utils';
-
-// Capitalize strings
-console.log(capitalize("hello"));  // "Hello"
-
-// Truncate strings
-console.log(truncate("Hello World", 8));  // "Hello..."
-console.log(truncate("Hello World", 8, '!'));  // "Hello W!"
-
-// Case conversions
-console.log(toCamelCase("hello-world"));   // "helloWorld"
-console.log(toKebabCase("helloWorld"));    // "hello-world"
-console.log(toSnakeCase("Hello World"));   // "hello_world"
-
-// URL-friendly slugs
-console.log(slugify("Hello World!"));      // "hello-world"
-console.log(slugify("What's Up?"));        // "whats-up"
-
-// Word counting
-console.log(wordCount("Hello world"));     // 2
-
-// String padding
-console.log(pad("hello", 8));              // "hello   "
-console.log(pad("hello", 8, "*", "start")); // "***hello"
-console.log(pad("hello", 8, "*", "both"));  // "*hello**"
-
-// Template formatting
-console.log(format("Hello {name}!", { name: "World" }));  // "Hello World!"
-console.log(format("{greeting} {name}!", { 
-  greeting: "Hi",
-  name: "User"
-}));  // "Hi User!"
-
-// String reversal
-console.log(reverse("hello"));  // "olleh"
-
-// Clean whitespace
-console.log(clean("  hello   world  "));  // "hello world"
-
-// Pluralization
-console.log(pluralize('cat', 1));              // "cat"
-console.log(pluralize('cat', 2));              // "cats"
-console.log(pluralize('baby', 2));             // "babies"
-console.log(pluralize('box', 2));              // "boxes"
-console.log(pluralize('child', 2, 'children')); // "children"
+formatNumber(1234);     // "1.2K"
+formatNumber(1500000);  // "1.5M"
+formatNumber(1234, { precision: 2 });  // "1.23K"
 ```
 
-## Features
+#### formatPercent(number: number, options?: FormatPercentOptions): string
+Formats a number as a percentage.
 
-- 🚀 **Fast & Lightweight**: Optimized for performance
-- 💪 **Type-Safe**: Written in TypeScript with full type definitions
-- 🔧 **Easy to Use**: Simple, intuitive API
-- 🌍 **Internationalization**: Support for multiple locales
-- 📦 **Tree-Shakeable**: Import only what you need
+```typescript
+formatPercent(0.125);     // "12.5%"
+formatPercent(0.125, { precision: 1 });  // "12.5%"
+```
 
-## Documentation
+### Currency Formatting
 
-Visit our [documentation](https://dev-rhynel.github.io/camote-utils/) for detailed API references and examples.
+#### formatCurrency(amount: number, currency?: string, locale?: string): string
+Formats a number as currency.
+
+```typescript
+formatCurrency(1234.56);                    // "$1,234.56"
+formatCurrency(1234.56, 'EUR');             // "€1,234.56"
+formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
+```
+
+### String Manipulation
+
+#### pluralize(word: string, count?: number, customPlural?: string): string
+Converts a word to its plural form based on count.
+
+```typescript
+pluralize('cat', 1);              // "cat"
+pluralize('cat', 2);              // "cats"
+pluralize('child', 2, 'children'); // "children"
+```
+
+#### capitalize(str: string): string
+Capitalizes the first character of a string.
+
+```typescript
+capitalize('hello');  // "Hello"
+capitalize('world');  // "World"
+```
+
+#### truncate(str: string, length: number, ending?: string): string
+Truncates a string if longer than specified length.
+
+```typescript
+truncate('Hello World', 5);     // "He..."
+truncate('Hello World', 8, '~'); // "Hello~"
+```
+
+#### toCamelCase(str: string): string
+Converts a string to camelCase.
+
+```typescript
+toCamelCase('hello-world');  // "helloWorld"
+toCamelCase('Hello World');  // "helloWorld"
+```
+
+#### toKebabCase(str: string): string
+Converts a string to kebab-case.
+
+```typescript
+toKebabCase('helloWorld');   // "hello-world"
+toKebabCase('Hello World');  // "hello-world"
+```
+
+### UUID Generation
+
+#### generateUuid(): string
+Generates a UUID v4 string.
+
+```typescript
+generateUuid();  // "123e4567-e89b-12d3-a456-426614174000"
+generateUuid();  // "550e8400-e29b-41d4-a716-446655440000"
+```
+
+### Checkers
+
+#### isUrl(str: string): boolean
+Validates if a string is a valid URL.
+
+```typescript
+isUrl('https://example.com');  // true
+isUrl('not-a-url');           // false
+```
+
+#### isUuid(str: string): boolean
+Validates if a string is a valid UUID.
+
+```typescript
+isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
+isUuid('not-a-uuid');                             // false
+```
 
 ## License
 
-MIT © [Rhynel](https://github.com/dev-rhynel)
+MIT
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
