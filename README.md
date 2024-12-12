@@ -152,9 +152,11 @@ isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
 isUuid('not-a-uuid');                             // false
 ```
 
+Visit our [documentation](https://dev-rhynel.github.io/camote-utils/) for detailed API references and examples.
+
 ## License
 
-MIT
+MIT © [Rhynel](https://github.com/dev-rhynel)
 
 ## Contributing
 
