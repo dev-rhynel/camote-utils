@@ -19,7 +19,6 @@ import {
   chopEnd,
   contains,
   exactly,
-  all,
   generateUuid
 } from '../src/formatters/string'
 
@@ -369,43 +368,6 @@ describe('String Formatters', () => {
       expect(exactly('Hello', 'World')).toBe(false)
       expect(exactly('Hello', 'World', false)).toBe(false)
       expect(exactly('test', 'testing')).toBe(false)
-    })
-  })
-
-  describe('all', () => {
-    it('should return true when all strings match the condition', () => {
-      expect(all(['hello', 'world'], str => str.length > 3)).toBe(true)
-      expect(all(['HELLO', 'WORLD'], str => str === str.toUpperCase())).toBe(true)
-      expect(all(['abc', 'def'], str => str.length === 3)).toBe(true)
-    })
-
-    it('should return false when any string fails the condition', () => {
-      expect(all(['hi', 'world'], str => str.length > 3)).toBe(false)
-      expect(all(['HELLO', 'world'], str => str === str.toUpperCase())).toBe(false)
-      expect(all(['abc', 'defgh'], str => str.length === 3)).toBe(false)
-    })
-
-    it('should handle empty array', () => {
-      expect(all([], str => str.length > 0)).toBe(false)
-    })
-
-    it('should handle invalid inputs', () => {
-      expect(all(null as any, str => str.length > 0)).toBe(false)
-      expect(all(undefined as any, str => str.length > 0)).toBe(false)
-      expect(all(['test'], null as any)).toBe(false)
-      expect(all(['test'], undefined as any)).toBe(false)
-    })
-
-    it('should handle array with non-string elements', () => {
-      expect(all(['hello', 123 as any], str => str.length > 0)).toBe(false)
-      expect(all(['world', null as any], str => str.length > 0)).toBe(false)
-      expect(all(['test', undefined as any], str => str.length > 0)).toBe(false)
-    })
-
-    it('should work with complex conditions', () => {
-      expect(all(['hello', 'world'], str => str.includes('o'))).toBe(true)
-      expect(all(['test', 'text'], str => str.startsWith('te'))).toBe(true)
-      expect(all(['abc', 'def'], str => /^[a-z]+$/.test(str))).toBe(true)
     })
   })
 

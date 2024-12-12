@@ -358,22 +358,6 @@ export const exactly = (str1: string, str2: string, caseSensitive: boolean = tru
 }
 
 /**
- * Checks if all strings in an array match a condition
- * @param strings - Array of strings to check
- * @param condition - Function that tests each string
- * @returns True if all strings match the condition, false otherwise
- * @example
- * all(['hello', 'world'], str => str.length > 3) // true
- * all(['hi', 'world'], str => str.length > 3) // false
- * all(['HELLO', 'WORLD'], str => str === str.toUpperCase()) // true
- */
-export const all = (strings: string[], condition: (str: string) => boolean): boolean => {
-  if (!strings || !Array.isArray(strings) || !condition) return false
-  if (strings.length === 0) return false
-  return strings.every(str => typeof str === 'string' && condition(str))
-}
-
-/**
  * Generates a UUID v4 (random) string
  * @returns A UUID v4 string
  * @example
