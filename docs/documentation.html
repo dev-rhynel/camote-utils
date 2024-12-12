@@ -35,11 +35,17 @@
                     <ul>
                         <li><a href="#formatNumber">formatNumber</a></li>
                         <li><a href="#formatPercent">formatPercent</a></li>
+                        <li><a href="#formatDecimals">formatDecimals</a></li>
                     </ul>
                 </li>
                 <li><a href="#currency-formatting">Currency Formatting</a>
                     <ul>
                         <li><a href="#formatCurrency">formatCurrency</a></li>
+                    </ul>
+                </li>
+                <li><a href="#price-calculations">Price Calculations</a>
+                    <ul>
+                        <li><a href="#calculateDiscountPrice">calculateDiscountPrice</a></li>
                     </ul>
                 </li>
                 <li><a href="#string-manipulation">String Manipulation</a>
@@ -157,6 +163,34 @@ formatNumber(1234, { precision: 2 });  // "1.23K"</code></pre>
                     <pre><code class="language-typescript">formatPercent(0.125);     // "12.5%"
 formatPercent(0.125, { precision: 1 });  // "12.5%"</code></pre>
                 </section>
+
+                <section id="formatDecimals">
+                    <h4>formatDecimals(num: number, decimals: number, roundingMode?: 'ceil' | 'floor' | 'round'): string</h4>
+                    <p>Formats a number with specified decimal places and rounding mode.</p>
+                    
+                    <h5>Parameters:</h5>
+                    <ul>
+                        <li><code>num</code>: The number to format</li>
+                        <li><code>decimals</code>: Number of decimal places</li>
+                        <li><code>roundingMode</code>: Optional rounding mode ('ceil', 'floor', or 'round', default: 'round')</li>
+                    </ul>
+
+                    <h5>Returns:</h5>
+                    <p>A formatted number string with specified decimal places</p>
+
+                    <h5>Examples:</h5>
+                    <pre><code class="language-typescript">// Default rounding (round)
+formatDecimals(1.2345, 2);        // "1.23"
+formatDecimals(1.2356, 2);        // "1.24"
+
+// Ceiling rounding
+formatDecimals(1.2345, 2, 'ceil'); // "1.24"
+formatDecimals(1.2301, 2, 'ceil'); // "1.24"
+
+// Floor rounding
+formatDecimals(1.2345, 2, 'floor'); // "1.23"
+formatDecimals(1.2399, 2, 'floor'); // "1.23"</code></pre>
+                </section>
             </section>
 
             <section id="currency-formatting">
@@ -177,6 +211,37 @@ formatPercent(0.125, { precision: 1 });  // "12.5%"</code></pre>
                     <pre><code class="language-typescript">formatCurrency(1234.56);                    // "$1,234.56"
 formatCurrency(1234.56, 'EUR');             // "€1,234.56"
 formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"</code></pre>
+                </section>
+            </section>
+
+            <section id="price-calculations">
+                <h3>Price Calculations</h3>
+                
+                <section id="calculateDiscountPrice">
+                    <h4>calculateDiscountPrice(originalPrice: number, discountAmount: number, discountType?: '%' | '$'): number</h4>
+                    <p>Calculates the final price after applying a discount. Supports both percentage and fixed amount discounts.</p>
+                    
+                    <h5>Parameters:</h5>
+                    <ul>
+                        <li><code>originalPrice</code>: The original price before discount</li>
+                        <li><code>discountAmount</code>: The amount of discount to apply</li>
+                        <li><code>discountType</code>: Optional type of discount ('$' for fixed amount, '%' for percentage). Defaults to '%'</li>
+                    </ul>
+
+                    <h5>Returns:</h5>
+                    <p>The price after applying the discount, rounded to 2 decimal places</p>
+
+                    <h5>Examples:</h5>
+                    <pre><code class="language-typescript">// Percentage discount (default)
+calculateDiscountPrice(100, 20);      // 80.00
+calculateDiscountPrice(50, 10, '%');  // 45.00
+
+// Fixed amount discount
+calculateDiscountPrice(100, 30, '$'); // 70.00
+
+// Precise decimal handling
+calculateDiscountPrice(75.50, 15, '%');    // 64.17
+calculateDiscountPrice(50.55, 10.55, '$'); // 40.00</code></pre>
                 </section>
             </section>
 

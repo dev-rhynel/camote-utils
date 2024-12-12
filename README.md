@@ -20,7 +20,9 @@ Import the functions you need:
 ```typescript
 import { 
   formatNumber, 
-  formatCurrency, 
+  formatCurrency,
+  formatDecimals,
+  calculateDiscountPrice,
   pluralize,
   generateUuid,
   isUrl,
@@ -31,10 +33,18 @@ import {
 formatNumber(1234);     // "1.2K"
 formatNumber(1500000);  // "1.5M"
 
+// Format decimals with different rounding modes
+formatDecimals(1.2345, 2);         // "1.23"
+formatDecimals(1.2345, 2, 'ceil'); // "1.24"
+
 // Format currency
 formatCurrency(1234.56);                 // "$1,234.56"
 formatCurrency(1234.56, 'EUR');          // "€1,234.56"
 formatCurrency(1234.56, 'JPY', 'ja-JP'); // "¥1,235"
+
+// Calculate discounted prices
+calculateDiscountPrice(100, 20);      // 80.00 (20% off)
+calculateDiscountPrice(100, 30, '$'); // 70.00 ($30 off)
 
 // Pluralize words
 pluralize('cat', 1);              // "cat"
@@ -62,12 +72,21 @@ formatNumber(1500000);  // "1.5M"
 formatNumber(1234, { precision: 2 });  // "1.23K"
 ```
 
-#### formatPercent(number: number, options?: FormatPercentOptions): string
-Formats a number as a percentage.
+#### formatDecimals(num: number, decimals: number, roundingMode?: 'ceil' | 'floor' | 'round'): string
+Formats a number with specified decimal places and rounding mode.
 
 ```typescript
-formatPercent(0.125);     // "12.5%"
-formatPercent(0.125, { precision: 1 });  // "12.5%"
+// Default rounding (round)
+formatDecimals(1.2345, 2);        // "1.23"
+formatDecimals(1.2356, 2);        // "1.24"
+
+// Ceiling rounding
+formatDecimals(1.2345, 2, 'ceil'); // "1.24"
+formatDecimals(1.2301, 2, 'ceil'); // "1.24"
+
+// Floor rounding
+formatDecimals(1.2345, 2, 'floor'); // "1.23"
+formatDecimals(1.2399, 2, 'floor'); // "1.23"
 ```
 
 ### Currency Formatting
@@ -79,6 +98,24 @@ Formats a number as currency.
 formatCurrency(1234.56);                    // "$1,234.56"
 formatCurrency(1234.56, 'EUR');             // "€1,234.56"
 formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
+```
+
+### Price Calculations
+
+#### calculateDiscountPrice(originalPrice: number, discountAmount: number, discountType?: '%' | '$'): number
+Calculates the final price after applying a discount. Supports both percentage and fixed amount discounts.
+
+```typescript
+// Percentage discount (default)
+calculateDiscountPrice(100, 20);      // 80.00
+calculateDiscountPrice(50, 10, '%');  // 45.00
+
+// Fixed amount discount
+calculateDiscountPrice(100, 30, '$'); // 70.00
+
+// Precise decimal handling
+calculateDiscountPrice(75.50, 15, '%');    // 64.17
+calculateDiscountPrice(50.55, 10.55, '$'); // 40.00
 ```
 
 ### String Manipulation
