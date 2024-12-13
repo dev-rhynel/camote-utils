@@ -383,7 +383,7 @@
                 </div>
             </div>
 
-            <div class="code-window">
+            <div class="code-window"  style="max-width: 900px; width: 100%;">
                 <div class="code-header">
                     <div class="code-dot"></div>
                     <div class="code-dot"></div>
@@ -393,21 +393,43 @@
                     <button class="copy-button" onclick="copyCode(this)">
                         <i class="fas fa-copy"></i>
                     </button>
-                    <pre><code class="language-typescript">import { humanReadableNumber, pluralize } from 'camote-utils';
+                    <pre><code class="language-typescript">import { humanReadableNumber, pluralize, _ } from 'camote-utils';
 
-// Format large numbers
-console.log(humanReadableNumber(1234567));      // "1.23M"
+// Example 1: Converting big numbers to readable format
+// Input: [1234567, 2345678, 3456789]
+// Steps: 1. Create a chain of operations
+//        2. Convert each number to readable format (1.23M)
+//        3. Join them with commas
+const bigNumbers = [1234567, 2345678, 3456789];
+const readableNumbers = _.chain(bigNumbers)
+  .map(humanReadableNumber)     // Converts to: ["1.23M", "2.35M", "3.46M"]
+  .join(', ')                   // Joins with commas
+  .value();                     // Ends chain and returns result
+console.log(readableNumbers);   // Output: "1.23M, 2.35M, 3.46M"
 
-// Basic pluralization
-console.log(pluralize("cat", 1));               // "cat"
-console.log(pluralize("cat", 2));               // "cats"
-console.log(pluralize("baby", 2));              // "babies"
+// Example 2: Simple pluralization
+// Shows how words change based on count
+const animals = _.map([1, 2, 5], count => {
+  const word = pluralize("cat", count);
+  return `${count} ${word}`;    // Adds count before each word
+});
+console.log(animals);           // Output: ["1 cat", "2 cats", "5 cats"]
 
-// Custom plural forms
-console.log(pluralize("child", 2, "children")); // "children"
-console.log(pluralize("person", 2, "people"));  // "people"
+// Example 3: Custom plural forms
+// Some words have special plural forms
+const specialCases = [
+  { word: "child", count: 2, plural: "children" },
+  { word: "person", count: 3, plural: "people" }
+];
 
-</code></pre>
+const result = _.chain(specialCases)
+  .map(item => {
+    const plural = pluralize(item.word, item.count, item.plural);
+    return `${item.count} ${plural}`;  // Adds count for clarity
+  })
+  .join(" and ")               // Joins with 'and' for readability
+  .value();
+console.log(result);           // Output: "2 children and 3 people"</code></pre>
                 </div>
             </div>
         </section>
