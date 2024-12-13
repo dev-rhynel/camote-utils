@@ -11,16 +11,19 @@ import {
   reverse,
   clean,
   pluralize,
-  isUrl,
-  isUuid,
+  generateUuid,
   toUpperCase,
   toLowerCase,
   chopStart,
   chopEnd,
+} from '../src/formatters/string';
+
+import {
+  isUrl,
+  isUuid,
   contains,
   exactly,
-  generateUuid
-} from '../src/formatters/string'
+} from '../src/checkers';
 
 describe('String Formatters', () => {
   describe('capitalize', () => {
@@ -352,22 +355,22 @@ describe('String Formatters', () => {
     })
 
     it('should handle empty strings', () => {
-      expect(exactly('', '')).toBe(true)
+      expect(exactly('', '', true)).toBe(true)
       expect(exactly('', '', false)).toBe(true)
-      expect(exactly('test', '')).toBe(false)
-      expect(exactly('', 'test')).toBe(false)
+      expect(exactly('test', '', false)).toBe(false)
+      expect(exactly('', 'test', false)).toBe(false)
     })
 
     it('should handle undefined values', () => {
-      expect(exactly(undefined as any, 'test')).toBe(false)
-      expect(exactly('test', undefined as any)).toBe(false)
-      expect(exactly(undefined as any, undefined as any)).toBe(false)
+      expect(exactly(undefined as any, 'test')).toBe(false);
+      expect(exactly('test', undefined as any)).toBe(false);
+      expect(exactly(undefined as any, undefined as any)).toBe(false);
     })
 
     it('should handle different strings', () => {
-      expect(exactly('Hello', 'World')).toBe(false)
+      expect(exactly('Hello', 'World', true)).toBe(false)
       expect(exactly('Hello', 'World', false)).toBe(false)
-      expect(exactly('test', 'testing')).toBe(false)
+      expect(exactly('test', 'testing', true)).toBe(false)
     })
   })
 
@@ -418,4 +421,48 @@ describe('String Formatters', () => {
       expect(isUrl('example.com')).toBe(false)
     })
   })
+
+  describe('toUpperCase', () => {
+    it('should convert string to uppercase', () => {
+      expect(toUpperCase('hello')).toBe('HELLO');
+      expect(toUpperCase('world')).toBe('WORLD');
+    });
+  });
+
+  describe('toLowerCase', () => {
+    it('should convert string to lowercase', () => {
+      expect(toLowerCase('HELLO')).toBe('hello');
+      expect(toLowerCase('WORLD')).toBe('world');
+    });
+  });
+
+  describe('chopStart', () => {
+    it('should remove characters from the start of the string', () => {
+      expect(chopStart('hello', 2)).toBe('llo');
+      expect(chopStart('world', 3)).toBe('ld');
+    });
+  });
+
+  describe('chopEnd', () => {
+    it('should remove characters from the end of the string', () => {
+      expect(chopEnd('hello', 2)).toBe('hel');
+      expect(chopEnd('world', 3)).toBe('wo');
+    });
+  });
+
+  describe('contains', () => {
+    it('should check if string contains a substring', () => {
+      expect(contains('hello world', 'world')).toBe(true);
+      expect(contains('hello world', 'WORLD', false)).toBe(true);
+      expect(contains('hello world', 'WORLD')).toBe(false);
+    });
+  });
+
+  describe('exactly', () => {
+    it('should check if two strings match exactly', () => {
+      expect(exactly('hello', 'hello')).toBe(true);
+      expect(exactly('hello', 'HELLO')).toBe(false);
+      expect(exactly('hello', 'HELLO', false)).toBe(true);
+    });
+  });
 })

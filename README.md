@@ -65,6 +65,77 @@ const endDate = new Date('2024-12-31');
 isDateWithinRange(startDate, endDate);  // true if current date is within range
 ```
 
+## Chain Operations
+
+The library now supports chainable operations similar to lodash/underscore. You can use it in three different ways:
+
+### 1. Chain Syntax
+
+```typescript
+import { _ } from 'camote-utils';
+
+// String operations
+_.chain('hello world')
+  .capitalize()
+  .toCamelCase()
+  .valueOf(); // "HelloWorld"
+
+// Number formatting
+_.chain(1234.56)
+  .formatCurrency('USD')
+  .valueOf(); // "$1,234.56"
+
+// Array operations
+_.chain([1, 2, 3, 4])
+  .map(x => x * 2)
+  .filter(x => x > 4)
+  .valueOf(); // [6, 8]
+```
+
+### 2. Static Methods
+
+```typescript
+import { _ } from 'camote-utils';
+
+// Use static methods directly
+_.capitalize('hello world');
+_.formatCurrency(1234.56, 'USD');
+_.isNil(null); // true
+_.isEmpty([]); // true
+```
+
+### 3. Direct Imports (Original Way)
+
+```typescript
+import { formatters } from 'camote-utils';
+
+// Use original formatters
+formatters.capitalize('hello world');
+formatters.formatCurrency(1234.56, 'USD');
+```
+
+### Available Chain Methods
+
+#### String Operations
+- `capitalize()` - Capitalizes the first letter
+- `truncate(length, ellipsis?)` - Truncates text to specified length
+- `toCamelCase()` - Converts to camelCase
+- `toKebabCase()` - Converts to kebab-case
+
+#### Number Operations
+- `formatCurrency(currency?, locale?)` - Formats as currency
+- `formatWithCommas()` - Adds thousand separators
+- `formatPercentage(decimals?)` - Formats as percentage
+
+#### Array Operations
+- `map(fn)` - Transforms array elements
+- `filter(fn)` - Filters array elements
+
+#### Static Utility Methods
+- `_.isNil(value)` - Checks for null/undefined
+- `_.isEmpty(value)` - Checks if value is empty
+- `_.chain(value)` - Creates a new chain
+
 ## API Reference
 
 ### Number Formatting
@@ -215,9 +286,15 @@ isUuid('123e4567-e29b-41d4-a716-446655440000');  // true
 isUuid('not-a-uuid');                             // false
 ```
 
-Visit our [documentation](https://dev-rhynel.github.io/camote-utils/) for detailed API references and examples.
+## Security Policy
+
+For information about our security policy and how to report vulnerabilities, please see our [Security Policy](SECURITY.md).
 
 ## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Visit our [documentation](https://dev-rhynel.github.io/camote-utils/) for detailed API references and examples.
 
 MIT © [Rhynel](https://github.com/dev-rhynel)
 

@@ -216,54 +216,6 @@ export const pluralize = (
 }
 
 /**
- * Checks if a string is a valid URL
- * @param str - The input string to validate
- * @returns boolean indicating if the string is a valid URL
- * @example
- * isUrl("https://example.com") // true
- * isUrl("not-a-url") // false
- * isUrl("http://localhost:3000") // true
- * isUrl("ftp://example.com") // true
- */
-export const isUrl = (str: string): boolean => {
-  try {
-    const url = new URL(str);
-    // Check for valid protocol (must be http, https, or ftp)
-    if (!url.protocol || !['http:', 'https:', 'ftp:'].includes(url.protocol)) {
-      return false;
-    }
-    // Check for valid hostname
-    if (!url.hostname || url.hostname.length === 0) {
-      return false;
-    }
-    // Check for double slashes in path
-    if (url.pathname.includes('//')) {
-      return false;
-    }
-    // Check for malformed URLs
-    if (!str.match(/^(https?|ftp):\/\//i)) {
-      return false;
-    }
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Checks if a string is a valid UUID (v4)
- * @param str - The input string to validate
- * @returns boolean indicating if the string is a valid UUID
- * @example
- * isUuid("123e4567-e89b-12d3-a456-426614174000") // true
- * isUuid("not-a-uuid") // false
- */
-export const isUuid = (str: string): boolean => {
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-  return uuidRegex.test(str);
-}
-
-/**
  * Converts a string to uppercase with optional locale support
  * @param str - The input string
  * @param locale - Optional locale for case conversion (e.g., 'tr-TR' for Turkish)
@@ -349,13 +301,14 @@ export const contains = (str: string, searchStr: string, caseSensitive: boolean 
  * exactly("Hello", "hello") // false
  * exactly("Hello", "hello", false) // true
  */
-export const exactly = (str1: string, str2: string, caseSensitive: boolean = true): boolean => {
-  if (str1 === undefined || str2 === undefined) return false
+export const exactly = (str1: string, str2: string, caseSensitive?: boolean): boolean => {
+  if (str1 === undefined || str2 === undefined) return false;
+  if (caseSensitive === undefined) caseSensitive = true;
   if (!caseSensitive) {
-    return str1.toLowerCase() === str2.toLowerCase()
+    return str1.toLowerCase() === str2.toLowerCase();
   }
-  return str1 === str2
-}
+  return str1 === str2;
+};
 
 /**
  * Generates a UUID v4 (random) string
