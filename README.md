@@ -286,6 +286,96 @@ isUuid('123e4567-e29b-41d4-a716-446655440000');  // true
 isUuid('not-a-uuid');                             // false
 ```
 
+## Random Generation
+
+The library provides a comprehensive set of random value generation functions:
+
+```typescript
+import { _ } from 'camote-utils';
+
+// Generate random integers
+_.generateRandomInteger(1, 10);                    // Number between 1 and 10
+_.generateRandomIntegerArray(3, 1, 10);           // [4, 7, 2]
+_.generateRandomIntegerExcluding(1, 10, [5, 6]);  // Number between 1-4 or 7-10
+
+// Generate random strings
+_.generateRandomString(8);                         // "aB3$kL9p"
+_.generateRandomString(10, { lowercase: true });   // "abcdefghij"
+_.generateRandomString(5, { custom: "ABC123" });   // "B1CA3"
+
+// Generate secure passwords
+_.generateRandomPassword(12);                      // "aB3$kL9p#mN4"
+_.generateRandomPassword(8, { exclude: 'O0Il1' }); // Excludes ambiguous chars
+
+// Generate hex colors
+_.generateRandomHexColor();                        // "#FF5733"
+_.generateRandomHexColor(false);                   // "FF5733"
+
+// Generate any random type
+_.generateRandom({ type: 'integer', min: 1, max: 10 });     // 7
+_.generateRandom({ type: 'float', min: 0, max: 1 });        // 0.123456
+_.generateRandom({ type: 'boolean' });                      // true
+_.generateRandom({ type: 'string', length: 8 });            // "aB3$kL9p"
+_.generateRandom({ type: 'hexColor' });                     // "#FF5733"
+```
+
+### Random String Options
+
+When generating random strings, you can customize the character set:
+
+```typescript
+interface GenerateRandomStringOptions {
+    lowercase?: boolean;   // Include a-z
+    uppercase?: boolean;   // Include A-Z
+    numbers?: boolean;     // Include 0-9
+    special?: boolean;     // Include !@#$%^&*()_+-=[]{}|;:,.<>?
+    custom?: string;      // Use custom character set
+    exclude?: string;     // Characters to exclude
+}
+
+// Examples
+_.generateRandomString(10, { 
+    lowercase: true, 
+    numbers: true 
+});  // "a7b2n9k4m5"
+
+_.generateRandomString(8, { 
+    custom: "ABC123",
+    exclude: "B2" 
+});  // "A1C3A1C3"
+```
+
+### Password Generation
+
+Generate secure passwords with required character types:
+
+```typescript
+// Default includes lowercase, uppercase, numbers, and special chars
+const password = _.generateRandomPassword(12);  // "aB3$kL9p#mN4"
+
+// Exclude ambiguous characters
+const password = _.generateRandomPassword(12, { 
+    exclude: 'O0Il1' 
+});  // "mK4$pJ9#nR5"
+```
+
+### Random Types
+
+Available types for `generateRandom`:
+
+```typescript
+type GenerateRandomType = 'integer' | 'float' | 'boolean' | 'string' | 'hexColor';
+
+interface GenerateRandomOptions {
+    type: GenerateRandomType;
+    min?: number;          // For numbers
+    max?: number;          // For numbers
+    length?: number;       // For strings
+    stringOptions?: GenerateRandomStringOptions;
+    includeHash?: boolean; // For hexColor
+}
+```
+
 ## Security Policy
 
 For information about our security policy and how to report vulnerabilities, please see our [Security Policy](SECURITY.md).

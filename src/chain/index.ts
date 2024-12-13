@@ -2,6 +2,18 @@ import * as numberFormatters from '../formatters/number';
 import * as stringFormatters from '../formatters/string';
 import * as dateFormatters from '../formatters/date';
 import * as checkers from '../checkers';
+import {
+    generateRandomInteger,
+    generateRandomIntegerArray,
+    generateRandomIntegerExcluding,
+    generateRandomString,
+    generateRandomPassword,
+    generateRandomHexColor,
+    generateRandom,
+    GenerateRandomType,
+    GenerateRandomOptions,
+    GenerateRandomStringOptions
+} from '../random';
 
 export class _ {
     private value: any;
@@ -13,6 +25,35 @@ export class _ {
     // Get the final value
     valueOf(): any {
         return this.value;
+    }
+
+    // Random generation functions
+    static generateRandomInteger(min: number, max: number): number {
+        return generateRandomInteger(min, max);
+    }
+
+    static generateRandomIntegerArray(length: number, min: number, max: number): number[] {
+        return generateRandomIntegerArray(length, min, max);
+    }
+
+    static generateRandomIntegerExcluding(min: number, max: number, exclude: number[]): number {
+        return generateRandomIntegerExcluding(min, max, exclude);
+    }
+
+    static generateRandomString(length: number, options?: GenerateRandomStringOptions): string {
+        return generateRandomString(length, options);
+    }
+
+    static generateRandomPassword(length: number, options?: Omit<GenerateRandomStringOptions, 'lowercase' | 'uppercase' | 'numbers' | 'special'>): string {
+        return generateRandomPassword(length, options);
+    }
+
+    static generateRandomHexColor(includeHash?: boolean): string {
+        return generateRandomHexColor(includeHash);
+    }
+
+    static generateRandom(options: GenerateRandomOptions): number | string | boolean {
+        return generateRandom(options);
     }
 
     // String operations
@@ -75,35 +116,101 @@ export class _ {
         return this;
     }
 
+    // Static checker methods
+    static isNil(value: any): value is null | undefined {
+        return checkers.isNil(value);
+    }
+
+    static isEmpty(value: any): boolean {
+        return checkers.isEmpty(value);
+    }
+
+    static isNumber(value: any): value is number {
+        return checkers.isNumber(value);
+    }
+
+    static isString(value: any): value is string {
+        return checkers.isString(value);
+    }
+
+    static isArray(value: any): value is any[] {
+        return checkers.isArray(value);
+    }
+
+    static isObject(value: any): value is object {
+        return checkers.isObject(value);
+    }
+
+    static isUrl(value: string): boolean {
+        return checkers.isUrl(value);
+    }
+
+    static isUuid(value: string): boolean {
+        return checkers.isUuid(value);
+    }
+
+    static isAlphanumeric(str: string): boolean {
+        return checkers.isAlphanumeric(str);
+    }
+
+    // Instance checker methods
+    isAlphanumeric(): boolean {
+        return checkers.isAlphanumeric(String(this.value));
+    }
+
     // Static methods
     static chain(value: any): _ {
         return new _(value);
     }
 
-    // Export checkers as static methods
-    static isNil = checkers.isNil;
-    static isEmpty = checkers.isEmpty;
-    static isNumber = checkers.isNumber;
-    static isString = checkers.isString;
-    static isArray = checkers.isArray;
-    static isObject = checkers.isObject;
-    static isUrl = checkers.isUrl;
-    static isUuid = checkers.isUuid;
+    // Formatter methods
+    static formatCurrency(value: number, currency?: string, locale?: string): string {
+        return numberFormatters.formatCurrency(value, currency, locale);
+    }
 
-    // Export formatters as static methods
-    static formatCurrency = numberFormatters.formatCurrency;
-    static formatWithCommas = numberFormatters.formatWithCommas;
-    static formatPercentage = numberFormatters.formatPercentage;
-    static capitalize = stringFormatters.capitalize;
-    static truncate = stringFormatters.truncate;
-    static toCamelCase = stringFormatters.toCamelCase;
-    static toKebabCase = stringFormatters.toKebabCase;
-    static isDateWithinRange = dateFormatters.isDateWithinRange;
+    static formatWithCommas(value: number): string {
+        return numberFormatters.formatWithCommas(value);
+    }
+
+    static formatPercentage(value: number, decimals?: number): string {
+        return numberFormatters.formatPercentage(value, decimals);
+    }
+
+    static capitalize(str: string): string {
+        return stringFormatters.capitalize(str);
+    }
+
+    static truncate(str: string, length: number, ellipsis?: string): string {
+        return stringFormatters.truncate(str, length, ellipsis);
+    }
+
+    static toCamelCase(str: string): string {
+        return stringFormatters.toCamelCase(str);
+    }
+
+    static toKebabCase(str: string): string {
+        return stringFormatters.toKebabCase(str);
+    }
+
+    static isDateWithinRange(startDate: Date, endDate: Date): boolean {
+        return dateFormatters.isDateWithinRange(startDate, endDate);
+    }
 }
 
-// Export original formatters
+// Export original formatters and checkers
 export const formatters = {
     ...numberFormatters,
     ...stringFormatters,
     ...dateFormatters
+};
+
+export const checks = {
+    ...checkers
+};
+
+// Export types
+export type {
+    GenerateRandomType,
+    GenerateRandomOptions,
+    GenerateRandomStringOptions
 };

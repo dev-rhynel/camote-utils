@@ -11,12 +11,12 @@ import {
   reverse,
   clean,
   pluralize,
-  generateUuid,
   toUpperCase,
   toLowerCase,
   chopStart,
   chopEnd,
 } from '../src/formatters/string';
+import { generateUuid } from '../src/random';
 
 import {
   isUrl,

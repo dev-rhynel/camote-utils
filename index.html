@@ -3,351 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>camote-utils - TypeScript Utility Library</title>
-    <meta name="description" content="A modern TypeScript utility library for common programming tasks">
-    <meta property="og:title" content="camote-utils">
-    <meta property="og:description" content="A modern TypeScript utility library for common programming tasks">
-    <meta property="og:type" content="website">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="docs/styles.css">
+    <title>camote-utils Documentation</title>
+    <meta name="description" content="Documentation for camote-utils TypeScript utility library">
+    <link rel="stylesheet" href="./styles/web.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
-    <style>
-        :root {
-            --primary: #7c3aed;
-            --primary-hover: #6d28d9;
-            --background: #fafafa;
-            --code-bg: #1a1a1a;
-        }
-
-        body {
-            background: var(--background);
-            scroll-behavior: smooth;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: rotate 60s linear infinite;
-            opacity: 0.1;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card.feature-card-dark {
-            background: #333;
-            color: white;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .code-window {
-            background: var(--code-bg);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 2rem auto;
-            position: relative;
-            max-width: 700px;
-            width: 90%;
-        }
-
-        .code-header {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .code-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ff5f56;
-        }
-
-        .code-dot:nth-child(2) { background: #ffbd2e; }
-        .code-dot:nth-child(3) { background: #27c93f; }
-
-        .code-content {
-            font-family: 'Fira Code', monospace;
-            color: #e6e6e6;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .copy-button {
-            position: absolute;
-            top: 2.7rem;
-            right: 2.5rem;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-            cursor: pointer;
-        }
-
-        .copy-button i {
-            font-size: 1.25rem;
-            color: #e6e6e6;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-            font-size: 0.875rem;
-            margin: 0.5rem 0 1rem;
-        }
-
-        .badge:hover {
-            transform: scale(1.05);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
-        }
-
-        footer.main-footer {
-           margin-top: 0; 
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: color 0.2s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--primary);
-        }
-
-        .updated-time {
-            font-size: 0.875rem;
-            opacity: 0.7;
-        }
-
-        .doc-button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: white;
-            color: var(--primary);
-            border-radius: 9999px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border: 2px solid white;
-        }
-
-        .doc-button:hover {
-            background: rgba(255,255,255,0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .doc-button i {
-            margin-right: 0.5rem;
-        }
-
-        .doc-button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .hero-icon {
-            margin-bottom: 2rem;
-        }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .hero-stat {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-        }
-
-        .hero-stat i {
-            font-size: 1.5rem;
-        }
-
-        .hero-stat .count {
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-        
-        pre {
-            margin: 0;
-            font-family: 'Fira Code', monospace;
-            color: #e6e6e6;
-            overflow-x: auto;
-        }
-
-        .contributors {
-            padding: 4rem 0;
-        }
-
-        .contributors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contributor {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 1rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .contributor:hover {
-            transform: translateY(-5px);
-        }
-
-        .contributor img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-
-        .contributor-info {
-            margin-top: 1rem;
-        }
-
-        .contributor-name {
-            font-weight: 500;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .contributor-count {
-            font-size: 0.875rem;
-            opacity: 0.7;
-        }
-    </style>
 </head>
 <body>
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-icon">
-                    <img src="https://github.com/user-attachments/assets/9302d4b2-38fd-4869-97b2-72616b22682f" alt="camote-utils icon" class="logo">
-                </div>
+    <button class="menu-toggle hidden-desktop" aria-label="Toggle menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+    <aside class="sidebar">
+        <nav>
+            <div class="nav-group">
+                <h3>Getting Started</h3>
+                <ul class="nav-links">
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#basic-usage">Basic Usage</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-group">
+                <h3>API Reference</h3>
+                <ul class="nav-links">
+                    <li>
+                        <a href="#chain" class="has-submenu">Chain Operations <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#chain-syntax">Chain Syntax</a></li>
+                            <li><a href="#static-methods">Static Methods</a></li>
+                            <li><a href="#chain-methods">Chain Methods</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#checkers" class="has-submenu">Checkers <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                           
+                            <li>
+                                <a href="#type-checking" class="has-submenu">Type Checking <i class="fas fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="#type-checking-functions">Available Functions</a></li>
+                                    <li><a href="#type-checking-usage">Usage Examples</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#string-validation">String Validation</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#number-formatting" class="has-submenu">Number Formatting <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#formatNumber">formatNumber</a></li>
+                            <li><a href="#formatPercent">formatPercent</a></li>
+                            <li><a href="#formatDecimals">formatDecimals</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#currency-formatting" class="has-submenu">Currency Formatting <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#formatCurrency">formatCurrency</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#price-calculations" class="has-submenu">Price Calculations <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#calculateDiscountPrice">calculateDiscountPrice</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#string-manipulation" class="has-submenu">String Manipulation <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#pluralize">pluralize</a></li>
+                            <li><a href="#capitalize">capitalize</a></li>
+                            <li><a href="#truncate">truncate</a></li>
+                            <li><a href="#toCamelCase">toCamelCase</a></li>
+                            <li><a href="#toKebabCase">toKebabCase</a></li>
+                            <li><a href="#toSnakeCase">toSnakeCase</a></li>
+                            <li><a href="#slugify">slugify</a></li>
+                            <li><a href="#wordCount">wordCount</a></li>
+                            <li><a href="#pad">pad</a></li>
+                            <li><a href="#format">format</a></li>
+                            <li><a href="#reverse">reverse</a></li>
+                            <li><a href="#clean">clean</a></li>
+                            <li><a href="#pluralize">pluralize</a></li>
+                            <li><a href="#toUpperCase">toUpperCase</a></li>
+                            <li><a href="#toLowerCase">toLowerCase</a></li>
+                            <li><a href="#chopStart">chopStart</a></li>
+                            <li><a href="#chopEnd">chopEnd</a></li>
+                            <li><a href="#contains">contains</a></li>
+                            <li><a href="#exactly">exactly</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#date-validation" class="has-submenu">Date Validation <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#isDateWithinRange">isDateWithinRange</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#random-generation" class="has-submenu">Random Generation <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#random-integers">Integer Generation</a></li>
+                            <li><a href="#random-strings">String Generation</a></li>
+                            <li><a href="#random-passwords">Password Generation</a></li>
+                            <li><a href="#random-colors">Color Generation</a></li>
+                            <li><a href="#random-uuid">UUID Generation</a></li>
+                            <li><a href="#random-generic">Generic Random Generation</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-group">
+                <h3>Advanced</h3>
+                <ul class="nav-links">
+                    <li><a href="#typescript">TypeScript Usage</a></li>
+                    <li><a href="#browser-support">Browser Support</a></li>
+                </ul>
+            </div>
+     
+            <div class="nav-group">
+                <h3>Community</h3>
+                <ul class="nav-links">
+                    <li><a href="#license">License</a></li>
+                    <li><a href="#security">Security</a></li>
+                    <li><a href="#contributors">Contributors</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="header-content">
+            <img src="https://github.com/user-attachments/assets/9302d4b2-38fd-4869-97b2-72616b22682f" width="100" alt="camote-utils icon" class="logo">
+            <div>
                 <h1>camote-utils</h1>
-                <p class="hero-description">A modern TypeScript utility library for common programming tasks.</p>
-                <div class="hero-stats">
-                    <div class="hero-stat" title="Total downloads since publication">
-                        <i class="fas fa-infinity"></i>
-                        <span id="total-downloads" class="count">...</span>
-                        <span class="stat-period">total</span>
-                    </div>
-                    <div class="hero-stat" title="Downloads in the last 30 days">
-                        <i class="fas fa-download"></i>
-                        <span id="download-count" class="count">...</span>
-                        <span class="stat-period">/month</span>
-                    </div>
-                    <div class="hero-stat" title="Downloads in the last 7 days">
-                        <i class="fas fa-chart-line"></i>
-                        <span id="weekly-downloads" class="count">...</span>
-                        <span class="stat-period">/week</span>
-                    </div>
-                    <a href="https://www.npmjs.com/package/camote-utils" target="_blank" class="hero-stat" title="Latest version on npm">
-                        <i class="fab fa-npm"></i>
-                        <span id="version-number" class="version">...</span>
+                <div>
+                    <a href="https://www.npmjs.com/package/camote-utils">
+                        <img src="https://img.shields.io/npm/v/camote-utils.svg" alt="npm version">
                     </a>
+                    <a href="https://opensource.org/licenses/MIT">
+                        <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+                    </a>
+                    <a href="https://www.npmjs.com/package/camote-utils">
+                        <img src="https://img.shields.io/npm/dt/camote-utils.svg" alt="Total Downloads">
+                    </a>
+                    <a href="https://github.com/rhynel/camote-utils">
+                        <img src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" alt="Coverage">
+                    </a>
+                    <a href="https://github.com/rhynel/camote-utils">
+                        <img src="https://img.shields.io/badge/maintenance-active-brightgreen.svg" alt="Maintenance">
+                    </a>
+                    <a href="https://github.com/dev-rhynel/camote-utils">
+                        <img src="https://img.shields.io/github/stars/dev-rhynel/camote-utils.svg" alt="GitHub Stars">
+                    </a>
+                    <a href="https://twitter.com/devrhynel">
+                        <img src="https://img.shields.io/twitter/follow/devrhynel.svg?style=social" alt="Twitter Follow">
+                    </a>  
                 </div>
-                <div class="hero-buttons">
-                    <a href="docs/documentation.html" class="doc-button">
-                        <i class="fas fa-book"></i>View Documentation
-                    </a>
-                    <a href="https://github.com/dev-rhynel/camote-utils" class="doc-button" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-github"></i>GitHub
-                    </a>
-                </div>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card feature-card-dark">
+                <i class="fas fa-bolt feature-icon"></i>
+                <h3>Fast & Lightweight</h3>
+                <p>Zero dependencies, tree-shakeable, and optimized for performance</p>
+            </div>
+            <div class="feature-card feature-card-dark">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>Type-Safe</h3>
+                <p>Written in TypeScript with full type definitions</p>
+            </div>
+            <div class="feature-card feature-card-dark">
+                <i class="fas fa-code feature-icon"></i>
+                <h3>Easy to Use</h3>
+                <p>Simple, intuitive API with comprehensive documentation</p>
+            </div>
+        </div>
+
+        <section id="getting-started">
+            <h2>Getting Started</h2>
+            
+            <section id="installation">
+                <h3>Installation</h3>
+                <p>Install camote-utils using npm:</p>
                 <div class="code-window">
                     <div class="code-header">
                         <div class="code-dot"></div>
@@ -355,202 +195,1003 @@
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <button class="copy-button" onclick="copyCode(this)">
-                            <i class="fas fa-copy"></i>
-                        </button>
                         <pre><code class="language-bash">npm install camote-utils</code></pre>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <section id="basic-usage">
+                <h3>Basic Usage</h3>
+                <p>Here are some examples of basic functionality:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { formatNumber, formatCurrency, pluralize } from 'camote-utils';
+
+// String manipulation
+pluralize('cat', 1);     // 'cat'
+pluralize('cat', 2);     // 'cats'
+pluralize('box', 2);     // 'boxes'
+pluralize('child', 2, 'children'); // 'children'
+
+// Number formatting
+formatNumber(1234);     // "1.2K"
+formatNumber(1500000);  // "1.5M"
+
+// Currency formatting
+formatCurrency(1234.56);                    // "$1,234.56"
+formatCurrency(1234.56, 'EUR');             // "€1,234.56"
+formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
+formatCurrency(1234.56, 'GBP', 'en-GB');    // "£1,234.56"</code></pre>
+                    </div>
+                </div>
+            </section>
         </section>
 
-        <section class="container">
-            <div class="feature-grid">
-                <div class="feature-card feature-card-dark">
-                    <i class="fas fa-bolt feature-icon"></i>
-                    <h3>Fast & Lightweight</h3>
-                    <p>Zero dependencies, tree-shakeable, and optimized for performance</p>
-                </div>
-                <div class="feature-card feature-card-dark">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3>Type-Safe</h3>
-                    <p>Written in TypeScript with full type definitions</p>
-                </div>
-                <div class="feature-card feature-card-dark">
-                    <i class="fas fa-code feature-icon"></i>
-                    <h3>Easy to Use</h3>
-                    <p>Simple, intuitive API with comprehensive documentation</p>
-                </div>
-            </div>
+        <section id="chain">
+            <h2>Chain Operations</h2>
+            <p>Chain operations allow you to perform multiple operations on a value in a fluent interface.</p>
+            
+            <section id="chain-syntax">
+                <h3>Chain Syntax</h3>
+                <p>Use the chain syntax to perform multiple operations in sequence:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { chain } from 'camote-utils';
 
-            <div class="code-window"  style="max-width: 900px; width: 100%;">
-                <div class="code-header">
-                    <div class="code-dot"></div>
-                    <div class="code-dot"></div>
-                    <div class="code-dot"></div>
+const result = chain('hello world')
+    .capitalize()
+    .truncate(5)
+    .value(); // Hello</code></pre>
+                    </div>
                 </div>
-                <div class="code-content">
-                    <button class="copy-button" onclick="copyCode(this)">
-                        <i class="fas fa-copy"></i>
-                    </button>
-                    <pre><code class="language-typescript">import { humanReadableNumber, pluralize, _ } from 'camote-utils';
+            </section>
 
-// Example 1: Converting big numbers to readable format
-// Input: [1234567, 2345678, 3456789]
-// Steps: 1. Create a chain of operations
-//        2. Convert each number to readable format (1.23M)
-//        3. Join them with commas
-const bigNumbers = [1234567, 2345678, 3456789];
-const readableNumbers = _.chain(bigNumbers)
-  .map(humanReadableNumber)     // Converts to: ["1.23M", "2.35M", "3.46M"]
-  .join(', ')                   // Joins with commas
-  .value();                     // Ends chain and returns result
-console.log(readableNumbers);   // Output: "1.23M, 2.35M, 3.46M"
+            <section id="static-methods">
+                <h3>Static Methods</h3>
+                <p>Use static methods for direct operations:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { capitalize, truncate } from 'camote-utils';
 
-// Example 2: Simple pluralization
-// Shows how words change based on count
-const animals = _.map([1, 2, 5], count => {
-  const word = pluralize("cat", count);
-  return `${count} ${word}`;    // Adds count before each word
+capitalize('hello world');  // Hello world
+truncate('hello world', 5);  // hello...</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="chain-methods">
+                <h3>Chain Methods</h3>
+                <p>Methods available in the chain sequence:</p>
+                <ul>
+                    <li>capitalize(): Capitalizes the first character</li>
+                    <li>truncate(length: number): Truncates to specified length</li>
+                    <li>toLowerCase(): Converts to lowercase</li>
+                    <li>toUpperCase(): Converts to uppercase</li>
+                    <li>trim(): Removes leading/trailing whitespace</li>
+                </ul>
+            </section>
+        </section>
+
+        <section id="checkers">
+            <h2>Checkers</h2>
+            <p>Utility functions for type checking and validation.</p>
+
+            <section id="type-checking">
+                <h3>Type Checking and String Validation</h3>
+                
+                <section id="type-checking-functions">
+                    <h4>Available Functions</h4>
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-typescript">// Type checking functions
+isString(value: any): boolean;    // Check if value is a string
+isNumber(value: any): boolean;    // Check if value is a number
+isBoolean(value: any): boolean;   // Check if value is a boolean
+isArray(value: any): boolean;     // Check if value is an array
+isObject(value: any): boolean;    // Check if value is an object
+isNull(value: any): boolean;      // Check if value is null
+isUndefined(value: any): boolean; // Check if value is undefined
+isFunction(value: any): boolean;  // Check if value is a function</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="type-checking-usage">
+                    <h4>Usage Examples</h4>
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-typescript">import { isString, isNumber, isArray, isObject } from 'camote-utils';
+
+// Basic type checking
+console.log(isString('hello'));     // true
+console.log(isString(123));         // false
+
+console.log(isNumber(42));          // true
+console.log(isNumber('42'));        // false
+
+console.log(isArray([1, 2, 3]));    // true
+console.log(isArray({ foo: 'bar'})); // false
+
+console.log(isObject({ name: 'John' })); // true
+console.log(isObject([1, 2, 3]));        // false
+
+// Checking for null and undefined
+console.log(isNull(null));          // true
+console.log(isNull(undefined));     // false
+
+console.log(isUndefined(undefined)); // true
+console.log(isUndefined(null));      // false</code></pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section id="string-validation">
+                <h3>String Validation</h3>
+                
+                <section id="string-validation-functions">
+                    <h4>Available Functions</h4>
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-typescript">// String validation functions
+isEmail(value: string): boolean;                         // Validate email format
+isURL(value: string): boolean;                          // Validate URL format
+isPhoneNumber(value: string): boolean;                  // Validate phone number format
+isPostalCode(value: string, country?: string): boolean; // Validate postal code format
+isCreditCard(value: string, type?: string): boolean;    // Validate credit card number
+isStrongPassword(value: string, options?: PasswordOptions): boolean; // Validate password strength
+isDateString(value: string, format?: string): boolean;  // Validate date string format
+
+interface PasswordOptions {
+    minLength?: number;      // Minimum length (default: 8)
+    minLowercase?: number;   // Minimum lowercase chars (default: 1)
+    minUppercase?: number;   // Minimum uppercase chars (default: 1)
+    minNumbers?: number;     // Minimum numbers (default: 1)
+    minSymbols?: number;     // Minimum special chars (default: 1)
+}</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="string-validation-usage">
+                    <h4>Usage Examples</h4>
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-typescript">import { isEmail, isURL, isPhoneNumber, isStrongPassword } from 'camote-utils';
+
+// Email validation
+console.log(isEmail('user@example.com'));     // true
+console.log(isEmail('invalid-email'));        // false
+
+// URL validation
+console.log(isURL('https://example.com'));    // true
+console.log(isURL('not-a-url'));             // false
+
+// Phone number validation
+console.log(isPhoneNumber('+1-555-123-4567')); // true
+console.log(isPhoneNumber('invalid'));         // false
+
+// Password strength validation
+const passwordOptions = {
+    minLength: 8,
+    minLowercase: 1,
+    minUppercase: 1,
+    minNumbers: 1,
+    minSymbols: 1
+};
+
+console.log(isStrongPassword('Abc123!@#', passwordOptions));  // true
+console.log(isStrongPassword('weakpass', passwordOptions));   // false
+
+// Date string validation
+console.log(isDateString('2024-01-14'));          // true
+console.log(isDateString('2024/01/14', 'YYYY/MM/DD')); // true</code></pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+
+        <section id="number-formatting">
+            <h2>Number Formatting</h2>
+            
+            <section id="formatNumber">
+                <h3>formatNumber(number, options)</h3>
+                <p>Formats a number with various options:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { formatNumber } from 'camote-utils';
+
+// Basic formatting
+formatNumber(1234567.89);               // "1,234,567.89"
+formatNumber(1234.5, { decimals: 0 });  // "1,235"
+
+// With units
+formatNumber(1500, { compact: true });  // "1.5K"
+formatNumber(1500000, { compact: true }); // "1.5M"</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="formatPercent">
+                <h3>formatPercent(number, options)</h3>
+                <p>Formats a number as a percentage:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { formatPercent } from 'camote-utils';
+
+formatPercent(0.1234);                  // "12.34%"
+formatPercent(0.1234, { decimals: 1 }); // "12.3%"</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="formatDecimals">
+                <h3>formatDecimals(number, decimals)</h3>
+                <p>Formats a number with fixed decimal places:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { formatDecimals } from 'camote-utils';
+
+formatDecimals(123.456, 2);  // "123.46"
+formatDecimals(123.4, 2);    // "123.40"</code></pre>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="currency-formatting">
+            <h2>Currency Formatting</h2>
+            
+            <section id="formatCurrency">
+                <h3>formatCurrency(amount, currency?, locale?)</h3>
+                <p>Formats a number as currency:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { formatCurrency } from 'camote-utils';
+
+// Basic usage
+formatCurrency(1234.56);                    // "$1,234.56"
+formatCurrency(1234.56, 'EUR');             // "€1,234.56"
+formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
+formatCurrency(1234.56, 'GBP', 'en-GB');    // "£1,234.56"</code></pre>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="price-calculations">
+            <h2>Price Calculations</h2>
+            
+            <section id="calculateDiscountPrice">
+                <h3>calculateDiscountPrice(price, discount)</h3>
+                <p>Calculates the final price after applying a discount:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { calculateDiscountPrice } from 'camote-utils';
+
+// Calculate 20% discount
+calculateDiscountPrice(100, 20);  // 80
+
+// Calculate with decimal discount
+calculateDiscountPrice(50, 0.15); // 42.50</code></pre>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="string-manipulation">
+            <h2>String Manipulation</h2>
+            <p>Functions for manipulating and formatting strings.</p>
+            <section id="capitalize">
+                <h3>capitalize</h3>
+                <p>Capitalizes the first letter of a string.</p>
+                <pre><code class="language-typescript">capitalize("hello") // "Hello"</code></pre>
+            </section>
+            
+            <section id="truncate">
+                <h3>truncate</h3>
+                <p>Truncates a string to a specified length and adds an ellipsis.</p>
+                <pre><code class="language-typescript">truncate("Hello World", 8) // "Hello..."</code></pre>
+            </section>
+            <section id="toCamelCase">
+                <h3>toCamelCase</h3>
+                <p>Converts a string to camelCase.</p>
+                <pre><code class="language-typescript">toCamelCase("hello-world") // "helloWorld"</code></pre>
+            </section>
+            <section id="toKebabCase">
+                <h3>toKebabCase</h3>
+                <p>Converts a string to kebab-case.</p>
+                <pre><code class="language-typescript">toKebabCase("helloWorld") // "hello-world"</code></pre>
+            </section>
+            <section id="toSnakeCase">
+                <h3>toSnakeCase</h3>
+                <p>Converts a string to snake_case.</p>
+                <pre><code class="language-typescript">toSnakeCase("helloWorld") // "hello_world"</code></pre>
+            </section>
+            <section id="slugify">
+                <h3>slugify</h3>
+                <p>Converts a string to a URL-friendly slug.</p>
+                <pre><code class="language-typescript">slugify("Hello World!") // "hello-world"</code></pre>
+            </section>
+            <section id="wordCount">
+                <h3>wordCount</h3>
+                <p>Counts the number of words in a string.</p>
+                <pre><code class="language-typescript">wordCount("Hello world") // 2</code></pre>
+            </section>
+            <section id="pad">
+                <h3>pad</h3>
+                <p>
+                    The <code>pad</code> function extends a string to a specified length by adding a specified character to the start, end, or both sides of the string.
+                    This is useful for aligning text or ensuring consistent string lengths in formatted outputs.
+                </p>
+                <h4>Examples:</h4>
+                <pre><code class="language-typescript">pad("hello", 8) // "hello   "
+pad("hello", 8, "*", "start") // "***hello"
+pad("hello", 8, "*", "both") // "*hello**"</code></pre>
+                <h4>Scenarios:</h4>
+                <ul>
+                    <li>Aligning text in console outputs or logs for better readability.</li>
+                    <li>Formatting numbers with leading zeros for consistency in reports.</li>
+                    <li>Creating fixed-width fields in text-based user interfaces.</li>
+                </ul>
+            </section>
+            <section id="format">
+                <h3>format</h3>
+                <p>Formats a string by replacing placeholders with provided values.</p>
+                <pre><code class="language-typescript">format("Hello {name}!", { name: "World" }) // "Hello World!"</code></pre>
+            </section>
+            <section id="reverse">
+                <h3>reverse</h3>
+                <p>Reverses a string.</p>
+                <pre><code class="language-typescript">reverse("hello") // "olleh"</code></pre>
+            </section>
+            <section id="clean">
+                <h3>clean</h3>
+                <p>Removes extra whitespace from a string.</p>
+                <pre><code class="language-typescript">clean("  hello   world  ") // "hello world"</code></pre>
+            </section>
+            <section id="pluralize">
+                <h3>pluralize</h3>
+                <p>
+                    The <code>pluralize</code> function adjusts a word to its plural form based on the provided count or a custom plural form.
+                    It is particularly useful for dynamically generating grammatically correct text based on quantities.
+                </p>
+                <h4>Examples:</h4>
+                <pre><code class="language-typescript">pluralize("cat", 1) // "cat"
+pluralize("cat", 2) // "cats"
+pluralize("child", 2, "children") // "children"
+pluralize("person", undefined, "people") // "people"</code></pre>
+                <h4>Scenarios:</h4>
+                <ul>
+                    <li>Displaying item counts in a shopping cart with correct singular or plural forms.</li>
+                    <li>Generating user-friendly messages in applications, such as "1 new message" vs. "5 new messages".</li>
+                    <li>Handling irregular plural forms in internationalized applications.</li>
+                </ul>
+            </section>
+            <section id="toUpperCase">
+                <h3>toUpperCase</h3>
+                <p>Converts a string to uppercase with optional locale support.</p>
+                <pre><code class="language-typescript">toUpperCase("hello") // "HELLO"</code></pre>
+            </section>
+            <section id="toLowerCase">
+                <h3>toLowerCase</h3>
+                <p>Converts a string to lowercase with optional locale support.</p>
+                <pre><code class="language-typescript">toLowerCase("HELLO") // "hello"</code></pre>
+            </section>
+            <section id="chopStart">
+                <h3>chopStart</h3>
+                <p>Removes a specified number of characters from the start of a string.</p>
+                <pre><code class="language-typescript">chopStart("hello", 2) // "llo"</code></pre>
+            </section>
+            <section id="chopEnd">
+                <h3>chopEnd</h3>
+                <p>Removes a specified number of characters from the end of a string.</p>
+                <pre><code class="language-typescript">chopEnd("hello", 2) // "hel"</code></pre>
+            </section>
+            <section id="contains">
+                <h3>contains</h3>
+                <p>
+                    The <code>contains</code> function checks if a given substring exists within a string. 
+                    It can be configured to perform case-sensitive or case-insensitive searches, making it versatile for various text processing tasks.
+                </p>
+                <h4>Examples:</h4>
+                <pre><code class="language-typescript">contains("Hello World", "world", true) // false
+contains("Hello World", "world", false) // true
+contains("Hello World", "lo") // true</code></pre>
+                <h4>Scenarios:</h4>
+                <ul>
+                    <li>Searching for keywords within user-generated content or documents.</li>
+                    <li>Implementing basic search functionality in applications.</li>
+                    <li>Validating input by checking for the presence of specific substrings.</li>
+                </ul>
+            </section>
+            <section id="exactly">
+                <h3>exactly</h3>
+                <p>Checks if two strings match exactly.</p>
+                <pre><code class="language-typescript">exactly("Hello", "hello", false) // true</code></pre>
+            </section>
+        </section>
+        <section id="date-validation">
+            <h2>Date Validation</h2>
+            
+            <section id="isDateWithinRange">
+                <h3>isDateWithinRange(date, startDate, endDate)</h3>
+                <p>Checks if a date is within a specified range:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { isDateWithinRange } from 'camote-utils';
+
+const date = new Date('2024-01-15');
+const start = new Date('2024-01-01');
+const end = new Date('2024-01-31');
+
+console.log(isDateWithinRange(date, start, end));  // true</code></pre>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="random-generation">
+            <h2>Random Generation</h2>
+            <p>A comprehensive set of functions for generating various types of random data.</p>
+            
+            <section id="random-integers">
+                <h3>Integer Generation</h3>
+                <p>Functions for generating random integers with various constraints:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { 
+    generateRandomInt,
+    generateRandomIntInRange,
+    generateRandomIntArray
+} from 'camote-utils';
+
+// Basic random integer
+console.log(generateRandomInt(10));        // e.g., 7 (0-10)
+console.log(generateRandomInt(100));       // e.g., 42 (0-100)
+
+// Random integer in range
+console.log(generateRandomIntInRange(5, 10));    // e.g., 7 (5-10)
+console.log(generateRandomIntInRange(-10, 10));  // e.g., -3 (-10 to 10)
+
+// Array of random integers
+console.log(generateRandomIntArray(5, 1, 10));   // e.g., [3, 7, 1, 9, 4]
+console.log(generateRandomIntArray(3, 0, 100));  // e.g., [42, 67, 13]</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="random-strings">
+                <h3>String Generation</h3>
+                <p>Generate random strings with different patterns and constraints:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { 
+    generateRandomString,
+    generateRandomAlpha,
+    generateRandomAlphanumeric,
+    generateRandomHex
+} from 'camote-utils';
+
+// Basic random string
+console.log(generateRandomString(8));        // e.g., "Kj#9mP2$"
+console.log(generateRandomString(12));       // e.g., "aB3$kL9#mN5@"
+
+// Alphabetic string (a-z, A-Z)
+console.log(generateRandomAlpha(8));         // e.g., "KjNmPqRs"
+console.log(generateRandomAlpha(8, true));   // e.g., "kjnmpqrs" (lowercase only)
+console.log(generateRandomAlpha(8, false));  // e.g., "KJNMPQRS" (uppercase only)
+
+// Alphanumeric string (a-z, A-Z, 0-9)
+console.log(generateRandomAlphanumeric(8));  // e.g., "Kj9mP2Nx"
+
+// Hexadecimal string
+console.log(generateRandomHex(8));           // e.g., "a1b2c3d4"
+console.log(generateRandomHex(6));           // e.g., "ff8800" (useful for colors)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="random-passwords">
+                <h3>Password Generation</h3>
+                <p>Generate secure random passwords with customizable options:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { 
+    generatePassword,
+    generateStrongPassword,
+    generatePinCode
+} from 'camote-utils';
+
+// Basic password generation
+console.log(generatePassword(12));  // e.g., "aB3$kL9#mN5@"
+
+// Custom password options
+const password = generatePassword({
+    length: 16,
+    numbers: true,
+    symbols: true,
+    uppercase: true,
+    lowercase: true,
+    excludeSimilar: true,     // Exclude similar characters (1, l, I, 0, O)
+    excludeAmbiguous: true    // Exclude ambiguous symbols ({}, [], (), /\, etc.)
 });
-console.log(animals);           // Output: ["1 cat", "2 cats", "5 cats"]
+console.log(password);  // e.g., "P@ssw0rd#K9$mN5@"
 
-// Example 3: Custom plural forms
-// Some words have special plural forms
-const specialCases = [
-  { word: "child", count: 2, plural: "children" },
-  { word: "person", count: 3, plural: "people" }
-];
+// Generate strong password (enforces security rules)
+console.log(generateStrongPassword());  // e.g., "StrongP@ssw0rd#2024"
 
-const result = _.chain(specialCases)
-  .map(item => {
-    const plural = pluralize(item.word, item.count, item.plural);
-    return `${item.count} ${plural}`;  // Adds count for clarity
-  })
-  .join(" and ")               // Joins with 'and' for readability
-  .value();
-console.log(result);           // Output: "2 children and 3 people"</code></pre>
+// Generate PIN code
+console.log(generatePinCode(4));        // e.g., "1234"
+console.log(generatePinCode(6));        // e.g., "123456"</code></pre>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <section id="random-colors">
+                <h3>Color Generation</h3>
+                <p>Generate random colors in various formats:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { 
+    generateRandomColor,
+    generateRandomRGB,
+    generateRandomHSL,
+    generateColorPalette
+} from 'camote-utils';
+
+// Basic color generation
+console.log(generateRandomColor());           // e.g., "#FF5733"
+console.log(generateRandomColor('rgb'));      // e.g., "rgb(255, 87, 51)"
+console.log(generateRandomColor('hsl'));      // e.g., "hsl(20, 100%, 60%)"
+
+// Specific color format generation
+console.log(generateRandomRGB());            // e.g., [255, 87, 51]
+console.log(generateRandomRGB(true));        // e.g., "rgb(255, 87, 51)"
+console.log(generateRandomHSL());            // e.g., [20, 100, 60]
+console.log(generateRandomHSL(true));        // e.g., "hsl(20, 100%, 60%)"
+
+// Generate color palette
+console.log(generateColorPalette(5));        // e.g., ["#FF5733", "#33FF57", "#5733FF", "#FF3333", "#33FFFF"]
+console.log(generateColorPalette(3, 'rgb')); // e.g., ["rgb(255,87,51)", "rgb(51,255,87)", "rgb(87,51,255)"]</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="random-uuid">
+                <h3>UUID Generation</h3>
+                <p>Generate various versions of UUIDs:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { 
+    generateUUID,
+    generateUUIDv4,
+    generateUUIDv5
+} from 'camote-utils';
+
+// Basic UUID generation (v4)
+console.log(generateUUID());     // e.g., "123e4567-e89b-12d3-a456-426614174000"
+
+// Specific UUID versions
+console.log(generateUUIDv4());   // e.g., "110ec58a-a0f2-4ac4-8393-c866d813b8d1"
+
+// UUID v5 (namespace-based)
+const namespace = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+const name = 'example.com';
+console.log(generateUUIDv5(name, namespace));  // Deterministic UUID based on namespace and name</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="random-generic">
+                <h3>Generic Random Generation</h3>
+                <p>Generate various types of random data for testing and development:</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { generateRandom } from 'camote-utils';
+
+// Personal information
+console.log(generateRandom('name'));      // e.g., "John Smith"
+console.log(generateRandom('firstName')); // e.g., "John"
+console.log(generateRandom('lastName'));  // e.g., "Smith"
+console.log(generateRandom('email'));     // e.g., "john.smith@example.com"
+console.log(generateRandom('username'));  // e.g., "johnsmith123"
+console.log(generateRandom('phone'));     // e.g., "+1-234-567-8900"
+
+// Addresses
+console.log(generateRandom('address'));   // e.g., "123 Main St"
+console.log(generateRandom('city'));      // e.g., "New York"
+console.log(generateRandom('state'));     // e.g., "NY"
+console.log(generateRandom('country'));   // e.g., "United States"
+console.log(generateRandom('zipCode'));   // e.g., "12345"
+
+// Internet
+console.log(generateRandom('url'));       // e.g., "https://example.com"
+console.log(generateRandom('ipv4'));      // e.g., "192.168.1.1"
+console.log(generateRandom('ipv6'));      // e.g., "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+console.log(generateRandom('userAgent')); // e.g., "Mozilla/5.0 ..."
+
+// Business
+console.log(generateRandom('company'));   // e.g., "Acme Corporation"
+console.log(generateRandom('jobTitle'));  // e.g., "Senior Developer"
+console.log(generateRandom('department')); // e.g., "Engineering"
+
+// Finance
+console.log(generateRandom('creditCard')); // e.g., "4111111111111111"
+console.log(generateRandom('currency'));   // e.g., "USD"
+console.log(generateRandom('amount'));     // e.g., "1234.56"
+console.log(generateRandom('iban'));       // e.g., "DE89370400440532013000"
+
+// Dates and Times
+console.log(generateRandom('date'));      // e.g., "2024-01-14"
+console.log(generateRandom('time'));      // e.g., "14:30:00"
+console.log(generateRandom('datetime'));  // e.g., "2024-01-14T14:30:00Z"
+
+// Custom data with options
+console.log(generateRandom('number', { min: 1, max: 100 }));     // e.g., 42
+console.log(generateRandom('string', { length: 10 }));           // e.g., "a1b2c3d4e5"
+console.log(generateRandom('array', { length: 5, type: 'number' })); // e.g., [1, 2, 3, 4, 5]</code></pre>
+                    </div>
+                </div>
+
+                <h4>Available Options</h4>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">interface RandomOptions {
+    // General options
+    length?: number;        // Length of generated data
+    type?: string;         // Type of data for arrays
+    format?: string;       // Output format (e.g., 'hex', 'rgb')
+    
+    // Number options
+    min?: number;          // Minimum value
+    max?: number;          // Maximum value
+    decimals?: number;     // Number of decimal places
+    
+    // String options
+    case?: 'lower' | 'upper' | 'mixed';  // Case for string generation
+    symbols?: boolean;     // Include symbols
+    numbers?: boolean;     // Include numbers
+    
+    // Date options
+    start?: Date;         // Start date for range
+    end?: Date;           // End date for range
+    
+    // Custom options
+    template?: string;    // Custom template for generation
+    exclude?: string[];   // Characters to exclude
+    include?: string[];   // Characters to include
+}</code></pre>
+                    </div>
+                </div>
+            </section>
         </section>
-    </main>
 
-    <section class="contributors">
-        <div class="container">
-            <h2>Contributors</h2>
-            <div class="contributors-grid" id="contributors-list">
-                <!-- Contributors will be dynamically added here -->
+        <section id="advanced">
+            <h2>Advanced</h2>
+
+            <section id="typescript">
+                <h3>TypeScript Usage</h3>
+                <p>camote-utils is written in TypeScript and includes type definitions.</p>
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-typescript">import { generateRandom } from 'camote-utils';
+
+// TypeScript will infer the correct return type
+const uuid: string = generateRandom('uuid');</code></pre>
+                    </div>
+                </div>
+            </section>
+            <section id="browser-support">
+                <h3>Browser Support</h3>
+                
+                <section id="supported-browsers">
+                    <h4>Supported Browsers</h4>
+                    <p>This library supports the following browsers:</p>
+                    <ul>
+                        <li>Chrome (latest 2 versions)</li>
+                        <li>Firefox (latest 2 versions)</li>
+                        <li>Safari (latest 2 versions)</li>
+                        <li>Edge (latest 2 versions)</li>
+                        <li>Opera (latest version)</li>
+                    </ul>
+                </section>
+
+                <section id="polyfills">
+                    <h4>Polyfills</h4>
+                    <p>For older browsers, you may need the following polyfills:</p>
+                    <pre><code>npm install core-js regenerator-runtime</code></pre>
+                    <p>Then import them in your entry file:</p>
+                    <pre><code>import 'core-js/stable';
+import 'regenerator-runtime/runtime';</code></pre>
+                </section>
+
+                <section id="known-issues">
+                    <h4>Known Issues</h4>
+                    <p>Current known browser-specific issues:</p>
+                    <ul>
+                        <li>IE11 requires additional polyfills for ES6+ features</li>
+                        <li>Safari &lt;14 may have issues with certain RegExp features</li>
+                        <li>Mobile browsers may have varying support for newer JavaScript features</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section id="license">
+                <h3>License</h3>
+                <p>This project is licensed under the MIT License.</p>
+            </section>
+
+            <section id="security">
+                <h3>Security</h3>
+                <p>For security concerns, please report them through our security policy.</p>
+            </section>
+
+            <section id="contributors">
+              
+                <h2>Contributors</h2>
+                <p>Thanks goes to these wonderful people who have contributed to this project:</p>
+
+                <div id="contributors-list" class="contributors-grid">
+                    <!-- Contributors will be dynamically loaded here -->
+                </div>
+
+                <div class="become-contributor">
+                    <h3>Want to Contribute?</h3>
+                    <p>We welcome contributions of all kinds! Check out our <a href="https://github.com/dev-rhynel/camote-utils/blob/main/CONTRIBUTING.md">contribution guidelines</a> to get started.</p>
+                    <div class="contribution-links">
+                        <a href="https://github.com/dev-rhynel/camote-utils/issues" class="doc-button">
+                            <i class="fas fa-bug"></i> Report Issues
+                        </a>
+                        <a href="https://github.com/dev-rhynel/camote-utils/pulls" class="doc-button">
+                            <i class="fas fa-code-branch"></i> Submit PRs
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://github.com/rhynel/camote-utils" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.npmjs.com/package/camote-utils" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-npm"></i>
+                </a>
             </div>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        <div class="social-links">
-            <a href="https://github.com/dev-rhynel/camote-utils" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.npmjs.com/package/camote-utils" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-npm"></i>
-            </a>
-        </div>
-        <p class="updated-time">Last updated: December 11, 2024</p>
-    </footer>
-
+            <p class="updated-time">Last updated: December 14, 2024</p>
+        </footer>
+    </main>
+    <div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" ><i class="fas fa-arrow-up"></i></div>
+    <script>
+    window.onscroll = function() {
+        document.getElementById('back-to-top').style.display = 
+            window.scrollY > 300 ? 'flex' : 'none';
+    };
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
     <script>
-        // Fetch NPM package information
-        async function fetchNpmInfo() {
-            try {
-                const response = await fetch('https://registry.npmjs.org/camote-utils');
-                const data = await response.json();
-                const latestVersion = data['dist-tags'].latest;
-                document.getElementById('version-number').textContent = `v${latestVersion}`;
-            } catch (error) {
-                console.error('Failed to fetch npm info:', error);
-                document.getElementById('version-number').textContent = 'v1.0.2';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Helper function to handle submenu toggle
+            function toggleSubmenu(link, subMenu) {
+                if (link.nextElementSibling && link.nextElementSibling.tagName === 'UL') {
+                    link.classList.toggle('expanded');
+                    
+                    // Expand this submenu
+                    if (link.classList.contains('expanded')) {
+                        // Calculate total height including all expanded children
+                        let totalHeight = subMenu.scrollHeight;
+                        subMenu.querySelectorAll('a.expanded + ul').forEach(child => {
+                            totalHeight += child.scrollHeight;
+                        });
+                        
+                        // Set submenu height
+                        subMenu.style.maxHeight = totalHeight + 'px';
+                        
+                        // Update parent heights if this is a nested menu
+                        let parent = link.closest('li').parentElement;
+                        while (parent && parent.tagName === 'UL') {
+                            let parentHeight = parent.scrollHeight;
+                            parent.querySelectorAll(':scope > li > a.expanded + ul').forEach(sibling => {
+                                if (sibling !== subMenu) {
+                                    parentHeight += sibling.scrollHeight;
+                                }
+                            });
+                            parent.style.maxHeight = parentHeight + totalHeight + 'px';
+                            parent = parent.parentElement.closest('ul');
+                        }
+                    } else {
+                        // Collapse this and all nested submenus
+                        subMenu.style.maxHeight = '0';
+                        subMenu.querySelectorAll('a.expanded').forEach(expandedLink => {
+                            expandedLink.classList.remove('expanded');
+                            if (expandedLink.nextElementSibling) {
+                                expandedLink.nextElementSibling.style.maxHeight = '0';
+                            }
+                        });
+                        
+                        // Update parent heights
+                        let parent = link.closest('li').parentElement;
+                        while (parent && parent.tagName === 'UL') {
+                            let parentHeight = parent.scrollHeight;
+                            parent.style.maxHeight = parentHeight + 'px';
+                            parent = parent.parentElement.closest('ul');
+                        }
+                    }
+                }
             }
-        }
 
-        // Fetch NPM download counts
-        async function fetchDownloadCount() {
-            try {
-                // Get package creation date
-                const registryResponse = await fetch('https://registry.npmjs.org/camote-utils');
-                const registryData = await registryResponse.json();
-                const creationTime = new Date(registryData.time.created);
-                const today = new Date();
-                
-                // Calculate date range for all-time downloads
-                const startDate = creationTime.toISOString().split('T')[0];
-                const endDate = today.toISOString().split('T')[0];
-
-                const [monthlyResponse, weeklyResponse, totalResponse] = await Promise.all([
-                    fetch('https://api.npmjs.org/downloads/point/last-month/camote-utils'),
-                    fetch('https://api.npmjs.org/downloads/point/last-week/camote-utils'),
-                    fetch(`https://api.npmjs.org/downloads/point/${startDate}:${endDate}/camote-utils`)
-                ]);
-
-                const [monthlyData, weeklyData, totalData] = await Promise.all([
-                    monthlyResponse.json(),
-                    weeklyResponse.json(),
-                    totalResponse.json()
-                ]);
-
-                // Update all download counts
-                document.getElementById('total-downloads').textContent = formatCount(totalData.downloads);
-                document.getElementById('download-count').textContent = formatCount(monthlyData.downloads);
-                document.getElementById('weekly-downloads').textContent = formatCount(weeklyData.downloads);
-
-            } catch (error) {
-                console.error('Failed to fetch download counts:', error);
-                document.getElementById('total-downloads').textContent = '...';
-                document.getElementById('download-count').textContent = '...';
-                document.getElementById('weekly-downloads').textContent = '...';
-            }
-        }
-
-        // Format count helper function
-        function formatCount(count) {
-            if (count >= 1000000) {
-                return (count / 1000000).toFixed(1) + 'M';
-            } else if (count >= 1000) {
-                return (count / 1000).toFixed(1) + 'k';
-            }
-            return count.toString();
-        }
-
-        // Initialize stats
-        function initializeStats() {
-            fetchNpmInfo();
-            fetchDownloadCount();
-
-            // Update stats every 5 minutes
-            setInterval(() => {
-                fetchNpmInfo();
-                fetchDownloadCount();
-            }, 5 * 60 * 1000);
-        }
-
-        // Copy code function
-        function copyCode(button) {
-            const codeBlock = button.nextElementSibling.querySelector('code');
-            const text = codeBlock.textContent;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const icon = button.querySelector('i');
-                icon.classList.remove('fa-copy');
-                icon.classList.add('fa-check');
-                
-                setTimeout(() => {
-                    icon.classList.remove('fa-check');
-                    icon.classList.add('fa-copy');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy:', err);
+            // Add click handlers to all menu items
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const subMenu = link.nextElementSibling;
+                if (subMenu && subMenu.tagName === 'UL') {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        toggleSubmenu(this, subMenu);
+                    });
+                }
             });
-        }
+
+            // Expand menu items based on current URL hash
+            function expandCurrentSection() {
+                const hash = window.location.hash;
+                if (hash) {
+                    const targetLink = document.querySelector(`a[href="${hash}"]`);
+                    if (targetLink) {
+                        let parent = targetLink.parentElement;
+                        while (parent && !parent.classList.contains('nav-links')) {
+                            const parentLink = parent.previousElementSibling;
+                            const parentMenu = parent.parentElement.parentElement;
+                            if (parentLink && parentLink.tagName === 'A' && parentMenu) {
+                                toggleSubmenu(parentLink, parent);
+                            }
+                            parent = parentMenu;
+                        }
+                        targetLink.classList.add('active');
+                        // Scroll to the section smoothly
+                        const targetElement = document.querySelector(hash);
+                        if (targetElement) {
+                            setTimeout(() => {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }, 100);
+                        }
+                    }
+                }
+            }
+
+            // Initial expansion based on URL
+            expandCurrentSection();
+
+            // Update active menu item on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section[id]');
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 60) {
+                        currentSection = '#' + section.getAttribute('id');
+                    }
+                });
+
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
 
         // Fetch GitHub Contributors
         async function fetchContributors() {
@@ -561,32 +1202,79 @@ console.log(result);           // Output: "2 children and 3 people"</code></pre>
                 const contributorsList = document.getElementById('contributors-list');
                 contributorsList.innerHTML = contributors
                     .map(contributor => `
-                        <a href="${contributor.html_url}" 
-                           class="contributor" 
-                           target="_blank"
-                           title="${contributor.login} - ${contributor.contributions} contributions">
-                            <img src="${contributor.avatar_url}" alt="${contributor.login}">
+                        <div class="contributor-card">
+                            <img src="${contributor.avatar_url}" alt="${contributor.login}" class="contributor-avatar">
                             <div class="contributor-info">
-                                <span class="contributor-name">@${contributor.login}</span>
-                                <span class="contributor-count">${contributor.contributions} commits</span>
+                                <h3>@${contributor.login}</h3>
+                                <p class="contributor-role">${contributor.contributions} contributions</p>
+                                <div class="contributor-links">
+                                    <a href="${contributor.html_url}" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     `)
                     .join('');
             } catch (error) {
                 console.error('Failed to fetch contributors:', error);
-                document.querySelector('.contributors').style.display = 'none';
+                const contributorsList = document.getElementById('contributors-list');
+                contributorsList.innerHTML = `
+                    <div class="contributor-card">
+                        <img src="https://avatars.githubusercontent.com/u/dev-rhynel" alt="Rhynel" class="contributor-avatar">
+                        <div class="contributor-info">
+                            <h3>Rhynel</h3>
+                            <p class="contributor-role">Creator & Maintainer</p>
+                            <div class="contributor-links">
+                                <a href="https://github.com/dev-rhynel" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
         }
 
-        // Initialize all
-        function initialize() {
-            initializeStats();
-            fetchContributors();
-        }
+        // Call fetchContributors when the page loads
+        document.addEventListener('DOMContentLoaded', fetchContributors);
+    </script>
 
-        // Initialize when page loads
-        initialize();
+    <script>
+        // Mobile menu functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menuIcon = menuToggle.querySelector('i');
+        const sidebar = document.querySelector('.sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            const isOpen = sidebar.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isOpen);
+            menuIcon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+            document.body.classList.toggle('menu-open', isOpen);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target) && 
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuIcon.className = 'fas fa-bars';
+                document.body.classList.remove('menu-open');
+            }
+        });
+
+        // Close menu when pressing escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuIcon.className = 'fas fa-bars';
+                document.body.classList.remove('menu-open');
+            }
+        });
     </script>
 </body>
 </html>

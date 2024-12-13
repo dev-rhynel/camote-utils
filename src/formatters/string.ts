@@ -309,17 +309,3 @@ export const exactly = (str1: string, str2: string, caseSensitive?: boolean): bo
   }
   return str1 === str2;
 };
-
-/**
- * Generates a UUID v4 (random) string
- * @returns A UUID v4 string
- * @example
- * generateUuid() // "123e4567-e89b-12d3-a456-426614174000"
- */
-export const generateUuid = (): string => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0
-    const v = c === 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
-}
