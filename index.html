@@ -108,7 +108,7 @@
                             <li><a href="#random-passwords">Password Generation</a></li>
                             <li><a href="#random-colors">Color Generation</a></li>
                             <li><a href="#random-uuid">UUID Generation</a></li>
-                            <li><a href="#random-generic">Generic Random Generation</a></li>
+                            <li><a href="#random-generic">Generate Random By Type</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -875,8 +875,8 @@ console.log(generateUUIDv5(name, namespace));  // Deterministic UUID based on na
             </section>
 
             <section id="random-generic">
-                <h3>Generic Random Generation</h3>
-                <p>Generate various types of random data for testing and development:</p>
+                <h3>Generate Random By Type</h3>
+                <p>Generate random data of various types:</p>
                 <div class="code-window">
                     <div class="code-header">
                         <div class="code-dot"></div>
@@ -885,44 +885,6 @@ console.log(generateUUIDv5(name, namespace));  // Deterministic UUID based on na
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">import { generateRandom } from 'camote-utils';
-
-// Personal information
-console.log(generateRandom('name'));      // e.g., "John Smith"
-console.log(generateRandom('firstName')); // e.g., "John"
-console.log(generateRandom('lastName'));  // e.g., "Smith"
-console.log(generateRandom('email'));     // e.g., "john.smith@example.com"
-console.log(generateRandom('username'));  // e.g., "johnsmith123"
-console.log(generateRandom('phone'));     // e.g., "+1-234-567-8900"
-
-// Addresses
-console.log(generateRandom('address'));   // e.g., "123 Main St"
-console.log(generateRandom('city'));      // e.g., "New York"
-console.log(generateRandom('state'));     // e.g., "NY"
-console.log(generateRandom('country'));   // e.g., "United States"
-console.log(generateRandom('zipCode'));   // e.g., "12345"
-
-// Internet
-console.log(generateRandom('url'));       // e.g., "https://example.com"
-console.log(generateRandom('ipv4'));      // e.g., "192.168.1.1"
-console.log(generateRandom('ipv6'));      // e.g., "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
-console.log(generateRandom('userAgent')); // e.g., "Mozilla/5.0 ..."
-
-// Business
-console.log(generateRandom('company'));   // e.g., "Acme Corporation"
-console.log(generateRandom('jobTitle'));  // e.g., "Senior Developer"
-console.log(generateRandom('department')); // e.g., "Engineering"
-
-// Finance
-console.log(generateRandom('creditCard')); // e.g., "4111111111111111"
-console.log(generateRandom('currency'));   // e.g., "USD"
-console.log(generateRandom('amount'));     // e.g., "1234.56"
-console.log(generateRandom('iban'));       // e.g., "DE89370400440532013000"
-
-// Dates and Times
-console.log(generateRandom('date'));      // e.g., "2024-01-14"
-console.log(generateRandom('time'));      // e.g., "14:30:00"
-console.log(generateRandom('datetime'));  // e.g., "2024-01-14T14:30:00Z"
-
 // Custom data with options
 console.log(generateRandom('number', { min: 1, max: 100 }));     // e.g., 42
 console.log(generateRandom('string', { length: 10 }));           // e.g., "a1b2c3d4e5"
