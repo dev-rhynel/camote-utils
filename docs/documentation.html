@@ -17,162 +17,86 @@
     <aside class="sidebar">
         <div class="back-link">
             <a href="../index.html" class="doc-button">
-                <i class="fas fa-arrow-left"></i>Back to Main Page
+                <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
-        <div class="nav-group">
-            <h3>Getting Started</h3>
-            <ul class="nav-links">
-                <li><a href="#installation" class="active">Installation</a></li>
-                <li><a href="#basic-usage">Basic Usage</a></li>
-            </ul>
-        </div>
-
-        <div class="nav-group">
-            <h3>API Reference</h3>
-            <ul class="nav-links">
-                <li><a href="#number-formatting">Number Formatting</a>
-                    <ul>
-                        <li><a href="#formatNumber">formatNumber</a></li>
-                        <li><a href="#formatPercent">formatPercent</a></li>
-                        <li><a href="#formatDecimals">formatDecimals</a></li>
-                    </ul>
-                </li>
-                <li><a href="#currency-formatting">Currency Formatting</a>
-                    <ul>
-                        <li><a href="#formatCurrency">formatCurrency</a></li>
-                    </ul>
-                </li>
-                <li><a href="#price-calculations">Price Calculations</a>
-                    <ul>
-                        <li><a href="#calculateDiscountPrice">calculateDiscountPrice</a></li>
-                    </ul>
-                </li>
-                <li><a href="#string-manipulation">String Manipulation</a>
-                    <ul>
-                        <li><a href="#pluralize">pluralize</a></li>
-                        <li><a href="#capitalize">capitalize</a></li>
-                        <li><a href="#truncate">truncate</a></li>
-                        <li><a href="#toCamelCase">toCamelCase</a></li>
-                        <li><a href="#toKebabCase">toKebabCase</a></li>
-                        <li><a href="#generateUuid">generateUuid</a></li>
-                    </ul>
-                </li>
-                <li><a href="#checkers">Checkers</a>
-                    <ul>
-                        <li><a href="#isUrl">isUrl</a></li>
-                        <li><a href="#isUuid">isUuid</a></li>
-                    </ul>
-                </li>
-                <li><a href="#date-validation">Date Validation</a>
-                    <ul>
-                        <li><a href="#isDateWithinRange">isDateWithinRange</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-group">
-            <h3>Advanced</h3>
-            <ul class="nav-links">
-                <li><a href="#chain">Chain Operations</a></li>
-                <li><a href="#typescript">TypeScript Usage</a></li>
-                <li><a href="#browser">Browser Support</a></li>
-                <li><a href="#contributing">Contributing</a></li>
-                <li><a href="#license">License</a></li>
-                <li><a href="#security">Security</a></li>
-            </ul>
-        </div>
+        <nav>
+            <div class="nav-group">
+                <h3>Getting Started</h3>
+                <ul class="nav-links">
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#basic-usage">Basic Usage</a></li>
+                </ul>
+            </div>
+            <div class="nav-group">
+                <h3>API Reference</h3>
+                <ul class="nav-links">
+                    <li><a href="#chain" class="active">Chain Operations</a>
+                        <ul>
+                            <li><a href="#chain-syntax">Chain Syntax</a></li>
+                            <li><a href="#static-methods">Static Methods</a></li>
+                            <li><a href="#chain-methods">Chain Methods</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#number-formatting">Number Formatting</a>
+                        <ul>
+                            <li><a href="#formatNumber">formatNumber</a></li>
+                            <li><a href="#formatPercent">formatPercent</a></li>
+                            <li><a href="#formatDecimals">formatDecimals</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#currency-formatting">Currency Formatting</a>
+                        <ul>
+                            <li><a href="#formatCurrency">formatCurrency</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#price-calculations">Price Calculations</a>
+                        <ul>
+                            <li><a href="#calculateDiscountPrice">calculateDiscountPrice</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#string-manipulation">String Manipulation</a>
+                        <ul>
+                            <li><a href="#pluralize">pluralize</a></li>
+                            <li><a href="#capitalize">capitalize</a></li>
+                            <li><a href="#truncate">truncate</a></li>
+                            <li><a href="#toCamelCase">toCamelCase</a></li>
+                            <li><a href="#toKebabCase">toKebabCase</a></li>
+                            <li><a href="#generateUuid">generateUuid</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#checkers">Checkers</a>
+                        <ul>
+                            <li><a href="#isUrl">isUrl</a></li>
+                            <li><a href="#isUuid">isUuid</a></li>
+                            <li><a href="#type-checking">Type Checking</a></li>
+                            <li><a href="#string-validation">String Validation</a></li>
+                            <li><a href="#checkers-api">API Reference</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#date-validation">Date Validation</a>
+                        <ul>
+                            <li><a href="#isDateWithinRange">isDateWithinRange</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-group">
+                <h3>Advanced</h3>
+                <ul class="nav-links">
+                    <li><a href="#typescript">TypeScript Usage</a></li>
+                    <li><a href="#browser">Browser Support</a></li>
+                    <li><a href="#contributing">Contributing</a></li>
+                    <li><a href="#license">License</a></li>
+                    <li><a href="#security">Security</a></li>
+                </ul>
+            </div>
+        </nav>
     </aside>
 
     <main class="main-content">
         <h1>camote-utils Documentation</h1>
         <p class="badge">v1.0.0</p>
-
-        <section id="chain">
-            <h2>Chain Operations</h2>
-            <p>The library provides a chainable interface for combining multiple operations. You can use it in three different ways:</p>
-
-            <section id="chain-syntax">
-                <h3>Chain Syntax</h3>
-                <p>Use the chain syntax to perform multiple operations in sequence:</p>
-                <pre><code class="language-typescript">import { _ } from '@rhynel';
-
-// String operations
-_.chain('hello world')
-  .capitalize()
-  .toCamelCase()
-  .valueOf(); // "HelloWorld"
-
-// Number formatting
-_.chain(1234.56)
-  .formatCurrency('USD')
-  .valueOf(); // "$1,234.56"
-
-// Array operations
-_.chain([1, 2, 3, 4])
-  .map(x => x * 2)
-  .filter(x => x > 4)
-  .valueOf(); // [6, 8]</code></pre>
-            </section>
-
-            <section id="static-methods">
-                <h3>Static Methods</h3>
-                <p>Use static methods for direct operations:</p>
-                <pre><code class="language-typescript">import { _ } from '@rhynel';
-
-// String formatting
-_.capitalize('hello world');  // "Hello world"
-_.formatCurrency(1234.56, 'USD');  // "$1,234.56"
-
-// Utility methods
-_.isNil(null);  // true
-_.isEmpty([]);  // true</code></pre>
-            </section>
-
-            <section id="direct-imports">
-                <h3>Direct Imports</h3>
-                <p>Use original formatters directly:</p>
-                <pre><code class="language-typescript">import { formatters } from '@rhynel';
-
-// Use original formatters
-formatters.capitalize('hello world');
-formatters.formatCurrency(1234.56, 'USD');</code></pre>
-            </section>
-
-            <section id="chain-methods">
-                <h3>Available Chain Methods</h3>
-                <div class="method-list">
-                    <h4>String Operations</h4>
-                    <ul>
-                        <li><code>capitalize()</code> - Capitalizes the first letter</li>
-                        <li><code>truncate(length, ellipsis?)</code> - Truncates text to specified length</li>
-                        <li><code>toCamelCase()</code> - Converts to camelCase</li>
-                        <li><code>toKebabCase()</code> - Converts to kebab-case</li>
-                    </ul>
-
-                    <h4>Number Operations</h4>
-                    <ul>
-                        <li><code>formatCurrency(currency?, locale?)</code> - Formats as currency</li>
-                        <li><code>formatWithCommas()</code> - Adds thousand separators</li>
-                        <li><code>formatPercentage(decimals?)</code> - Formats as percentage</li>
-                    </ul>
-
-                    <h4>Array Operations</h4>
-                    <ul>
-                        <li><code>map(fn)</code> - Transforms array elements</li>
-                        <li><code>filter(fn)</code> - Filters array elements</li>
-                    </ul>
-
-                    <h4>Static Utility Methods</h4>
-                    <ul>
-                        <li><code>_.isNil(value)</code> - Checks for null/undefined</li>
-                        <li><code>_.isEmpty(value)</code> - Checks if value is empty</li>
-                        <li><code>_.chain(value)</code> - Creates a new chain</li>
-                    </ul>
-                </div>
-            </section>
-        </section>
 
         <section id="installation">
             <h2>Installation</h2>
@@ -222,7 +146,92 @@ formatCurrency(1234.56, 'GBP', 'en-GB');    // "£1,234.56"</code></pre>
 
         <section id="api-reference">
             <h2>API Reference</h2>
-            
+
+            <section id="chain">
+                <h3>Chain Operations</h3>
+                <p>The library provides a chainable interface for combining multiple operations. You can use it in three different ways:</p>
+
+                <section id="chain-syntax">
+                    <h4>Chain Syntax</h4>
+                    <p>Use the chain syntax to perform multiple operations in sequence:</p>
+                    <pre><code class="language-typescript">import { _ } from 'camote-utils';
+
+// String operations
+_.chain('hello world')
+  .capitalize()
+  .toCamelCase()
+  .valueOf(); // "HelloWorld"
+
+// Number formatting
+_.chain(1234.56)
+  .formatCurrency('USD')
+  .valueOf(); // "$1,234.56"
+
+// Array operations
+_.chain([1, 2, 3, 4])
+  .map(x => x * 2)
+  .filter(x => x > 4)
+  .valueOf(); // [6, 8]</code></pre>
+                </section>
+
+                <section id="static-methods">
+                    <h4>Static Methods</h4>
+                    <p>Use static methods for direct operations:</p>
+                    <pre><code class="language-typescript">import { _ } from 'camote-utils';
+
+// String formatting
+_.capitalize('hello world');  // "Hello world"
+_.formatCurrency(1234.56, 'USD');  // "$1,234.56"
+
+// Utility methods
+_.isNil(null);  // true
+_.isEmpty([]);  // true</code></pre>
+                </section>
+
+                <section id="direct-imports">
+                    <h3>Direct Imports</h3>
+                    <p>Use original formatters directly:</p>
+                    <pre><code class="language-typescript">import { formatters } from 'camote-utils';
+
+// Use original formatters
+formatters.capitalize('hello world');
+formatters.formatCurrency(1234.56, 'USD');</code></pre>
+                </section>
+
+                <section id="chain-methods">
+                    <h3>Available Chain Methods</h3>
+                    <div class="method-list">
+                        <h4>String Operations</h4>
+                        <ul>
+                            <li><code>capitalize()</code> - Capitalizes the first letter</li>
+                            <li><code>truncate(length, ellipsis?)</code> - Truncates text to specified length</li>
+                            <li><code>toCamelCase()</code> - Converts to camelCase</li>
+                            <li><code>toKebabCase()</code> - Converts to kebab-case</li>
+                        </ul>
+
+                        <h4>Number Operations</h4>
+                        <ul>
+                            <li><code>formatCurrency(currency?, locale?)</code> - Formats as currency</li>
+                            <li><code>formatWithCommas()</code> - Adds thousand separators</li>
+                            <li><code>formatPercentage(decimals?)</code> - Formats as percentage</li>
+                        </ul>
+
+                        <h4>Array Operations</h4>
+                        <ul>
+                            <li><code>map(fn)</code> - Transforms array elements</li>
+                            <li><code>filter(fn)</code> - Filters array elements</li>
+                        </ul>
+
+                        <h4>Static Utility Methods</h4>
+                        <ul>
+                            <li><code>_.isNil(value)</code> - Checks for null/undefined</li>
+                            <li><code>_.isEmpty(value)</code> - Checks if value is empty</li>
+                            <li><code>_.chain(value)</code> - Creates a new chain</li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+
             <section id="number-formatting">
                 <h3>Number Formatting</h3>
                 
@@ -431,33 +440,101 @@ generateUuid();  // "550e8400-e29b-41d4-a716-446655440000"</code></pre>
 
             <section id="checkers">
                 <h3>Checkers</h3>
-                
-                <section id="isUrl">
-                    <h4>isUrl(str: string): boolean</h4>
-                    <p>Checks if a string is a valid URL.</p>
-                    
-                    <h5>Parameters:</h5>
-                    <ul>
-                        <li><code>str</code>: The string to check</li>
-                    </ul>
+                <p>The checkers module provides a set of utility functions for type checking and validation.</p>
 
-                    <h5>Examples:</h5>
-                    <pre><code class="language-typescript">isUrl('https://example.com');  // true
-isUrl('not-a-url');          // false</code></pre>
+                <section id="type-checking">
+                    <h4>Type Checking</h4>
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-typescript">import { isNil, isEmpty, isNumber, isString, isArray, isObject } from 'camote-utils';
+
+// Check for null or undefined
+isNil(null);      // true
+isNil(undefined); // true
+isNil('');        // false
+
+// Check if empty
+isEmpty(null);        // true
+isEmpty('');          // true
+isEmpty([]);          // true
+isEmpty({});          // true
+isEmpty('hello');     // false
+isEmpty([1, 2, 3]);   // false
+
+// Type checking
+isNumber(123);    // true
+isNumber(NaN);    // false
+isNumber('123');  // false
+
+isString('hello'); // true
+isString(123);     // false
+
+isArray([1, 2, 3]);  // true
+isArray({});         // false
+
+isObject({});        // true
+isObject([]);        // false
+isObject(null);      // false</code></pre>
+                        </div>
+                    </div>
                 </section>
 
-                <section id="isUuid">
-                    <h4>isUuid(str: string): boolean</h4>
-                    <p>Checks if a string is a valid UUID.</p>
-                    
-                    <h5>Parameters:</h5>
-                    <ul>
-                        <li><code>str</code>: The string to check</li>
-                    </ul>
+                <section id="string-validation">
+                    <h4>String Validation</h4>
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-typescript">import { isUrl, isUuid, contains, exactly } from 'camote-utils';
 
-                    <h5>Examples:</h5>
-                    <pre><code class="language-typescript">isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
-isUuid('not-a-uuid');                              // false</code></pre>
+// URL validation
+isUrl("https://example.com");     // true
+isUrl("http://localhost:3000");   // true
+isUrl("not-a-url");              // false
+
+// UUID validation
+isUuid("123e4567-e89b-12d3-a456-426614174000"); // true
+isUuid("not-a-uuid");                           // false
+
+// String comparison
+contains("Hello World", "world", true);   // false (case-sensitive)
+contains("Hello World", "world", false);  // true (case-insensitive)
+
+exactly("Hello", "hello", true);   // false (case-sensitive)
+exactly("Hello", "hello", false);  // true (case-insensitive)</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="checkers-api">
+                    <h4>API Reference</h4>
+                    <div class="method-list">
+                        <h5>Type Checking</h5>
+                        <ul>
+                            <li><code>isNil(value: any): boolean</code> - Checks if a value is null or undefined</li>
+                            <li><code>isEmpty(value: any): boolean</code> - Checks if a value is empty (null, undefined, empty string, empty array, empty object)</li>
+                            <li><code>isNumber(value: any): boolean</code> - Checks if a value is a valid number (not NaN or Infinity)</li>
+                            <li><code>isString(value: any): boolean</code> - Checks if a value is a string</li>
+                            <li><code>isArray(value: any): boolean</code> - Checks if a value is an array</li>
+                            <li><code>isObject(value: any): boolean</code> - Checks if a value is an object (not null, not array)</li>
+                        </ul>
+
+                        <h5>String Validation</h5>
+                        <ul>
+                            <li><code>isUrl(str: string): boolean</code> - Checks if a string is a valid URL</li>
+                            <li><code>isUuid(str: string): boolean</code> - Checks if a string is a valid UUID (v4)</li>
+                            <li><code>contains(str: string, substring: string, caseSensitive?: boolean): boolean</code> - Checks if a string contains a substring</li>
+                            <li><code>exactly(str: string, match: string, caseSensitive?: boolean): boolean</code> - Checks if two strings match exactly</li>
+                        </ul>
+                    </div>
                 </section>
             </section>
 
