@@ -23,6 +23,16 @@ describe('Number Formatters', () => {
     it('should handle numbers less than 1000', () => {
       expect(humanReadableNumber(999)).toBe('999')
     })
+
+    it('should format numbers with specified decimals', () => {
+      expect(humanReadableNumber(1234, { decimals: 1 })).toBe('1.2K')
+      expect(humanReadableNumber(1500, { decimals: 0 })).toBe('2K')
+    })
+
+    it('should format numbers in compact representation', () => {
+      expect(humanReadableNumber(1500, { compact: true })).toBe('1.5K')
+      expect(humanReadableNumber(1500000, { compact: true })).toBe('1.5M')
+    })
   })
 
   describe('formatWithCommas', () => {

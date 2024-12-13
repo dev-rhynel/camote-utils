@@ -140,13 +140,22 @@ formatters.formatCurrency(1234.56, 'USD');
 
 ### Number Formatting
 
-#### humanReadableNumber(number: number, options?: FormatNumberOptions): string
-Formats a number into a human-readable string with unit suffixes (K, M, B, T).
+#### humanReadableNumber(number: number, options?: { decimals?: number; compact?: boolean }): string
 
+Formats a number into a human-readable string with K, M, B, T suffixes.
+
+#### Parameters:
+- `number`: The number to format.
+- `options` (optional): An object containing formatting options.
+  - `decimals`: Number of decimal places to display (default: 2).
+  - `compact`: Use compact representation (default: false).
+
+#### Examples:
 ```typescript
-humanReadableNumber(1234);     // "1.2K"
-humanReadableNumber(1500000);  // "1.5M"
-humanReadableNumber(1234, { precision: 2 });  // "1.23K"
+humanReadableNumber(1234);                     // "1.2K"
+humanReadableNumber(1500000);                  // "1.5M"
+humanReadableNumber(1234, { decimals: 1 });    // "1.2K"
+humanReadableNumber(1500, { compact: true });   // "1.5K"
 ```
 
 #### formatDecimals(num: number, decimals: number, roundingMode?: 'ceil' | 'floor' | 'round'): string

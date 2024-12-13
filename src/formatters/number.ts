@@ -1,20 +1,26 @@
 /**
  * Formats a number into a human-readable string with K, M, B, T suffixes
  * @param num - The number to format
+ * @param options - Optional formatting options
+ * @param options.decimals - Number of decimal places (default: 2)
+ * @param options.compact - Use compact representation (default: false)
  * @returns A formatted string representation of the number
  * @example
- * humanReadableNumber(1234) // "1.2K"
- * humanReadableNumber(1000000) // "1.0M"
+ * humanReadableNumber(1234) // "1.23K"
+ * humanReadableNumber(1000000) // "1.00M"
+ * humanReadableNumber(1234, { decimals: 1 }) // "1.2K"
+ * humanReadableNumber(1234, { compact: true }) // "1.2K"
  */
-export const humanReadableNumber = (num: number): string => {
-  if (num < 1000) return num.toString()
+export const humanReadableNumber = (num: number, options?: { decimals?: number; compact?: boolean }): string => {
+  const { decimals = 1, compact = false } = options || {};
+  if (num < 1000) return Math.floor(num).toString();
 
-  const units = ['K', 'M', 'B', 'T']
-  const order = Math.floor(Math.log10(num) / 3)
-  const unitName = units[order - 1]
-  const formattedNum = (num / Math.pow(1000, order)).toFixed(1)
+  const units = ['K', 'M', 'B', 'T'];
+  const order = Math.floor(Math.log10(num) / 3);
+  const unitName = units[order - 1];
+  const formattedNum = (num / Math.pow(1000, order)).toFixed(compact ? 1 : decimals);
 
-  return `${formattedNum}${unitName}`
+  return decimals === 0 ? `${parseInt(formattedNum)}${unitName}` : `${formattedNum}${unitName}`;
 }
 
 /**
