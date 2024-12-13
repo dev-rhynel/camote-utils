@@ -19,7 +19,7 @@ Import the functions you need:
 
 ```typescript
 import { 
-  formatNumber, 
+  humanReadableNumber, 
   formatCurrency,
   formatDecimals,
   calculateDiscountPrice,
@@ -31,8 +31,8 @@ import {
 } from 'camote-utils';
 
 // Format numbers
-formatNumber(1234);     // "1.2K"
-formatNumber(1500000);  // "1.5M"
+humanReadableNumber(1234);     // "1.2K"
+humanReadableNumber(1500000);  // "1.5M"
 
 // Format decimals with different rounding modes
 formatDecimals(1.2345, 2);         // "1.23"
@@ -140,13 +140,13 @@ formatters.formatCurrency(1234.56, 'USD');
 
 ### Number Formatting
 
-#### formatNumber(number: number, options?: FormatNumberOptions): string
+#### humanReadableNumber(number: number, options?: FormatNumberOptions): string
 Formats a number into a human-readable string with unit suffixes (K, M, B, T).
 
 ```typescript
-formatNumber(1234);     // "1.2K"
-formatNumber(1500000);  // "1.5M"
-formatNumber(1234, { precision: 2 });  // "1.23K"
+humanReadableNumber(1234);     // "1.2K"
+humanReadableNumber(1500000);  // "1.5M"
+humanReadableNumber(1234, { precision: 2 });  // "1.23K"
 ```
 
 #### formatDecimals(num: number, decimals: number, roundingMode?: 'ceil' | 'floor' | 'round'): string
