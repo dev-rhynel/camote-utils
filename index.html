@@ -210,7 +210,7 @@
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { humanReadableNumber, pluralize } from 'camote-utils';
+                        <pre><code class="language-typescript">import { _, pluralize } from 'camote-utils';
 
 // String manipulation
 pluralize('cat', 1);     // 'cat'
@@ -219,14 +219,14 @@ pluralize('box', 2);     // 'boxes'
 pluralize('child', 2, 'children'); // 'children'
 
 // Basic formatting
-humanReadableNumber(1234567.89);               // "1.2M"
-humanReadableNumber(1234.5, { decimals: 0 });  // "1,235"
+_.humanReadableNumber(1234567.89);               // "1.2M"
+_.humanReadableNumber(1234.5, { decimals: 0 });  // "1,235"
 
 // With units
-humanReadableNumber(1500, { compact: true });    // "1.5K"
-humanReadableNumber(1500000, { compact: true }); // "1.5M"
-humanReadableNumber(1500, { decimals: 0 });      // "2K"
-humanReadableNumber(999, { decimals: 0 });       // "999"</code></pre>
+_.humanReadableNumber(1500, { compact: true });    // "1.5K"
+_.humanReadableNumber(1500000, { compact: true }); // "1.5M"
+_.humanReadableNumber(1500, { decimals: 0 });      // "2K"
+_.humanReadableNumber(999, { decimals: 0 });       // "999"</code></pre>
                     </div>
                 </div>
             </section>
@@ -246,12 +246,10 @@ humanReadableNumber(999, { decimals: 0 });       // "999"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { chain } from 'camote-utils';
-
-const result = chain('hello world')
+                        <pre><code class="language-typescript">import { _ } from 'camote-utils';
+const result = _.chain('hello world')
     .capitalize()
-    .truncate(5)
-    .value(); // Hello</code></pre>
+    .truncate(5); // Hello</code></pre>
                     </div>
                 </div>
             </section>

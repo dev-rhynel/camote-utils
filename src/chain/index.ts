@@ -56,6 +56,12 @@ export class _ {
         return generateRandom(options);
     }
 
+    static humanReadableNumber(value: number, options?: { decimals?: number; compact?: boolean }): _ {
+        const instance = new _(value);
+        instance.value = numberFormatters.humanReadableNumber(value, options);
+        return instance;
+    }
+
     // String operations
     capitalize(): _ {
         this.value = stringFormatters.capitalize(String(this.value));
