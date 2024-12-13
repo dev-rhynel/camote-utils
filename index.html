@@ -218,15 +218,15 @@ pluralize('cat', 2);     // 'cats'
 pluralize('box', 2);     // 'boxes'
 pluralize('child', 2, 'children'); // 'children'
 
-// Number formatting
-humanReadableNumber(1234);     // "1.2K"
-humanReadableNumber(1500000);  // "1.5M"
+// Basic formatting
+humanReadableNumber(1234567.89);               // "1,234,567.89"
+humanReadableNumber(1234.5, { decimals: 0 });  // "1,235"
 
-// Currency formatting
-formatCurrency(1234.56);                    // "$1,234.56"
-formatCurrency(1234.56, 'EUR');             // "€1,234.56"
-formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
-formatCurrency(1234.56, 'GBP', 'en-GB');    // "£1,234.56"</code></pre>
+// With units
+humanReadableNumber(1500, { compact: true });  // "1.5K"
+humanReadableNumber(1500000, { compact: true }); // "1.5M"
+humanReadableNumber(1500, { decimals: 0 });     // "2K"
+humanReadableNumber(999, { decimals: 0 });      // "999"</code></pre>
                     </div>
                 </div>
             </section>
