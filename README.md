@@ -10,6 +10,11 @@ A comprehensive TypeScript utility library featuring advanced string and number 
 [![GitHub Stars](https://img.shields.io/github/stars/dev-rhynel/camote-utils.svg)](https://github.com/dev-rhynel/camote-utils)
 [![Twitter Follow](https://img.shields.io/twitter/follow/devrhynel.svg?style=social)](https://twitter.com/devrhynel)
 
+## Highlights
+- A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms.
+- Updated to version **1.0.8**.
+- New return type for the `generateRandom` method now includes `string[]`.
+
 ## Installation
 
 ```bash
@@ -22,6 +27,7 @@ Import the functions you need:
 
 ```typescript
 import { 
+   _,
   humanReadableNumber, 
   formatCurrency,
   formatDecimals,
@@ -34,8 +40,11 @@ import {
 } from 'camote-utils';
 
 // Format numbers
-humanReadableNumber(1234);     // "1.2K"
-humanReadableNumber(1500000);  // "1.5M"
+// Basic formatting
+_.humanReadableNumber(1234567.89)               // "1.2M"
+
+// With units
+_.humanReadableNumber(1500, { decimals: 0 })      // "2K"
 
 // Format decimals with different rounding modes
 formatDecimals(1.2345, 2);         // "1.23"
@@ -51,12 +60,18 @@ calculateDiscountPrice(100, 20);      // 80.00 (20% off)
 calculateDiscountPrice(100, 30, '$'); // 70.00 ($30 off)
 
 // Pluralize words
-pluralize('cat', 1);              // "cat"
-pluralize('cat', 2);              // "cats"
-pluralize('child', 2, 'children'); // "children"
+pluralize('cat', 1) // 'cat'
+pluralize('cat', 2) // 'cats'
+pluralize('box', 2) // 'boxes'
+pluralize('baby', 2, 'babies') // 'babies'
+pluralize('person', 1, 'people') // 'person'
+pluralize('person', 2, 'people') // 'people'    
 
-// Generate UUID
-generateUUID();  // "123e4567-e89b-12d3-a456-426614174000"
+// Basic UUID generation (v4)
+generateUUID()     // e.g., "123e4567-e89b-12d3-a456-426614174000"
+
+// Specific UUID versions
+generateUUIDv4()   // e.g., "110ec58a-a0f2-4ac4-8393-c866d813b8d1"
 
 // Validate strings
 isUrl('https://example.com');  // true
@@ -66,327 +81,27 @@ isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
 const startDate = new Date('2024-01-01');
 const endDate = new Date('2024-12-31');
 isDateWithinRange(startDate, endDate);  // true if current date is within range
-```
 
-## Chain Operations
-
-The library now supports chainable operations similar to lodash/underscore. You can use it in three different ways:
-
-### 1. Chain Syntax
-
-```typescript
-import { _ } from 'camote-utils';
-
+// Chain Syntax
 // String operations
-_.chain('hello world')
+const capitalized = _.chain('hello world')
   .capitalize()
   .toCamelCase()
   .valueOf(); // "HelloWorld"
 
 // Number formatting
-_.chain(1234.56)
+const formattedCurrency = _.chain(1234.56)
   .formatCurrency('USD')
   .valueOf(); // "$1,234.56"
 
 // Array operations
-_.chain([1, 2, 3, 4])
-  .map(x => x * 2)
-  .filter(x => x > 4)
+const doubledFiltered = _.chain([1, 2, 3, 4])
+  .map(x => x * 2) // Double each number
+  .filter(x => x > 4) // Keep only numbers greater than 4
   .valueOf(); // [6, 8]
 ```
 
-### 2. Static Methods
-
-```typescript
-import { _ } from 'camote-utils';
-
-// Use static methods directly
-_.capitalize('hello world');
-_.formatCurrency(1234.56, 'USD');
-_.isNil(null); // true
-_.isEmpty([]); // true
-```
-
-### 3. Direct Imports (Original Way)
-
-```typescript
-import { formatters } from 'camote-utils';
-
-// Use original formatters
-formatters.capitalize('hello world');
-formatters.formatCurrency(1234.56, 'USD');
-```
-
-### Available Chain Methods
-
-#### String Operations
-- `capitalize()` - Capitalizes the first letter
-- `truncate(length, ellipsis?)` - Truncates text to specified length
-- `toCamelCase()` - Converts to camelCase
-- `toKebabCase()` - Converts to kebab-case
-
-#### Number Operations
-- `formatCurrency(currency?, locale?)` - Formats as currency
-- `formatWithCommas()` - Adds thousand separators
-- `formatPercentage(decimals?)` - Formats as percentage
-
-#### Array Operations
-- `map(fn)` - Transforms array elements
-- `filter(fn)` - Filters array elements
-
-#### Static Utility Methods
-- `_.isNil(value)` - Checks for null/undefined
-- `_.isEmpty(value)` - Checks if value is empty
-- `_.chain(value)` - Creates a new chain
-
-## API Reference
-
-### Number Formatting
-
-#### humanReadableNumber(number: number, options?: { decimals?: number; compact?: boolean }): string
-
-Formats a number into a human-readable string with K, M, B, T suffixes.
-
-#### Parameters:
-- `number`: The number to format.
-- `options` (optional): An object containing formatting options.
-  - `decimals`: Number of decimal places to display (default: 2).
-  - `compact`: Use compact representation (default: false).
-
-#### Examples:
-```typescript
-humanReadableNumber(1234);                     // "1.2K"
-humanReadableNumber(1500000);                  // "1.5M"
-humanReadableNumber(1234, { decimals: 1 });    // "1.2K"
-humanReadableNumber(1500, { compact: true });   // "1.5K"
-```
-
-#### formatDecimals(num: number, decimals: number, roundingMode?: 'ceil' | 'floor' | 'round'): string
-Formats a number with specified decimal places and rounding mode.
-
-```typescript
-// Default rounding (round)
-formatDecimals(1.2345, 2);        // "1.23"
-formatDecimals(1.2356, 2);        // "1.24"
-
-// Ceiling rounding
-formatDecimals(1.2345, 2, 'ceil'); // "1.24"
-formatDecimals(1.2301, 2, 'ceil'); // "1.24"
-
-// Floor rounding
-formatDecimals(1.2345, 2, 'floor'); // "1.23"
-formatDecimals(1.2399, 2, 'floor'); // "1.23"
-```
-
-### Currency Formatting
-
-#### formatCurrency(amount: number, currency?: string, locale?: string): string
-Formats a number as currency.
-
-```typescript
-formatCurrency(1234.56);                    // "$1,234.56"
-formatCurrency(1234.56, 'EUR');             // "€1,234.56"
-formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
-```
-
-### Price Calculations
-
-#### calculateDiscountPrice(originalPrice: number, discountAmount: number, discountType?: '%' | '$'): number
-Calculates the final price after applying a discount. Supports both percentage and fixed amount discounts.
-
-```typescript
-// Percentage discount (default)
-calculateDiscountPrice(100, 20);      // 80.00
-calculateDiscountPrice(50, 10, '%');  // 45.00
-
-// Fixed amount discount
-calculateDiscountPrice(100, 30, '$'); // 70.00
-
-// Precise decimal handling
-calculateDiscountPrice(75.50, 15, '%');    // 64.17
-calculateDiscountPrice(50.55, 10.55, '$'); // 40.00
-```
-
-### String Manipulation
-
-#### pluralize(word: string, count?: number, customPlural?: string): string
-Converts a word to its plural form based on count.
-
-```typescript
-pluralize('cat', 1);              // "cat"
-pluralize('cat', 2);              // "cats"
-pluralize('child', 2, 'children'); // "children"
-```
-
-#### capitalize(str: string): string
-Capitalizes the first character of a string.
-
-```typescript
-capitalize('hello');  // "Hello"
-capitalize('world');  // "World"
-```
-
-#### truncate(str: string, length: number, ending?: string): string
-Truncates a string if longer than specified length.
-
-```typescript
-truncate('Hello World', 5);     // "He..."
-truncate('Hello World', 8, '~'); // "Hello~"
-```
-
-#### toCamelCase(str: string): string
-Converts a string to camelCase.
-
-```typescript
-toCamelCase('hello-world');  // "helloWorld"
-toCamelCase('Hello World');  // "helloWorld"
-```
-
-#### toKebabCase(str: string): string
-Converts a string to kebab-case.
-
-```typescript
-toKebabCase('helloWorld');   // "hello-world"
-toKebabCase('Hello World');  // "hello-world"
-```
-
-### UUID Generation
-
-#### generateUUID(): string
-Generates a UUID v4 string.
-
-```typescript
-generateUUID();  // "123e4567-e29b-41d4-a716-446655440000"
-generateUUID();  // "550e8400-e29b-41d4-a716-446655440000"
-```
-
-### Date Validation
-
-#### isDateWithinRange(startDate: Date | null, endDate: Date | null): boolean
-Checks if the current date falls within a given date range. The start date is considered from the beginning of the day (00:00:00.000) and the end date is considered until the end of the day (23:59:59.999).
-
-```typescript
-// Check if current date is within range
-const startDate = new Date('2024-01-01');
-const endDate = new Date('2024-12-31');
-isDateWithinRange(startDate, endDate);  // true if current date is within range
-
-// Handle null dates
-isDateWithinRange(null, new Date());     // false
-isDateWithinRange(new Date(), null);     // false
-
-// Same day range
-const today = new Date();
-isDateWithinRange(today, today);         // true (considers full day)
-```
-
-### Checkers
-
-#### isUrl(str: string): boolean
-Validates if a string is a valid URL.
-
-```typescript
-isUrl('https://example.com');  // true
-isUrl('not-a-url');           // false
-```
-
-#### isUuid(str: string): boolean
-Validates if a string is a valid UUID.
-
-```typescript
-isUuid('123e4567-e29b-41d4-a716-446655440000');  // true
-isUuid('not-a-uuid');                             // false
-```
-
-## Random Generation
-
-The library provides a comprehensive set of random value generation functions:
-
-```typescript
-import { _ } from 'camote-utils';
-
-// Generate random integers
-_.generateRandomInteger(1, 10);                    // Number between 1 and 10
-_.generateRandomIntegerArray(3, 1, 10);           // [4, 7, 2]
-_.generateRandomIntegerExcluding(1, 10, [5, 6]);  // Number between 1-4 or 7-10
-
-// Generate random strings
-_.generateRandomString(8);                         // "aB3$kL9p"
-_.generateRandomString(10, { lowercase: true });   // "abcdefghij"
-_.generateRandomString(5, { custom: "ABC123" });   // "B1CA3"
-
-// Generate secure passwords
-_.generateRandomPassword(12);                      // "aB3$kL9p#mN4"
-_.generateRandomPassword(8, { exclude: 'O0Il1' }); // Excludes ambiguous chars
-
-// Generate hex colors
-_.generateRandomHexColor();                        // "#FF5733"
-_.generateRandomHexColor(false);                   // "FF5733"
-
-// Generate any random type
-_.generateRandom({ type: 'integer', min: 1, max: 10 });     // 7
-_.generateRandom({ type: 'float', min: 0, max: 1 });        // 0.123456
-_.generateRandom({ type: 'boolean' });                      // true
-_.generateRandom({ type: 'string', length: 8 });            // "aB3$kL9p"
-_.generateRandom({ type: 'hexColor' });                     // "#FF5733"
-```
-
-### Random String Options
-
-When generating random strings, you can customize the character set:
-
-```typescript
-interface GenerateRandomStringOptions {
-    lowercase?: boolean;   // Include a-z
-    uppercase?: boolean;   // Include A-Z
-    numbers?: boolean;     // Include 0-9
-    special?: boolean;     // Include !@#$%^&*()_+-=[]{}|;:,.<>?
-    custom?: string;      // Use custom character set
-    exclude?: string;     // Characters to exclude
-}
-
-// Examples
-_.generateRandomString(10, { 
-    lowercase: true, 
-    numbers: true 
-});  // "a7b2n9k4m5"
-
-_.generateRandomString(8, { 
-    custom: "ABC123",
-    exclude: "B2" 
-});  // "A1C3A1C3"
-```
-
-### Password Generation
-
-Generate secure passwords with required character types:
-
-```typescript
-// Default includes lowercase, uppercase, numbers, and special chars
-const password = _.generateRandomPassword(12);  // "aB3$kL9p#mN4"
-
-// Exclude ambiguous characters
-const password = _.generateRandomPassword(12, { 
-    exclude: 'O0Il1' 
-});  // "mK4$pJ9#nR5"
-```
-
-### Random Types
-
-Available types for `generateRandom`:
-
-```typescript
-type GenerateRandomType = 'integer' | 'float' | 'boolean' | 'string' | 'hexColor';
-
-interface GenerateRandomOptions {
-    type: GenerateRandomType;
-    min?: number;          // For numbers
-    max?: number;          // For numbers
-    length?: number;       // For strings
-    stringOptions?: GenerateRandomStringOptions;
-    includeHash?: boolean; // For hexColor
-}
-```
+For full documentation, please visit our [documentation site](https://example.com/docs).
 
 ## Security Policy
 
@@ -395,8 +110,6 @@ For information about our security policy and how to report vulnerabilities, ple
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Visit our [documentation](https://dev-rhynel.github.io/camote-utils/) for detailed API references and examples.
 
 MIT © [Rhynel](https://github.com/dev-rhynel)
 
