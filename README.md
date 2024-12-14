@@ -75,12 +75,17 @@ generateUUIDv4()   // e.g., "110ec58a-a0f2-4ac4-8393-c866d813b8d1"
 
 // Validate strings
 isUrl('https://example.com');  // true
-isUuid('123e4567-e89b-12d3-a456-426614174000');  // true
+isUuid('123e4567-e89b-12d3-a456-426614174000');  // 
 
 // Check if date is within range
-const startDate = new Date('2024-01-01');
-const endDate = new Date('2024-12-31');
-isDateWithinRange(startDate, endDate);  // true if current date is within range
+const date = new Date('2024-01-15')
+const start = new Date('2024-01-01')
+const end = new Date('2024-01-31')
+
+isDateWithinRange(start, end, date);  // true if current dat
+
+// Check if the current date is within the range
+isDateWithinRange(start, end)  // true (using default date value now())
 
 // Chain Syntax
 // String operations
