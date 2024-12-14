@@ -974,9 +974,27 @@ const uuid: string = generateRandom('uuid')</code></pre>
                     </div>
                 </div>
             </section>
+
             <section id="browser-support">
                 <h3>Browser Support</h3>
+                <p>This library is compatible with all modern browsers and Node.js environments. It's built using ES2018+ features and includes necessary polyfills for older environments.</p>
                 
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                        <div class="code-dot"></div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-html">&lt;script src="https://unpkg.com/camote-utils"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const { humanReadableNumber } = window.camote;
+
+    console.log(humanReadableNumber(1234567)); // "1.23M"
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+    
                 <section id="supported-browsers">
                     <h4>Supported Browsers</h4>
                     <p>This library supports the following browsers:</p>
