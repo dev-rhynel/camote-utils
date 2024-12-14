@@ -5,7 +5,10 @@ A comprehensive TypeScript utility library for common string and number operatio
 [![npm version](https://img.shields.io/npm/v/camote-utils.svg)](https://www.npmjs.com/package/camote-utils)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Total Downloads](https://img.shields.io/npm/dt/camote-utils.svg)](https://www.npmjs.com/package/camote-utils)
-
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/rhynel/camote-utils)
+[![Maintenance](https://img.shields.io/badge/maintenance-active-brightgreen.svg)](https://github.com/rhynel/camote-utils)
+[![GitHub Stars](https://img.shields.io/github/stars/dev-rhynel/camote-utils.svg)](https://github.com/dev-rhynel/camote-utils)
+[![Twitter Follow](https://img.shields.io/twitter/follow/devrhynel.svg?style=social)](https://twitter.com/devrhynel)
 
 ## Installation
 
