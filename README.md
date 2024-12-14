@@ -101,7 +101,7 @@ const doubledFiltered = _.chain([1, 2, 3, 4])
   .valueOf(); // [6, 8]
 ```
 
-For full documentation, please visit our [documentation site](https://example.com/docs).
+For full documentation, please visit our [documentation site](https://dev-rhynel.github.io/camote-utils).
 
 ## Security Policy
 
