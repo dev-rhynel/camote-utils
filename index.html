@@ -531,11 +531,23 @@ formatCurrency(1234.56, 'GBP', 'en-GB')// "£1,234.56"</code></pre>
                     <div class="code-content">
                         <pre><code class="language-typescript">import { calculateDiscountPrice } from 'camote-utils
 
-// Calculate 20% discount
-calculateDiscountPrice(100, 20)  // 80
+// Calculate a fixed discount of $30 on an original price of $100
+calculateDiscountPrice(100, 30, '$')  // 70
 
-// Calculate with decimal discount
-calculateDiscountPrice(50, 0.15) // 42.50</code></pre>
+// Calculate a percentage discount of 10% on an original price of $200
+calculateDiscountPrice(200, 0.10, '%') // 180
+
+// Calculate a fixed discount of $15 on an original price of $50
+calculateDiscountPrice(50, 15, '$')    // 35
+
+// Calculate a percentage discount of 25% on an original price of $80
+calculateDiscountPrice(80, 0.25, '%')  // 60
+
+// Calculate a fixed discount of $0 on an original price of $100 (no discount)
+calculateDiscountPrice(100, 0, '$')    // 100
+
+// Calculate a percentage discount of 0% on an original price of $150 (no discount)
+calculateDiscountPrice(150, 0, '%')     // 150</code></pre>
                     </div>
                 </div>
             </section>
