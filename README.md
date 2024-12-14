@@ -63,7 +63,7 @@ calculateDiscountPrice(100, 30, '$'); // 70.00 ($30 off)
 pluralize('cat', 1) // 'cat'
 pluralize('cat', 2) // 'cats'
 pluralize('box', 2) // 'boxes'
-pluralize('baby', 2, 'babies') // 'babies'
+pluralize('baby', 2) // 'babies'
 pluralize('person', 1, 'people') // 'person'
 pluralize('person', 2, 'people') // 'people'    
 
