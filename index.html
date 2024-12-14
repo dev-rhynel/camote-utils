@@ -136,7 +136,7 @@
         <div class="header-content">
             <img src="https://github.com/user-attachments/assets/9302d4b2-38fd-4869-97b2-72616b22682f" width="100" alt="camote-utils icon" class="logo">
             <div>
-                <h1>camote-utils <img src="https://static-production.npmjs.com/255a118f56f5346b97e56325a1217a16.svg" width="25" alt="camote-utils"></h1>
+                <h1>camote-utils <img src="https://static-production.npmjs.com/255a118f56f5346b97e56325a1217a16.svg" width="18" alt="camote-utils"></h1>
                 <div>
                     <a href="https://www.npmjs.com/package/camote-utils">
                         <img src="https://img.shields.io/npm/v/camote-utils.svg" alt="npm version">
@@ -193,7 +193,11 @@
                         <div class="code-dot"></div>
                         <div class="code-dot"></div>
                     </div>
-                    <div class="code-content">
+                    <div class="code-content" style="position: relative;">
+                        <button class="copy-button" aria-label="Copy code">
+                            <i class="fas fa-copy" id="copy-icon"></i>
+                            <i class="fas fa-check" id="check-icon" style="display: none;"></i> <!-- Hidden by default -->
+                        </button>
                         <pre><code class="language-bash">npm install camote-utils</code></pre>
                     </div>
                 </div>
@@ -1234,6 +1238,31 @@ import 'regenerator-runtime/runtime';</code></pre>
                 menuIcon.className = 'fas fa-bars';
                 document.body.classList.remove('menu-open');
             }
+        });
+
+        // Add this script at the bottom of your HTML file
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const codeBlock = button.nextElementSibling.querySelector('code');
+                const codeText = codeBlock.innerText;
+
+                navigator.clipboard.writeText(codeText).then(() => {
+                    // Change button style to indicate success
+                    const copyIcon = button.querySelector('#copy-icon');
+                    const checkIcon = button.querySelector('#check-icon');
+
+                    copyIcon.style.display = 'none'; // Hide copy icon
+                    checkIcon.style.display = 'inline'; // Show check icon
+
+                    // Reset icons after a delay
+                    setTimeout(() => {
+                        copyIcon.style.display = 'inline'; // Show copy icon again
+                        checkIcon.style.display = 'none'; // Hide check icon
+                    }, 2000); // Duration of the animation
+                }).catch(err => {
+                    console.error('Error copying text: ', err);
+                });
+            });
         });
     </script>
 </body>

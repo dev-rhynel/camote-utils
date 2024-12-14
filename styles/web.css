@@ -1165,12 +1165,10 @@ footer {
     background: #27c93f;
 }
 
-/* Feature Grid */
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    margin: 4rem 0;
 }
 
 .feature-card {
@@ -1250,24 +1248,43 @@ footer {
     padding: 0 2rem;
 }
 
-/* Copy Button */
 .copy-button {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    padding: 0.5rem;
-    background: transparent;
-    border: none;
+    position: absolute; 
+    right: 40px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    padding: 0.5rem 1rem; 
+    background: var(--background); 
+    border: 1px solid var(--border-color); 
+    border-radius: 4px; 
     color: var(--text-muted);
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 0.9rem; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
-
 .copy-button:hover {
-    color: var(--primary);
+    color: var(--primary); 
+}
+.copy-button.copied {
+    background-color: #4CAF50;  
+    color: white;
+    animation: pulse 0.6s; 
 }
 
-/* Hide scrollbar in mobile menu to prevent double scrollbars */
+/* Pulse animation for the copied state */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 @media (max-width: 767px) {
     body.menu-open {
         overflow: hidden;
@@ -1289,4 +1306,47 @@ footer {
     justify-content:center;
     cursor:pointer;
     z-index:1000;
+}
+
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.feature-card:hover {
+    transform: scale(0.97);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.logo {
+    animation: float 3s ease-in-out infinite; 
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+}
+
+.logo:hover {
+    animation: bounce 0.6s; /* Apply bounce animation on hover */
+    opacity: 0.8; 
 }
