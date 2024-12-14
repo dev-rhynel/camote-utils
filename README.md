@@ -83,8 +83,6 @@ const start = new Date('2024-01-01')
 const end = new Date('2024-01-31')
 
 isDateWithinRange(start, end, date);  // true
-
-
 // Check if the current date is within the range
 isDateWithinRange(start, end)  // true (using default date value now())
 
