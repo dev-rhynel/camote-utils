@@ -16,7 +16,7 @@ import {
   chopStart,
   chopEnd,
 } from '../src/formatters/string';
-import { generateUuid } from '../src/random';
+import { generateUUID } from '../src/random';
 
 import {
   isUrl,
@@ -374,10 +374,10 @@ describe('String Formatters', () => {
     })
   })
 
-  describe('generateUuid', () => {
+  describe('generateUUID', () => {
     it('should generate valid UUID v4 strings', () => {
-      const uuid1 = generateUuid()
-      const uuid2 = generateUuid()
+      const uuid1 = generateUUID()
+      const uuid2 = generateUUID()
 
       // Should be valid UUIDs
       expect(isUuid(uuid1)).toBe(true)
@@ -388,7 +388,7 @@ describe('String Formatters', () => {
     })
 
     it('should generate UUIDs with correct format', () => {
-      const uuid = generateUuid()
+      const uuid = generateUUID()
       
       // Check UUID v4 format
       expect(uuid).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
@@ -401,7 +401,7 @@ describe('String Formatters', () => {
     })
 
     it('should generate multiple unique UUIDs', () => {
-      const uuids = new Set(Array.from({ length: 1000 }, () => generateUuid()))
+      const uuids = new Set(Array.from({ length: 1000 }, () => generateUUID()))
       expect(uuids.size).toBe(1000) // All should be unique
     })
   })

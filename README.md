@@ -27,7 +27,7 @@ import {
   formatDecimals,
   calculateDiscountPrice,
   pluralize,
-  generateUuid,
+  generateUUID,
   isUrl,
   isUuid,
   isDateWithinRange 
@@ -56,7 +56,7 @@ pluralize('cat', 2);              // "cats"
 pluralize('child', 2, 'children'); // "children"
 
 // Generate UUID
-generateUuid();  // "123e4567-e89b-12d3-a456-426614174000"
+generateUUID();  // "123e4567-e89b-12d3-a456-426614174000"
 
 // Validate strings
 isUrl('https://example.com');  // true
@@ -252,12 +252,12 @@ toKebabCase('Hello World');  // "hello-world"
 
 ### UUID Generation
 
-#### generateUuid(): string
+#### generateUUID(): string
 Generates a UUID v4 string.
 
 ```typescript
-generateUuid();  // "123e4567-e29b-41d4-a716-446655440000"
-generateUuid();  // "550e8400-e29b-41d4-a716-446655440000"
+generateUUID();  // "123e4567-e29b-41d4-a716-446655440000"
+generateUUID();  // "550e8400-e29b-41d4-a716-446655440000"
 ```
 
 ### Date Validation

@@ -88,3 +88,11 @@ describe('Chain - Array Operations', () => {
     expect(result).toEqual([2, 4]);
   });
 });
+
+describe('valueOf', () => {
+  it('should return the internal value', () => {
+    const instance = new _('test value');
+    const result = instance.valueOf();
+    expect(result).toBe('test value');
+  });
+});

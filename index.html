@@ -213,23 +213,21 @@
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { _, pluralize } from 'camote-utils';
-
+                        <pre><code class="language-typescript">import { _, pluralize } from 'camote-utils'
+                            
 // String manipulation
-pluralize('cat', 1);     // 'cat'
-pluralize('cat', 2);     // 'cats'
-pluralize('box', 2);     // 'boxes'
-pluralize('child', 2, 'children'); // 'children'
+pluralize('cat', 1) // 'cat'
+pluralize('cat', 2) // 'cats'
+pluralize('box', 2) // 'boxes'
+pluralize('baby', 2, 'babies') // 'babies'
+pluralize('person', 1, 'people') // 'person'
+pluralize('person', 2, 'people') // 'people'    
 
 // Basic formatting
-_.humanReadableNumber(1234567.89);               // "1.2M"
-_.humanReadableNumber(1234.5, { decimals: 0 });  // "1,235"
+_.humanReadableNumber(1234567.89)               // "1.2M"
 
 // With units
-_.humanReadableNumber(1500, { compact: true });    // "1.5K"
-_.humanReadableNumber(1500000, { compact: true }); // "1.5M"
-_.humanReadableNumber(1500, { decimals: 0 });      // "2K"
-_.humanReadableNumber(999, { decimals: 0 });       // "999"</code></pre>
+_.humanReadableNumber(1500, { decimals: 0 })      // "2K"</code></pre>
                     </div>
                 </div>
             </section>
@@ -249,10 +247,10 @@ _.humanReadableNumber(999, { decimals: 0 });       // "999"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { _ } from 'camote-utils';
+                        <pre><code class="language-typescript">import { _ } from 'camote-utils
 const result = _.chain('hello world')
     .capitalize()
-    .truncate(5); // Hello</code></pre>
+    .truncate(5) // Hello</code></pre>
                     </div>
                 </div>
             </section>
@@ -267,10 +265,10 @@ const result = _.chain('hello world')
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { capitalize, truncate } from 'camote-utils';
+                        <pre><code class="language-typescript">import { capitalize, truncate } from 'camote-utils
 
-capitalize('hello world');  // Hello world
-truncate('hello world', 5);  // hello...</code></pre>
+capitalize('hello world')  // Hello world
+truncate('hello world', 5)  // hello...</code></pre>
                     </div>
                 </div>
             </section>
@@ -326,27 +324,27 @@ isFunction(value: any): boolean;  // Check if value is a function</code></pre>
                             <div class="code-dot"></div>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-typescript">import { isString, isNumber, isArray, isObject } from 'camote-utils';
+                            <pre><code class="language-typescript">import { isString, isNumber, isArray, isObject } from 'camote-utils
 
 // Basic type checking
-console.log(isString('hello'));     // true
-console.log(isString(123));         // false
+isString('hello')     // true
+isString(123)         // false
 
-console.log(isNumber(42));          // true
-console.log(isNumber('42'));        // false
+isNumber(42)          // true
+isNumber('42')        // false
 
-console.log(isArray([1, 2, 3]));    // true
-console.log(isArray({ foo: 'bar'})); // false
+isArray([1, 2, 3])    // true
+isArray({ foo: 'bar'}) // false
 
-console.log(isObject({ name: 'John' })); // true
-console.log(isObject([1, 2, 3]));        // false
+isObject({ name: 'John' }) // true
+isObject([1, 2, 3])        // false
 
 // Checking for null and undefined
-console.log(isNull(null));          // true
-console.log(isNull(undefined));     // false
+isNull(null)          // true
+isNull(undefined)     // false
 
-console.log(isUndefined(undefined)); // true
-console.log(isUndefined(null));      // false</code></pre>
+isUndefined(undefined) // true
+isUndefined(null)      // false</code></pre>
                         </div>
                     </div>
                 </section>
@@ -393,19 +391,19 @@ interface PasswordOptions {
                             <div class="code-dot"></div>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-typescript">import { isEmail, isURL, isPhoneNumber, isStrongPassword } from 'camote-utils';
+                            <pre><code class="language-typescript">import { isEmail, isURL, isPhoneNumber, isStrongPassword } from 'camote-utils
 
 // Email validation
-console.log(isEmail('user@example.com'));     // true
-console.log(isEmail('invalid-email'));        // false
+isEmail('user@example.com')     // true
+isEmail('invalid-email')        // false
 
 // URL validation
-console.log(isURL('https://example.com'));    // true
-console.log(isURL('not-a-url'));             // false
+isURL('https://example.com')    // true
+isURL('not-a-url')             // false
 
 // Phone number validation
-console.log(isPhoneNumber('+1-555-123-4567')); // true
-console.log(isPhoneNumber('invalid'));         // false
+isPhoneNumber('+1-555-123-4567') // true
+isPhoneNumber('invalid')         // false
 
 // Password strength validation
 const passwordOptions = {
@@ -416,12 +414,12 @@ const passwordOptions = {
     minSymbols: 1
 };
 
-console.log(isStrongPassword('Abc123!@#', passwordOptions));  // true
-console.log(isStrongPassword('weakpass', passwordOptions));   // false
+isStrongPassword('Abc123!@#', passwordOptions)  // true
+isStrongPassword('weakpass', passwordOptions)   // false
 
 // Date string validation
-console.log(isDateString('2024-01-14'));          // true
-console.log(isDateString('2024/01/14', 'YYYY/MM/DD')); // true</code></pre>
+isDateString('2024-01-14')          // true
+isDateString('2024/01/14', 'YYYY/MM/DD') // true</code></pre>
                         </div>
                     </div>
                 </section>
@@ -441,16 +439,17 @@ console.log(isDateString('2024/01/14', 'YYYY/MM/DD')); // true</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { humanReadableNumber } from 'camote-utils';
+                        <pre><code class="language-typescript">import { humanReadableNumber } from 'camote-utils
+                            
 // Basic formatting
-humanReadableNumber(1234567.89);               // "1.2M"
-humanReadableNumber(1234.5, { decimals: 0 });  // "1,235"
+humanReadableNumber(1234567.89)               // "1.2M"
+humanReadableNumber(1234.5, { decimals: 0 })  // "1,235"
 
 // With units
-humanReadableNumber(1500, { compact: true });    // "1.5K"
-humanReadableNumber(1500000, { compact: true }); // "1.5M"
-humanReadableNumber(1500, { decimals: 0 });      // "2K"
-humanReadableNumber(999, { decimals: 0 });       // "999"</code></pre>
+humanReadableNumber(1500, { compact: true })    // "1.5K"
+humanReadableNumber(1500000, { compact: true }) // "1.5M"
+humanReadableNumber(1500, { decimals: 0 })      // "2K"
+humanReadableNumber(999, { decimals: 0 })       // "999"</code></pre>
                     </div>
                 </div>
             </section>
@@ -465,10 +464,10 @@ humanReadableNumber(999, { decimals: 0 });       // "999"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { formatPercent } from 'camote-utils';
+                        <pre><code class="language-typescript">import { formatPercent } from 'camote-utils
 
-formatPercent(0.1234);                  // "12.34%"
-formatPercent(0.1234, { decimals: 1 }); // "12.3%"</code></pre>
+formatPercent(0.1234)                  // "12.34%"
+formatPercent(0.1234, { decimals: 1 }) // "12.3%"</code></pre>
                     </div>
                 </div>
             </section>
@@ -483,10 +482,10 @@ formatPercent(0.1234, { decimals: 1 }); // "12.3%"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { formatDecimals } from 'camote-utils';
+                        <pre><code class="language-typescript">import { formatDecimals } from 'camote-utils
 
-formatDecimals(123.456, 2);  // "123.46"
-formatDecimals(123.4, 2);    // "123.40"</code></pre>
+formatDecimals(123.456, 2)  // "123.46"
+formatDecimals(123.4, 2)    // "123.40"</code></pre>
                     </div>
                 </div>
             </section>
@@ -505,13 +504,13 @@ formatDecimals(123.4, 2);    // "123.40"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { formatCurrency } from 'camote-utils';
+                        <pre><code class="language-typescript">import { formatCurrency } from 'camote-utils
 
 // Basic usage
-formatCurrency(1234.56);                    // "$1,234.56"
-formatCurrency(1234.56, 'EUR');             // "€1,234.56"
-formatCurrency(1234.56, 'JPY', 'ja-JP');    // "¥1,235"
-formatCurrency(1234.56, 'GBP', 'en-GB');    // "£1,234.56"</code></pre>
+formatCurrency(1234.56)                // "$1,234.56"
+formatCurrency(1234.56, 'EUR')         // "€1,234.56"
+formatCurrency(1234.56, 'JPY', 'ja-JP')// "¥1,235"
+formatCurrency(1234.56, 'GBP', 'en-GB')// "£1,234.56"</code></pre>
                     </div>
                 </div>
             </section>
@@ -530,13 +529,13 @@ formatCurrency(1234.56, 'GBP', 'en-GB');    // "£1,234.56"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { calculateDiscountPrice } from 'camote-utils';
+                        <pre><code class="language-typescript">import { calculateDiscountPrice } from 'camote-utils
 
 // Calculate 20% discount
-calculateDiscountPrice(100, 20);  // 80
+calculateDiscountPrice(100, 20)  // 80
 
 // Calculate with decimal discount
-calculateDiscountPrice(50, 0.15); // 42.50</code></pre>
+calculateDiscountPrice(50, 0.15) // 42.50</code></pre>
                     </div>
                 </div>
             </section>
@@ -687,13 +686,13 @@ contains("Hello World", "lo") // true</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { isDateWithinRange } from 'camote-utils';
+                        <pre><code class="language-typescript">import { isDateWithinRange } from 'camote-utils
 
-const date = new Date('2024-01-15');
-const start = new Date('2024-01-01');
-const end = new Date('2024-01-31');
+const date = new Date('2024-01-15')
+const start = new Date('2024-01-01')
+const end = new Date('2024-01-31')
 
-console.log(isDateWithinRange(date, start, end));  // true</code></pre>
+isDateWithinRange(date, start, end)  // true</code></pre>
                     </div>
                 </div>
             </section>
@@ -714,22 +713,27 @@ console.log(isDateWithinRange(date, start, end));  // true</code></pre>
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">import { 
-    generateRandomInt,
-    generateRandomIntInRange,
-    generateRandomIntArray
-} from 'camote-utils';
+    generateRandomInteger,
+    generateRandomIntegerInRange,
+    generateRandomIntegerArray
+} from 'camote-utils
 
 // Basic random integer
-console.log(generateRandomInt(10));        // e.g., 7 (0-10)
-console.log(generateRandomInt(100));       // e.g., 42 (0-100)
+generateRandomInteger(10)        // e.g., 7 (0-10)
+generateRandomInteger(100)       // e.g., 42 (0-100)
 
 // Random integer in range
-console.log(generateRandomIntInRange(5, 10));    // e.g., 7 (5-10)
-console.log(generateRandomIntInRange(-10, 10));  // e.g., -3 (-10 to 10)
+generateRandomIntegerInRange(5, 10)    // e.g., 7 (5-10)
+generateRandomIntegerInRange(-10, 10)  // e.g., -3 (-10 to 10)
 
 // Array of random integers
-console.log(generateRandomIntArray(5, 1, 10));   // e.g., [3, 7, 1, 9, 4]
-console.log(generateRandomIntArray(3, 0, 100));  // e.g., [42, 67, 13]</code></pre>
+generateRandomIntegerArray(5, 1, 10)   // e.g., [3, 7, 1, 9, 4]
+generateRandomIntegerArray(3, 0, 100)  // e.g., [42, 67, 13]
+
+// Generates an array of random integers
+generateRandomIntegerExcluding(1, 10, [5, 6])    // Returns a number between 1-4 or 7-10
+generateRandomIntegerExcluding(1, 3, [2])        // Returns either 1 or 3
+</code></pre>
                     </div>
                 </div>
             </section>
@@ -749,23 +753,23 @@ console.log(generateRandomIntArray(3, 0, 100));  // e.g., [42, 67, 13]</code></p
     generateRandomAlpha,
     generateRandomAlphanumeric,
     generateRandomHex
-} from 'camote-utils';
+} from 'camote-utils
 
 // Basic random string
-console.log(generateRandomString(8));        // e.g., "Kj#9mP2$"
-console.log(generateRandomString(12));       // e.g., "aB3$kL9#mN5@"
+generateRandomString(8)        // e.g., "Kj#9mP2$"
+generateRandomString(12)       // e.g., "aB3$kL9#mN5@"
 
 // Alphabetic string (a-z, A-Z)
-console.log(generateRandomAlpha(8));         // e.g., "KjNmPqRs"
-console.log(generateRandomAlpha(8, true));   // e.g., "kjnmpqrs" (lowercase only)
-console.log(generateRandomAlpha(8, false));  // e.g., "KJNMPQRS" (uppercase only)
+generateRandomAlpha(8)         // e.g., "KjNmPqRs"
+generateRandomAlpha(8, true)   // e.g., "kjnmpqrs" (lowercase only)
+generateRandomAlpha(8, false)  // e.g., "KJNMPQRS" (uppercase only)
 
 // Alphanumeric string (a-z, A-Z, 0-9)
-console.log(generateRandomAlphanumeric(8));  // e.g., "Kj9mP2Nx"
+generateRandomAlphanumeric(8)  // e.g., "Kj9mP2Nx"
 
 // Hexadecimal string
-console.log(generateRandomHex(8));           // e.g., "a1b2c3d4"
-console.log(generateRandomHex(6));           // e.g., "ff8800" (useful for colors)</code></pre>
+generateRandomHex(8)           // e.g., "a1b2c3d4"
+generateRandomHex(6)           // e.g., "ff8800" (useful for colors)</code></pre>
                     </div>
                 </div>
             </section>
@@ -784,10 +788,10 @@ console.log(generateRandomHex(6));           // e.g., "ff8800" (useful for color
     generatePassword,
     generateStrongPassword,
     generatePinCode
-} from 'camote-utils';
+} from 'camote-utils
 
 // Basic password generation
-console.log(generatePassword(12));  // e.g., "aB3$kL9#mN5@"
+generatePassword(12)  // e.g., "aB3$kL9#mN5@"
 
 // Custom password options
 const password = generatePassword({
@@ -798,15 +802,15 @@ const password = generatePassword({
     lowercase: true,
     excludeSimilar: true,     // Exclude similar characters (1, l, I, 0, O)
     excludeAmbiguous: true    // Exclude ambiguous symbols ({}, [], (), /\, etc.)
-});
-console.log(password);  // e.g., "P@ssw0rd#K9$mN5@"
+})
+password  // e.g., "P@ssw0rd#K9$mN5@"
 
 // Generate strong password (enforces security rules)
-console.log(generateStrongPassword());  // e.g., "StrongP@ssw0rd#2024"
+generateStrongPassword()  // e.g., "StrongP@ssw0rd#2024"
 
 // Generate PIN code
-console.log(generatePinCode(4));        // e.g., "1234"
-console.log(generatePinCode(6));        // e.g., "123456"</code></pre>
+generatePinCode(4)        // e.g., "1234"
+generatePinCode(6)        // e.g., "123456"</code></pre>
                     </div>
                 </div>
             </section>
@@ -826,22 +830,22 @@ console.log(generatePinCode(6));        // e.g., "123456"</code></pre>
     generateRandomRGB,
     generateRandomHSL,
     generateColorPalette
-} from 'camote-utils';
+} from 'camote-utils
 
 // Basic color generation
-console.log(generateRandomColor());           // e.g., "#FF5733"
-console.log(generateRandomColor('rgb'));      // e.g., "rgb(255, 87, 51)"
-console.log(generateRandomColor('hsl'));      // e.g., "hsl(20, 100%, 60%)"
+generateRandomColor()           // e.g., "#FF5733"
+generateRandomColor('rgb')      // e.g., "rgb(255, 87, 51)"
+generateRandomColor('hsl')      // e.g., "hsl(20, 100%, 60%)"
 
 // Specific color format generation
-console.log(generateRandomRGB());            // e.g., [255, 87, 51]
-console.log(generateRandomRGB(true));        // e.g., "rgb(255, 87, 51)"
-console.log(generateRandomHSL());            // e.g., [20, 100, 60]
-console.log(generateRandomHSL(true));        // e.g., "hsl(20, 100%, 60%)"
+generateRandomRGB()            // e.g., [255, 87, 51]
+generateRandomRGB(true)        // e.g., "rgb(255, 87, 51)"
+generateRandomHSL()            // e.g., [20, 100, 60]
+generateRandomHSL(true)        // e.g., "hsl(20, 100%, 60%)"
 
 // Generate color palette
-console.log(generateColorPalette(5));        // e.g., ["#FF5733", "#33FF57", "#5733FF", "#FF3333", "#33FFFF"]
-console.log(generateColorPalette(3, 'rgb')); // e.g., ["rgb(255,87,51)", "rgb(51,255,87)", "rgb(87,51,255)"]</code></pre>
+generateColorPalette(5)        // e.g., ["#FF5733", "#33FF57", "#5733FF", "#FF3333", "#33FFFF"]
+generateColorPalette(3, 'rgb') // e.g., ["rgb(255,87,51)", "rgb(51,255,87)", "rgb(87,51,255)"]</code></pre>
                     </div>
                 </div>
             </section>
@@ -859,19 +863,13 @@ console.log(generateColorPalette(3, 'rgb')); // e.g., ["rgb(255,87,51)", "rgb(51
                         <pre><code class="language-typescript">import { 
     generateUUID,
     generateUUIDv4,
-    generateUUIDv5
-} from 'camote-utils';
+} from 'camote-utils
 
 // Basic UUID generation (v4)
-console.log(generateUUID());     // e.g., "123e4567-e89b-12d3-a456-426614174000"
+generateUUID()     // e.g., "123e4567-e89b-12d3-a456-426614174000"
 
 // Specific UUID versions
-console.log(generateUUIDv4());   // e.g., "110ec58a-a0f2-4ac4-8393-c866d813b8d1"
-
-// UUID v5 (namespace-based)
-const namespace = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-const name = 'example.com';
-console.log(generateUUIDv5(name, namespace));  // Deterministic UUID based on namespace and name</code></pre>
+generateUUIDv4()   // e.g., "110ec58a-a0f2-4ac4-8393-c866d813b8d1"</code></pre>
                     </div>
                 </div>
             </section>
@@ -886,11 +884,20 @@ console.log(generateUUIDv5(name, namespace));  // Deterministic UUID based on na
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { generateRandom } from 'camote-utils';
+                        <pre><code class="language-typescript">import { generateRandom } from 'camote-utils
+
 // Custom data with options
-console.log(generateRandom('number', { min: 1, max: 100 }));     // e.g., 42
-console.log(generateRandom('string', { length: 10 }));           // e.g., "a1b2c3d4e5"
-console.log(generateRandom('array', { length: 5, type: 'number' })); // e.g., [1, 2, 3, 4, 5]</code></pre>
+generateRandom({ type: 'integer', min: 1, max: 10 })     // 7
+generateRandom({ type: 'float', min: 0, max: 1 })        // 0.123456
+generateRandom({ type: 'boolean' })                      // true
+generateRandom({ type: 'string', length: 8 })            // "aB3$kL9p"
+generateRandom({ type: 'hexColor' })                     // "#FF5733"
+generateRandom({ type: 'rgbColor' })                     // "rgb(255, 87, 51)"
+generateRandom({ type: 'rgbColor', format: 'array' })    // [255, 87, 51]
+generateRandom({ type: 'hslColor' })                     // "hsl(20, 100%, 60%)"
+generateRandom({ type: 'hslColor', format: 'array' })    // [20, 100, 60]
+generateRandom({ type: 'colorPalette', numColors: 3 })   // ["#FF5733", "#33FF57", "#5733FF"]
+generateRandom({ type: 'uuid' })                         // "123e4567-e89b-12d3-a456-426614174000"</code></pre>
                     </div>
                 </div>
 
@@ -914,7 +921,7 @@ console.log(generateRandom('array', { length: 5, type: 'number' })); // e.g., [1
     decimals?: number;     // Number of decimal places
     
     // String options
-    case?: 'lower' | 'upper' | 'mixed';  // Case for string generation
+    case?: 'lower' | 'upper' | 'mixed  // Case for string generation
     symbols?: boolean;     // Include symbols
     numbers?: boolean;     // Include numbers
     
@@ -945,10 +952,10 @@ console.log(generateRandom('array', { length: 5, type: 'number' })); // e.g., [1
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { generateRandom } from 'camote-utils';
+                        <pre><code class="language-typescript">import { generateRandom } from 'camote-utils
 
 // TypeScript will infer the correct return type
-const uuid: string = generateRandom('uuid');</code></pre>
+const uuid: string = generateRandom('uuid')</code></pre>
                     </div>
                 </div>
             </section>
@@ -972,8 +979,8 @@ const uuid: string = generateRandom('uuid');</code></pre>
                     <p>For older browsers, you may need the following polyfills:</p>
                     <pre><code>npm install core-js regenerator-runtime</code></pre>
                     <p>Then import them in your entry file:</p>
-                    <pre><code>import 'core-js/stable';
-import 'regenerator-runtime/runtime';</code></pre>
+                    <pre><code>import 'core-js/stable
+import 'regenerator-runtime/runtime</code></pre>
                 </section>
 
                 <section id="known-issues">
@@ -1033,7 +1040,18 @@ import 'regenerator-runtime/runtime';</code></pre>
             <p class="updated-time">Last updated: December 14, 2024</p>
         </footer>
     </main>
+
     <div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" ><i class="fas fa-arrow-up"></i></div>
+    
+    <script>
+    window.onscroll = function() {
+        document.getElementById('back-to-top').style.display = 
+            window.scrollY > 300 ? 'flex' : 'none';
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
     <script>
     window.onscroll = function() {
         document.getElementById('back-to-top').style.display = 

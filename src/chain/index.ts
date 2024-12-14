@@ -8,11 +8,17 @@ import {
     generateRandomIntegerExcluding,
     generateRandomString,
     generateRandomPassword,
-    generateRandomHexColor,
     generateRandom,
     GenerateRandomType,
     GenerateRandomOptions,
-    GenerateRandomStringOptions
+    GenerateRandomStringOptions,
+    generateRandomHexColor,
+    generateRandomRGB,
+    generateRandomHSL,
+    generateColorPalette,
+    generateRandomColor,
+    generateUUID,
+    generateUUIDv4
 } from '../random';
 
 export class _ {
@@ -52,8 +58,36 @@ export class _ {
         return generateRandomHexColor(includeHash);
     }
 
-    static generateRandom(options: GenerateRandomOptions): number | string | boolean {
+    static generateRandom(options: GenerateRandomOptions): number | string | boolean | string[] {
         return generateRandom(options);
+    }
+
+    static generateRandomHex(includeHash: boolean = true): string {
+        return generateRandomHexColor(includeHash);
+    }
+
+    static generateRandomColor(format?: 'hex' | 'rgb' | 'hsl'): string {
+        return generateRandomColor(format);
+    }
+
+    static generateColorPalette(numColors: number, format?: 'hex' | 'rgb' | 'hsl'): string[] {
+        return generateColorPalette(numColors, format);
+    }
+
+    static generateRandomRGB(includeAlpha: boolean = false): string | number[] {
+        return generateRandomRGB(includeAlpha);
+    }
+
+    static generateRandomHSL(includeAlpha: boolean = false): string | number[] {
+        return generateRandomHSL(includeAlpha);
+    }
+
+    static generateUUID(): string {
+        return generateUUID();
+    }
+
+    static generateUUIDv4(): string {
+        return generateUUIDv4();
     }
 
     static humanReadableNumber(value: number, options?: { decimals?: number; compact?: boolean }): _ {
