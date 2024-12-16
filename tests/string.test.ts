@@ -199,7 +199,7 @@ describe('String Formatters', () => {
   
     test('handles words ending in y correctly', () => {
       expect(pluralize('baby', 2)).toBe('babies');
-      expect(pluralize('toy', 2)).toBe('toys');  // y after vowel
+      expect(pluralize('toy', 2)).toBe('toys');
     });
   
     test('handles words requiring es suffix', () => {

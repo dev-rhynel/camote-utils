@@ -526,3 +526,19 @@ export const isStrongPassword = (password: string): boolean => {
     return strongPasswordRegex.test(password);
 };
 
+/**
+ * Checks if a string is a valid time format (HH:MM or HH:MM:SS).
+ * @param timeString - The time string to validate.
+ * @returns True if the time is valid, false otherwise.
+ * @example
+ * isValidTime("14:30"); // true
+ * isValidTime("02:30 PM"); // true
+ * isValidTime("25:00"); // false
+ * isValidTime("14:60"); // false
+ */
+export const isValidTime = (timeString: string): boolean => {
+    const timeRegex = /^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]))?$/;
+    const amPmRegex = /^(0[0-9]|1[0-2]):([0-5][0-9])(:([0-5][0-9]))?\s?(AM|PM)$/i;
+    return timeRegex.test(timeString) || amPmRegex.test(timeString);
+};
+

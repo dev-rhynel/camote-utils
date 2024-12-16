@@ -197,6 +197,10 @@ export class _ {
         return checkers.isEmail(value);
     }
 
+    static isValidTime(value: string): boolean {
+        return checkers.isValidTime(value);
+    }
+
     // Static methods
     static chain(value: any): _ {
         return new _(value);
