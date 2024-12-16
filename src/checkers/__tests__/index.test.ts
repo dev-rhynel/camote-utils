@@ -24,7 +24,9 @@ import {
     isNaN,
     isNull,
     isUndefined,
-    isAlphanumeric
+    isAlphanumeric,
+    isEmail,
+    isStrongPassword
 } from '../index';
 
 describe('Type Checking Functions', () => {
@@ -241,6 +243,45 @@ describe('Type Checking Functions', () => {
             expect(isFinite(Infinity)).toBe(false);
             expect(isFinite(-Infinity)).toBe(false);
             expect(isFinite(NaN)).toBe(false);
+        });
+    });
+
+    describe('isEmail', () => {
+        test('valid email', () => {
+            expect(isEmail("rhynel@dev.com")).toBe(true);
+        });
+        test('invalid email without domain', () => {
+            expect(isEmail("not-an-email")).toBe(false);
+        });
+        test('valid email with domain', () => {
+            expect(isEmail("user@domain.co")).toBe(true);
+        });
+        test('invalid email with empty domain', () => {
+            expect(isEmail("user@.com")).toBe(false);
+        });
+        test('invalid email with double dots', () => {
+            expect(isEmail("user@domain..com")).toBe(false);
+        });
+    });
+
+    describe('isStrongPassword', () => {
+        test('strong password', () => {
+            expect(isStrongPassword("Password123!")).toBe(true);
+        });
+        test('weak password', () => {
+            expect(isStrongPassword("weakpass")).toBe(false);
+        });
+        test('missing uppercase letter', () => {
+            expect(isStrongPassword("password123!")).toBe(false);
+        });
+        test('missing lowercase letter', () => {
+            expect(isStrongPassword("PASSWORD123!")).toBe(false);
+        });
+        test('missing number', () => {
+            expect(isStrongPassword("Password!")).toBe(false);
+        });
+        test('missing special character', () => {
+            expect(isStrongPassword("Password123")).toBe(false);
         });
     });
 
