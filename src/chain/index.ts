@@ -189,13 +189,12 @@ export class _ {
         return checkers.isUuid(value);
     }
 
-    static isAlphanumeric(str: string): boolean {
-        return checkers.isAlphanumeric(str);
+    static isAlphanumeric(value: string): boolean {
+        return checkers.isAlphanumeric(value);
     }
 
-    // Instance checker methods
-    isAlphanumeric(): boolean {
-        return checkers.isAlphanumeric(String(this.value));
+    static isEmail(value: string): boolean {
+        return checkers.isEmail(value);
     }
 
     // Static methods

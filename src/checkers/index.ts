@@ -499,3 +499,30 @@ export const isAlphanumeric = (str: string): boolean => {
     if (typeof str !== 'string') return false;
     return /^[a-zA-Z0-9]+$/.test(str);
 };
+
+/**
+ * Checks if a string is a valid email address
+ * @param str - The input string to validate
+ * @returns boolean indicating if the string is a valid email
+ * @example
+ * isEmail("example@example.com"); // true
+ * isEmail("not-an-email"); // false
+ */
+export const isEmail = (str: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(str);
+};
+
+/**
+ * Checks if a password is strong
+ * @param password - The password to check
+ * @returns True if the password is strong
+ * @example
+ * isStrongPassword("Password123!"); // true
+ * isStrongPassword("weakpass"); // false
+ */
+export const isStrongPassword = (password: string): boolean => {
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    return strongPasswordRegex.test(password);
+};
+

@@ -140,7 +140,7 @@
 
     <main class="main-content">
         <div class="header-content">
-            <a href="index.htm" class="logo-link"><img src="https://github.com/user-attachments/assets/9302d4b2-38fd-4869-97b2-72616b22682f" width="100" alt="camote-utils icon" class="logo"></a>
+            <a href="index.html" class="logo-link"><img src="https://github.com/user-attachments/assets/9302d4b2-38fd-4869-97b2-72616b22682f" width="100" alt="camote-utils icon" class="logo"></a>
             <div>
                 <h1>camote-utils <img src="https://static-production.npmjs.com/255a118f56f5346b97e56325a1217a16.svg" width="18" alt="camote-utils"></h1>
                 <div>
@@ -370,12 +370,10 @@ isUndefined(null)      // false</code></pre>
                         <div class="code-content">
                             <pre><code class="language-typescript">// String validation functions
 isEmail(value: string): boolean;                         // Validate email format
-isURL(value: string): boolean;                          // Validate URL format
+isUrl(value: string): boolean;                          // Validate URL format
 isPhoneNumber(value: string): boolean;                  // Validate phone number format
-isPostalCode(value: string, country?: string): boolean; // Validate postal code format
 isCreditCard(value: string, type?: string): boolean;    // Validate credit card number
 isStrongPassword(value: string, options?: PasswordOptions): boolean; // Validate password strength
-isDateString(value: string, format?: string): boolean;  // Validate date string format
 
 interface PasswordOptions {
     minLength?: number;      // Minimum length (default: 8)
@@ -397,15 +395,15 @@ interface PasswordOptions {
                             <div class="code-dot"></div>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-typescript">import { isEmail, isURL, isPhoneNumber, isStrongPassword } from 'camote-utils
+                            <pre><code class="language-typescript">import { isEmail, isUrl, isPhoneNumber, isStrongPassword } from 'camote-utils
 
 // Email validation
 isEmail('user@example.com')     // true
 isEmail('invalid-email')        // false
 
 // URL validation
-isURL('https://example.com')    // true
-isURL('not-a-url')             // false
+isUrl('https://example.com')    // true
+isUrl('not-a-url')             // false
 
 // Phone number validation
 isPhoneNumber('+1-555-123-4567') // true
