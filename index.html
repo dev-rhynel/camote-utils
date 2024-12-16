@@ -395,7 +395,7 @@ interface PasswordOptions {
                             <div class="code-dot"></div>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-typescript">import { isEmail, isUrl, isPhoneNumber, isStrongPassword } from 'camote-utils
+                            <pre><code class="language-typescript">import { isEmail, isUrl, isStrongPassword, isValidTime } from 'camote-utils
 
 // Email validation
 isEmail('user@example.com')     // true
@@ -404,10 +404,6 @@ isEmail('invalid-email')        // false
 // URL validation
 isUrl('https://example.com')    // true
 isUrl('not-a-url')             // false
-
-// Phone number validation
-isPhoneNumber('+1-555-123-4567') // true
-isPhoneNumber('invalid')         // false
 
 // Password strength validation
 const passwordOptions = {
@@ -421,9 +417,7 @@ const passwordOptions = {
 isStrongPassword('Abc123!@#', passwordOptions)  // true
 isStrongPassword('weakpass', passwordOptions)   // false
 
-// Date string validation
-isDateString('2024-01-14')          // true
-isDateString('2024/01/14', 'YYYY/MM/DD') // true</code></pre>
+isValidTime('14:30') // true</code></pre>
                         </div>
                     </div>
                 </section>
