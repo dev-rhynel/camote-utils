@@ -227,7 +227,7 @@
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">import { _, pluralize, mask } from 'camote-utils'
+                        <pre><code class="language-typescript">import { _, pluralize } from 'camote-utils'
                             
 // String manipulation
 pluralize('cat', 1) // 'cat'
@@ -237,8 +237,8 @@ pluralize('baby', 2) // 'babies'
 pluralize('person', 1, 'people') // 'person'
 pluralize('person', 2, 'people') // 'people'    
 
-mask('1234567890') // '1234******'
-mask('123456NiCe', '#') // '1234######'
+_.mask('1234567890') // '1234******'
+_.mask('123456NiCe', '#') // '1234######'
 
 // Basic formatting
 _.humanReadableNumber(1234567.89)               // "1.2M"
