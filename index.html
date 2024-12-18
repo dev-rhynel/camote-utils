@@ -859,13 +859,13 @@ generatePassword(12);  // "aB3$kL9p#mN4"
 // Custom password options
 generatePassword(5, { includeUppercase: false, includeNumbers: false, includeSpecialChars: false }); // "abcde"
 
-const password = generatePassword(8, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true }); // "aB3$kL9p#mN4"
+const password = generatePassword(8, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true });
 
-password  // e.g., "aB3$kL9p#mN4"
+password  // e.g., "aB3$kL9p"
 
 // Generate strong password (enforces security rules)
-generateStrongPassword()  // e.g., "StrongP@ssw0rd#2024"
-generateStrongPassword(16)  // e.g., "StrongP@ssw0rd#2024!!~$"
+generateStrongPassword()  // e.g., "StrongP@ssw0"
+generateStrongPassword(16)  // e.g., "StrongP@ssw0rd#2"
 
 // Generate PIN code
 generatePinCode(4)        // e.g., "1234"
