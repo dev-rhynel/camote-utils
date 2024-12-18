@@ -220,7 +220,7 @@ export const generateRandomPassword = (length: number, options: Omit<GenerateRan
  * @example
  * generateStrongPassword(12);  // "aB3$kL9p#mN4"
  */
-export const generateStrongPassword = (length: number): string => {
+export const generateStrongPassword = (length: number = 12): string => {
     if (length < 8) {
         throw new Error('Password length must be at least 8 characters');
     }
