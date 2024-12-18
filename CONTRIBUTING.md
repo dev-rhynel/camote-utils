@@ -1,9 +1,11 @@
-Step 1 - Add feature
+Step 1 - Fork
 
-Step 2 - Add test
+Step 2 - Add feature
 
-Step 3 - Update Chain
+Step 3 - Add test
 
-Step 4 - Update Doc
+Step 4 - Update Chain
 
-Step 5 - PR
+Step 5 - Update Doc
+
+Step 6 - PR
