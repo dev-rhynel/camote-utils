@@ -36,7 +36,8 @@ import {
   generateUUID,
   isUrl,
   isUuid,
-  isDateWithinRange 
+  isDateWithinRange,
+  mask
 } from 'camote-utils';
 
 // Format numbers
@@ -49,6 +50,9 @@ _.humanReadableNumber(1500, { decimals: 0 })      // "2K"
 // Format decimals with different rounding modes
 formatDecimals(1.2345, 2);         // "1.23"
 formatDecimals(1.2345, 2, 'ceil'); // "1.24"
+
+mask('1234567890') // '1234******'
+mask('123456NiCe', '#') // '1234######'
 
 // Format currency
 formatCurrency(1234.56);                 // "$1,234.56"
