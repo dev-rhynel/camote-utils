@@ -18,7 +18,9 @@ import {
     generateColorPalette,
     generateRandomColor,
     generateUUID,
-    generateUUIDv4
+    generateUUIDv4,
+    generateStrongPassword,
+    generatePassword
 } from '../random';
 
 export class _ {
@@ -94,6 +96,18 @@ export class _ {
         const instance = new _(value);
         instance.value = numberFormatters.humanReadableNumber(value, options);
         return instance;
+    }
+
+    static generatePassword = (length: number, options: {
+        includeUppercase?: boolean;
+        includeNumbers?: boolean;
+        includeSpecialChars?: boolean;
+      }) : string => {  
+        return generatePassword(length, options);
+    }
+
+    static generateStrongPassword = (length: number) : string => {
+        return generateStrongPassword(length);
     }
 
     // String operations

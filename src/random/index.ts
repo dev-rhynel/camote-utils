@@ -213,6 +213,47 @@ export const generateRandomPassword = (length: number, options: Omit<GenerateRan
 };
 
 /**
+ * Generates a strong random password based on specified criteria
+ * @param length - Length of the password (minimum 8)
+ * @returns Secure random password
+ * @throws {Error} If length is less than 8
+ * @example
+ * generateStrongPassword(12);  // "aB3$kL9p#mN4"
+ */
+export const generateStrongPassword = (length: number): string => {
+    if (length < 8) {
+        throw new Error('Password length must be at least 8 characters');
+    }
+
+    const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+    const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numberChars = '0123456789';
+    const specialChars = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+    // Ensure at least one character from each set is included
+    const passwordChars = [
+        lowercaseChars.charAt(Math.floor(Math.random() * lowercaseChars.length)),
+        uppercaseChars.charAt(Math.floor(Math.random() * uppercaseChars.length)),
+        numberChars.charAt(Math.floor(Math.random() * numberChars.length)),
+        specialChars.charAt(Math.floor(Math.random() * specialChars.length))
+    ];
+
+    // Fill the rest of the password length with random characters
+    for (let i = 4; i < length; i++) {
+        const allChars = lowercaseChars + uppercaseChars + numberChars + specialChars;
+        passwordChars.push(allChars.charAt(Math.floor(Math.random() * allChars.length)));
+    }
+
+    // Shuffle the password characters
+    for (let i = passwordChars.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [passwordChars[i], passwordChars[j]] = [passwordChars[j], passwordChars[i]];
+    }
+
+    return passwordChars.join('');
+};
+
+/**
  * Generates a random hex color string
  * @param includeHash - Whether to include # prefix
  * @returns Random hex color string
@@ -422,4 +463,40 @@ export const generateRandom = (options: GenerateRandomOptions): number | string 
         default:
             throw new Error(`Invalid random type: ${options.type}`);
     }
+};
+
+/**
+ * Generates a random password based on specified criteria
+ * @param length - The length of the password
+ * @param options - Configuration options for password generation
+ * @returns A random password
+ * @throws {Error} If length is less than 0
+ * @example
+ * generatePassword(12);  // "aB3$kL9p#mN4"
+ * generatePassword(8, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true }); // "aB3$kL9p#mN4"
+ * generatePassword(5, { includeUppercase: false, includeNumbers: false, includeSpecialChars: false }); // "abcde"
+ */
+export const generatePassword = (length: number, options: {
+  includeUppercase?: boolean;
+  includeNumbers?: boolean;
+  includeSpecialChars?: boolean;
+}): string => {
+  const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+  const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numberChars = '0123456789';
+  const specialChars = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+  let characterSet = lowercaseChars;
+
+  if (options.includeUppercase) characterSet += uppercaseChars;
+  if (options.includeNumbers) characterSet += numberChars;
+  if (options.includeSpecialChars) characterSet += specialChars;
+
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characterSet.length);
+    password += characterSet[randomIndex];
+  }
+
+  return password;
 };

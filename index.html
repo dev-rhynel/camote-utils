@@ -854,18 +854,14 @@ generateRandomHex(6)           // e.g., "ff8800" (useful for colors)</code></pre
 
 // Basic password generation
 generatePassword(12)  // e.g., "aB3$kL9#mN5@"
+generatePassword(12);  // "aB3$kL9p#mN4"
 
 // Custom password options
-const password = generatePassword({
-    length: 16,
-    numbers: true,
-    symbols: true,
-    uppercase: true,
-    lowercase: true,
-    excludeSimilar: true,     // Exclude similar characters (1, l, I, 0, O)
-    excludeAmbiguous: true    // Exclude ambiguous symbols ({}, [], (), /\, etc.)
-})
-password  // e.g., "P@ssw0rd#K9$mN5@"
+generatePassword(5, { includeUppercase: false, includeNumbers: false, includeSpecialChars: false }); // "abcde"
+
+const password = generatePassword(8, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true }); // "aB3$kL9p#mN4"
+
+password  // e.g., "aB3$kL9p#mN4"
 
 // Generate strong password (enforces security rules)
 generateStrongPassword()  // e.g., "StrongP@ssw0rd#2024"

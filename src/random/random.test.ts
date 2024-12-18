@@ -11,7 +11,9 @@ import {
     generateColorPalette,
     generateRandomColor,
     generateRandom,
-    generateRandomIntegerInRange
+    generateRandomIntegerInRange,
+    generatePassword,
+    generateStrongPassword
 } from './index';
 
 describe('Random Generation Functions', () => {
@@ -118,4 +120,63 @@ describe('generateRandomIntegerInRange', () => {
         expect(() => generateRandomIntegerInRange(NaN, 10)).toThrow('Both min and max must be finite numbers');
         expect(() => generateRandomIntegerInRange(5, Infinity)).toThrow('Both min and max must be finite numbers');
     });
+
+
+    describe('generatePassword function', () => {
+        test('should generate a password of specified length', () => {
+          const password = generatePassword(10, { includeUppercase: false, includeNumbers: false, includeSpecialChars: false });
+          expect(password).toHaveLength(10);
+        });
+      
+        test('should include uppercase letters when specified', () => {
+          const password = generatePassword(10, { includeUppercase: true });
+          expect(password).toMatch(/[A-Z]/);
+        });
+      
+        test('should include numbers when specified', () => {
+          const password = generatePassword(10, { includeNumbers: true });
+          expect(password).toMatch(/[0-9]/);
+        });
+      
+        test('should include special characters when specified', () => {
+          const password = generatePassword(10, { includeSpecialChars: true });
+          expect(password).toMatch(/[!@#$%^&*()_+[\]{}|;:,.<>?]/);
+        });
+      
+        test('should generate a password of correct length with all options', () => {
+          const password = generatePassword(12, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true });
+          expect(password).toHaveLength(12);
+        });
+    });
+    
+    describe('generateStrongPassword function', () => {
+        test('should generate a password of specified length', () => {
+          const password = generateStrongPassword(12);
+          expect(password).toHaveLength(12);
+        });
+      
+        test('should throw an error if length is less than 8', () => {
+          expect(() => generateStrongPassword(7)).toThrow('Password length must be at least 8 characters');
+        });
+      
+        test('should include at least one lowercase letter', () => {
+          const password = generateStrongPassword(12);
+          expect(password).toMatch(/[a-z]/);
+        });
+      
+        test('should include at least one uppercase letter', () => {
+          const password = generateStrongPassword(12);
+          expect(password).toMatch(/[A-Z]/);
+        });
+      
+        test('should include at least one number', () => {
+          const password = generateStrongPassword(12);
+          expect(password).toMatch(/[0-9]/);
+        });
+      
+        test('should include at least one special character', () => {
+          const password = generateStrongPassword(12);
+          expect(password).toMatch(/[!@#$%^&*()_+[\]{}|;:,.<>?]/);
+        });
+      });
 });
