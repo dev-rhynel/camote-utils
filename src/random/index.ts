@@ -194,6 +194,9 @@ export const generateRandomString = (length: number, options: GenerateRandomStri
  * @example
  * generateRandomPassword(12);  // "aB3$kL9p#mN4"
  * generateRandomPassword(8, { exclude: 'O0Il1' }); // Excludes ambiguous characters
+ * generateRandomPassword(8, { lowercase: false, uppercase: false, numbers: false, special: false }); // Excludes all character types
+ * generateRandomPassword(8, { custom: "ABC123" }); // Uses custom character set
+ * generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" }); // Uses custom character set and excludes ambiguous characters
  */
 export const generateRandomPassword = (length: number, options: Omit<GenerateRandomStringOptions, 'lowercase' | 'uppercase' | 'numbers' | 'special'> = {}): string => {
     if (length < 8) {
@@ -463,40 +466,4 @@ export const generateRandom = (options: GenerateRandomOptions): number | string 
         default:
             throw new Error(`Invalid random type: ${options.type}`);
     }
-};
-
-/**
- * Generates a random password based on specified criteria
- * @param length - The length of the password
- * @param options - Configuration options for password generation
- * @returns A random password
- * @throws {Error} If length is less than 0
- * @example
- * generatePassword(12);  // "aB3$kL9p#mN4"
- * generatePassword(8, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true }); // "aB3$kL9p#mN4"
- * generatePassword(5, { includeUppercase: false, includeNumbers: false, includeSpecialChars: false }); // "abcde"
- */
-export const generatePassword = (length: number, options: {
-  includeUppercase?: boolean;
-  includeNumbers?: boolean;
-  includeSpecialChars?: boolean;
-}): string => {
-  const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
-  const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const numberChars = '0123456789';
-  const specialChars = '!@#$%^&*()_+[]{}|;:,.<>?';
-
-  let characterSet = lowercaseChars;
-
-  if (options.includeUppercase) characterSet += uppercaseChars;
-  if (options.includeNumbers) characterSet += numberChars;
-  if (options.includeSpecialChars) characterSet += specialChars;
-
-  let password = '';
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characterSet.length);
-    password += characterSet[randomIndex];
-  }
-
-  return password;
 };

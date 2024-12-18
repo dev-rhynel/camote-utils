@@ -12,7 +12,6 @@ import {
     generateRandomColor,
     generateRandom,
     generateRandomIntegerInRange,
-    generatePassword,
     generateStrongPassword
 } from './index';
 
@@ -119,34 +118,6 @@ describe('generateRandomIntegerInRange', () => {
     test('throws an error if min or max is not a finite number', () => {
         expect(() => generateRandomIntegerInRange(NaN, 10)).toThrow('Both min and max must be finite numbers');
         expect(() => generateRandomIntegerInRange(5, Infinity)).toThrow('Both min and max must be finite numbers');
-    });
-
-
-    describe('generatePassword function', () => {
-        test('should generate a password of specified length', () => {
-          const password = generatePassword(10, { includeUppercase: false, includeNumbers: false, includeSpecialChars: false });
-          expect(password).toHaveLength(10);
-        });
-      
-        test('should include uppercase letters when specified', () => {
-          const password = generatePassword(10, { includeUppercase: true });
-          expect(password).toMatch(/[A-Z]/);
-        });
-      
-        test('should include numbers when specified', () => {
-          const password = generatePassword(10, { includeNumbers: true });
-          expect(password).toMatch(/[0-9]/);
-        });
-      
-        test('should include special characters when specified', () => {
-          const password = generatePassword(10, { includeSpecialChars: true });
-          expect(password).toMatch(/[!@#$%^&*()_+[\]{}|;:,.<>?]/);
-        });
-      
-        test('should generate a password of correct length with all options', () => {
-          const password = generatePassword(12, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true });
-          expect(password).toHaveLength(12);
-        });
     });
     
     describe('generateStrongPassword function', () => {

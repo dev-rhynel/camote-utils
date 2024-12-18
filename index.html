@@ -847,20 +847,18 @@ generateRandomHex(6)           // e.g., "ff8800" (useful for colors)</code></pre
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">import { 
-    generatePassword,
+    generateRandomPassword,
     generateStrongPassword
-} from 'camote-utils
+} from 'camote-utils'
 
 // Basic password generation
-generatePassword(12)  // e.g., "aB3$kL9#mN5@"
-generatePassword(12);  // "aB3$kL9p#mN4"
+generateRandomPassword(12);  // "aB3$kL9p#mN4"
 
 // Custom password options
-generatePassword(5, { includeUppercase: false, includeNumbers: false, includeSpecialChars: false }); // "abcde"
-
-const password = generatePassword(8, { includeUppercase: true, includeNumbers: true, includeSpecialChars: true });
-
-password  // e.g., "aB3$kL9p"
+generateRandomPassword(8, { exclude: 'O0Il1' }); // Excludes ambiguous characters
+generateRandomPassword(8, { lowercase: false, uppercase: false, numbers: false, special: false }); // Excludes all character types
+generateRandomPassword(8, { custom: "ABC123" }); // Uses custom character set
+generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" }); // Uses custom character set and excludes ambiguous characters
 
 // Generate strong password (enforces security rules)
 generateStrongPassword()  // e.g., "StrongP@ssw0"
