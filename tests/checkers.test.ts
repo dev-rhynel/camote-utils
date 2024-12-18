@@ -7,6 +7,7 @@ import {
   chopEnd,
   contains,
   exactly,
+  isEmpty,
 } from '../src/checkers';
 
 describe('Checkers Module', () => {
@@ -73,6 +74,33 @@ describe('Checkers Module', () => {
       expect(exactly(undefined as any, 'test')).toBe(false);
       expect(exactly('test', undefined as any)).toBe(false);
       expect(exactly(undefined as any, undefined as any)).toBe(false);
+    });
+  });
+
+  describe('isEmpty', () => {
+    it('should return true for null', () => {
+      expect(isEmpty(null)).toBe(true);
+    });
+    it('should return true for undefined', () => {
+      expect(isEmpty(undefined)).toBe(true);
+    });
+    it('should return true for empty string', () => {
+      expect(isEmpty('')).toBe(true);
+    });
+    it('should return true for empty array', () => {
+      expect(isEmpty([])).toBe(true);
+    });
+    it('should return true for empty object', () => {
+      expect(isEmpty({})).toBe(true);
+    });
+    it('should return false for non-empty string', () => {
+      expect(isEmpty('hello')).toBe(false);
+    });
+    it('should return false for non-empty array', () => {
+      expect(isEmpty([1, 2, 3])).toBe(false);
+    });
+    it('should return false for non-empty object', () => {
+      expect(isEmpty({ a: 1 })).toBe(false);
     });
   });
 });

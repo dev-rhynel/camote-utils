@@ -323,7 +323,9 @@ isArray(value: any): boolean;     // Check if value is an array
 isObject(value: any): boolean;    // Check if value is an object
 isNull(value: any): boolean;      // Check if value is null
 isUndefined(value: any): boolean; // Check if value is undefined
-isFunction(value: any): boolean;  // Check if value is a function</code></pre>
+isFunction(value: any): boolean;  // Check if value is a function
+isEmpty(value: any): boolean;     // Check if value is empty
+</code></pre>
                         </div>
                     </div>
                 </section>
@@ -357,7 +359,14 @@ isNull(null)          // true
 isNull(undefined)     // false
 
 isUndefined(undefined) // true
-isUndefined(null)      // false</code></pre>
+isUndefined(null)      // false
+
+isEmpty('')            // true
+isEmpty([])            // true
+isEmpty({})            // true
+isEmpty(null)          // false
+isEmpty(undefined)     // false
+isEmpty('hello')       // false</code></pre>
                         </div>
                     </div>
                 </section>
