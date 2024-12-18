@@ -378,8 +378,6 @@ isUndefined(null)      // false</code></pre>
                             <pre><code class="language-typescript">// String validation functions
 isEmail(value: string): boolean;                         // Validate email format
 isUrl(value: string): boolean;                          // Validate URL format
-isPhoneNumber(value: string): boolean;                  // Validate phone number format
-isCreditCard(value: string, type?: string): boolean;    // Validate credit card number
 isStrongPassword(value: string, options?: PasswordOptions): boolean; // Validate password strength
 
 interface PasswordOptions {
@@ -489,8 +487,10 @@ formatPercent(0.1234, { decimals: 1 }) // "12.3%"</code></pre>
                     <div class="code-content">
                         <pre><code class="language-typescript">import { formatDecimals } from 'camote-utils
 
-formatDecimals(123.456, 2)  // "123.46"
-formatDecimals(123.4, 2)    // "123.40"</code></pre>
+formatDecimals(123.456, 2) // "123.46" 
+formatDecimals(123.4, 2) // "123.40" 
+formatDecimals(123.456, 2, 'ceil') // "123.46" 
+formatDecimals(123.456, 2, 'floor') // "123.45"</code></pre>
                     </div>
                 </div>
             </section>
@@ -998,7 +998,7 @@ const uuid: string = generateRandom('uuid')</code></pre>
 &lt;script&gt;
     const { humanReadableNumber } = window.camoteUtils;
 
-    console.log(humanReadableNumber(1234567)); // "1.23M"
+    humanReadableNumber(1234567)); // "1.23M"
 &lt;/script&gt;</code></pre>
                     </div>
                 </div>
