@@ -98,40 +98,6 @@ export const wordCount = (str: string): number => {
   return str.trim() === '' ? 0 : str.trim().split(/\s+/).length
 }
 
-/**
- * Pads a string to a specified length
- * @param str - The input string
- * @param length - The desired total length
- * @param char - The padding character (default: " ")
- * @param position - The padding position ("start" | "end" | "both", default: "end")
- * @returns The padded string
- * @example
- * pad("hello", 8) // "hello   "
- * pad("hello", 8, "*", "start") // "***hello"
- * pad("hello", 8, "*", "both") // "*hello**"
- */
-export const pad = (
-  str: string,
-  length: number,
-  char: string = " ",
-  position: "start" | "end" | "both" = "end"
-): string => {
-  const padChar = char.charAt(0)
-  const padLength = length - str.length
-  
-  if (padLength <= 0) return str
-  
-  switch (position) {
-    case "start":
-      return padChar.repeat(padLength) + str
-    case "both":
-      const startPad = Math.floor(padLength / 2)
-      const endPad = padLength - startPad
-      return padChar.repeat(startPad) + str + padChar.repeat(endPad)
-    default:
-      return str + padChar.repeat(padLength)
-  }
-}
 
 /**
  * Formats a string by replacing placeholders with provided values
@@ -309,3 +275,68 @@ export const exactly = (str1: string, str2: string, caseSensitive?: boolean): bo
   }
   return str1 === str2;
 };
+
+/**
+ * Masks a portion of a string with a specified character.
+ * @param str - The input string
+ * @param maskChar - The character to use for masking (default: '*')
+ * @param visibleCount - The number of characters to keep visible (default: 6)
+ * @param position - The position to apply the mask ('start', 'end', default: 'end')
+ * @param active - Whether to apply the mask (default: true)
+ * @returns The masked string
+ * @example
+ * mask('1234567890') // '123456****'
+ * mask('1234567890', '#') // '123456####'
+ * mask('1234567890', '*', 4) // '1234******'
+ * mask('1234567890', '*', 6, 'start') // '******7890'
+ * mask('1234567890', '*', 6, 'end', false) // '1234567890'
+ */
+export const mask = (str: string, maskChar: string = '*', visibleCount: number = 6, position: 'start' | 'end' = 'end', active: boolean = true): string => {
+  if (!active) return str;
+  if (!str) return str;
+  visibleCount = Math.min(visibleCount, str.length);
+  const maskedLength = Math.max(0, str.length - visibleCount);
+  switch (position) {
+    case 'start':
+      return maskChar.repeat(maskedLength) + str.slice(-visibleCount);
+    case 'end':
+      return str.slice(0, visibleCount) + maskChar.repeat(maskedLength);
+    default:
+      return str;
+  }
+}
+
+/**
+ * Pads a string to a specified length
+ * @param str - The input string
+ * @param length - The desired total length
+ * @param char - The padding character (default: " ")
+ * @param position - The padding position ("start" | "end" | "both", default: "end")
+ * @returns The padded string
+ * @example
+ * pad("hello", 8) // "hello   "
+ * pad("hello", 8, "*", "start") // "***hello"
+ * pad("hello", 8, "*", "both") // "*hello**"
+ */
+export const pad = (
+  str: string,
+  length: number,
+  char: string = " ",
+  position: "start" | "end" | "both" = "end"
+): string => {
+  const padChar = char.charAt(0)
+  const padLength = length - str.length
+
+  if (padLength <= 0) return str
+
+  switch (position) {
+    case "start":
+      return padChar.repeat(padLength) + str
+    case "both":
+      const startPad = Math.floor(padLength / 2)
+      const endPad = padLength - startPad
+      return padChar.repeat(startPad) + str + padChar.repeat(endPad)
+    default:
+      return str + padChar.repeat(padLength)
+  }
+}

@@ -117,6 +117,10 @@ export class _ {
         return this;
     }
 
+    mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
+        return stringFormatters.mask(str, maskChar, visibleCount, position, active);
+    }
+
     // Number operations
     formatCurrency(currency?: string, locale?: string): _ {
         this.value = numberFormatters.formatCurrency(Number(this.value), currency, locale);
@@ -233,6 +237,14 @@ export class _ {
 
     static toKebabCase(str: string): string {
         return stringFormatters.toKebabCase(str);
+    }
+
+    static pad(str: string, length: number, char: string = ' ', position: 'start' | 'end' | 'both' = 'end'): string {
+        return stringFormatters.pad(str, length, char, position);
+    }
+
+    static mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
+        return stringFormatters.mask(str, maskChar, visibleCount, position, active);
     }
 
     static isDateWithinRange(startDate: Date, endDate: Date): boolean {

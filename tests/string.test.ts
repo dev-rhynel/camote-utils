@@ -15,6 +15,7 @@ import {
   toLowerCase,
   chopStart,
   chopEnd,
+  mask
 } from '../src/formatters/string';
 import { generateUUID } from '../src/random';
 
@@ -365,7 +366,7 @@ describe('String Formatters', () => {
       expect(exactly(undefined as any, 'test')).toBe(false);
       expect(exactly('test', undefined as any)).toBe(false);
       expect(exactly(undefined as any, undefined as any)).toBe(false);
-    })
+    });
 
     it('should handle different strings', () => {
       expect(exactly('Hello', 'World', true)).toBe(false)
@@ -465,4 +466,39 @@ describe('String Formatters', () => {
       expect(exactly('hello', 'HELLO', false)).toBe(true);
     });
   });
+
+  describe('mask', () => {
+    it('should mask all but the first 6 characters by default', () => {
+      expect(mask('1234567890')).toBe('123456****');
+    });
+  
+    it('should mask with a custom character', () => {
+      expect(mask('1234567890', '#')).toBe('123456####');
+    });
+  
+    it('should mask correctly with specified visible count', () => {
+      expect(mask('1234567890', '*', 4)).toBe('1234******');
+    });
+  
+    it('should mask correctly with start position', () => {
+      expect(mask('1234567890', '*', 6, 'start')).toBe('****567890');
+    });
+  
+    it('should handle empty string', () => {
+      expect(mask('')).toBe('');
+    });
+  
+    it('should show all characters if visibleCount is greater than string length', () => {
+      expect(mask('Hi')).toBe('Hi');
+    });
+
+    it('should not mask if active is false', () => {
+      expect(mask('1234567890', '*', 6, 'start', false)).toBe('1234567890');
+    });
+
+    it('should mask correctly with end position', () => {
+      expect(mask('1234567890', '*', 16, 'end')).toBe('1234567890');
+    });
+  });
+  
 })

@@ -88,6 +88,7 @@
                             <li><a href="#slugify">slugify</a></li>
                             <li><a href="#wordCount">wordCount</a></li>
                             <li><a href="#pad">pad</a></li>
+                            <li><a href="#mask">mask</a></li>
                             <li><a href="#format">format</a></li>
                             <li><a href="#reverse">reverse</a></li>
                             <li><a href="#clean">clean</a></li>
@@ -388,6 +389,7 @@ isEmpty('hello')       // false</code></pre>
 isEmail(value: string): boolean;                         // Validate email format
 isUrl(value: string): boolean;                          // Validate URL format
 isStrongPassword(value: string, options?: PasswordOptions): boolean; // Validate password strength
+isValidTime(value: string): boolean; // Validate time format
 
 interface PasswordOptions {
     minLength?: number;      // Minimum length (default: 8)
@@ -615,12 +617,37 @@ calculateDiscountPrice(150, 0, '%')     // 150</code></pre>
                 <h4>Examples:</h4>
                 <pre><code class="language-typescript">pad("hello", 8) // "hello   "
 pad("hello", 8, "*", "start") // "***hello"
-pad("hello", 8, "*", "both") // "*hello**"</code></pre>
+pad("hello", 8, "*", "both") // "*hello**"
+pad("hello", 8, " ", "both") // " hello  "</code></pre>
                 <h4>Scenarios:</h4>
                 <ul>
                     <li>Aligning text in console outputs or logs for better readability.</li>
                     <li>Formatting numbers with leading zeros for consistency in reports.</li>
                     <li>Creating fixed-width fields in text-based user interfaces.</li>
+                </ul>
+            </section>
+            <section id="mask">
+                <h3>mask</h3>
+                <p>
+                    The <code>mask</code> function extends a string to a specified length by adding a specified character to the start, end, or both sides of the string.
+                    This is useful for aligning text or ensuring consistent string lengths in formatted outputs.
+                </p>
+                <h4>Examples:</h4>
+                <pre><code class="language-typescript">// Visible Count (number) - The number of characters to keep visible (default: 6)
+
+mask('1234567890') // '123456****'
+mask('1234567890', '#') // '123456####'
+mask('1234567890', '*', 4) // '1234******'
+mask('1234567890', '*', 6, 'start') // '******7890'
+mask('1234567890', '*', 6, 'end') // '123456******'
+mask('camote2025', '*', 4) // 'camote****'
+mask('1234567890', '*', 6, 'end', false) // '1234567890' default true 
+</code></pre>
+                <h4>Scenarios:</h4>
+                <ul>
+                    <li>Masking sensitive information, such as credit card numbers or social security numbers.</li>
+                    <li>Creating placeholders for user input fields in forms.</li>
+                    <li>Displaying sensitive data in a secure way in console logs or error messages.</li>
                 </ul>
             </section>
             <section id="format">
