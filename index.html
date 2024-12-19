@@ -113,6 +113,7 @@
                         <a href="#object-manipulation" class="has-submenu">Object Manipulation <i class="fas fa-chevron-down"></i></a>
                         <ul>
                             <li><a href="#deepClone">deepClone</a></li>
+                            <li><a href="#deepCompareObjects">deepCompareObjects</a></li>
                             <li><a href="#removeEmptyKeysEntries">removeEmptyKeysEntries</a></li>
                         </ul>
                     </li>
@@ -773,6 +774,27 @@ filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4)         // [1, 2, 3, 4]
                 <pre><code class="language-typescript">deepClone({ a: 1, b: { c: 2 } })   // { a: 1, b: { c: 2 } }
 deepClone(object)                  // { ...object }</code></pre>
             </section>
+
+            <section id="deepCompareObjects">
+                <h3>deepCompareObjects</h3>
+                <p>Compares two objects and returns true if they are equal.</p>
+                <pre><code class="language-typescript">const obj1 = { a: 1, b: { c: 2 } }
+const obj2 = { a: 1, b: { c: 3 } }
+deepCompareObjects(obj1, obj2, true)                                   // { b: { c: 3 } }
+deepCompareObjects(obj1, obj2)                                         // false
+
+const arrayWithObject1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
+const arrayWithObject2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }]
+deepCompareObjects(arrayWithObject1, arrayWithObject2, true);           // [{ id: 2, name: 'Charlie' }]
+deepCompareObjects(arrayWithObject1, arrayWithObject2)                  // false
+
+const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
+const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
+deepCompareObjects(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
+deepCompareObjects(nestedObj1, nestedObj2);                             // false
+</code></pre>
+            </section>
+
             <section id="removeEmptyKeysEntries">
                 <h3>removeEmptyKeysEntries</h3>
                 <p>Removes empty keys and entries from an object.</p>

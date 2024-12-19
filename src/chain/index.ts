@@ -75,7 +75,12 @@ export class _ {
         this.value = objectFormatters.deepClone(this.value);
         return this;
     }
-    
+
+    public deepCompareObjects(anotherValue: any): this {
+        this.value = objectFormatters.deepCompareObjects(this.value, anotherValue);
+        return this;
+    }
+
     // Random generation functions
     static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);
