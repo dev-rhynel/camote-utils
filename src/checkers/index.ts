@@ -507,9 +507,10 @@ export const isAlphanumeric = (str: string): boolean => {
  * @example
  * isEmail("example@example.com"); // true
  * isEmail("not-an-email"); // false
+ * isEmail("user@domain..com"); // false
  */
 export const isEmail = (str: string): boolean => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+$/;
     return emailRegex.test(str);
 };
 

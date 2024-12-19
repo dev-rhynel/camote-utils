@@ -1,7 +1,10 @@
 import * as numberFormatters from '../formatters/number';
 import * as stringFormatters from '../formatters/string';
 import * as dateFormatters from '../formatters/date';
+import * as arrayFormatters from '../formatters/array';
+import * as objectFormatters from '../formatters/object';
 import * as checkers from '../checkers';
+
 import {
     generateRandomInteger,
     generateRandomIntegerArray,
@@ -24,7 +27,7 @@ import {
 
 export class _ {
     private value: any;
-
+        
     constructor(value: any) {
         this.value = value;
     }
@@ -34,6 +37,45 @@ export class _ {
         return this.value;
     }
 
+    // Method to get the current value
+    public getValue(): any {
+        return this.value;
+    }
+    
+    // Method to remove duplicates
+    public removeDuplicates(): this {
+        this.value = arrayFormatters.removeDuplicates(this.value);
+        return this;
+    }
+
+    // Method to flatten the array
+    public flattenArray(): this {
+        this.value = arrayFormatters.flattenArray(this.value);
+        return this;
+    }
+
+    // Method to filter the array based on a condition
+    public filterArray(conditionFn: (value: any) => boolean): this {
+        this.value = arrayFormatters.filterArray(this.value, conditionFn);
+        return this;
+    }
+
+    // Method to transform the array values
+    public transformArray(transformFn: (value: any) => any): this {
+        this.value = arrayFormatters.transformArray(this.value, transformFn);
+        return this;
+    }
+
+    public removeEmptyKeysEntries(): this {
+        this.value = objectFormatters.removeEmptyKeysEntries(this.value);
+        return this;
+    }
+
+    public deepClone(): this {
+        this.value = objectFormatters.deepClone(this.value);
+        return this;
+    }
+    
     // Random generation functions
     static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);

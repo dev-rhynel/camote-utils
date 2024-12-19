@@ -103,10 +103,11 @@ export const generateRandomIntegerExcluding = (min: number, max: number, exclude
 
     // Calculate available numbers
     const range = max - min + 1;
-    const availableCount = range - excludeSet.size;
+    const availableNumbers = Array.from({ length: range }, (_, i) => min + i).filter(num => !excludeSet.has(num));
+    const availableCount = availableNumbers.length;
 
     if (availableCount <= 0) {
-        throw new Error('No valid numbers available in the range after exclusions');
+        throw new Error('No valid numbers available in the range after exclusions. Please check your min, max, and exclude values.');
     }
 
     // Generate random number until we get one that's not excluded
@@ -138,50 +139,69 @@ const CHARS = {
 };
 
 /**
- * Generates a random string with specified options
- * @param length - Length of the string to generate
- * @param options - Configuration options for string generation
- * @returns Random string matching the specified criteria
- * @throws {Error} If length is less than 0
- * @throws {Error} If no character set is selected
+ * Generates a random string based on specified options.
+ * 
+ * @param length - The length of the string to generate.
+ * @param options - Configuration options for string generation, which may include:
+ *    - custom: A string of custom characters to use for generation.
+ *    - lowercase: A boolean indicating whether to include lowercase letters.
+ *    - uppercase: A boolean indicating whether to include uppercase letters.
+ *    - numbers: A boolean indicating whether to include numeric characters.
+ *    - special: A boolean indicating whether to include special characters.
+ *    - exclude: A string of characters to exclude from the generated string.
+ * 
+ * @returns A random string that matches the specified criteria.
+ * 
+ * @throws {Error} If length is less than 0.
+ * @throws {Error} If no character set is selected (i.e., all options are false or empty).
+ * 
  * @example
- * generateRandomString(8);                    // "aB3$kL9p"
- * generateRandomString(10, { lowercase: true, numbers: true }); // "a7b2n9k4m5"
- * generateRandomString(5, { custom: "ABC123" }); // "B1CA3"
+ * generateRandomString(8); // Might return "aB3$kL9p"
+ * generateRandomString(10, { lowercase: true, numbers: true }); // Might return "a7b2n9k4m5"
+ * generateRandomString(5, { custom: "ABC123" }); // Might return "B1CA3"
  */
-export const generateRandomString = (length: number, options: GenerateRandomStringOptions = {}): string => {
+export const generateRandomString = (length: number, options?: GenerateRandomStringOptions): string => {
+    // Check for negative length
     if (length < 0) {
         throw new Error('Length cannot be negative');
     }
 
-    // Build character set based on options
-    let chars = '';
-    if (options.custom) {
-        chars = options.custom;
-    } else {
-        if (options.lowercase) chars += CHARS.lowercase;
-        if (options.uppercase) chars += CHARS.uppercase;
-        if (options.numbers) chars += CHARS.numbers;
-        if (options.special) chars += CHARS.special;
-        if (!chars) chars = CHARS.lowercase + CHARS.uppercase + CHARS.numbers;
+    const { custom, lowercase, uppercase, numbers, special, exclude } = options || {};
+    let characters = '';
+
+    // Build the character set using the CHARS object
+    if (custom) {
+        characters += custom;
+    }
+    if (lowercase) {
+        characters += CHARS.lowercase;
+    }
+    if (uppercase) {
+        characters += CHARS.uppercase;
+    }
+    if (numbers) {
+        characters += CHARS.numbers;
+    }
+    if (special) {
+        characters += CHARS.special;
     }
 
-    // Remove excluded characters if specified
-    if (options.exclude) {
-        const excludeSet = new Set(options.exclude);
-        chars = [...chars].filter(c => !excludeSet.has(c)).join('');
+    // Exclude specified characters
+    if (exclude) {
+        characters = characters.split('').filter(char => !exclude.includes(char)).join('');
     }
 
-    if (!chars) {
-        throw new Error('No characters available for string generation');
+    // Throw an error if no characters are available
+    if (characters.length === 0) {
+        throw new Error('No characters available for string generation. Please specify at least one character type.');
     }
 
-    // Generate random string
+    // Generate the random string
     let result = '';
     for (let i = 0; i < length; i++) {
-        result += chars[generateRandomInteger(0, chars.length - 1)];
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters[randomIndex];
     }
-
     return result;
 };
 

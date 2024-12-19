@@ -101,6 +101,21 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#array-manipulation" class="has-submenu">Array Manipulation <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#removeDuplicates">removeDuplicates</a></li>
+                            <li><a href="#flattenArray">flattenArray</a></li>
+                            <li><a href="#filterArray">filterArray</a></li>
+                            <li><a href="#transformArray">transformArray</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#object-manipulation" class="has-submenu">Object Manipulation <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#removeEmptyKeysEntries">removeEmptyKeysEntries</a></li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="#date-validation" class="has-submenu">Date Validation <i class="fas fa-chevron-down"></i></a>
                         <ul>
                             <li><a href="#isDateWithinRange">isDateWithinRange</a></li>
@@ -732,7 +747,51 @@ contains("Hello World", "lo") // true</code></pre>
                 <pre><code class="language-typescript">exactly("Hello", "hello", false) // true</code></pre>
             </section>
         </section>
-        <section id="date-validation">
+
+        <section id="array-manipulation">
+            <h2>Array Manipulation</h2>
+            <p>Functions for manipulating and working with arrays.</p>
+            <section id="removeDuplicates">
+                <h3>removeDuplicates</h3>
+                <p>Removes duplicate elements from an array.</p>
+                <pre><code class="language-typescript">removeDuplicates([1, 2, 2, 3, 4, 4, 5]) // [1, 2, 3, 4, 5]</code></pre>
+            </section>
+            <section id="flattenArray">
+                <h3>flattenArray</h3>
+                <p>Flattens a nested array into a single level array.</p>
+                <pre><code class="language-typescript">flattenArray([1, 2, [3, 4], [5, 6]]) // [1, 2, 3, 4, 5, 6]</code></pre>
+            </section>
+            <section id="filterArray">
+                <h3>filterArray</h3>
+                <p>Filters an array based on a predicate function.</p>
+                <pre><code class="language-typescript">filterArray([1, 2, 3, 4, 5], (num) => num % 2 === 0) // [2, 4]</code></pre>
+            </section>
+            <section id="transformArray">
+                <h3>transformArray</h3>
+                <p>Transforms an array by applying a function to each element.</p>
+                <pre><code class="language-typescript">transformArray([1, 2, 3], (num) => num * 2) // [2, 4, 6]</code></pre>
+            </section>
+        </section>
+
+        <section id="object-manipulation">
+            <h2>Object Manipulation</h2>
+            <p>Functions for manipulating and working with objects.</p>
+            <section id="deepClone">
+                <h3>deepClone</h3>
+                <p>Creates a deep copy of an object.</p>
+                <pre><code class="language-typescript">deepClone({ a: 1, b: { c: 2 } }) // { a: 1, b: { c: 2 } }</code></pre>
+            </section>
+            <section id="removeEmptyKeysEntries">
+                <h3>removeEmptyKeysEntries</h3>
+                <p>Removes empty keys and entries from an object.</p>
+                <pre><code class="language-typescript">removeEmptyKeysEntries({ a: 1, b: undefined })     // { a: 1 }
+removeEmptyKeysEntries({ a: 1, b: null })          // { a: 1 }
+removeEmptyKeysEntries({ a: 1, b: '' })            // { a: 1 }
+removeEmptyKeysEntries({ a: 1, b: 2 })            // { a: 1, b: 2 }</code></pre>
+            </section>
+        </section>
+
+        <section id="date-validation">  
             <h2>Date Validation</h2>
             
             <section id="isDateWithinRange">
@@ -856,16 +915,22 @@ generateRandomPassword(12);  // "aB3$kL9p#mN4"
 
 // Custom password options
 generateRandomPassword(8, { exclude: 'O0Il1' }); // Excludes ambiguous characters
-generateRandomPassword(8, { lowercase: false, uppercase: false, numbers: false, special: false }); // Excludes all character types
-generateRandomPassword(8, { custom: "ABC123" }); // Uses custom character set
-generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" }); // Uses custom character set and excludes ambiguous characters
+
+// Excludes all character types
+generateRandomPassword(8, { lowercase: false, uppercase: false, numbers: false, special: false });
+
+// Uses custom character set
+generateRandomPassword(8, { custom: "ABC123" });
+
+// Uses custom character set and excludes ambiguous characters
+generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" }); 
 
 // Generate strong password (enforces security rules)
 generateStrongPassword()  // e.g., "StrongP@ssw0"
 generateStrongPassword(16)  // e.g., "StrongP@ssw0rd#2"</code></pre>
                     </div>
                 </div>
-            </section>
+            </section>  
 
             <section id="random-colors">
                 <h3>Color Generation</h3>
