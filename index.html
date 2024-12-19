@@ -246,18 +246,18 @@
                         <pre><code class="language-typescript">import { _, pluralize } from 'camote-utils'
                             
 // String manipulation
-pluralize('cat', 1) // 'cat'
-pluralize('cat', 2) // 'cats'
-pluralize('box', 2) // 'boxes'
-pluralize('baby', 2) // 'babies'
-pluralize('person', 1, 'people') // 'person'
-pluralize('person', 2, 'people') // 'people'    
+pluralize('cat', 1)                  // 'cat'
+pluralize('cat', 2)                  // 'cats'
+pluralize('box', 2)                  // 'boxes'
+pluralize('baby', 2)                 // 'babies'
+pluralize('person', 1, 'people')     // 'person'
+pluralize('person', 2, 'people')     // 'people'    
 
-_.mask('1234567890') // '1234******'
-_.mask('123456NiCe', '#') // '1234######'
+_.mask('1234567890')                 // '1234******'
+_.mask('123456NiCe', '#')            // '1234######'
 
 // Basic formatting
-_.humanReadableNumber(1234567.89)               // "1.2M"
+_.humanReadableNumber(1234567.89)    // "1.2M"
 
 // With units
 _.humanReadableNumber(1500, { decimals: 0 })      // "2K"</code></pre>
@@ -300,7 +300,7 @@ const result = _.chain('hello world')
                     <div class="code-content">
                         <pre><code class="language-typescript">import { capitalize, truncate } from 'camote-utils
 
-capitalize('hello world')  // Hello world
+capitalize('hello world')   // Hello world
 truncate('hello world', 5)  // hello...</code></pre>
                     </div>
                 </div>
@@ -469,8 +469,8 @@ isValidTime('14:30') // true</code></pre>
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">// Basic formatting
-humanReadableNumber(1234567.89)               // "1.2M"
-humanReadableNumber(1234.5, { decimals: 0 })  // "1,235"
+humanReadableNumber(1234567.89)                // "1.2M"
+humanReadableNumber(1234.5, { decimals: 0 })   // "1,235"
 
 // With units
 humanReadableNumber(1500, { compact: true })    // "1.5K"
@@ -530,10 +530,10 @@ formatDecimals(123.456, 2, 'floor') // "123.45"</code></pre>
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">// Basic usage
-formatCurrency(1234.56)                // "$1,234.56"
-formatCurrency(1234.56, 'EUR')         // "€1,234.56"
-formatCurrency(1234.56, 'JPY', 'ja-JP')// "¥1,235"
-formatCurrency(1234.56, 'GBP', 'en-GB')// "£1,234.56"</code></pre>
+formatCurrency(1234.56)                  // "$1,234.56"
+formatCurrency(1234.56, 'EUR')           // "€1,234.56"
+formatCurrency(1234.56, 'JPY', 'ja-JP')  // "¥1,235"
+formatCurrency(1234.56, 'GBP', 'en-GB')  // "£1,234.56"</code></pre>
                     </div>
                 </div>
             </section>
@@ -553,7 +553,7 @@ formatCurrency(1234.56, 'GBP', 'en-GB')// "£1,234.56"</code></pre>
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">// Calculate a fixed discount of $30 on an original price of $100
-calculateDiscountPrice(100, 30, '$')  // 70
+calculateDiscountPrice(100, 30, '$')   // 70
 
 // Calculate a percentage discount of 10% on an original price of $200
 calculateDiscountPrice(200, 0.10, '%') // 180
@@ -568,7 +568,7 @@ calculateDiscountPrice(80, 0.25, '%')  // 60
 calculateDiscountPrice(100, 0, '$')    // 100
 
 // Calculate a percentage discount of 0% on an original price of $150 (no discount)
-calculateDiscountPrice(150, 0, '%')     // 150</code></pre>
+calculateDiscountPrice(150, 0, '%')    // 150</code></pre>
                     </div>
                 </div>
             </section>
@@ -622,8 +622,8 @@ calculateDiscountPrice(150, 0, '%')     // 150</code></pre>
                 <h4>Examples:</h4>
                 <pre><code class="language-typescript">pad("hello", 8) // "hello   "
 pad("hello", 8, "*", "start") // "***hello"
-pad("hello", 8, "*", "both") // "*hello**"
-pad("hello", 8, " ", "both") // " hello  "</code></pre>
+pad("hello", 8, "*", "both")  // "*hello**"
+pad("hello", 8, " ", "both")  // " hello  "</code></pre>
                 <h4>Scenarios:</h4>
                 <ul>
                     <li>Aligning text in console outputs or logs for better readability.</li>
@@ -638,15 +638,15 @@ pad("hello", 8, " ", "both") // " hello  "</code></pre>
                     This is useful for aligning text or ensuring consistent string lengths in formatted outputs.
                 </p>
                 <h4>Examples:</h4>
-                <pre><code class="language-typescript">// Visible Count (number) - The number of characters to keep visible (default: 6)
-
-mask('1234567890') // '1234******'
-mask('123456NiCe', '#') // '1234######'
-mask('1234567890', '*', 4) // '1234******'
-mask('1234567890', '*', 7, 'start') // '*******890'
-mask('1234567890', '*', 5, 'end') // '12345*****'
-mask('camote2025', '*', 4) // 'camote****'
-mask('1234567890', '*', 6, 'end', false) // '1234567890' default true 
+                <pre><code class="language-typescript">// Number of characters to keep visible (default: 6)
+mask('1234567890')                        // '1234******'
+mask('123456NiCe', '#')                   // '1234######'
+mask('1234567890', '*', 4)                // '1234******'
+mask('1234567890', '*', 7, 'start')       // '*******890'
+mask('1234567890', '*', 5, 'end')         // '12345*****'
+mask('camote2025', '*', 4)                // 'camote****'
+// default true 
+mask('1234567890', '*', 6, 'end', false)  // '1234567890'
 </code></pre>
                 <h4>Scenarios:</h4>
                 <ul>
@@ -677,12 +677,12 @@ mask('1234567890', '*', 6, 'end', false) // '1234567890' default true
                     It is particularly useful for dynamically generating grammatically correct text based on quantities.
                 </p>
                 <h4>Examples:</h4>
-                <pre><code class="language-typescript">pluralize("cat", 1) // "cat"
-pluralize('cat', 2) // 'cats'
-pluralize('box', 2) // 'boxes'
-pluralize('baby', 2) // 'babies'
-pluralize('person', 1, 'people') // 'person'
-pluralize('person', 2, 'people') // 'people' 
+                <pre><code class="language-typescript">pluralize("cat", 1)                      // "cat"
+pluralize('cat', 2)                      // 'cats'
+pluralize('box', 2)                      // 'boxes'
+pluralize('baby', 2)                     // 'babies'
+pluralize('person', 1, 'people')         // 'person'
+pluralize('person', 2, 'people')         // 'people' 
 pluralize("person", undefined, "people") // "people"</code></pre>
                 <h4>Scenarios:</h4>
                 <ul>
@@ -718,9 +718,9 @@ pluralize("person", undefined, "people") // "people"</code></pre>
                     It can be configured to perform case-sensitive or case-insensitive searches, making it versatile for various text processing tasks.
                 </p>
                 <h4>Examples:</h4>
-                <pre><code class="language-typescript">contains("Hello World", "world", true) // false
-contains("Hello World", "world", false) // true
-contains("Hello World", "lo") // true</code></pre>
+                <pre><code class="language-typescript">contains("Hello World", "world", true)   // false
+contains("Hello World", "world", false)  // true
+contains("Hello World", "lo")            // true</code></pre>
                 <h4>Scenarios:</h4>
                 <ul>
                     <li>Searching for keywords within user-generated content or documents.</li>
@@ -751,10 +751,10 @@ contains("Hello World", "lo") // true</code></pre>
             <section id="filterArray">
                 <h3>filterArray</h3>
                 <p>Filters an array based on a predicate function.</p>
-                <pre><code class="language-typescript">filterArray([1, 2, 3, 4, 5], (num) => num % 2 === 0) // [2, 4]
-filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num % 2 !== 0) // [1, 3, 5, 7]
-filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num > 4) // [5, 6, 7, 8]
-filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4) // [1, 2, 3, 4]</code></pre>
+                <pre><code class="language-typescript">filterArray([1, 2, 3, 4, 5], (num) => num % 2 === 0)                   // [2, 4]
+filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num % 2 !== 0)          // [1, 3, 5, 7]
+filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num > 4)                // [5, 6, 7, 8]
+filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4)               // [1, 2, 3, 4]</code></pre>
             </section>
             <section id="transformArray">
                 <h3>transformArray</h3>
@@ -778,7 +778,7 @@ deepClone(object) // { ...object }</code></pre>
                 <pre><code class="language-typescript">removeEmptyKeysEntries({ a: 1, b: undefined })     // { a: 1 }
 removeEmptyKeysEntries({ a: 1, b: null })          // { a: 1 }
 removeEmptyKeysEntries({ a: 1, b: '' })            // { a: 1 }
-removeEmptyKeysEntries({ a: 1, b: 2 })            // { a: 1, b: 2 }</code></pre>
+removeEmptyKeysEntries({ a: 1, b: 2 })             // { a: 1, b: 2 }</code></pre>
             </section>
         </section>
 
@@ -802,7 +802,7 @@ const end = new Date('2024-01-31')
 isDateWithinRange(start, end, date)  // true
 
 // Check if the current date is within the range
-isDateWithinRange(start, end)  // true (using default current date)</code></pre>
+isDateWithinRange(start, end)        // true (using default current date)</code></pre>
                     </div>
                 </div>
             </section>
@@ -897,7 +897,7 @@ generateRandomPassword(8, { custom: "ABC123" });
 generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" }); 
 
 // Generate strong password (enforces security rules)
-generateStrongPassword()  // e.g., "StrongP@ssw0"
+generateStrongPassword()    // e.g., "StrongP@ssw0"
 generateStrongPassword(16)  // e.g., "StrongP@ssw0rd#2"</code></pre>
                     </div>
                 </div>
@@ -925,8 +925,8 @@ generateRandomHSL()            // e.g., [20, 100, 60]
 generateRandomHSL(true)        // e.g., "hsl(20, 100%, 60%)"
 
 // Generate color palette
-generateColorPalette(5)        // e.g., ["#FF5733", "#33FF57", "#5733FF", "#FF3333", "#33FFFF"]
-generateColorPalette(3, 'rgb') // e.g., ["rgb(255,87,51)", "rgb(51,255,87)", "rgb(87,51,255)"]</code></pre>
+generateColorPalette(5)         // e.g., ["#FF5733", "#33FF57", "#5733FF", "#FF3333", "#33FFFF"]
+generateColorPalette(3, 'rgb')  // e.g., ["rgb(255,87,51)", "rgb(51,255,87)", "rgb(87,51,255)"]</code></pre>
                     </div>
                 </div>
             </section>
@@ -985,7 +985,7 @@ generateRandom({ type: 'uuid' })                         // "123e4567-e89b-12d3-
                     <div class="code-content">
                         <pre><code class="language-typescript">interface RandomOptions {
     // General options
-    length?: number;        // Length of generated data
+    length?: number;       // Length of generated data
     type?: string;         // Type of data for arrays
     format?: string;       // Output format (e.g., 'hex', 'rgb')
     
