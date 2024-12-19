@@ -360,21 +360,21 @@ isEmpty(value: any): boolean;     // Check if value is empty
                         </div>
                         <div class="code-content">
                             <pre><code class="language-typescript">// Basic type checking
-isString('hello')     // true
-isString(123)         // false
+isString('hello')      // true
+isString(123)          // false
 
-isNumber(42)          // true
-isNumber('42')        // false
+isNumber(42)           // true
+isNumber('42')         // false
 
-isArray([1, 2, 3])    // true
+isArray([1, 2, 3])     // true
 isArray({ foo: 'bar'}) // false
 
 isObject({ name: 'John' }) // true
 isObject([1, 2, 3])        // false
 
 // Checking for null and undefined
-isNull(null)          // true
-isNull(undefined)     // false
+isNull(null)           // true
+isNull(undefined)      // false
 
 isUndefined(undefined) // true
 isUndefined(null)      // false
