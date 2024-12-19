@@ -403,8 +403,8 @@ isEmpty('hello')       // false</code></pre>
                         </div>
                         <div class="code-content">
                             <pre><code class="language-typescript">// String validation functions
-isEmail(value: string): boolean;                         // Validate email format
-isUrl(value: string): boolean;                          // Validate URL format
+isEmail(value: string): boolean;     // Validate email format
+isUrl(value: string): boolean;       // Validate URL format
 isStrongPassword(value: string, options?: PasswordOptions): boolean; // Validate password strength
 isValidTime(value: string): boolean; // Validate time format
 
@@ -434,7 +434,7 @@ isEmail('invalid-email')        // false
 
 // URL validation
 isUrl('https://example.com')    // true
-isUrl('not-a-url')             // false
+isUrl('not-a-url')              // false
 
 // Password strength validation
 const passwordOptions = {
@@ -491,8 +491,8 @@ humanReadableNumber(999, { decimals: 0 })       // "999"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">formatPercent(0.1234)                  // "12.34%"
-formatPercent(0.1234, { decimals: 1 }) // "12.3%"</code></pre>
+                        <pre><code class="language-typescript">formatPercent(0.1234)                    // "12.34%"
+formatPercent(0.1234, { decimals: 1 })   // "12.3%"</code></pre>
                     </div>
                 </div>
             </section>
@@ -507,10 +507,10 @@ formatPercent(0.1234, { decimals: 1 }) // "12.3%"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">formatDecimals(123.456, 2) // "123.46" 
-formatDecimals(123.4, 2) // "123.40" 
-formatDecimals(123.456, 2, 'ceil') // "123.46" 
-formatDecimals(123.456, 2, 'floor') // "123.45"</code></pre>
+                        <pre><code class="language-typescript">formatDecimals(123.456, 2)               // "123.46" 
+formatDecimals(123.4, 2)                 // "123.40" 
+formatDecimals(123.456, 2, 'ceil')       // "123.46" 
+formatDecimals(123.456, 2, 'floor')      // "123.45"</code></pre>
                     </div>
                 </div>
             </section>
@@ -751,10 +751,10 @@ contains("Hello World", "lo")            // true</code></pre>
             <section id="filterArray">
                 <h3>filterArray</h3>
                 <p>Filters an array based on a predicate function.</p>
-                <pre><code class="language-typescript">filterArray([1, 2, 3, 4, 5], (num) => num % 2 === 0)                   // [2, 4]
-filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num % 2 !== 0)          // [1, 3, 5, 7]
-filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num > 4)                // [5, 6, 7, 8]
-filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4)               // [1, 2, 3, 4]</code></pre>
+                <pre><code class="language-typescript">filterArray([1, 2, 3, 4, 5], (num) => num % 2 === 0)             // [2, 4]
+filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num % 2 !== 0)    // [1, 3, 5, 7]
+filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num > 4)          // [5, 6, 7, 8]
+filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4)         // [1, 2, 3, 4]</code></pre>
             </section>
             <section id="transformArray">
                 <h3>transformArray</h3>
