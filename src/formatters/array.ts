@@ -39,3 +39,21 @@ export const filterArray = <T>(arr: T[], conditionFn: (value: T) => boolean): T[
 export const transformArray = <T, U>(arr: T[], transformFn: (value: T) => U): U[] => {
   return arr.map(transformFn);
 };
+
+/**
+ * Capitalizes the first letter of each word in each string of the array.
+ * This function is case-sensitive and will capitalize the first letter of each word
+ * regardless of its position in the string. It uses a regular expression to match
+ * word boundaries and the 'replace' method to replace the matched characters with
+ * their uppercase equivalent.
+ * 
+ * @param array - The input array of strings
+ * @returns A new array with each string capitalized
+ * @throws Error if the input is not an array
+ */
+export const capitalizeEach = (array: string[]): string[] => {
+  if (!Array.isArray(array)) {
+    throw new Error('Capitalize each can only be called on arrays');
+  }
+  return array.map(item => item.replace(/\b\w/g, char => char.toUpperCase()));
+};

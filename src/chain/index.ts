@@ -3,6 +3,7 @@ import * as stringFormatters from '../formatters/string';
 import * as dateFormatters from '../formatters/date';
 import * as arrayFormatters from '../formatters/array';
 import * as objectFormatters from '../formatters/object';
+import * as deepFormatters from '../formatters/deep';
 import * as checkers from '../checkers';
 
 import {
@@ -66,18 +67,23 @@ export class _ {
         return this;
     }
 
+    public capitalizeEach(): this {
+        this.value = arrayFormatters.capitalizeEach(this.value);
+        return this;
+    }
+
     public removeEmptyKeysEntries(): this {
         this.value = objectFormatters.removeEmptyKeysEntries(this.value);
         return this;
     }
 
     public deepClone(): this {
-        this.value = objectFormatters.deepClone(this.value);
+        this.value = deepFormatters.deepClone(this.value);
         return this;
     }
 
     public deepCompareObjects(anotherValue: any): this {
-        this.value = objectFormatters.deepCompareObjects(this.value, anotherValue);
+        this.value = deepFormatters.deepCompareObjects(this.value, anotherValue);
         return this;
     }
 
@@ -209,6 +215,16 @@ export class _ {
             throw new Error('Filter can only be called on arrays');
         }
         this.value = this.value.filter(fn);
+        return this;
+    }
+
+    capitalizeWords(): _ {
+        this.value = stringFormatters.capitalizeWords(String(this.value));
+        return this;
+    }
+
+    trim(): _ {
+        this.value = stringFormatters.trim(String(this.value));
         return this;
     }
 

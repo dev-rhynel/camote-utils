@@ -1,4 +1,4 @@
-import { removeDuplicates, flattenArray, filterArray, transformArray } from '../src/formatters/array';
+import { removeDuplicates, flattenArray, filterArray, transformArray, capitalizeEach } from '../src/formatters/array';
 
 describe('Array Manipulation Functions', () => {
   
@@ -52,6 +52,24 @@ describe('Array Manipulation Functions', () => {
     it('should return an empty array when input is empty', () => {
       const transformFn = (value: number) => value * 2;
       expect(transformArray([], transformFn)).toEqual([]);
+    });
+  });
+
+  describe('capitalizeEach', () => {
+    it('should capitalize the first letter of each word in each string', () => {
+      const input = ['hello world', 'goodbye world'];
+      const expectedOutput = ['Hello World', 'Goodbye World'];
+      expect(capitalizeEach(input)).toEqual(expectedOutput);
+    });
+
+    it('should handle an empty array', () => {
+      const input: string[] = [];
+      const expectedOutput: string[] = [];
+      expect(capitalizeEach(input)).toEqual(expectedOutput);
+    });
+
+    it('should throw an error if the input is not an array', () => {
+      expect(() => capitalizeEach('not an array' as any)).toThrow('Capitalize each can only be called on arrays');
     });
   });
 

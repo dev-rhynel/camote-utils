@@ -81,6 +81,7 @@
                         <ul>
                             <li><a href="#pluralize">pluralize</a></li>
                             <li><a href="#capitalize">capitalize</a></li>
+                            <li><a href="#capitalizeWords">capitalizeWords</a></li>
                             <li><a href="#truncate">truncate</a></li>
                             <li><a href="#toCamelCase">toCamelCase</a></li>
                             <li><a href="#toKebabCase">toKebabCase</a></li>
@@ -98,6 +99,7 @@
                             <li><a href="#chopEnd">chopEnd</a></li>
                             <li><a href="#contains">contains</a></li>
                             <li><a href="#exactly">exactly</a></li>
+                            <li><a href="#trim">trim</a></li>
                         </ul>
                     </li>
                     <li>
@@ -107,14 +109,20 @@
                             <li><a href="#flattenArray">flattenArray</a></li>
                             <li><a href="#filterArray">filterArray</a></li>
                             <li><a href="#transformArray">transformArray</a></li>
+                            <li><a href="#capitalizeEach">capitalizeEach</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#object-manipulation" class="has-submenu">Object Manipulation <i class="fas fa-chevron-down"></i></a>
                         <ul>
+                            <li><a href="#removeEmptyKeysEntries">removeEmptyKeysEntries</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#deep-manipulation" class="has-submenu">Deep Manipulation <i class="fas fa-chevron-down"></i></a>
+                        <ul>
                             <li><a href="#deepClone">deepClone</a></li>
                             <li><a href="#deepCompareObjects">deepCompareObjects</a></li>
-                            <li><a href="#removeEmptyKeysEntries">removeEmptyKeysEntries</a></li>
                         </ul>
                     </li>
                     <li>
@@ -585,6 +593,12 @@ calculateDiscountPrice(150, 0, '%')    // 150</code></pre>
                 <pre><code class="language-typescript">capitalize("hello") // "Hello"</code></pre>
             </section>
             
+            <section id="capitalizeWords">
+                <h3>capitalizeWords</h3>
+                <p>Capitalizes the first letter of each word in a string.</p>
+                <pre><code class="language-typescript">capitalizeWords("hello world") // "Hello World"</code></pre>
+            </section>
+            
             <section id="truncate">
                 <h3>truncate</h3>
                 <p>Truncates a string to a specified length and adds an ellipsis.</p>
@@ -735,6 +749,12 @@ contains("Hello World", "lo")            // true</code></pre>
                 <p>Checks if two strings match exactly.</p>
                 <pre><code class="language-typescript">exactly("Hello", "hello", false) // true</code></pre>
             </section>
+
+            <section id="trim">
+                <h3>trim</h3>
+                <p>Removes leading and trailing whitespace from a string.</p>
+                <pre><code class="language-typescript">trim("  Hello  ") // "Hello"</code></pre>
+            </section>
         </section>
 
         <section id="array-manipulation">
@@ -758,21 +778,46 @@ filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num % 2 !== 0)    // [1, 3, 5, 7]
 filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num > 4)          // [5, 6, 7, 8]
 filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4)         // [1, 2, 3, 4]</code></pre>
             </section>
+
             <section id="transformArray">
                 <h3>transformArray</h3>
                 <p>Transforms an array by applying a function to each element.</p>
                 <pre><code class="language-typescript">transformArray([1, 2, 3], (num) => num * 2) // [2, 4, 6]</code></pre>
             </section>
+
+            <section id="capitalizeEach">
+                <h3>capitalizeEach</h3>
+                <p>Capitalizes the first letter of each word in each string within an array.</p>
+                <pre><code class="language-typescript">capitalizeEach(["hello world", "typescript rocks"])   // ["Hello World", "Typescript Rocks"]</code></pre>
+            </section>              
         </section>
 
         <section id="object-manipulation">
             <h2>Object Manipulation</h2>
             <p>Functions for manipulating and working with objects.</p>
+            <section id="removeEmptyKeysEntries">
+                <h3>removeEmptyKeysEntries</h3>
+                <p>Removes empty keys and entries from an object.</p>
+                <pre><code class="language-typescript">removeEmptyKeysEntries({ a: 1, b: undefined })     // { a: 1 }
+removeEmptyKeysEntries({ a: 1, b: null })          // { a: 1 }
+removeEmptyKeysEntries({ a: 1, b: '' })            // { a: 1 }
+removeEmptyKeysEntries({ a: 1, b: 2 })             // { a: 1, b: 2 }</code></pre>
+            </section>
+        </section>
+
+        <section id="deep-manipulation">
+            <h2>Object Manipulation</h2>
+            <p>Functions for manipulating and working with objects.</p>
             <section id="deepClone">
                 <h3>deepClone</h3>
-                <p>Creates a deep copy of an object.</p>
-                <pre><code class="language-typescript">deepClone({ a: 1, b: { c: 2 } })   // { a: 1, b: { c: 2 } }
-deepClone(object)                  // { ...object }</code></pre>
+                <p>Creates a deep copy of an object. It handles nested objects, arrays, dates, and other complex structures.</p>
+                <pre><code class="language-typescript">deepClone({ a: 1, b: { c: 2 } })          // { a: 1, b: { c: 2 } }
+deepClone([1, { a: 2 }])                  // [1, { a: 2 }]
+deepClone(new Date(2024, 11, 20))         // Date object with the same date
+deepClone(object)                         // Deep copy of the object
+deepClone([{ a: 1 }, { b: 2 }])           // [{ a: 1 }, { b: 2 }]
+deepClone({ a: [1, 2, { b: 3 }] })        // { a: [1, 2, { b: 3 }] }  
+</code></pre>
             </section>
 
             <section id="deepCompareObjects">
@@ -782,8 +827,8 @@ deepClone(object)                  // { ...object }</code></pre>
 
 const obj1 = { a: 1, b: { c: 2 } }
 const obj2 = { a: 1, b: { c: 3 } }
-deepCompareObjects(obj1, obj2, true)                                   // { b: { c: 3 } }
-deepCompareObjects(obj1, obj2)                                         // false
+deepCompareObjects(obj1, obj2, true)     // { b: { c: 3 } }
+deepCompareObjects(obj1, obj2)           // false
 
 const arrayWithObject1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 const arrayWithObject2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }]
@@ -795,15 +840,6 @@ const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'ligh
 deepCompareObjects(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
 deepCompareObjects(nestedObj1, nestedObj2);                             // false
 </code></pre>
-            </section>
-
-            <section id="removeEmptyKeysEntries">
-                <h3>removeEmptyKeysEntries</h3>
-                <p>Removes empty keys and entries from an object.</p>
-                <pre><code class="language-typescript">removeEmptyKeysEntries({ a: 1, b: undefined })     // { a: 1 }
-removeEmptyKeysEntries({ a: 1, b: null })          // { a: 1 }
-removeEmptyKeysEntries({ a: 1, b: '' })            // { a: 1 }
-removeEmptyKeysEntries({ a: 1, b: 2 })             // { a: 1, b: 2 }</code></pre>
             </section>
         </section>
 
@@ -848,16 +884,16 @@ isDateWithinRange(start, end)        // true (using default current date)</code>
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">// Basic random integer
-generateRandomInteger(10)        // e.g., 7 (0-10)
-generateRandomInteger(100)       // e.g., 42 (0-100)
+generateRandomInteger(10)    // e.g., 7 (0-10)
+generateRandomInteger(100)   // e.g., 42 (0-100)
 
 // Random integer in range
-generateRandomIntegerInRange(5, 10)    // e.g., 7 (5-10)
-generateRandomIntegerInRange(-10, 10)  // e.g., -3 (-10 to 10)
+generateRandomIntegerInRange(5, 10)     // e.g., 7 (5-10)
+generateRandomIntegerInRange(-10, 10)   // e.g., -3 (-10 to 10)
 
 // Array of random integers
-generateRandomIntegerArray(5, 1, 10)   // e.g., [3, 7, 1, 9, 4]
-generateRandomIntegerArray(3, 0, 100)  // e.g., [42, 67, 13]
+generateRandomIntegerArray(5, 1, 10)    // e.g., [3, 7, 1, 9, 4]
+generateRandomIntegerArray(3, 0, 100)   // e.g., [42, 67, 13]
 
 // Generates an array of random integers
 generateRandomIntegerExcluding(1, 10, [5, 6])    // Returns a number between 1-4 or 7-10

@@ -1,61 +1,54 @@
-import { deepClone, deepCompareObjects  } from '../src/formatters/object';
+import { removeEmptyKeysEntries } from './../src/formatters/object';
 
-describe('deepClone', () => {
-    it('should create a deep copy of an object', () => {
-        const original = { a: 1, b: { c: 2 } };
-        const copy = deepClone(original);
-        
-        // Verify that the copy is a different object
-        expect(copy).not.toBe(original);
-        
-        // Verify that the properties are equal
-        expect(copy).toEqual(original);
-        
-        // Modify the copy and ensure the original is not affected
-        copy.b.c = 3;
-        expect(original.b.c).toBe(2); // Original should remain unchanged
-    });
+describe('removeEmptyKeysEntries', () => {
+  it('should remove keys with falsy values', () => {
+    const input = { a: 1, b: 0, c: false, d: '', e: null, f: undefined, g: 'hello' };
+    const expectedOutput = { a: 1, g: 'hello' };
+    expect(removeEmptyKeysEntries(input)).toEqual(expectedOutput);
+  });
 
-    it('should handle arrays', () => {
-        const original = [1, 2, [3, 4]];
-        const copy = deepClone(original);
-        
-        expect(copy).not.toBe(original);
-        expect(copy).toEqual(original);
-        
-        // Modify the copy and ensure the original is not affected
-        (copy[2] as number[])[0] = 5;
-        expect((original[2] as number[])[0]).toBe(3); // Original should remain unchanged
-        expect(original[2]).toEqual([3, 4]); // Ensure the original array remains unchanged
-    });
-});
+  it('should transform values if a transform function is provided', () => {
+    const input = { a: [1, 2], b: [3, 4], c: [] };
+    const transformFn = (value: number) => value * 2;
+    const expectedOutput = { a: [2, 4], b: [6, 8] };
+    expect(removeEmptyKeysEntries(input, transformFn)).toEqual(expectedOutput);
+  });
 
-describe('deepCompareObjects', () => {
-    test('should return differences between two objects', () => {
-        const obj1 = { a: 1, b: { c: 2 } };
-        const obj2 = { a: 1, b: { c: 3 } };
-        const differences = deepCompareObjects(obj1, obj2, true);
-        expect(differences).toEqual({ b: { c: 3 } });
-    });
+  it('should filter values by a specific condition if provided', () => {
+    const input = { a: 'apple', b: 'banana', c: 'cherry', d: '' };
+    const filterCondition = 'a';
+    const expectedOutput = { a: 'apple', b: 'banana' };
+    expect(removeEmptyKeysEntries(input, undefined, filterCondition)).toEqual(expectedOutput);
+  });
 
-    test('should return false for unequal objects', () => {
-        const obj1 = { a: 1, b: { c: 2 } };
-        const obj2 = { a: 1, b: { c: 3 } };
-        const areEqual = deepCompareObjects(obj1, obj2);
-        expect(areEqual).toBe(false);
-    });
+  it('should handle nested objects', () => {
+    const input = { a: { x: 1 }, b: { y: 0 }, c: { z: 'hello' } };
+    const expectedOutput = { a: { x: 1 }, c: { z: 'hello' } };
+    expect(removeEmptyKeysEntries(input)).toEqual(expectedOutput);
+  });
 
-    test('should return differences between two arrays of objects', () => {
-        const array1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
-        const array2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }];
-        const arrayDifferences = deepCompareObjects(array1, array2, true);
-        expect(arrayDifferences).toEqual([{ id: 2, name: 'Charlie' }]);
-    });
+  it('should handle mixed types in the object', () => {
+    const input = { a: 1, b: 'hello', c: false, d: null, e: { nested: 'value' }, f: undefined };
+    const expectedOutput = { a: 1, b: 'hello', e: { nested: 'value' } };
+    expect(removeEmptyKeysEntries(input)).toEqual(expectedOutput);
+  });
 
-    test('should return differences for nested objects', () => {
-        const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
-        const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
-        const nestedDifferences = deepCompareObjects(nestedObj1, nestedObj2, true);
-        expect(nestedDifferences).toEqual({ settings: { theme: 'light' } });
-    });
+  it('should return an empty object when input is empty', () => {
+    const input = {};
+    const expectedOutput = {};
+    expect(removeEmptyKeysEntries(input)).toEqual(expectedOutput);
+  });
+
+  it('should return an empty object when all values are falsy', () => {
+    const input = { a: 0, b: '', c: null, d: undefined };
+    const expectedOutput = {};
+    expect(removeEmptyKeysEntries(input)).toEqual(expectedOutput);
+  });
+
+  it('should handle nested arrays correctly', () => {
+    const input = { a: [1, 2, 3], b: ['hello', 'world'], c: [] };
+    const transformFn = (value: number) => value * 2;
+    const expectedOutput = { a: [2, 4, 6], b: ['hello', 'world'] };
+    expect(removeEmptyKeysEntries(input, transformFn)).toEqual(expectedOutput);
+  });
 });

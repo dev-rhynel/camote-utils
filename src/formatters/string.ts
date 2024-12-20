@@ -277,6 +277,19 @@ export const exactly = (str1: string, str2: string, caseSensitive?: boolean): bo
 };
 
 /**
+ * Capitalizes the first letter of each word in a string
+ * @param str - The input string
+ * @returns The string with the first letter of each word capitalized
+ * @example
+ * capitalizeWords("hello world") // "Hello World"
+ */
+export const capitalizeWords = (str: string): string => {
+  // Use a regular expression to find the first character of each word
+  // and replace it with its uppercase version.
+  return str.replace(/\b\w/g, char => char.toUpperCase());
+};
+
+/**
  * Masks a portion of a string with a specified character.
  * @param str - The input string
  * @param maskChar - The character to use for masking (default: '*')
@@ -340,3 +353,10 @@ export const pad = (
       return str + padChar.repeat(padLength)
   }
 }
+
+/**
+ * Trims whitespace from both ends of a string.
+ * @param str - The input string
+ * @returns The trimmed string
+ */
+export const trim = (str: string): string => str.trim();

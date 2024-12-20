@@ -15,7 +15,9 @@ import {
   toLowerCase,
   chopStart,
   chopEnd,
-  mask
+  mask,
+  capitalizeWords,
+  trim
 } from '../src/formatters/string';
 import { generateUUID } from '../src/random';
 
@@ -501,4 +503,44 @@ describe('String Formatters', () => {
     });
   });
   
+  describe('trim', () => {
+    it('should trim whitespace from both ends of a string', () => {
+      const input = '   hello world   ';
+      const expectedOutput = 'hello world';
+      expect(trim(input)).toBe(expectedOutput);
+    });
+
+    it('should handle an empty string', () => {
+      const input = '';
+      const expectedOutput = '';
+      expect(trim(input)).toBe(expectedOutput);
+    });
+
+    it('should not change a string without whitespace', () => {
+      const input = 'hello';
+      const expectedOutput = 'hello';
+      expect(trim(input)).toBe(expectedOutput);
+    });
+  });
+
 })
+
+describe('capitalizeWords', () => {
+  it('should capitalize the first letter of each word', () => {
+    const input = 'hello world';
+    const expectedOutput = 'Hello World';
+    expect(capitalizeWords(input)).toBe(expectedOutput);
+  });
+
+  it('should handle an empty string', () => {
+    const input = '';
+    const expectedOutput = '';
+    expect(capitalizeWords(input)).toBe(expectedOutput);
+  });
+
+  it('should handle a single word', () => {
+    const input = 'test';
+    const expectedOutput = 'Test';
+    expect(capitalizeWords(input)).toBe(expectedOutput);
+  });
+});
