@@ -87,6 +87,11 @@ export class _ {
         return this;
     }
 
+    public deepCompare(anotherValue: any): this {
+        this.value = deepFormatters.deepCompare(this.value, anotherValue);
+        return this;
+    }
+
     // Random generation functions
     static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);

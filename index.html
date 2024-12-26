@@ -122,7 +122,7 @@
                         <a href="#deep-manipulation" class="has-submenu">Deep Manipulation <i class="fas fa-chevron-down"></i></a>
                         <ul>
                             <li><a href="#deepClone">deepClone</a></li>
-                            <li><a href="#deepCompareObjects">deepCompareObjects</a></li>
+                            <li><a href="#deepCompare">deepCompare</a></li>
                         </ul>
                     </li>
                     <li>
@@ -820,25 +820,25 @@ deepClone({ a: [1, 2, { b: 3 }] })        // { a: [1, 2, { b: 3 }] }
 </code></pre>
             </section>
 
-            <section id="deepCompareObjects">
-                <h3>deepCompareObjects</h3>
+            <section id="deepCompare">
+                <h3>deepCompare</h3>
                 <p>Compares two objects deeply and returns either true or false based on equality. Optionally, returns an object containing the differences.</p>
-                <pre><code class="language-typescript">deepCompareObjects = (originalObject: any, toCompareObject: any, returnChanges: boolean = false): boolean | object => {}
+                <pre><code class="language-typescript">deepCompare = (originalObject: any, toCompareObject: any, returnChanges: boolean = false): boolean | object => {}
 
 const obj1 = { a: 1, b: { c: 2 } }
 const obj2 = { a: 1, b: { c: 3 } }
-deepCompareObjects(obj1, obj2, true)     // { b: { c: 3 } }
-deepCompareObjects(obj1, obj2)           // false
+deepCompare(obj1, obj2, true)     // { b: { c: 3 } }
+deepCompare(obj1, obj2)           // false
 
 const arrayWithObject1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 const arrayWithObject2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }]
-deepCompareObjects(arrayWithObject1, arrayWithObject2, true);           // [{ id: 2, name: 'Charlie' }]
-deepCompareObjects(arrayWithObject1, arrayWithObject2)                  // false
+deepCompare(arrayWithObject1, arrayWithObject2, true);           // [{ id: 2, name: 'Charlie' }]
+deepCompare(arrayWithObject1, arrayWithObject2)                  // false
 
 const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
 const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
-deepCompareObjects(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
-deepCompareObjects(nestedObj1, nestedObj2);                             // false
+deepCompare(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
+deepCompare(nestedObj1, nestedObj2);                             // false
 </code></pre>
             </section>
         </section>
