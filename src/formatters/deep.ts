@@ -65,9 +65,12 @@ export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnCh
     for (let i = 0; i < Math.max(originalObj.length, toCompareObj.length); i++) {
       const originalItem = originalObj[i];
       const compareItem = toCompareObj[i];
-      // Use deep comparison for each item
-      if (JSON.stringify(originalItem) !== JSON.stringify(compareItem)) {
-        differences.push(compareItem);
+      // Check for null or undefined before comparison
+      if (originalItem !== undefined && originalItem !== null && compareItem !== undefined && compareItem !== null) {
+        // Use deep comparison for each item
+        if (JSON.stringify(originalItem) !== JSON.stringify(compareItem)) {
+          differences.push(compareItem);
+        }
       }
     }
     return returnChanges ? differences : differences.length === 0;
@@ -77,31 +80,34 @@ export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnCh
     const result: Record<string, any> = {}; 
     for (const key in toCompareObj) {
       if (toCompareObj.hasOwnProperty(key)) {
-        if (Array.isArray(toCompareObj[key])) {
-          if (!Array.isArray(originalObj[key]) || originalObj[key].length !== toCompareObj[key].length) {
-            result[key] = toCompareObj[key];
+        if (Array.isArray(toCompareObj?.[key])) {
+          if (!Array.isArray(originalObj?.[key]) || originalObj?.[key] === null || originalObj?.[key].length !== toCompareObj?.[key].length) {
+            result[key] = toCompareObj?.[key];
           } else {
-            const arrayMismatched = toCompareObj[key].map((item, index) => {
-              if (typeof item === 'object' && item !== null) {
-                return Object.keys(compare(originalObj[key][index], item)).length > 0 ? item : undefined;
+            const arrayMismatched = toCompareObj?.[key].map((item, index) => {
+              if (originalObj?.[key] !== null && originalObj?.[key] !== undefined && index < originalObj?.[key].length) {
+                if (typeof item === 'object' && item !== null) {
+                  return Object.keys(compare(originalObj?.[key][index], item)).length > 0 ? item : undefined;
+                }
+                return originalObj?.[key][index] !== item ? item : undefined;
               }
-              return originalObj[key][index] !== item ? item : undefined;
+              return item;
             }).filter(item => item !== undefined);
             if (arrayMismatched.length > 0) {
               result[key] = arrayMismatched;
             }
           }
-        } else if (typeof toCompareObj[key] === 'object' && toCompareObj[key] !== null) {
-          if (typeof originalObj[key] !== 'object' || originalObj[key] === null) {
-            result[key] = toCompareObj[key];
+        } else if (typeof toCompareObj?.[key] === 'object' && toCompareObj?.[key] !== null) {
+          if (typeof originalObj?.[key] !== 'object' || originalObj?.[key] === null) {
+            result[key] = toCompareObj?.[key];
           } else {
-            const nestedMismatched = compare(originalObj[key], toCompareObj[key]);
+            const nestedMismatched = compare(originalObj?.[key], toCompareObj?.[key]);
             if (Object.keys(nestedMismatched).length > 0) {
               result[key] = nestedMismatched;
             }
           }
-        } else if (originalObj[key] !== toCompareObj[key]) {
-          result[key] = toCompareObj[key];
+        } else if (originalObj?.[key] !== null && toCompareObj?.[key] !== null && originalObj?.[key] !== toCompareObj?.[key]) {
+          result[key] = toCompareObj?.[key];
         }
       }
     }
