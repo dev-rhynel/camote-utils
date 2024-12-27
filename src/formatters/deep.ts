@@ -60,15 +60,19 @@ export const deepClone = <T>(obj: T): T => {
 * const nestedAreEqual = deepCompareObjects(nestedObj1, nestedObj2); // false
 */
 export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnChanges: boolean = false): boolean | object => {
-if (Array.isArray(originalObj) && Array.isArray(toCompareObj)) {
-  const differences = originalObj.map((item, index) => {
-      if (JSON.stringify(item) !== JSON.stringify(toCompareObj[index])) {
-          return toCompareObj[index];
+  if (Array.isArray(originalObj) && Array.isArray(toCompareObj)) {
+    const differences = [];
+    for (let i = 0; i < Math.max(originalObj.length, toCompareObj.length); i++) {
+      const originalItem = originalObj[i];
+      const compareItem = toCompareObj[i];
+      // Use deep comparison for each item
+      if (JSON.stringify(originalItem) !== JSON.stringify(compareItem)) {
+        differences.push(compareItem);
       }
-  }).filter(Boolean); // Filter out undefined values
-  return returnChanges ? differences : differences.length === 0;
-}
-
+    }
+    return returnChanges ? differences : differences.length === 0;
+  }
+  
   const compare = (originalObj: any, toCompareObj: any) => {
     const result: Record<string, any> = {}; 
     for (const key in toCompareObj) {

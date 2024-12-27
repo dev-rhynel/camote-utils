@@ -95,6 +95,13 @@ describe('deepCompareObjects', () => {
 });
 
 describe('deepCompare', () => {
+  test('should return true for equal between two string', () => {
+    const str1 = 'hello';
+    const str2 = 'hello';
+    const differences = deepCompare(str1, str2);
+    expect(differences).toEqual(true);
+  });
+
   test('should return differences between two objects', () => {
       const obj1 = { a: 1, b: { c: 2 } };
       const obj2 = { a: 1, b: { c: 3 } };
