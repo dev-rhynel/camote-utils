@@ -74,7 +74,7 @@ export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnCh
   }
   
   const compare = (originalObj: any, toCompareObj: any) => {
-    const result: Record<string, any> = {}; 
+    const result: Record<string, any> = {};  
     for (const key in toCompareObj) {
       if (toCompareObj.hasOwnProperty(key)) {
         if (Array.isArray(toCompareObj?.[key])) {
