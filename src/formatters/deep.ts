@@ -1,4 +1,3 @@
-
 export const deepClone = <T>(obj: T): T => {
   if (obj === null || typeof obj !== 'object') {
     return obj;
@@ -61,16 +60,13 @@ export const deepClone = <T>(obj: T): T => {
 */
 export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnChanges: boolean = false): boolean | object => {
   if (Array.isArray(originalObj) && Array.isArray(toCompareObj)) {
+    if (originalObj.length !== toCompareObj.length) return false;
     const differences = [];
     for (let i = 0; i < Math.max(originalObj.length, toCompareObj.length); i++) {
       const originalItem = originalObj[i];
       const compareItem = toCompareObj[i];
-      // Check for null or undefined before comparison
-      if (originalItem !== undefined && originalItem !== null && compareItem !== undefined && compareItem !== null) {
-        // Use deep comparison for each item
-        if (JSON.stringify(originalItem) !== JSON.stringify(compareItem)) {
-          differences.push(compareItem);
-        }
+      if (JSON.stringify(originalItem) !== JSON.stringify(compareItem)) {
+        differences.push(compareItem);
       }
     }
     return returnChanges ? differences : differences.length === 0;

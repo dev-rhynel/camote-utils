@@ -108,6 +108,16 @@ describe('deepCompare', () => {
     const differences = deepCompare(str1, str2);
     expect(differences).toEqual(false);
   });
+
+  test('should return differences between two arrays', () => {
+      const array1 = ['Alice', 'James'];
+      const array2 = ['Alice'];
+
+      const differences = deepCompare(array1, array2);
+      expect(differences).toEqual(false);
+  })
+
+
   test('should return differences between two objects', () => {
       const obj1 = { a: 1, b: { c: 2 } };
       const obj2 = { a: 1, b: { c: 3 } };
