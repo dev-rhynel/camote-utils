@@ -92,6 +92,239 @@ export class _ {
         return this;
     }
 
+    // String operations
+    capitalize(): _ {
+        this.value = stringFormatters.capitalize(String(this.value));
+        return this;
+    }
+
+    truncate(length: number, ellipsis?: string): _ {
+        this.value = stringFormatters.truncate(String(this.value), length, ellipsis);
+        return this;
+    }
+
+    toCamelCase(): _ {
+        this.value = stringFormatters.toCamelCase(String(this.value));
+        return this;
+    }
+
+    toKebabCase(): _ {
+        this.value = stringFormatters.toKebabCase(String(this.value));
+        return this;
+    }
+
+    mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
+        return stringFormatters.mask(str, maskChar, visibleCount, position, active);
+    }
+
+    // Date operations
+    isDateWithinRange(endDate: Date): _ {
+        this.value = dateFormatters.isDateWithinRange(this.value as Date, endDate);
+        return this;
+    }
+
+    // Array operations
+    map(fn: (item: any) => any): _ {
+        if (!Array.isArray(this.value)) {
+            throw new Error('Map can only be called on arrays');
+        }
+        this.value = this.value.map(fn);
+        return this;
+    }
+
+    filter(fn: (item: any) => boolean): _ {
+        if (!Array.isArray(this.value)) {
+            throw new Error('Filter can only be called on arrays');
+        }
+        this.value = this.value.filter(fn);
+        return this;
+    }
+
+    capitalizeWords(): _ {
+        this.value = stringFormatters.capitalizeWords(String(this.value));
+        return this;
+    }
+
+    trim(): _ {
+        this.value = stringFormatters.trim(String(this.value));
+        return this;
+    }
+
+    pluralize(count?: number, customPlural?: string): _ {
+        this.value = stringFormatters.pluralize(String(this.value), count, customPlural);
+        return this;
+    }
+
+    // Number operations
+   formatCurrency(currency?: string, locale?: string): _ {
+        this.value = numberFormatters.formatCurrency(Number(this.value), currency, locale);
+        return this;
+    }
+
+    formatWithCommas(): _ {
+        this.value = numberFormatters.formatWithCommas(Number(this.value));
+        return this;
+    }
+
+    formatPercentage(decimals?: number): _ {
+        this.value = numberFormatters.formatPercentage(Number(this.value), decimals);
+        return this;
+    }
+    
+    // Static methods
+    static chain(value: any): _ {
+        return new _(value);
+    }
+
+    // Static checker methods
+    static isNil(value: any): value is null | undefined {
+        return checkers.isNil(value);
+    }
+
+    static isEmpty(value: any): boolean {
+        return checkers.isEmpty(value);
+    }
+
+    static isNumber(value: any): value is number {
+        return checkers.isNumber(value);
+    }
+
+    static isString(value: any): value is string {
+        return checkers.isString(value);
+    }
+
+    static isArray(value: any): value is any[] {
+        return checkers.isArray(value);
+    }
+
+    static isObject(value: any): value is object {
+        return checkers.isObject(value);
+    }
+
+    static isUrl(value: string): boolean {
+        return checkers.isUrl(value);
+    }
+
+    static isUuid(value: string): boolean {
+        return checkers.isUuid(value);
+    }
+
+    static isAlphanumeric(value: string): boolean {
+        return checkers.isAlphanumeric(value);
+    }
+
+    static isEmail(value: string): boolean {
+        return checkers.isEmail(value);
+    }
+
+    static isStrongPassword(value: string): boolean {
+        return checkers.isStrongPassword(value);
+    }
+
+    static isValidTime(value: string): boolean {
+        return checkers.isValidTime(value);
+    }
+
+    static isFunction(value: any): value is (...args: any[]) => any {
+        return checkers.isFunction(value);
+    }
+
+    static isDateWithinRange(startDate: Date, endDate: Date): boolean {
+        return dateFormatters.isDateWithinRange(startDate, endDate);
+    }
+
+    static isBoolean(str: string): boolean {
+        return checkers.isBoolean(str);
+    }
+
+    static isDataView(str: string): boolean {
+        return checkers.isDataView(str);
+    }
+
+    static isNaN(str: string): boolean {
+        return checkers.isNaN(str);
+    }
+
+    static isUndefined(str: string): boolean {
+        return checkers.isUndefined(str);
+    }
+
+    static isFinite(str: string): boolean {
+        return checkers.isFinite(str);
+    }
+
+    static isNull(str: string): boolean {
+        return checkers.isNull(str);
+    }
+
+    // Formatter methods // 
+
+    // Number formatters
+    static formatCurrency(value: number, currency?: string, locale?: string): string {
+        return numberFormatters.formatCurrency(value, currency, locale);
+    }
+
+    static formatWithCommas(value: number): string {
+        return numberFormatters.formatWithCommas(value);
+    }
+
+    static formatPercentage(value: number, decimals?: number): string {
+        return numberFormatters.formatPercentage(value, decimals);
+    }
+
+    static formatDecimals(value: number, decimals: number): string {
+        return numberFormatters.formatDecimals(value, decimals);
+    }
+
+    static formatOrdinal(value: number): string {
+        return numberFormatters.formatOrdinal(value);
+    }
+
+    static calculateDiscountPrice(price: number, discount: number): number {
+        return numberFormatters.calculateDiscountPrice(price, discount);
+    }
+
+    // String formatters
+    static capitalize(str: string): string {
+        return stringFormatters.capitalize(str);
+    }
+
+    static truncate(str: string, length: number, ellipsis?: string): string {
+        return stringFormatters.truncate(str, length, ellipsis);
+    }
+
+    static toCamelCase(str: string): string {
+        return stringFormatters.toCamelCase(str);
+    }
+
+    static toKebabCase(str: string): string {
+        return stringFormatters.toKebabCase(str);
+    }
+
+    static pad(str: string, length: number, char: string = ' ', position: 'start' | 'end' | 'both' = 'end'): string {
+        return stringFormatters.pad(str, length, char, position);
+    }
+
+    static mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
+        return stringFormatters.mask(str, maskChar, visibleCount, position, active);
+    }
+
+    static toLowerCase(str: string, substr: string): string {
+        return stringFormatters.toLowerCase(str, substr);
+    }
+
+    static toUpperCase(str: string, substr: string): string {
+        return stringFormatters.toUpperCase(str, substr);
+    }
+
+    static chopEnd(str: string, count: number = 1): string {
+        return stringFormatters.chopEnd(str, count);
+    }   
+
+    static chopStart(str: string, count: number = 1): string {
+        return stringFormatters.chopStart(str, count);
+    }
+
     // Random generation functions
     static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);
@@ -158,178 +391,16 @@ export class _ {
     static generateStrongPassword = (length: number) : string => {
         return generateStrongPassword(length);
     }
-
-    // String operations
-    capitalize(): _ {
-        this.value = stringFormatters.capitalize(String(this.value));
-        return this;
-    }
-
-    truncate(length: number, ellipsis?: string): _ {
-        this.value = stringFormatters.truncate(String(this.value), length, ellipsis);
-        return this;
-    }
-
-    toCamelCase(): _ {
-        this.value = stringFormatters.toCamelCase(String(this.value));
-        return this;
-    }
-
-    toKebabCase(): _ {
-        this.value = stringFormatters.toKebabCase(String(this.value));
-        return this;
-    }
-
-    mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
-        return stringFormatters.mask(str, maskChar, visibleCount, position, active);
-    }
-
-    // Number operations
-    formatCurrency(currency?: string, locale?: string): _ {
-        this.value = numberFormatters.formatCurrency(Number(this.value), currency, locale);
-        return this;
-    }
-
-    formatWithCommas(): _ {
-        this.value = numberFormatters.formatWithCommas(Number(this.value));
-        return this;
-    }
-
-    formatPercentage(decimals?: number): _ {
-        this.value = numberFormatters.formatPercentage(Number(this.value), decimals);
-        return this;
-    }
-
-    // Date operations
-    isDateWithinRange(endDate: Date): _ {
-        this.value = dateFormatters.isDateWithinRange(this.value as Date, endDate);
-        return this;
-    }
-
-    // Array operations
-    map(fn: (item: any) => any): _ {
-        if (!Array.isArray(this.value)) {
-            throw new Error('Map can only be called on arrays');
-        }
-        this.value = this.value.map(fn);
-        return this;
-    }
-
-    filter(fn: (item: any) => boolean): _ {
-        if (!Array.isArray(this.value)) {
-            throw new Error('Filter can only be called on arrays');
-        }
-        this.value = this.value.filter(fn);
-        return this;
-    }
-
-    capitalizeWords(): _ {
-        this.value = stringFormatters.capitalizeWords(String(this.value));
-        return this;
-    }
-
-    trim(): _ {
-        this.value = stringFormatters.trim(String(this.value));
-        return this;
-    }
-
-    // Static checker methods
-    static isNil(value: any): value is null | undefined {
-        return checkers.isNil(value);
-    }
-
-    static isEmpty(value: any): boolean {
-        return checkers.isEmpty(value);
-    }
-
-    static isNumber(value: any): value is number {
-        return checkers.isNumber(value);
-    }
-
-    static isString(value: any): value is string {
-        return checkers.isString(value);
-    }
-
-    static isArray(value: any): value is any[] {
-        return checkers.isArray(value);
-    }
-
-    static isObject(value: any): value is object {
-        return checkers.isObject(value);
-    }
-
-    static isUrl(value: string): boolean {
-        return checkers.isUrl(value);
-    }
-
-    static isUuid(value: string): boolean {
-        return checkers.isUuid(value);
-    }
-
-    static isAlphanumeric(value: string): boolean {
-        return checkers.isAlphanumeric(value);
-    }
-
-    static isEmail(value: string): boolean {
-        return checkers.isEmail(value);
-    }
-
-    static isValidTime(value: string): boolean {
-        return checkers.isValidTime(value);
-    }
-
-    // Static methods
-    static chain(value: any): _ {
-        return new _(value);
-    }
-
-    // Formatter methods
-    static formatCurrency(value: number, currency?: string, locale?: string): string {
-        return numberFormatters.formatCurrency(value, currency, locale);
-    }
-
-    static formatWithCommas(value: number): string {
-        return numberFormatters.formatWithCommas(value);
-    }
-
-    static formatPercentage(value: number, decimals?: number): string {
-        return numberFormatters.formatPercentage(value, decimals);
-    }
-
-    static capitalize(str: string): string {
-        return stringFormatters.capitalize(str);
-    }
-
-    static truncate(str: string, length: number, ellipsis?: string): string {
-        return stringFormatters.truncate(str, length, ellipsis);
-    }
-
-    static toCamelCase(str: string): string {
-        return stringFormatters.toCamelCase(str);
-    }
-
-    static toKebabCase(str: string): string {
-        return stringFormatters.toKebabCase(str);
-    }
-
-    static pad(str: string, length: number, char: string = ' ', position: 'start' | 'end' | 'both' = 'end'): string {
-        return stringFormatters.pad(str, length, char, position);
-    }
-
-    static mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
-        return stringFormatters.mask(str, maskChar, visibleCount, position, active);
-    }
-
-    static isDateWithinRange(startDate: Date, endDate: Date): boolean {
-        return dateFormatters.isDateWithinRange(startDate, endDate);
-    }
 }
 
 // Export original formatters and checkers
 export const formatters = {
     ...numberFormatters,
     ...stringFormatters,
-    ...dateFormatters
+    ...dateFormatters,
+    ...arrayFormatters,
+    ...objectFormatters,
+    ...deepFormatters
 };
 
 export const checks = {

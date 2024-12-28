@@ -44,8 +44,9 @@ export const formatWithCommas = (num: number): string => {
  * formatPercentage(0.1234, 1) // "12.3%"
  */
 export const formatPercentage = (num: number, decimals: number = 0): string => {
-  return `${(num * 100).toFixed(decimals)}%`
+  return `${(num * 100).toFixed(decimals)}%`;
 }
+
 
 /**
  * Formats a number as an ordinal string (1st, 2nd, 3rd, etc.)

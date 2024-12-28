@@ -238,45 +238,6 @@ export const chopEnd = (str: string, count: number = 1): string => {
 }
 
 /**
- * Checks if a string contains a substring
- * @param str - The input string to search in
- * @param searchStr - The substring to search for
- * @param caseSensitive - Whether the search should be case-sensitive (default: true)
- * @returns True if the substring is found, false otherwise
- * @example
- * contains("Hello World", "world", true) // false
- * contains("Hello World", "world", false) // true
- * contains("Hello World", "lo") // true
- */
-export const contains = (str: string, searchStr: string, caseSensitive: boolean = true): boolean => {
-  if (!str || !searchStr) return false
-  if (!caseSensitive) {
-    return str.toLowerCase().includes(searchStr.toLowerCase())
-  }
-  return str.includes(searchStr)
-}
-
-/**
- * Checks if two strings match exactly
- * @param str1 - First string to compare
- * @param str2 - Second string to compare
- * @param caseSensitive - Whether the comparison should be case-sensitive (default: true)
- * @returns True if the strings match exactly, false otherwise
- * @example
- * exactly("Hello", "Hello") // true
- * exactly("Hello", "hello") // false
- * exactly("Hello", "hello", false) // true
- */
-export const exactly = (str1: string, str2: string, caseSensitive?: boolean): boolean => {
-  if (str1 === undefined || str2 === undefined) return false;
-  if (caseSensitive === undefined) caseSensitive = true;
-  if (!caseSensitive) {
-    return str1.toLowerCase() === str2.toLowerCase();
-  }
-  return str1 === str2;
-};
-
-/**
  * Capitalizes the first letter of each word in a string
  * @param str - The input string
  * @returns The string with the first letter of each word capitalized

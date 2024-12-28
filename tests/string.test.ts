@@ -28,6 +28,7 @@ import {
   exactly,
 } from '../src/checkers';
 
+
 describe('String Formatters', () => {
   describe('capitalize', () => {
     it('should capitalize the first letter', () => {
