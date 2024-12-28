@@ -60,7 +60,6 @@ export const deepClone = <T>(obj: T): T => {
 */
 export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnChanges: boolean = false): boolean | object => {
   if (Array.isArray(originalObj) && Array.isArray(toCompareObj)) {
-    if (originalObj.length !== toCompareObj.length) return false;
     const differences = [];
     for (let i = 0; i < Math.max(originalObj.length, toCompareObj.length); i++) {
       const originalItem = originalObj[i];
@@ -69,6 +68,8 @@ export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnCh
         differences.push(compareItem);
       }
     }
+    if (originalObj.length !== toCompareObj.length) return returnChanges ? differences : false;
+
     return returnChanges ? differences : differences.length === 0;
   }
   
