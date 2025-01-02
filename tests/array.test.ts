@@ -1,4 +1,4 @@
-import { removeDuplicates, flattenArray, filterArray, transformArray, capitalizeEach } from '../src/formatters/array';
+import { removeDuplicates, flattenArray, filterArray, transformArray, capitalizeEach, implode } from '../src/formatters/array';
 
 describe('Array Manipulation Functions', () => {
   
@@ -73,4 +73,23 @@ describe('Array Manipulation Functions', () => {
     });
   });
 
+  
+  describe('Array Utility Functions', () => {
+    describe('implode', () => {
+      it('should join array elements into a string with a specified delimiter', () => {
+        const result = implode(["Hello", "World"], " ");
+        expect(result).toBe("Hello World");
+      });
+
+      it('should return an empty string for an empty array', () => {
+        const result = implode([], " ");
+        expect(result).toBe("");
+      });
+
+      it('should join a single element array', () => {
+        const result = implode(["Hello"], " ");
+        expect(result).toBe("Hello");
+      });
+    });
+  });
 });

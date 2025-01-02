@@ -57,3 +57,16 @@ export const capitalizeEach = (array: string[]): string[] => {
   }
   return array.map(item => item.replace(/\b\w/g, char => char.toUpperCase()));
 };
+
+/**
+ * Joins array elements into a string using a specified delimiter.
+ * Similar to PHP's implode function.
+ * @param arr - The input array
+ * @param delimiter - The delimiter to join the elements
+ * @returns A string with the array elements joined
+ * @example
+ * implode(["Hello", "World"], " ") // "Hello World"
+ */
+export const implode = <T>(arr: T[], delimiter: string): string => {
+  return arr.join(delimiter);
+};

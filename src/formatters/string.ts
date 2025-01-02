@@ -321,3 +321,25 @@ export const pad = (
  * @returns The trimmed string
  */
 export const trim = (str: string): string => str.trim();
+
+/**
+ * Splits a string into an array of substrings based on a specified delimiter.
+ * Similar to PHP's explode function.
+ * @param str - The input string
+ * @param delimiter - The delimiter to split the string by
+ * @param limit - Optional limit on the number of substrings to return
+ * @returns An array of substrings
+ * @example
+ * explode("Hello,World", ",") // ["Hello", "World"]
+ * @example
+ * explode("Hello,World,Again", ",", 2) // ["Hello", "World,Again"]
+ */
+export const explode = (str: string, delimiter: string, limit?: number): string[] => {
+  if (!str) return []; // Return an empty array for empty strings
+  const parts = str.split(delimiter);
+  if (limit && limit < parts.length) {
+    const lastPart = parts.slice(limit).join(delimiter);
+    return [...parts.slice(0, limit), lastPart];
+  }
+  return parts;
+};

@@ -100,6 +100,7 @@
                             <li><a href="#contains">contains</a></li>
                             <li><a href="#exactly">exactly</a></li>
                             <li><a href="#trim">trim</a></li>
+                            <li><a href="#explode">explode</a></li>
                         </ul>
                     </li>
                     <li>
@@ -110,6 +111,7 @@
                             <li><a href="#filterArray">filterArray</a></li>
                             <li><a href="#transformArray">transformArray</a></li>
                             <li><a href="#capitalizeEach">capitalizeEach</a></li>
+                            <li><a href="#implode">implode</a></li>
                         </ul>
                     </li>
                     <li>
@@ -756,6 +758,14 @@ contains("Hello World", "lo")            // true</code></pre>
                 <p>Removes leading and trailing whitespace from a string.</p>
                 <pre><code class="language-typescript">trim("  Hello  ") // "Hello"</code></pre>
             </section>
+            <section id="explode">
+                <h3>explode</h3>
+                <p>Splits a string into an array of characters.</p>
+                <pre><code class="language-typescript">explode("Hello,World", ",")          // ["Hello", "World"]
+explode("Hello,World,Again", ",", 2) // ["Hello", "World,Again"]
+explode("Hello,World,Again", ",", 3) // ["Hello", "World", "Again"]
+                </code></pre>
+            </section>
         </section>
 
         <section id="array-manipulation">
@@ -790,7 +800,16 @@ filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4)         // [1, 2, 3, 4]
                 <h3>capitalizeEach</h3>
                 <p>Capitalizes the first letter of each word in each string within an array.</p>
                 <pre><code class="language-typescript">capitalizeEach(["hello world", "typescript rocks"])   // ["Hello World", "Typescript Rocks"]</code></pre>
-            </section>              
+            </section>     
+            
+            <section id="implode">
+                <h3>implode</h3>
+                <p>Converts an array into a comma-separated string.</p>
+                <pre><code class="language-typescript">implode([1, 2, 3]) // "1,2,3"
+implode(["Hello", "World"], " ") // "Hello World"
+implode(["Hello", "World"], ", ") // "Hello, World"
+                </code></pre>
+            </section>
         </section>
 
         <section id="object-manipulation">
