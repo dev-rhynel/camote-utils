@@ -125,6 +125,7 @@
                         <ul>
                             <li><a href="#deepClone">deepClone</a></li>
                             <li><a href="#deepCompare">deepCompare</a></li>
+                            <li><a href="#deepMerge">deepMerge</a></li>
                         </ul>
                     </li>
                     <li>
@@ -858,7 +859,21 @@ deepCompare(arrayWithObject1, arrayWithObject2)                  // false
 const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
 const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
 deepCompare(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
-deepCompare(nestedObj1, nestedObj2);                             // false
+deepCompare(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
+deepCompare(nestedObj1, nestedObj2)                             // false
+</code></pre>
+            </section>
+
+            <section id="deepMerge">
+                <h3>deepMerge</h3>
+                <p>Merges two objects recursively, overwriting values in the first object with values from the second objects or arrays.</p>
+                <pre><code class="language-typescript">deepMerge({ a: 1, b: { c: 2 } }, { b: { d: 3 } })   // { a: 1, b: { c: 2, d: 3 } }
+deepMerge({ a: 1 }, { b: 2 })                       // { a: 1, b: 2 }
+deepMerge({ a: 1 }, { a: 2 })                       // { a: 2 }
+deepMerge({ a: { b: 1 } }, { a: { c: 2 } })         // { a: { b: 1, c: 2 } }
+deepMerge({ arr: [1, 2, 3] }, { arr: [3, 4, 5] })   // { arr: [1, 2, 3, 4, 5] }
+// Exclude keys
+deepMerge( { a: 1, b: 2 }, { c: 3, d: 4, e: 5 }, ['d', 'e'])   // { a: 1, b: 2, c: 3 }
 </code></pre>
             </section>
         </section>

@@ -6,4 +6,4 @@ export * from './formatters/object';
 export * from './formatters/deep';
 export * from './checkers';
 export * from './random';
-export { _, formatters } from './chain';
+export { _, formatters, checks} from './chain';

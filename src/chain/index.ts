@@ -97,6 +97,11 @@ export class _ {
         return this;
     }
 
+    public deepMerge(anotherValue: any): this {
+        this.value = deepFormatters.deepMerge(this.value, anotherValue);
+        return this;
+    }
+
     // String operations
     capitalize(): _ {
         this.value = stringFormatters.capitalize(String(this.value));

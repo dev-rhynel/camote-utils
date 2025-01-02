@@ -117,3 +117,39 @@ export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnCh
 };
 
 export const deepCompare = deepCompareObjects;
+
+/**
+ * Merges two objects deeply, combining their properties.
+ * If both objects have properties that are arrays, it merges the arrays and removes duplicates.
+ * If properties are objects, it merges them recursively.
+ * Excluded keys can be specified to prevent them from being merged.
+ *
+ * @param obj1 - The first object to merge.
+ * @param obj2 - The second object to merge.
+ * @param excluded - An array of keys to exclude from merging.
+ * @returns A new object that is the result of merging obj1 and obj2.
+/**
+ * @param excluded - An array of keys to exclude from merging. 
+ *                   For example, if you want to merge two objects but skip the key 'password':
+ *                   const merged = deepMerge(obj1, obj2, ['password']);
+ */
+export const deepMerge = (obj1: { [x: string]: any; }, obj2: { [x: string]: any; }, excluded: string[] = []) => {
+  const merged = { ...obj1 };
+
+  // Iterate over the keys of obj2
+  Object.keys(obj2).forEach(key => {
+    if (!excluded.includes(key)) {
+      if (typeof obj2[key] === 'object' && obj2[key] !== null) {
+        // If the property is an array, merge and remove duplicates
+        if (Array.isArray(obj2[key])) {
+          merged[key] = [...new Set([...(obj1[key] || []), ...(obj2[key] || [])])];
+        } else {
+          merged[key] = deepMerge(obj1[key] || {}, obj2[key], excluded);
+        }
+      } else {
+        merged[key] = obj2[key];
+      }
+    }
+  });
+  return merged;
+}

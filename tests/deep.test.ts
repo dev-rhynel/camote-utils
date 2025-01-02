@@ -1,4 +1,4 @@
-import { deepClone, deepCompareObjects, deepCompare  } from '../src/formatters/deep';
+import { deepClone, deepCompareObjects, deepCompare, deepMerge } from '../src/formatters/deep';
 
 describe('deepClone', () => {
   it('should create a deep copy of a simple object', () => {
@@ -65,33 +65,33 @@ describe('deepClone', () => {
 });
 
 describe('deepCompareObjects', () => {
-    test('should return differences between two objects', () => {
-        const obj1 = { a: 1, b: { c: 2 } };
-        const obj2 = { a: 1, b: { c: 3 } };
-        const differences = deepCompareObjects(obj1, obj2, true);
-        expect(differences).toEqual({ b: { c: 3 } });
-    });
+  test('should return differences between two objects', () => {
+    const obj1 = { a: 1, b: { c: 2 } };
+    const obj2 = { a: 1, b: { c: 3 } };
+    const differences = deepCompareObjects(obj1, obj2, true);
+    expect(differences).toEqual({ b: { c: 3 } });
+  });
 
-    test('should return false for unequal objects', () => {
-        const obj1 = { a: 1, b: { c: 2 } };
-        const obj2 = { a: 1, b: { c: 3 } };
-        const areEqual = deepCompareObjects(obj1, obj2);
-        expect(areEqual).toBe(false);
-    });
+  test('should return false for unequal objects', () => {
+    const obj1 = { a: 1, b: { c: 2 } };
+    const obj2 = { a: 1, b: { c: 3 } };
+    const areEqual = deepCompareObjects(obj1, obj2);
+    expect(areEqual).toBe(false);
+  });
 
-    test('should return differences between two arrays of objects', () => {
-        const array1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
-        const array2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }];
-        const arrayDifferences = deepCompareObjects(array1, array2, true);
-        expect(arrayDifferences).toEqual([{ id: 2, name: 'Charlie' }]);
-    });
+  test('should return differences between two arrays of objects', () => {
+    const array1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+    const array2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }];
+    const arrayDifferences = deepCompareObjects(array1, array2, true);
+    expect(arrayDifferences).toEqual([{ id: 2, name: 'Charlie' }]);
+  });
 
-    test('should return differences for nested objects', () => {
-        const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
-        const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
-        const nestedDifferences = deepCompareObjects(nestedObj1, nestedObj2, true);
-        expect(nestedDifferences).toEqual({ settings: { theme: 'light' } });
-    });
+  test('should return differences for nested objects', () => {
+    const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
+    const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
+    const nestedDifferences = deepCompareObjects(nestedObj1, nestedObj2, true);
+    expect(nestedDifferences).toEqual({ settings: { theme: 'light' } });
+  });
 });
 
 describe('deepCompare', () => {
@@ -110,47 +110,82 @@ describe('deepCompare', () => {
   });
 
   test('should return true for equal between two arrays', () => {
-      const array1 = ['Alice', 'James'];
-      const array2 = ['Alice'];
-
-      const differences = deepCompare(array1, array2);
-      expect(differences).toEqual(false);
+    const array1 = ['Alice', 'James'];
+    const array2 = ['Alice'];
+    const differences = deepCompare(array1, array2);
+    expect(differences).toEqual(false);
   })
 
   test('should return differences between two arrays', () => {
-      const array1 = ['Alice'];
-      const array2 = ['Alice', 'James'];
+    const array1 = ['Alice'];
+    const array2 = ['Alice', 'James'];
 
-      const differences = deepCompare(array1, array2, true);
-      expect(differences).toEqual(['James']);
+    const differences = deepCompare(array1, array2, true);
+    expect(differences).toEqual(['James']);
   })
 
-
   test('should return differences between two objects', () => {
-      const obj1 = { a: 1, b: { c: 2 } };
-      const obj2 = { a: 1, b: { c: 3 } };
-      const differences = deepCompare(obj1, obj2, true);
-      expect(differences).toEqual({ b: { c: 3 } });
+    const obj1 = { a: 1, b: { c: 2 } };
+    const obj2 = { a: 1, b: { c: 3 } };
+    const differences = deepCompare(obj1, obj2, true);
+    expect(differences).toEqual({ b: { c: 3 } });
   });
 
   test('should return false for unequal objects', () => {
-      const obj1 = { a: 1, b: { c: 2 } };
-      const obj2 = { a: 1, b: { c: 3 } };
-      const areEqual = deepCompare(obj1, obj2);
-      expect(areEqual).toBe(false);
+    const obj1 = { a: 1, b: { c: 2 } };
+    const obj2 = { a: 1, b: { c: 3 } };
+    const areEqual = deepCompare(obj1, obj2);
+    expect(areEqual).toBe(false);
   });
 
   test('should return differences between two arrays of objects', () => {
-      const array1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
-      const array2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }];
-      const arrayDifferences = deepCompare(array1, array2, true);
-      expect(arrayDifferences).toEqual([{ id: 2, name: 'Charlie' }]);
+    const array1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+    const array2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }];
+    const arrayDifferences = deepCompare(array1, array2, true);
+    expect(arrayDifferences).toEqual([{ id: 2, name: 'Charlie' }]);
   });
 
   test('should return differences for nested objects', () => {
-      const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
-      const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
-      const nestedDifferences = deepCompare(nestedObj1, nestedObj2, true);
-      expect(nestedDifferences).toEqual({ settings: { theme: 'light' } });
+    const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
+    const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
+    const nestedDifferences = deepCompare(nestedObj1, nestedObj2, true);
+    expect(nestedDifferences).toEqual({ settings: { theme: 'light' } });
+  });
+});
+
+describe('deepMerge', () => {
+  it('should merge two simple objects', () => {
+    const obj1 = { a: 1, b: 2 };
+    const obj2 = { c: 3 };
+    const merged = deepMerge(obj1, obj2);
+    expect(merged).toEqual({ a: 1, b: 2, c: 3 });
+  });
+
+  it('should merge nested objects', () => {
+    const obj1 = { a: { b: 1 } };
+    const obj2 = { a: { c: 2 }, d: 3 };
+    const merged = deepMerge(obj1, obj2);
+    expect(merged).toEqual({ a: { b: 1, c: 2 }, d: 3 });
+  });
+
+  it('should merge arrays', () => {
+    const obj1 = { arr: [1, 2] };
+    const obj2 = { arr: [2, 3] };
+    const merged = deepMerge(obj1, obj2);
+    expect(merged).toEqual({ arr: [1, 2, 3] });
+  });
+
+  it('should exclude specified keys', () => {
+    const obj1 = { a: 1, b: 2 };
+    const obj2 = { c: 3, d: 4, e: 5 };
+    const merged = deepMerge(obj1, obj2, ['d', 'e']);
+    expect(merged).toEqual({ a: 1, b: 2, c: 3 });
+  });
+
+  it('should merge arrays correctly without duplicates', () => {
+    const obj1 = { arr: [1, 2, 3] };
+    const obj2 = { arr: [3, 4, 5] };
+    const merged = deepMerge(obj1, obj2);
+    expect(merged).toEqual({ arr: [1, 2, 3, 4, 5] });
   });
 });
