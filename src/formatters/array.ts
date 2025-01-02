@@ -66,7 +66,9 @@ export const capitalizeEach = (array: string[]): string[] => {
  * @returns A string with the array elements joined
  * @example
  * implode(["Hello", "World"], " ") // "Hello World"
+ * implode([1, 2, 3]) // "1,2,3"
+ * implode([1, 2, 3], '-') // "1-2-3"
  */
-export const implode = <T>(arr: T[], delimiter: string): string => {
+export const implode = <T>(arr: T[], delimiter: string = ','): string => {
   return arr.join(delimiter);
 };

@@ -87,7 +87,12 @@ describe('Array Manipulation Functions', () => {
       });
 
       it('should join a single element array', () => {
-        const result = implode(["Hello"], " ");
+        const result = implode([1, 2, 3]);
+        expect(result).toBe("1,2,3");
+      });
+
+      it('should join a single element array', () => {
+        const result = implode(["Hello"]);
         expect(result).toBe("Hello");
       });
     });
