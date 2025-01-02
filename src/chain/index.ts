@@ -67,6 +67,11 @@ export class _ {
         return this;
     }
 
+    public implode(arr: any[], delimiter: string): this {
+        this.value = arrayFormatters.implode(arr, delimiter);
+        return this;
+    }
+
     public capitalizeEach(): this {
         this.value = arrayFormatters.capitalizeEach(this.value);
         return this;
@@ -115,6 +120,11 @@ export class _ {
 
     mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
         return stringFormatters.mask(str, maskChar, visibleCount, position, active);
+    }
+
+    explode(delimiter: string, limit?: number): _ {
+        this.value = stringFormatters.explode(String(this.value), delimiter, limit);
+        return this;
     }
 
     // Date operations

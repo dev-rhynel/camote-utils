@@ -17,7 +17,8 @@ import {
   chopEnd,
   mask,
   capitalizeWords,
-  trim
+  trim,
+  explode
 } from '../src/formatters/string';
 import { generateUUID } from '../src/random';
 
@@ -524,24 +525,100 @@ describe('String Formatters', () => {
     });
   });
 
+  describe('explode', () => {
+    it('should split a string into an array of substrings based on a specified delimiter', () => {
+      const result = explode("Hello,World,Again", ",");
+      expect(result).toEqual(["Hello", "World", "Again"]);
+    });
+
+    it('should return an array with a single element for a string without delimiters', () => {
+      const result = explode("HelloWorld", ",");
+      expect(result).toEqual(["HelloWorld"]);
+    });
+
+    it('should handle consecutive delimiters', () => {
+      const result = explode("Hello,,World", ",");
+      expect(result).toEqual(["Hello", "", "World"]);
+    });
+
+    it('should return an empty array for an empty string', () => {
+      const result = explode("", ",");
+      expect(result).toEqual([]);
+    });
+
+    it('should return the original string in an array if the delimiter is not found', () => {
+      const result = explode("HelloWorld", ",");
+      expect(result).toEqual(["HelloWorld"]);
+    });
+
+    it('should handle a string with leading and trailing delimiters', () => {
+      const result = explode(",Hello,World,Again,", ",");
+      expect(result).toEqual(["", "Hello", "World", "Again", ""]);
+    });
+
+    it('should handle a string with multiple delimiters in a row', () => {
+      const result = explode("Hello,,,World", ",");
+      expect(result).toEqual(["Hello", "", "", "World"]);
+    });
+
+    it('should handle a single character as a delimiter', () => {
+      const result = explode("a-b-c", "-");
+      expect(result).toEqual(["a", "b", "c"]);
+    });
+
+    it('should handle a longer substring as a delimiter', () => {
+      const result = explode("Hello---World---Again", "---");
+      expect(result).toEqual(["Hello", "World", "Again"]);
+    });
+
+    it('should handle a string with special characters', () => {
+      const result = explode("Hello@World#Again$,", ",");
+      expect(result).toEqual(["Hello@World#Again$", ""]);
+    });
+
+    it('should handle a string with leading and trailing delimiters', () => {
+      const result = explode(",Hello,World,Again,", ",");
+      expect(result).toEqual(["", "Hello", "World", "Again", ""]);
+    });
+
+    it('should handle a string with multiple delimiters in a row', () => {
+      const result = explode("Hello,,,World", ",");
+      expect(result).toEqual(["Hello", "", "", "World"]);
+    });
+
+    it('should handle a single character as a delimiter', () => {
+      const result = explode("a-b-c", "-");
+      expect(result).toEqual(["a", "b", "c"]);
+    });
+
+    it('should handle a longer substring as a delimiter', () => {
+      const result = explode("Hello---World---Again", "---");
+      expect(result).toEqual(["Hello", "World", "Again"]);
+    });
+
+    it('should handle a string with special characters', () => {
+      const result = explode("Hello@World#Again$,", ",");
+      expect(result).toEqual(["Hello@World#Again$", ""]);
+    });
+  });
+
+  describe('capitalizeWords', () => {
+    it('should capitalize the first letter of each word', () => {
+      const input = 'hello world';
+      const expectedOutput = 'Hello World';
+      expect(capitalizeWords(input)).toBe(expectedOutput);
+    });
+
+    it('should handle an empty string', () => {
+      const input = '';
+      const expectedOutput = '';
+      expect(capitalizeWords(input)).toBe(expectedOutput);
+    });
+
+    it('should handle a single word', () => {
+      const input = 'test';
+      const expectedOutput = 'Test';
+      expect(capitalizeWords(input)).toBe(expectedOutput);
+    });
+  });
 })
-
-describe('capitalizeWords', () => {
-  it('should capitalize the first letter of each word', () => {
-    const input = 'hello world';
-    const expectedOutput = 'Hello World';
-    expect(capitalizeWords(input)).toBe(expectedOutput);
-  });
-
-  it('should handle an empty string', () => {
-    const input = '';
-    const expectedOutput = '';
-    expect(capitalizeWords(input)).toBe(expectedOutput);
-  });
-
-  it('should handle a single word', () => {
-    const input = 'test';
-    const expectedOutput = 'Test';
-    expect(capitalizeWords(input)).toBe(expectedOutput);
-  });
-});
