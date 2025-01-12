@@ -688,14 +688,14 @@ describe('String Formatters', () => {
       expect(toHtmlEntities(input)).toBe(expectedOutput);
     })
 
-    it('should not turn the excluded character as string into unicode', () => {
+    it('should not turn the excluded character as string into html entities', () => {
       const input = 'Hello World';
       const exclude = 'Hed';
       const expectedOutput = 'He&#108;&#108;&#111;&#32;&#87;&#111;&#114;&#108;d';
       expect(toHtmlEntities(input, exclude)).toBe(expectedOutput);
     })
 
-    it('should not turn the excluded character from string array into unicode', () => {
+    it('should not turn the excluded character from string array into html entities', () => {
       const input = 'Hello World';
       const exclude = ['H', 'e', 'd'];
       const expectedOutput = 'He&#108;&#108;&#111;&#32;&#87;&#111;&#114;&#108;d';
