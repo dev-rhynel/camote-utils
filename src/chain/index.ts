@@ -67,6 +67,11 @@ export class _ {
         return this;
     }
 
+    public implode(arr: any[], delimiter: string): this {
+        this.value = arrayFormatters.implode(arr, delimiter);
+        return this;
+    }
+
     public capitalizeEach(): this {
         this.value = arrayFormatters.capitalizeEach(this.value);
         return this;
@@ -89,6 +94,11 @@ export class _ {
 
     public deepCompare(anotherValue: any): this {
         this.value = deepFormatters.deepCompare(this.value, anotherValue);
+        return this;
+    }
+
+    public deepMerge(anotherValue: any): this {
+        this.value = deepFormatters.deepMerge(this.value, anotherValue);
         return this;
     }
 
@@ -115,6 +125,21 @@ export class _ {
 
     mask(str: string, maskChar: string = '*', visibleCount: number = 4, position: 'start' | 'end' = 'end', active: boolean = true): string {
         return stringFormatters.mask(str, maskChar, visibleCount, position, active);
+    }
+
+    explode(delimiter: string, limit?: number): _ {
+        this.value = stringFormatters.explode(String(this.value), delimiter, limit);
+        return this;
+    }
+
+    toUnicodes(str: string, exclude: string | string[] = "") {
+        this.value = stringFormatters.toUnicodes(str, exclude);
+        return this;
+    }
+
+    toHTMLEntities(str: string, exclude: string | string[] = "") {
+        this.value = stringFormatters.toHtmlEntities(str, exclude);
+        return this;
     }
 
     // Date operations
@@ -325,16 +350,8 @@ export class _ {
         return stringFormatters.chopStart(str, count);
     }
 
-    static toHtmlEntities(str: string, exclude: string | string[] = ""): string {
-        return stringFormatters.toHtmlEntities(str, exclude);
-    }
-
-    static toUnicodes(str: string, exclude: string | string[] = ""): string {    
-        return stringFormatters.toUnicodes(str, exclude);
-    }
-
     // Random generation functions
-    static generateRandomInteger(min: number, max: number): number {    
+    static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);
     }
 
