@@ -350,6 +350,14 @@ export class _ {
         return stringFormatters.chopStart(str, count);
     }
 
+    static toHtmlEntities(str: string, exclude: string | string[] = ""): string {
+        return stringFormatters.toHtmlEntities(str, exclude);
+    }
+
+    static toUnicodes(str: string, exclude: string | string[] = ""): string {    
+        return stringFormatters.toUnicodes(str, exclude);
+    }
+
     // Random generation functions
     static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);
