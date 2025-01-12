@@ -1,4 +1,4 @@
-import { deepClone, deepCompareObjects, deepCompare, deepMerge } from '../src/formatters/deep';
+import { deepClone, deepCompareObjects, deepCompare, deepMerge, deepExclude } from '../src/formatters/deep';
 
 describe('deepClone', () => {
   it('should create a deep copy of a simple object', () => {
@@ -152,6 +152,44 @@ describe('deepCompare', () => {
     expect(nestedDifferences).toEqual({ settings: { theme: 'light' } });
   });
 });
+
+describe('deepExclude', () => {
+  test('should exclude specified values from the array', () => {
+    const sourceArray = [1, 2, 3, { id: 4 }, { id: 5 }];
+    const valuesToExclude = [2, { id: 5 }];
+    const result = deepExclude(sourceArray, valuesToExclude, item => (typeof item === 'object' ? item.id : item));
+    expect(result).toEqual([1, 3, { id: 4 }]);
+  });
+
+  test('should exclude specified objects from the array based on key', () => {
+    const sourceArray = [{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }, { id: 3, name: 'Bob' }];
+    const valuesToExclude = [{ id: 2, name: 'Jane' }];
+    const result = deepExclude(sourceArray, valuesToExclude, item => item.id);
+    expect(result).toEqual([{ id: 1, name: 'John' }, { id: 3, name: 'Bob' }]);
+  });
+
+  test('should handle null values correctly', () => {
+    const sourceArray = [null, { id: 1 }, { id: 2 }];
+    const valuesToExclude = [null, { id: 2 }];
+    const result = deepExclude(sourceArray, valuesToExclude, item => (typeof item === 'object' ? item?.id : item));
+    expect(result).toEqual([{ id: 1 }]);
+  });
+
+  test('should handle arrays of primitive values', () => {
+    const sourceArray = [1, 2, 3, 4];
+    const valuesToExclude = [2, 4];
+    const result = deepExclude(sourceArray, valuesToExclude);
+    expect(result).toEqual([1, 3]);
+  });
+
+  it('should exclude specified values from an array of strings', () => {
+    const sourceArray = ['apple', 'banana', 'cherry', 'date'];
+    const valuesToExclude = ['banana', 'date'];
+    const result = deepExclude(sourceArray, valuesToExclude);
+    expect(result).toEqual(['apple', 'cherry']);
+  });
+});
+
 
 describe('deepMerge', () => {
   it('should merge two simple objects', () => {

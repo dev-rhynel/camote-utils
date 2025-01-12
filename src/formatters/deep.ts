@@ -1,3 +1,5 @@
+import { isString } from "../checkers";
+
 export const deepClone = <T>(obj: T): T => {
   if (obj === null || typeof obj !== 'object') {
     return obj;
@@ -41,6 +43,10 @@ export const deepClone = <T>(obj: T): T => {
 *          is true; otherwise, returns a boolean indicating whether the objects are equal.
 *
 * @example
+*  deepCompareObjects('hello', 'hello'); // true
+*  deepCompareObjects('hello', 'world'); // false
+* 
+* @example
 * const obj1 = { a: 1, b: { c: 2 } };
 * const obj2 = { a: 1, b: { c: 3 } };
 * const differences = deepCompareObjects(obj1, obj2, true); // { b: { c: 3 } }
@@ -59,6 +65,8 @@ export const deepClone = <T>(obj: T): T => {
 * const nestedAreEqual = deepCompareObjects(nestedObj1, nestedObj2); // false
 */
 export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnChanges: boolean = false): boolean | object => {
+  if(isString(originalObj) && isString(toCompareObj)) return originalObj === toCompareObj;
+
   if (Array.isArray(originalObj) && Array.isArray(toCompareObj)) {
     const differences = [];
     for (let i = 0; i < Math.max(originalObj.length, toCompareObj.length); i++) {
@@ -153,3 +161,40 @@ export const deepMerge = (obj1: { [x: string]: any; }, obj2: { [x: string]: any;
   });
   return merged;
 }
+
+
+/**
+ * Filters values in an array against another array.
+ * If the value is an object or an array, it will filter deeply.
+ *
+ * @param sourceArray - The input array.
+ * @param valuesToExclude - The array of values to filter against.
+ * @param keySelector - An optional function to extract the key to filter by.
+ * @returns A new array with values that do not match a value in valuesToExclude.
+ *
+ * @example
+ * const sourceArray = [1, 2, 3, { id: 4 }, { id: 5 }];
+ * const valuesToExclude = [2, { id: 5 }];
+ * const result = deepExclude(sourceArray, valuesToExclude, item => (typeof item === 'object' ? item.id : item));
+ * Result will be [1, 3, { id: 4 }]
+ * 
+ * @example
+ * const sourceArray = [{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }, { id: 3, name: 'Bob' }];
+ * const valuesToExclude = [{ id: 2, name: 'Jane' }];
+ * const result = deepExclude(sourceArray, valuesToExclude, item => item.id);
+ * Result will be [{ id: 1, name: 'John' }, { id: 3, name: 'Bob' }]
+ */
+export const deepExclude = <T>(
+  sourceArray: T[],
+  valuesToExclude: T[],
+  keySelector: (value: T) => unknown = (value) => JSON.stringify(value),
+): T[] => {
+  // Create a set of keys from the values to exclude
+  const valuesToExcludeKeys = new Set(valuesToExclude.map((value) => keySelector(value)));
+  
+  // Filter the source array based on the keys
+  return sourceArray.filter((value) => {
+    const key = keySelector(value);
+    return !valuesToExcludeKeys.has(key);
+  });
+};
