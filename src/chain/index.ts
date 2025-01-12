@@ -132,6 +132,16 @@ export class _ {
         return this;
     }
 
+    toUnicodes(str: string, exclude: string | string[] = "") {
+        this.value = stringFormatters.toUnicodes(str, exclude);
+        return this;
+    }
+
+    toHTMLEntities(str: string, exclude: string | string[] = "") {
+        this.value = stringFormatters.toHtmlEntities(str, exclude);
+        return this;
+    }
+
     // Date operations
     isDateWithinRange(endDate: Date): _ {
         this.value = dateFormatters.isDateWithinRange(this.value as Date, endDate);
