@@ -101,6 +101,8 @@
                             <li><a href="#exactly">exactly</a></li>
                             <li><a href="#trim">trim</a></li>
                             <li><a href="#explode">explode</a></li>
+                            <li><a href="#toUnicodes">toUnicodes</a></li>
+                            <li><a href="#toHtmlEntities">toHtmlEntities</a></li>
                         </ul>
                     </li>
                     <li>
@@ -766,6 +768,22 @@ contains("Hello World", "lo")            // true</code></pre>
 explode("Hello,World,Again", ",", 2) // ["Hello", "World,Again"]
 explode("Hello,World,Again", ",", 3) // ["Hello", "World", "Again"]
                 </code></pre>
+            </section>
+            <section id="toUnicodes">
+                <h3>toUnicodes</h3>
+                <p>Converts a string into its Unicode escape sequence representation.</p>
+                <pre><code class="language-typescript">toUnicodes("Hello"); //"\u{0048}\u{0065}\u{006C}\u{006C}\u{006F}"
+toUnicodes("Hi 😀"); //" \u{0048}\u{0069}\u{0020}\u{1F600}" 
+toUnicodes("Hello", "He"); // "He\u{006C}\u{006C}\u{006F}"
+toUnicodes("Hi 😀", ["H", "i"]); // "Hi\u{0020}\u{1F600}"</code></pre>
+            </section>
+            <section id="toHtmlEntities">
+                <h3>toHtmlEntities</h3>
+                <p>Converts a string into its HTML Entities representation.</p>
+                <pre><code class="language-typescript">toHtmlEntities("Hello");  // "&amp;#72;&#101;&amp;#108;&amp;#108;&amp;#111;"
+toHtmlEntities('Hi 😀'); // "&amp;#72;&amp;#105;&amp;#32;&amp;#128512;" 
+toHtmlEntities("Hello", "He"); // "He&amp;#108;&amp;#108;&amp;#111;"
+toHtmlEntities("Hi 😀", ["H", "i"]); // "Hi&amp;#32;&amp;#128512;"</code></pre>
             </section>
         </section>
 

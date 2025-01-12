@@ -18,7 +18,9 @@ import {
   mask,
   capitalizeWords,
   trim,
-  explode
+  explode,
+  toUnicodes,
+  toHtmlEntities
 } from '../src/formatters/string';
 import { generateUUID } from '../src/random';
 
@@ -621,4 +623,83 @@ describe('String Formatters', () => {
       expect(capitalizeWords(input)).toBe(expectedOutput);
     });
   });
+
+  describe('Unicodes', () => {
+    it('should turn the character into unicode', () => {
+      const input = 'Hello World';
+      const expectedOutput = '\\u{0048}\\u{0065}\\u{006C}\\u{006C}\\u{006F}\\u{0020}\\u{0057}\\u{006F}\\u{0072}\\u{006C}\\u{0064}';
+
+      expect(toUnicodes(input)).toBe(expectedOutput);
+    })
+
+    it('should turn the converted unicode to original character', () => {
+      const input = 'Hello World';
+      const expectedOutput = toUnicodes(input).replace(/\\u{([0-9A-F]+)}/g, (_, hex) => {
+        return String.fromCodePoint(parseInt(hex, 16)); // Convert back to character
+     });
+
+      expect(input).toBe(expectedOutput);
+    })
+
+    it('should handle an empty string', () => {
+      const input = '';
+      const expectedOutput = ''
+
+      expect(toUnicodes(input)).toBe(expectedOutput);
+    })
+
+    it('should not turn the excluded character as string into unicode', () => {
+      const input = 'Hello World';
+      const exclude = 'Hed';
+      const expectedOutput = 'He\\u{006C}\\u{006C}\\u{006F}\\u{0020}\\u{0057}\\u{006F}\\u{0072}\\u{006C}d';
+      expect(toUnicodes(input, exclude)).toBe(expectedOutput);
+    })
+
+    it('should not turn the excluded character from string array into unicode', () => {
+      const input = 'Hello World';
+      const exclude = ['H', 'e', 'd'];
+      const expectedOutput = 'He\\u{006C}\\u{006C}\\u{006F}\\u{0020}\\u{0057}\\u{006F}\\u{0072}\\u{006C}d';
+      expect(toUnicodes(input, exclude)).toBe(expectedOutput);
+    })
+  })
+
+  describe('HTML Entities', () => {
+    it('should turn the character into html entities', () => {
+      const input = 'Hello World';
+      const expectedOutput = '&#72;&#101;&#108;&#108;&#111;&#32;&#87;&#111;&#114;&#108;&#100;';
+
+      expect(toHtmlEntities(input)).toBe(expectedOutput);
+    })
+
+    it('should turn the converted html entities to original character', () => {
+      const input = 'Hello World';
+      const expectedOutput = toHtmlEntities(input).replace(/&#(\d+);/g, (_ , numStr) => {
+        const codePoint = parseInt(numStr, 10); // Conver to base 10
+        return String.fromCodePoint(codePoint); // Convert back to character
+     });
+
+      expect(input).toBe(expectedOutput);
+    })
+
+    it('should handle an empty string', () => {
+      const input = '';
+      const expectedOutput = ''
+
+      expect(toHtmlEntities(input)).toBe(expectedOutput);
+    })
+
+    it('should not turn the excluded character as string into html entities', () => {
+      const input = 'Hello World';
+      const exclude = 'Hed';
+      const expectedOutput = 'He&#108;&#108;&#111;&#32;&#87;&#111;&#114;&#108;d';
+      expect(toHtmlEntities(input, exclude)).toBe(expectedOutput);
+    })
+
+    it('should not turn the excluded character from string array into html entities', () => {
+      const input = 'Hello World';
+      const exclude = ['H', 'e', 'd'];
+      const expectedOutput = 'He&#108;&#108;&#111;&#32;&#87;&#111;&#114;&#108;d';
+      expect(toHtmlEntities(input, exclude)).toBe(expectedOutput);
+    })
+  })
 })

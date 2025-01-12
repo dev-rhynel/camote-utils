@@ -343,3 +343,86 @@ export const explode = (str: string, delimiter: string, limit?: number): string[
   }
   return parts;
 };
+
+/**
+ * Converts a string into its Unicode escape sequence representation.
+ * Each character is replaced by its Unicode code point, formatted as `\u{codePoint}`.
+ * For example, the character 'A' will be converted to `\u{0041}`.
+ * 
+ * @param str - The input string to be converted to Unicode escape sequences.
+ * @param exclude - A character exlude on conveting to Unicode
+ * @returns The string where each character is represented as a Unicode escape sequence.
+ * @example
+ * // Returns a string with Unicode escape sequences for each character
+ * toUnicodes("Hello"); //"\u{0048}\u{0065}\u{006C}\u{006C}\u{006F}"
+ * toUnicodes("Hi 😀"); //"\u{0048}\u{0069}\u{0020}\u{1F600}" 
+ * toUnicodes("Hello", "He"); // "He\u{006C}\u{006C}\u{006F}"
+ * toUnicodes("Hi 😀", ["H", "i"]); // "Hi\u{0020}\u{1F600}"
+ */
+
+export const toUnicodes = (str: string, exclude: string | string[] = ""): string => {
+  if (!str) return str;
+
+  const stringArray = Array.from(str); // To support outside the basic multilingual plane (BMP)
+ 
+  for (let i = 0; i < stringArray.length; i++) {
+
+     if (exclude.length > 0) {
+        exclude = typeof(exclude) == "object" ? exclude.join('') : exclude;
+        if (exclude.includes(stringArray[i])) continue
+     }
+
+     // Get the Unicode code point of the character
+     const codePoint = stringArray[i].codePointAt(0);
+
+     if (codePoint) {
+        // Convert codePoint to hexadecimal
+        const hex = codePoint.toString(16).toUpperCase(); 
+
+        // Replace each character with its Unicode escape sequence
+        stringArray[i] = `\\u{${hex.padStart(4, "0")}}`; 
+     }
+  }
+
+ return stringArray.join('');
+}
+
+
+/**
+* Converts a string into its HTML Entities representation.
+* Each character is replaced by its HTML Entity, formatted as `&#codePoint`.
+* For example, the character 'A' will be converted to `&#65;`.
+* 
+* @param str - The input string to be converted to HTML Entities.
+* @param exclude - A character exlude on conveting to HTML Entities.
+* @returns The string where each character is represented as a HTML Entities escape sequence.
+* @example
+* toHtmlEntities("Hello");  // "&#72;&#101;&#108;&#108;&#111;"
+* toHtmlEntities('Hi 😀'); // "&#72;&#105;&#32;&#128512;" 
+* toHtmlEntities("Hello", "He"); // "He&#108;&#108;&#111;"
+* toHtmlEntities("Hi 😀", ["H", "i"]); // "Hi&#32;&#128512;"
+*/
+
+export const toHtmlEntities = (str: string,  exclude: string | string[] = ""): string => {
+  if (!str) return str;
+
+  const stringArray = Array.from(str); // To support outside the basic multilingual plane (BMP)
+ 
+  for (let i = 0; i < stringArray.length; i++) {
+     
+     if (exclude.length > 0) {
+        exclude = typeof(exclude) == "object" ? exclude.join('') : exclude;
+        if (exclude.includes(stringArray[i])) continue
+     }
+
+     // Get the Unicode code point of the character
+     const codePoint = stringArray[i].codePointAt(0);
+
+     if (codePoint) {
+        // Replace each character with its Unicode escape sequence
+        stringArray[i] = `&#${codePoint};`; 
+     }
+  }
+
+ return stringArray.join('');
+}
