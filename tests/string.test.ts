@@ -674,7 +674,7 @@ describe('String Formatters', () => {
     it('should turn the converted html entities to original character', () => {
       const input = 'Hello World';
       const expectedOutput = toHtmlEntities(input).replace(/&#(\d+);/g, (_ , numStr) => {
-        const codePoint = parseInt(numStr, 10); // Conver to base 10
+        const codePoint = parseInt(numStr, 10); // Convert to base 10
         return String.fromCodePoint(codePoint); // Convert back to character
      });
 
