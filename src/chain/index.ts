@@ -142,6 +142,11 @@ export class _ {
         return this;
     }
 
+    swapCase() {
+        this.value = stringFormatters.swapCase(this.value);
+        return this;
+    }
+
     // Date operations
     isDateWithinRange(endDate: Date): _ {
         this.value = dateFormatters.isDateWithinRange(this.value as Date, endDate);
@@ -358,6 +363,10 @@ export class _ {
         return stringFormatters.toUnicodes(str, exclude);
     }
 
+    static swapCase(str: string): string {
+        return stringFormatters.swapCase(str);
+    }
+ 
     // Random generation functions
     static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);

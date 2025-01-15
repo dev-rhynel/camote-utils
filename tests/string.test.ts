@@ -20,7 +20,8 @@ import {
   trim,
   explode,
   toUnicodes,
-  toHtmlEntities
+  toHtmlEntities,
+  swapCase
 } from '../src/formatters/string';
 import { generateUUID } from '../src/random';
 
@@ -703,3 +704,54 @@ describe('String Formatters', () => {
     })
   })
 })
+
+describe('swapCase', () => {
+  it('should swap the case of each character in the string', () => {
+    const input = 'Hello World';
+    const expectedOutput = 'hELLO wORLD';
+    
+    expect(swapCase(input)).toBe(expectedOutput);
+  });
+
+  it('should swap the case for all characters in a mixed case string', () => {
+    const input = 'JavaScript';
+    const expectedOutput = 'jAVAsCRIPT';
+    
+    expect(swapCase(input)).toBe(expectedOutput);
+  });
+
+  it('should leave non-alphabetic characters unchanged', () => {
+    const input = '123 ABC!';
+    const expectedOutput = '123 abc!';
+    
+    expect(swapCase(input)).toBe(expectedOutput);
+  });
+
+  it('should return an empty string when given an empty string', () => {
+    const input = '';
+    const expectedOutput = '';
+    
+    expect(swapCase(input)).toBe(expectedOutput);
+  });
+
+  it('should swap case for strings with special characters and spaces', () => {
+    const input = 'A!b@ C#d$';
+    const expectedOutput = 'a!B@ c#D$';
+    
+    expect(swapCase(input)).toBe(expectedOutput);
+  });
+
+  it('should handle a string with only lowercase characters', () => {
+    const input = 'lowercase';
+    const expectedOutput = 'LOWERCASE';
+    
+    expect(swapCase(input)).toBe(expectedOutput);
+  });
+
+  it('should handle a string with only uppercase characters', () => {
+    const input = 'UPPERCASE';
+    const expectedOutput = 'uppercase';
+    
+    expect(swapCase(input)).toBe(expectedOutput);
+  });
+});

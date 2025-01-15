@@ -426,3 +426,23 @@ export const toHtmlEntities = (str: string,  exclude: string | string[] = ""): s
 
  return stringArray.join('');
 }
+
+/**
+ * Swaps the case of each alphabetic character in a string. 
+ * Uppercase letters are converted to lowercase, and lowercase letters to uppercase. 
+ * Non-alphabetic characters remain unchanged.
+ * 
+ * 
+ * @param str - The input string whose case is to be swapped.
+ * @returns A new string with each alphabetic character's case swapped.
+ * @example
+ * swapCase("Hello World");  // "hELLO wORLD"
+ * swapCase("JavaScript");   // "jAVAsCRIPT"
+ * swapCase("123 ABC!");     // "123 abc!"
+ * swapCase("");             // ""
+ */
+export const swapCase = (str: string): string => {
+  return str.replace(/[a-zA-Z]/g, match => {
+    return match === match.toUpperCase() ? match.toLowerCase() : match.toUpperCase();
+  });
+}

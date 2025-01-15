@@ -103,6 +103,7 @@
                             <li><a href="#explode">explode</a></li>
                             <li><a href="#toUnicodes">toUnicodes</a></li>
                             <li><a href="#toHtmlEntities">toHtmlEntities</a></li>
+                            <li><a href="#swapCase">swapCase</a></li>
                         </ul>
                     </li>
                     <li>
@@ -784,6 +785,18 @@ toUnicodes("Hi 😀", ["H", "i"]); // "Hi\u{0020}\u{1F600}"</code></pre>
 toHtmlEntities('Hi 😀'); // "&amp;#72;&amp;#105;&amp;#32;&amp;#128512;" 
 toHtmlEntities("Hello", "He"); // "He&amp;#108;&amp;#108;&amp;#111;"
 toHtmlEntities("Hi 😀", ["H", "i"]); // "Hi&amp;#32;&amp;#128512;"</code></pre>
+            </section>
+            <section id="swapCase">
+                <h3>swapCase</h3>
+                <p>
+                    Swaps the case of each alphabetic character in a string. 
+                    Uppercase letters are converted to lowercase, and lowercase letters to uppercase. 
+                    Non-alphabetic characters remain unchanged.
+                </p>
+                <pre><code class="language-typescript">swapCase("Hello World");  // "hELLO wORLD"
+swapCase("JavaScript");   // "jAVAsCRIPT"
+swapCase("123 ABC!");     // "123 abc!"
+swapCase("");             // ""</code></pre>
             </section>
         </section>
 
