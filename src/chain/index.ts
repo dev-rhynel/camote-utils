@@ -132,18 +132,18 @@ export class _ {
         return this;
     }
 
-    toUnicodes(str: string, exclude: string | string[] = "") {
-        this.value = stringFormatters.toUnicodes(str, exclude);
+    toUnicodes(exclude: string | string[] = ""): _ {
+        this.value = stringFormatters.toUnicodes(String(this.value), exclude);
         return this;
     }
 
-    toHTMLEntities(str: string, exclude: string | string[] = "") {
-        this.value = stringFormatters.toHtmlEntities(str, exclude);
+    toHTMLEntities(exclude: string | string[] = ""): _ {
+        this.value = stringFormatters.toHtmlEntities(String(this.value), exclude);
         return this;
     }
 
-    swapCase() {
-        this.value = stringFormatters.swapCase(this.value);
+    swapCase(): _ {
+        this.value = stringFormatters.swapCase(String(this.value));
         return this;
     }
 
