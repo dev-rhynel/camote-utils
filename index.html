@@ -103,6 +103,7 @@
                             <li><a href="#explode">explode</a></li>
                             <li><a href="#toUnicodes">toUnicodes</a></li>
                             <li><a href="#toHtmlEntities">toHtmlEntities</a></li>
+                            <li><a href="#swapCase">swapCase</a></li>
                         </ul>
                     </li>
                     <li>
@@ -785,6 +786,18 @@ toHtmlEntities('Hi 😀'); // "&amp;#72;&amp;#105;&amp;#32;&amp;#128512;"
 toHtmlEntities("Hello", "He"); // "He&amp;#108;&amp;#108;&amp;#111;"
 toHtmlEntities("Hi 😀", ["H", "i"]); // "Hi&amp;#32;&amp;#128512;"</code></pre>
             </section>
+            <section id="swapCase">
+                <h3>swapCase</h3>
+                <p>
+                    Swaps the case of each alphabetic character in a string. 
+                    Uppercase letters are converted to lowercase, and lowercase letters to uppercase. 
+                    Non-alphabetic characters remain unchanged.
+                </p>
+                <pre><code class="language-typescript">swapCase("Hello World");  // "hELLO wORLD"
+swapCase("JavaScript");   // "jAVAsCRIPT"
+swapCase("123 ABC!");     // "123 abc!"
+swapCase("");             // ""</code></pre>
+            </section>
         </section>
 
         <section id="array-manipulation">
@@ -1243,7 +1256,7 @@ import 'regenerator-runtime/runtime</code></pre>
                     <i class="fab fa-npm"></i>
                 </a>
             </div>
-            <p class="updated-time">Last updated: December 14, 2024</p>
+            <p class="updated-time">Last updated: January, 2025</p>
         </footer>
     </main>
 
