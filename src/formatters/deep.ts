@@ -80,9 +80,9 @@ export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnCh
 
     return returnChanges ? differences : differences.length === 0;
   }
-  
+
   const compare = (originalObj: any, toCompareObj: any) => {
-    const result: Record<string, any> = {};  
+    const result: Record<string, any> = {};
     for (const key in toCompareObj) {
       if (toCompareObj.hasOwnProperty(key)) {
         if (Array.isArray(toCompareObj?.[key])) {
@@ -111,6 +111,8 @@ export const deepCompareObjects = (originalObj: any, toCompareObj: any, returnCh
               result[key] = nestedMismatched;
             }
           }
+        } else if (originalObj?.[key] !== toCompareObj?.[key] && (originalObj?.[key] === null || toCompareObj?.[key] === null)) {
+          return false;
         } else if (originalObj?.[key] !== null && toCompareObj?.[key] !== null && originalObj?.[key] !== toCompareObj?.[key]) {
           result[key] = toCompareObj?.[key];
         }
