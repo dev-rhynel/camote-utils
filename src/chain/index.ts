@@ -132,13 +132,18 @@ export class _ {
         return this;
     }
 
-    toUnicodes(str: string, exclude: string | string[] = "") {
-        this.value = stringFormatters.toUnicodes(str, exclude);
+    toUnicodes(exclude: string | string[] = ""): _ {
+        this.value = stringFormatters.toUnicodes(String(this.value), exclude);
         return this;
     }
 
-    toHTMLEntities(str: string, exclude: string | string[] = "") {
-        this.value = stringFormatters.toHtmlEntities(str, exclude);
+    toHTMLEntities(exclude: string | string[] = ""): _ {
+        this.value = stringFormatters.toHtmlEntities(String(this.value), exclude);
+        return this;
+    }
+
+    swapCase(): _ {
+        this.value = stringFormatters.swapCase(String(this.value));
         return this;
     }
 
@@ -358,6 +363,10 @@ export class _ {
         return stringFormatters.toUnicodes(str, exclude);
     }
 
+    static swapCase(str: string): string {
+        return stringFormatters.swapCase(str);
+    }
+ 
     // Random generation functions
     static generateRandomInteger(min: number, max: number): number {
         return generateRandomInteger(min, max);

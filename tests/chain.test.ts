@@ -56,6 +56,11 @@ describe('Chain - String Operations', () => {
     const result = _.chain('hello world').toKebabCase().valueOf();
     expect(result).toBe('hello-world');
   });
+
+  it('should convert a string to swapCase', () => {
+    const result = _.chain('Hello World').swapCase().valueOf();
+    expect(result).toBe('hELLO wORLD');
+  });
 });
 
 // Test suite for number operations
