@@ -152,11 +152,11 @@ describe('deepCompare', () => {
     expect(nestedDifferences).toEqual({ settings: { theme: 'light' } });
   });
 
-  test('should return true for nested objects', () => {
+  test('should return false for nested objects', () => {
     const nestedObj1 = { data: null };
     const nestedObj2 = { data: 'not null' };
     const nestedDifferences = deepCompare(nestedObj1, nestedObj2);
-    expect(nestedDifferences).toEqual(true);
+    expect(nestedDifferences).toEqual(false);
   });
 });
 

@@ -205,19 +205,6 @@ export const generateRandomString = (length: number, options?: GenerateRandomStr
     return result;
 };
 
-/**
- * Generates a random password with good security characteristics
- * @param length - Length of the password (minimum 8)
- * @param options - Optional configuration for additional requirements
- * @returns Secure random password
- * @throws {Error} If length is less than 8
- * @example
- * generateRandomPassword(12);  // "aB3$kL9p#mN4"
- * generateRandomPassword(8, { exclude: 'O0Il1' }); // Excludes ambiguous characters
- * generateRandomPassword(8, { lowercase: false, uppercase: false, numbers: false, special: false }); // Excludes all character types
- * generateRandomPassword(8, { custom: "ABC123" }); // Uses custom character set
- * generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" }); // Uses custom character set and excludes ambiguous characters
- */
 export const generateRandomPassword = (length: number, options: Omit<GenerateRandomStringOptions, 'lowercase' | 'uppercase' | 'numbers' | 'special'> = {}): string => {
     if (length < 8) {
         throw new Error('Password length must be at least 8 characters');
@@ -233,16 +220,8 @@ export const generateRandomPassword = (length: number, options: Omit<GenerateRan
     });
 
     return password;
-};
+}
 
-/**
- * Generates a strong random password based on specified criteria
- * @param length - Length of the password (minimum 8)
- * @returns Secure random password
- * @throws {Error} If length is less than 8
- * @example
- * generateStrongPassword(12);  // "aB3$kL9p#mN4"
- */
 export const generateStrongPassword = (length: number = 12): string => {
     if (length < 8) {
         throw new Error('Password length must be at least 8 characters');
@@ -264,7 +243,7 @@ export const generateStrongPassword = (length: number = 12): string => {
     // Fill the rest of the password length with random characters
     for (let i = 4; i < length; i++) {
         const allChars = lowercaseChars + uppercaseChars + numberChars + specialChars;
-        passwordChars.push(allChars.charAt(Math.floor(Math.random() * allChars.length)));
+        passwordChars.push(allChars.charAt(Math.floor(Math.random() * allChars.length)))
     }
 
     // Shuffle the password characters
@@ -273,107 +252,59 @@ export const generateStrongPassword = (length: number = 12): string => {
         [passwordChars[i], passwordChars[j]] = [passwordChars[j], passwordChars[i]];
     }
 
-    return passwordChars.join('');
-};
+    return passwordChars.join('')
+}
 
-/**
- * Generates a random hex color string
- * @param includeHash - Whether to include # prefix
- * @returns Random hex color string
- * @example
- * generateRandomHexColor();     // "#FF5733"
- * generateRandomHexColor(false); // "FF5733"
- */
 export const generateRandomHexColor = (includeHash: boolean = true): string => {
     const hex = generateRandomInteger(0, 0xFFFFFF).toString(16).padStart(6, '0').toUpperCase();
-    return includeHash ? `#${hex}` : hex;
-};
+    return includeHash ? `#${hex}` : hex
+}
 
-/**
- * Generates a random RGB color string
- * @param includeArray - Whether to return an array of RGB values
- * @returns Random RGB color string or array
- * @example
- * generateRandomRGB();            // e.g., [255, 87, 51]
- * generateRandomRGB(true);        // e.g., "rgb(255, 87, 51)"
- */
 export const generateRandomRGB = (includeArray: boolean = false): string | number[] => {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    return includeArray ? [r, g, b] : `rgb(${r}, ${g}, ${b})`;
-};
+    const r = Math.floor(Math.random() * 256)
+    const g = Math.floor(Math.random() * 256)
+    const b = Math.floor(Math.random() * 256)
+    return includeArray ? [r, g, b] : `rgb(${r}, ${g}, ${b})`
+}
 
-/**
- * Generates a random HSL color string
- * @param includeArray - Whether to return an array of HSL values
- * @returns Random HSL color string or array
- * @example
- * generateRandomHSL();            // e.g., [20, 100, 60]
- * generateRandomHSL(true);        // e.g., "hsl(20, 100%, 60%)"
- */
 export const generateRandomHSL = (includeArray: boolean = false): string | number[] => {
-    const h = Math.floor(Math.random() * 361); // Hue: 0-360
-    const s = Math.floor(Math.random() * 101); // Saturation: 0-100%
-    const l = Math.floor(Math.random() * 101); // Lightness: 0-100%
+    const h = Math.floor(Math.random() * 361) // Hue: 0-360
+    const s = Math.floor(Math.random() * 101) // Saturation: 0-100%
+    const l = Math.floor(Math.random() * 101) // Lightness: 0-100%
     return includeArray ? [h, s, l] : `hsl(${h}, ${s}%, ${l}%)`;
 };
 
-/**
- * Generates a color palette with random colors
- * @param numColors - The number of colors to generate
- * @param format - The color format to return ('hex', 'rgb', 'hsl')
- * @returns Array of random color strings
- * @example
- * generateColorPalette(5);        // e.g., ["#FF5733", "#33FF57", "#5733FF", "#FF3333", "#33FFFF"]
- * generateColorPalette(3, 'rgb'); // e.g., ["rgb(255,87,51)", "rgb(51,255,87)", "rgb(87,51,255)"]
- */
 export const generateColorPalette = (numColors: number, format: 'hex' | 'rgb' | 'hsl' = 'hex'): string[] => {
-    const palette: string[] = [];
+    const palette: string[] = []
     for (let i = 0; i < numColors; i++) {
-        palette.push(generateRandomColor(format)); // Use the random color function
+        palette.push(generateRandomColor(format))
     }
-    return palette;
-};
+    return palette
+}
 
-/**
- * Generates a random color in specified format
- * @param format - The color format to return ('hex', 'rgb', 'hsl')
- * @returns A random color string in the specified format
- * @example
- * generateRandomColor();           // e.g., "#FF5733"
- * generateRandomColor('rgb');      // e.g., "rgb(255, 87, 51)"
- * generateRandomColor('hsl');      // e.g., "hsl(20, 100%, 60%)"
- */
 export const generateRandomColor = (format: 'hex' | 'rgb' | 'hsl' = 'hex'): string => {
     switch (format) {
         case 'rgb':
-            const rgbArray = generateRandomRGB(true);
-            return Array.isArray(rgbArray) ? `rgb(${rgbArray.join(', ')})` : rgbArray;
+            const rgbArray = generateRandomRGB(true)
+            return Array.isArray(rgbArray) ? `rgb(${rgbArray.join(', ')})` : rgbArray
         case 'hsl':
             const hslArray = generateRandomHSL(true);
-            return Array.isArray(hslArray) ? `hsl(${hslArray.join(', ')})` : hslArray;
+            return Array.isArray(hslArray) ? `hsl(${hslArray.join(', ')})` : hslArray
         default:
-            return generateRandomHexColor();
+            return generateRandomHexColor()
     }
-};
+}
 
-/**
- * Generates a UUID v4 (random) string
- * @returns A UUID v4 string
- * @example
- * generateUUID() // "123e4567-e89b-12d3-a456-426614174000"
- */
 export const generateUUID = (): string => {
     // Generate 16 random bytes
     const bytes = new Uint8Array(16);
     for (let i = 0; i < 16; i++) {
-        bytes[i] = generateRandomInteger(0, 255);
+        bytes[i] = generateRandomInteger(0, 255)
     }
 
     // Set version (4) and variant (RFC4122)
-    bytes[6] = (bytes[6] & 0x0f) | 0x40;
-    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    bytes[6] = (bytes[6] & 0x0f) | 0x40
+    bytes[8] = (bytes[8] & 0x3f) | 0x80
 
     // Convert to hex string
     const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
@@ -382,12 +313,6 @@ export const generateUUID = (): string => {
     return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 };
 
-/**
- * Generates a UUID v4 (random) string
- * @returns A UUID v4 string
- * @example
- * generateUUIDv4() // "110ec58a-a0f2-4ac4-8393-c866d813b8d1"
- */
 export const generateUUIDv4 = (): string => {
     const bytes = new Uint8Array(16);
     for (let i = 0; i < 16; i++) {
@@ -400,43 +325,19 @@ export const generateUUIDv4 = (): string => {
     return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 };
 
-/**
- * Type of random value to generate
- */
 export type GenerateRandomType = 'integer' | 'float' | 'boolean' | 'string' | 'hexColor' | 'rgbColor' | 'hslColor' | 'uuid' | 'colorPalette';
 
-/**
- * Options for random value generation
- */
 export interface GenerateRandomOptions {
     type: GenerateRandomType;
-    min?: number;          // For numbers
-    max?: number;          // For numbers
-    length?: number;       // For strings
-    stringOptions?: GenerateRandomStringOptions; // For strings
-    includeHash?: boolean; // For hexColor
-    numColors?: number;    // For colorPalette
-    format?: 'hex' | 'rgb' | 'hsl'; // For colorPalette
+    min?: number;         
+    max?: number;         
+    length?: number;      
+    stringOptions?: GenerateRandomStringOptions; 
+    includeHash?: boolean; 
+    numColors?: number;   
+    format?: 'hex' | 'rgb' | 'hsl'; 
 }
 
-/**
- * Generates a random value of the specified type
- * @param options - Configuration options for random value generation
- * @returns Random value of the specified type
- * @throws {Error} If invalid options are provided
- * @example
- * generateRandom({ type: 'integer', min: 1, max: 10 });     // 7
- * generateRandom({ type: 'float', min: 0, max: 1 });        // 0.123456
- * generateRandom({ type: 'boolean' });                      // true
- * generateRandom({ type: 'string', length: 8 });            // "aB3$kL9p"
- * generateRandom({ type: 'hexColor' });                     // "#FF5733"
- * generateRandom({ type: 'rgbColor' });                     // "rgb(255, 87, 51)"
- * generateRandom({ type: 'rgbColor', format: 'array' });    // [255, 87, 51]
- * generateRandom({ type: 'hslColor' });                     // "hsl(20, 100%, 60%)"
- * generateRandom({ type: 'hslColor', format: 'array' });    // [20, 100, 60]
- * generateRandom({ type: 'colorPalette', numColors: 3 });   // ["#FF5733", "#33FF57", "#5733FF"]
- * generateRandom({ type: 'uuid' });                         // "123e4567-e89b-12d3-a456-426614174000"
- */
 export const generateRandom = (options: GenerateRandomOptions): number | string | boolean | string[] => {
     switch (options.type) {
         case 'integer':

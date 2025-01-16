@@ -1,9 +1,9 @@
-export * from './formatters/number';
-export * from './formatters/string';
-export * from './formatters/date';
-export * from './formatters/array';
-export * from './formatters/object';
-export * from './formatters/deep';
-export * from './checkers';
-export * from './random';
-export { _, formatters, checks} from './chain';
+export * from './formatters/number'
+export * from './formatters/string'
+export * from './formatters/date'
+export * from './formatters/array'
+export * from './formatters/object'
+export * from './formatters/deep'
+export * from './checkers'
+export * from './random'
+export { _, formatters, checks} from './chain'
