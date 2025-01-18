@@ -121,6 +121,7 @@
                         <a href="#object-manipulation" class="has-submenu">Object Manipulation <i class="fas fa-chevron-down"></i></a>
                         <ul>
                             <li><a href="#removeEmptyKeysEntries">removeEmptyKeysEntries</a></li>
+                            <li><a href="#objectToQueryString">objectToQueryString</a></li>
                         </ul>
                     </li>
                     <li>
@@ -854,6 +855,34 @@ implode(["Hello", "World"], ", ") // "Hello, World"
 removeEmptyKeysEntries({ a: 1, b: null })          // { a: 1 }
 removeEmptyKeysEntries({ a: 1, b: '' })            // { a: 1 }
 removeEmptyKeysEntries({ a: 1, b: 2 })             // { a: 1, b: 2 }</code></pre>
+            </section>
+            <section id="objectToQueryString">
+                <h3>objectToQueryString</h3>
+                <p>Converts an object, array of key-value pairs (matrix), or a flat array of alternating keys and values into a URL query string. <br>
+                   The function can handle different input formats: <br>
+                    - A plain object (Record &lt;string, any&gt;), <br>
+                    - A matrix (an array of arrays, where each sub-array has two elements representing a key-value pair), <br>
+                    - A flat array with an even number of elements, where each even-indexed element is a key, and the following odd-indexed element is its corresponding value.</p>
+                <pre><code class="language-typescript">// Using a plain object
+objectToQueryString({ key1: 'value1', key2: 'value2' });
+// Returns: "key1=value1&key2=value2"
+        
+// Using a matrix (array of key-value pairs)
+objectToQueryString([['key1', 'value1'], ['key2', 'value2']]);
+// Returns: "key1=value1&key2=value2"
+
+// Using a flat array
+objectToQueryString(['key1', 'value1', 'key2', 'value2']);
+// Returns: "key1=value1&key2=value2"
+
+// Throws an error for an invalid array format
+objectToQueryString([['key1', 'value1'], 'invalid']);
+// Throws: Error: Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements.
+
+// Throws an error for an empty object / array
+objectToQueryString([]);
+objectToQueryString({});
+// throw new Error("Invalid input format: Expected a non-empty object or a valid array format.");</code></pre>
             </section>
         </section>
 

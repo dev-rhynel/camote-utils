@@ -63,6 +63,11 @@ export const removeEmptyKeysEntries = (
  * // Throws an error for an invalid array format
  * objectToQueryString([['key1', 'value1'], 'invalid']);
  * // Throws: Error: Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements.
+ * 
+ * // Throws an error for an empty object / array
+ * objectToQueryString([]);
+ * objectToQueryString({});
+ * // throw new Error("Invalid input format: Expected a non-empty object or a valid array format.");
  */
 
 export const objectToQueryString = (obj: Record<string, any> | Array<Array<any>> | Array<any>): string => {
