@@ -66,21 +66,18 @@ export const removeEmptyKeysEntries = (
  */
 
 export const objectToQueryString = (obj: Record<string, any> | Array<Array<any>> | Array<any>): string => {
-  if (Array.isArray(obj)) {
+  if (Array.isArray(obj) && obj.length > 0) {
    const isMatrix = obj.every(item => Array.isArray(item) && item.length == 2);
    if (isMatrix) {
      return new URLSearchParams(obj).toString();
    }
 
-   const isFlatArray = obj.every(item => typeof item !== "object");
+   const isFlatArray = obj.every(item => typeof item !== "object") && obj.length % 2 == 0;
    if (isFlatArray) {
      //const newObj = Array.from({length: Math.ceil(obj.length / 2)}, (v, i) => obj.slice(i * 2, i * 2 + 2 )).filter(x => x.length == 2);
      const newObj = obj.reduce((acc, curr, idx, array) => {
        if (idx % 2 == 0) {
-         const value = array[idx + 1] !== undefined;
-         if (value) {
-           acc[curr] = value;
-         }
+          acc[curr] = array[idx + 1];
        }
        return acc;
      }, {} as Record<string, any>);

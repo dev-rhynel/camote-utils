@@ -1,4 +1,4 @@
-import { removeEmptyKeysEntries } from './../src/formatters/object';
+import { removeEmptyKeysEntries, objectToQueryString } from './../src/formatters/object';
 
 describe('removeEmptyKeysEntries', () => {
   it('should remove keys with falsy values', () => {
@@ -50,5 +50,51 @@ describe('removeEmptyKeysEntries', () => {
     const transformFn = (value: number) => value * 2;
     const expectedOutput = { a: [2, 4, 6], b: ['hello', 'world'] };
     expect(removeEmptyKeysEntries(input, transformFn)).toEqual(expectedOutput);
+  });
+});
+
+
+describe('objectToQueryString', () => {
+  
+  // Test valid cases
+
+  it('should convert a plain object to a query string', () => {
+    const input = { key1: 'value1', key2: 'value2' };
+    const result = objectToQueryString(input);
+    expect(result).toBe('key1=value1&key2=value2');
+  });
+
+  it('should convert a matrix array to a query string', () => {
+    const input = [['key1', 'value1'], ['key2', 'value2']];
+    const result = objectToQueryString(input);
+    expect(result).toBe('key1=value1&key2=value2');
+  });
+
+  it('should convert a flat array with key-value pairs to a query string', () => {
+    const input = ['key1', 'value1', 'key2', 'value2'];
+    const result = objectToQueryString(input);
+    expect(result).toBe('key1=value1&key2=value2');
+  });
+
+  // Test invalid cases
+
+  it('should throw an error for an invalid matrix format', () => {
+    const input = [['key1', 'value1'], 'invalid'];
+    expect(() => objectToQueryString(input)).toThrow();
+  });
+
+  it('should throw an error for a flat array with an odd number of elements', () => {
+    const input = ['key1', 'value1', 'key2'];
+    expect(() => objectToQueryString(input)).toThrow();
+  });
+
+  it('should throw an error for an empty object', () => {
+    const input = {};
+    expect(() => objectToQueryString(input)).toThrow();
+  });
+
+  it('should throw an error for an empty array', () => {
+    const input: any[] = [];
+    expect(() => objectToQueryString(input)).toThrow();
   });
 });
