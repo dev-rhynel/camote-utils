@@ -12,8 +12,6 @@ A comprehensive TypeScript utility library featuring advanced string and number 
 
 ## Highlights
 - A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms.
-- Updated to version **1.0.8**.
-- New return type for the `generateRandom` method now includes `string[]`.
 
 ## Installation
 
