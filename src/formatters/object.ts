@@ -67,7 +67,7 @@ export const removeEmptyKeysEntries = (
  * // Throws an error for an empty object / array
  * objectToQueryString([]);
  * objectToQueryString({});
- * // throw new Error("Invalid input format: Expected a non-empty object or a valid array format.");
+ * // Throws: Error: Invalid input format: Expected a non-empty object or a valid array format.
  */
 
 export const objectToQueryString = (obj: Record<string, any> | Array<Array<any>> | Array<any>): string => {
