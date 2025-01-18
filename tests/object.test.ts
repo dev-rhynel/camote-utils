@@ -80,21 +80,21 @@ describe('objectToQueryString', () => {
 
   it('should throw an error for an invalid matrix format', () => {
     const input = [['key1', 'value1'], 'invalid'];
-    expect(() => objectToQueryString(input)).toThrow();
+    expect(() => objectToQueryString(input)).toThrow(new Error("Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements."));
   });
 
   it('should throw an error for a flat array with an odd number of elements', () => {
     const input = ['key1', 'value1', 'key2'];
-    expect(() => objectToQueryString(input)).toThrow();
+    expect(() => objectToQueryString(input)).toThrow(new Error("Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements."));
   });
 
   it('should throw an error for an empty object', () => {
     const input = {};
-    expect(() => objectToQueryString(input)).toThrow();
+    expect(() => objectToQueryString(input)).toThrow(new Error("Invalid input format: Expected a non-empty object or a valid array format."));
   });
 
   it('should throw an error for an empty array', () => {
     const input: any[] = [];
-    expect(() => objectToQueryString(input)).toThrow();
+    expect(() => objectToQueryString(input)).toThrow(new Error("Invalid input format: Expected a non-empty object or a valid array format."));
   });
 });

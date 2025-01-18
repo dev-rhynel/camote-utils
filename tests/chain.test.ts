@@ -133,7 +133,7 @@ describe('Chain - Object Operations', () => {
       _.chain(['key1', 'value1', 'key2'])
         .objectToQueryString()
         .valueOf();
-    }).toThrow();
+    }).toThrow(new Error("Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements."));
   });
 
   it('should throw an error if an invalid nested array is passed after flattening', () => {
@@ -142,6 +142,15 @@ describe('Chain - Object Operations', () => {
         .flattenArray()
         .objectToQueryString()
         .valueOf();
-    }).toThrow();
+    }).toThrow(new Error("Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements."));
+  });
+
+  it('should throw an error if an invalid nested array is passed after flattening', () => {
+    expect(() => {
+      _.chain([[], []])
+        .flattenArray()
+        .objectToQueryString()
+        .valueOf();
+    }).toThrow(new Error("Invalid input format: Expected a non-empty object or a valid array format."));
   });
 })
