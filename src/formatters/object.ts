@@ -36,7 +36,6 @@ export const objectToQueryString = (obj: Record<string, any> | Array<Array<any>>
 
    const isFlatArray = obj.every(item => typeof item !== "object") && obj.length % 2 == 0;
    if (isFlatArray) {
-     //const newObj = Array.from({length: Math.ceil(obj.length / 2)}, (v, i) => obj.slice(i * 2, i * 2 + 2 )).filter(x => x.length == 2);
      const newObj = obj.reduce((acc, curr, idx, array) => {
        if (idx % 2 == 0) {
           acc[curr] = array[idx + 1];
