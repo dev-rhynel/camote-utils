@@ -128,6 +128,15 @@ describe('Chain - Object Operations', () => {
     expect(result).toBe('1=2&3=4&5=6');
   });
 
+  it('should flatten an array and then convert to query string', () => {
+    const result = _.chain(['key1', 'value1', 'key2', 'value2', ['key3', 'value3']])
+      .flattenArray()
+      .objectToQueryString()
+      .valueOf();
+
+    expect(result).toBe('key1=value1&key2=value2&key3=value3')
+  });
+
   it('should throw an error for an invalid flat array format (odd number of elements)', () => {
     expect(() => {
       _.chain(['key1', 'value1', 'key2'])
