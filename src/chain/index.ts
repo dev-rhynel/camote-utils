@@ -98,6 +98,11 @@ export class _ {
         return this
     }
 
+    public objectToQueryString(): this {
+        this.value = objectFormatters.objectToQueryString(this.value);
+        return this
+    }
+
     // String operations
     capitalize(): _ {
         this.value = stringFormatters.capitalize(String(this.value))
