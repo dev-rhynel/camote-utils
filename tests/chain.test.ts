@@ -101,3 +101,65 @@ describe('valueOf', () => {
     expect(result).toBe('test value');
   });
 });
+
+describe('Chain - Object Operations', () => {
+  it('should convert a flat array to query string', () => {
+    const result = _.chain(['key1', 'value1', 'key2', 'value2'])
+      .objectToQueryString()
+      .valueOf();
+
+    expect(result).toBe('key1=value1&key2=value2');
+  });
+
+  it('should convert a matrix array to query string', () => {
+    const result = _.chain([['key1', 'value1'], ['key2', 'value2']])
+      .objectToQueryString()
+      .valueOf();
+
+    expect(result).toBe('key1=value1&key2=value2');
+  });
+
+  it('should remove duplicates and then convert to query string', () => {
+    const result = _.chain([1, 2, 2, 3, 4, 4, 5, 6, 6])
+      .removeDuplicates()  
+      .objectToQueryString()
+      .valueOf(); 
+
+    expect(result).toBe('1=2&3=4&5=6');
+  });
+
+  it('should flatten an array and then convert to query string', () => {
+    const result = _.chain(['key1', 'value1', 'key2', 'value2', ['key3', 'value3']])
+      .flattenArray()
+      .objectToQueryString()
+      .valueOf();
+
+    expect(result).toBe('key1=value1&key2=value2&key3=value3')
+  });
+
+  it('should throw an error for an invalid flat array format (odd number of elements)', () => {
+    expect(() => {
+      _.chain(['key1', 'value1', 'key2'])
+        .objectToQueryString()
+        .valueOf();
+    }).toThrow(new Error("Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements."));
+  });
+
+  it('should throw an error if an invalid nested array is passed after flattening', () => {
+    expect(() => {
+      _.chain(['key1', 'value1', 'key2', 'value2', ['key3']])
+        .flattenArray()
+        .objectToQueryString()
+        .valueOf();
+    }).toThrow(new Error("Invalid array format: Expected either an array of key-value pairs (matrix) or a flat array with an even number of elements."));
+  });
+
+  it('should throw an error if an invalid nested array is passed after flattening', () => {
+    expect(() => {
+      _.chain([[], []])
+        .flattenArray()
+        .objectToQueryString()
+        .valueOf();
+    }).toThrow(new Error("Invalid input format: Expected a non-empty object or a valid array format."));
+  });
+})
