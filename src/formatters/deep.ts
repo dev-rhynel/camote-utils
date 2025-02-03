@@ -25,10 +25,15 @@ export const deepClone = <T>(obj: T): T => {
   return objCopy;
 };
 
+
 export const deepCompare = (originalObj: any, toCompareObj: any, returnChanges: boolean = false): boolean | any => {
   // Handle null/undefined cases
   if (originalObj === toCompareObj) return returnChanges ? {} : true;
-  if (!originalObj || !toCompareObj) return returnChanges ? toCompareObj : false;
+  if (!originalObj || !toCompareObj) {
+    if (typeof originalObj === 'string' && toCompareObj === null) return returnChanges ? originalObj : false;
+    if (typeof toCompareObj === 'string' && originalObj === null) return returnChanges ? toCompareObj : false;
+    return returnChanges ? toCompareObj : false;
+  }
 
   // Get object types
   const originalType = typeof originalObj;
@@ -40,14 +45,14 @@ export const deepCompare = (originalObj: any, toCompareObj: any, returnChanges: 
   // Handle array comparison
   if (Array.isArray(originalObj) && Array.isArray(toCompareObj)) {
     if (!returnChanges && originalObj.length !== toCompareObj.length) return false;
-    
+
     const differences: any[] = [];
     for (let i = 0; i < toCompareObj.length; i++) {
       if (i >= originalObj.length) {
         differences.push(toCompareObj[i]);
         continue;
       }
-      
+
       const compResult = deepCompare(originalObj[i], toCompareObj[i], returnChanges);
       if (returnChanges) {
         if (compResult && (typeof compResult === 'object' ? Object.keys(compResult).length > 0 : true)) {
@@ -97,7 +102,7 @@ export const deepCompare = (originalObj: any, toCompareObj: any, returnChanges: 
   // For primitive types, do direct comparison
   const areEqual = originalObj === toCompareObj;
   return returnChanges ? (areEqual ? {} : toCompareObj) : areEqual;
-};
+}
 
 export const deepCompareObjects = deepCompare
 
@@ -127,12 +132,10 @@ export const deepExclude = <T>(
   valuesToExclude: T[],
   keySelector: (value: T) => unknown = (value) => JSON.stringify(value),
 ): T[] => {
-  // Create a set of keys from the values to exclude
   const valuesToExcludeKeys = new Set(valuesToExclude.map((value) => keySelector(value)));
   
-  // Filter the source array based on the keys
   return sourceArray.filter((value) => {
     const key = keySelector(value);
     return !valuesToExcludeKeys.has(key);
-  });
-};
+  })
+}
