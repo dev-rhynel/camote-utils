@@ -83,6 +83,11 @@ export class _ {
         return this
     }
 
+    public deepSortAlphabetical(): this {
+        this.value = deepFormatters.deepSortAlphabetical(this.value)
+        return this
+    }
+
     public deepCompareObjects(anotherValue: any): this {
         this.value = deepFormatters.deepCompareObjects(this.value, anotherValue)
         return this

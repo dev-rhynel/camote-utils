@@ -1,6 +1,6 @@
 {
   "name": "camote-utils",
-  "version": "1.1.81",
+  "version": "1.1.82",
   "description": "A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -40,7 +40,7 @@
   "license": "MIT",
   "private": false,
   "sponsor": {
-    "name": "Your Sponsor Name ❤️",
+    "name": "Rhynel ❤️",
     "url": "https://buymeacoffee.com/rhynel"
   },
   "devDependencies": {

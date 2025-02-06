@@ -25,14 +25,63 @@ export const deepClone = <T>(obj: T): T => {
   return objCopy;
 };
 
+export const deepSortAlphabetical = (input: any, inReverse: boolean = false): any => {
+  if (Array.isArray(input)) {
+    return input
+      .map((item) => deepSortAlphabetical(item))
+      .sort((a, b) => {
+        const aType = typeof a;
+        const bType = typeof b;
 
-export const deepCompare = (originalObj: any, toCompareObj: any, returnChanges: boolean = false): boolean | any => {
+        // Prioritize objects over numbers
+        if (aType === 'object' && bType !== 'object') return inReverse ? 1 : -1;
+        if (bType === 'object' && aType !== 'object') return inReverse ? -1 : 1;
+
+        // If both are of the same type, proceed with comparison
+        if (aType === bType) {
+          if (aType === 'string') {
+            return inReverse ? b.localeCompare(a) : a.localeCompare(b);
+          } else if (aType === 'object') {
+            // Sort objects by their keys
+            const aKeys = Object.keys(a).sort();
+            const bKeys = Object.keys(b).sort();
+            return inReverse ? bKeys[0].localeCompare(aKeys[0]) : aKeys[0].localeCompare(bKeys[0]);
+          } else {
+            // For numbers and other types, convert to string for comparison
+            return inReverse ? String(b).localeCompare(String(a)) : String(a).localeCompare(String(b));
+          }
+        }
+
+        // Handle cases where types differ
+        return inReverse ? bType.localeCompare(aType) : aType.localeCompare(bType);
+      });
+  } else if (input && typeof input === 'object') {
+    return Object.keys(input)
+      .sort((a, b) => (inReverse ? b.localeCompare(a) : a.localeCompare(b)))
+      .reduce((acc, key) => {
+        acc[key] = deepSortAlphabetical(input[key], inReverse);
+        return acc;
+      }, {} as any);
+  } else {
+    return input;
+  }
+};
+
+export const deepCompare = (objectA: any, objectB: any, returnChanges: boolean = false): boolean | any => {
+  const originalObj = deepSortAlphabetical(objectA);
+  const toCompareObj = deepSortAlphabetical(objectB);
+
   // Handle null/undefined cases
   if (originalObj === toCompareObj) return returnChanges ? {} : true;
   if (!originalObj || !toCompareObj) {
     if (typeof originalObj === 'string' && toCompareObj === null) return returnChanges ? originalObj : false;
     if (typeof toCompareObj === 'string' && originalObj === null) return returnChanges ? toCompareObj : false;
     return returnChanges ? toCompareObj : false;
+  }
+
+  // For primitive types, do direct comparison
+  if (typeof originalObj === 'number' && typeof toCompareObj === 'number') {
+    return returnChanges ? (originalObj === toCompareObj ? {} : toCompareObj) : originalObj === toCompareObj;
   }
 
   // Get object types
@@ -139,3 +188,4 @@ export const deepExclude = <T>(
     return !valuesToExcludeKeys.has(key);
   })
 }
+

@@ -56,4 +56,5 @@ export const objectToQueryString = (obj: Record<string, any> | Array<Array<any>>
 
 
   throw new Error("Invalid input format: Expected a non-empty object or a valid array format.");
-};
+}
+

@@ -1,4 +1,4 @@
-import { deepClone, deepCompareObjects, deepCompare, deepMerge, deepExclude } from '../src/formatters/deep';
+import { deepClone, deepCompareObjects, deepCompare, deepMerge, deepExclude, deepSortAlphabetical } from '../src/formatters/deep';
 
 describe('deepClone', () => {
   it('should create a deep copy of a simple object', () => {
@@ -232,5 +232,61 @@ describe('deepMerge', () => {
     const obj2 = { arr: [3, 4, 5] };
     const merged = deepMerge(obj1, obj2);
     expect(merged).toEqual({ arr: [1, 2, 3, 4, 5] });
+  });
+});
+
+describe('deepSortAlphabetical', () => {
+  it('should sort an object alphabetically', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const sorted = deepSortAlphabetical(obj);
+    expect(sorted).toEqual({ a: 1, b: 2, c: 3 });
+  });
+
+  it('should sort an object alphabetically in reverse', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const sorted = deepSortAlphabetical(obj, true);
+    expect(sorted).toEqual({ c: 3, b: 2, a: 1 });
+  });
+
+  it('should sort nested objects', () => {
+    const obj = { b: { c: 3, a: 1 }, a: 2 };
+    const sorted = deepSortAlphabetical(obj);
+    expect(sorted).toEqual({ a: 2, b: { a: 1, c: 3 } });
+  });
+
+  it('should sort arrays of objects', () => {
+    const arr = [{ b: 2 }, { a: 1 }, { c: 3 }];
+    const sorted = deepSortAlphabetical(arr);
+    expect(sorted).toEqual([{ a: 1 }, { b: 2 }, { c: 3 }]);
+  });
+
+  it('should handle empty objects', () => {
+    const obj = {};
+    const sorted = deepSortAlphabetical(obj);
+    expect(sorted).toEqual({});
+  });
+
+  it('should handle arrays with mixed types', () => {
+    const arr = [3, 1, 2, { b: 2 }, { a: 1 }];
+    const sorted = deepSortAlphabetical(arr);
+    expect(sorted).toEqual([{ a: 1 }, { b: 2 }, 1, 2, 3]);
+  });
+
+  it('should sort deeply nested structures', () => {
+    const obj = { d: { b: 2, a: 1 }, a: { c: 3, b: 2 } };
+    const sorted = deepSortAlphabetical(obj);
+    expect(sorted).toEqual({ a: { b: 2, c: 3 }, d: { a: 1, b: 2 } });
+  });
+
+  it('should handle arrays with objects having the same keys', () => {
+    const arr = [{ a: 1, b: 2 }, { a: 3, b: 4 }];
+    const sorted = deepSortAlphabetical(arr);
+    expect(sorted).toEqual([{ a: 1, b: 2 }, { a: 3, b: 4 }]);
+  });
+
+  it('should handle null and undefined values gracefully', () => {
+    const obj = { a: null, b: undefined, c: 3 };
+    const sorted = deepSortAlphabetical(obj);
+    expect(sorted).toEqual({ a: null, b: undefined, c: 3 });
   });
 });

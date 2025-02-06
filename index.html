@@ -130,6 +130,7 @@
                             <li><a href="#deepClone">deepClone</a></li>
                             <li><a href="#deepCompare">deepCompare</a></li>
                             <li><a href="#deepMerge">deepMerge</a></li>
+                            <li><a href="#deepSortAlphabetical">deepSortAlphabetical</a></li>
                         </ul>
                     </li>
                     <li>
@@ -906,21 +907,31 @@ deepClone({ a: [1, 2, { b: 3 }] })        // { a: [1, 2, { b: 3 }] }
                 <p>Compares two objects deeply and returns either true or false based on equality. Optionally, returns an object containing the differences.</p>
                 <pre><code class="language-typescript">deepCompare = (originalObject: any, toCompareObject: any, returnChanges: boolean = false): boolean | object => {}
 
+// Example 1: Objects are equal
+const obj1 = { a: 1, b: { c: 2 } }
+const obj2 = { a: 1, b: { c: 2 } }
+deepCompare(obj1, obj2)  // true
+deepCompare(obj1, obj2, true)  // {}
+
+// Example 2: Objects are not equal
 const obj1 = { a: 1, b: { c: 2 } }
 const obj2 = { a: 1, b: { c: 3 } }
 deepCompare(obj1, obj2, true)     // { b: { c: 3 } }
 deepCompare(obj1, obj2)           // false
 
+// Example 3: Comparing arrays
 const arrayWithObject1 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]
 const arrayWithObject2 = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Charlie' }]
 deepCompare(arrayWithObject1, arrayWithObject2, true);           // [{ id: 2, name: 'Charlie' }]
 deepCompare(arrayWithObject1, arrayWithObject2)                  // false
 
+// Example 4: Comparing nested objects
 const nestedObj1 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'dark' } };
 const nestedObj2 = { users: [{ id: 1, name: 'Alice' }], settings: { theme: 'light' } };
+// Return true if objects are equal
+deepCompare(nestedObj1, nestedObj2)                              // false
+// Returns an object with the differences
 deepCompare(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
-deepCompare(nestedObj1, nestedObj2, true);                       // { settings: { theme: 'light' } }
-deepCompare(nestedObj1, nestedObj2)                             // false
 </code></pre>
             </section>
 
@@ -935,6 +946,22 @@ deepMerge({ arr: [1, 2, 3] }, { arr: [3, 4, 5] })   // { arr: [1, 2, 3, 4, 5] }
 // Exclude keys
 deepMerge( { a: 1, b: 2 }, { c: 3, d: 4, e: 5 }, ['d', 'e'])   // { a: 1, b: 2, c: 3 }
 </code></pre>
+            </section>
+
+            <section id="deepSortAlphabetical">
+                <h3>deepSortAlphabetical</h3>
+                <p>Sorts an object or array alphabetically by key.</p>
+                <pre><code class="language-typescript">deepSortAlphabetical({ a: 1, b: 2, c: 3 })   // { a: 1, b: 2, c: 3 }
+deepSortAlphabetical([1, 2, 3])              // [1, 2, 3]
+
+// Example with nested objects
+deepSortAlphabetical({ c: { d: 4, a: 1 }, b: 2 })        // { b: 2, c: { a: 1, d: 4 } }
+deepSortAlphabetical([{ b: 2 }, { a: 1 }, { c: 3 }])     // [{ a: 1 }, { b: 2 }, { c: 3 }]
+
+// Reverse order
+deepSortAlphabetical({ a: { b: 1, c: 2 }, d: 3 }, true)   // { d: 3, a: { b: 1, c: 2 } }
+deepSortAlphabetical([1, 2, 3], true)                     // [3, 2, 1]
+            </code></pre>
             </section>
         </section>
 
