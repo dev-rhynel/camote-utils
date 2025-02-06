@@ -852,10 +852,26 @@ implode(["Hello", "World"], ", ") // "Hello, World"
             <section id="removeEmptyKeysEntries">
                 <h3>removeEmptyKeysEntries</h3>
                 <p>Removes empty keys and entries from an object.</p>
-                <pre><code class="language-typescript">removeEmptyKeysEntries({ a: 1, b: undefined })     // { a: 1 }
-removeEmptyKeysEntries({ a: 1, b: null })          // { a: 1 }
-removeEmptyKeysEntries({ a: 1, b: '' })            // { a: 1 }
-removeEmptyKeysEntries({ a: 1, b: 2 })             // { a: 1, b: 2 }</code></pre>
+                <pre><code class="language-typescript">const input = {
+    a: 1,
+    b: null,
+    c: undefined,
+    d: '',
+    e: [],
+    f: {},
+    g: 0,
+    h: 'value',
+    i: [1, 2, 3],
+}
+
+const expectedOutput = {
+    a: 1,
+    g: 0,
+    h: 'value',
+    i: [1, 2, 3],
+}
+
+expect(removeEmptyKeysEntries(input)).toEqual(expectedOutput)  // true</code></pre>
             </section>
             <section id="objectToQueryString">
                 <h3>objectToQueryString</h3>
