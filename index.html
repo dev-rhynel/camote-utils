@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://dev-rhynel.github.io/camote-utils" />
     <meta property="og:image" content="https://github.com/user-attachments/assets/9302d4b2-38fd-4869-97b2-72616b22682f"/>
     <meta property="og:description" content="A comprehensive TypeScript utility library featuring advanced string and number formatting, data structures, and algorithms." />
-    <link rel="stylesheet" href="./styles/web.css">
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
 </head>
@@ -43,7 +43,7 @@
                     <li>
                         <a href="#checkers" class="has-submenu">Checkers <i class="fas fa-chevron-down"></i></a>
                         <ul>
-                           
+
                             <li>
                                 <a href="#type-checking" class="has-submenu">Type Checking <i class="fas fa-chevron-down"></i></a>
                                 <ul>
@@ -160,7 +160,7 @@
                     <li><a href="#browser-support">Browser Support</a></li>
                 </ul>
             </div>
-     
+
             <div class="nav-group">
                 <h3>Community</h3>
                 <ul class="nav-links">
@@ -199,14 +199,14 @@
                     </a>
                     <a href="https://twitter.com/devrhynel">
                         <img src="https://img.shields.io/twitter/follow/devrhynel.svg?style=social" alt="Twitter Follow">
-                    </a>  
+                    </a>
                 </div>
                 <a href="https://buymeacoffee.com/rhynel" target="_blank">
-                    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" 
-                        alt="Buy Me A Coffee" 
+                    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                        alt="Buy Me A Coffee"
                         style="height: 50px; margin-top: 12px;
                     ">
-                  </a>     
+                  </a>
             </div>
         </div>
 
@@ -230,7 +230,7 @@
 
         <section id="getting-started">
             <h2>Getting Started</h2>
-            
+
             <section id="installation">
                 <h3>Installation</h3>
                 <p>Install camote-utils using npm:</p>
@@ -261,20 +261,20 @@
                     </div>
                     <div class="code-content">
                         <pre><code class="language-typescript">import { _, pluralize } from 'camote-utils'
-                            
+
 // String manipulation
 pluralize('cat', 1)                  // 'cat'
 pluralize('cat', 2)                  // 'cats'
 pluralize('box', 2)                  // 'boxes'
 pluralize('baby', 2)                 // 'babies'
 pluralize('person', 1, 'people')     // 'person'
-pluralize('person', 2, 'people')     // 'people'    
+pluralize('person', 2, 'people')     // 'people'
 
 // Masking
 _.mask('1234567890')                 // '1234******'
 _.mask('123456NiCe', '#')            // '1234######'
 _.mask('123456NiCe', '#', 4, 'start')            // '####56NiCe'
- 
+
 // Basic formatting
 _.humanReadableNumber(1234567.89)    // "1.2M"
 
@@ -288,7 +288,7 @@ _.humanReadableNumber(1500, { decimals: 0 })      // "2K"</code></pre>
         <section id="chain">
             <h2>Chain Operations</h2>
             <p>Chain operations allow you to perform multiple operations on a value in a fluent interface.</p>
-            
+
             <section id="chain-syntax">
                 <h3>Chain Syntax</h3>
                 <p>Use the chain syntax to perform multiple operations in sequence:</p>
@@ -344,7 +344,7 @@ truncate('hello world', 5)  // hello...</code></pre>
 
             <section id="type-checking">
                 <h3>Type Checking and String Validation</h3>
-                
+
                 <section id="type-checking-functions">
                     <h4>Available Functions</h4>
                     <div class="code-window">
@@ -411,7 +411,7 @@ isEmpty('hello')       // false</code></pre>
 
             <section id="string-validation">
                 <h3>String Validation</h3>
-                
+
                 <section id="string-validation-functions">
                     <h4>Available Functions</h4>
                     <div class="code-window">
@@ -476,7 +476,7 @@ isValidTime('14:30') // true</code></pre>
 
         <section id="number-formatting">
             <h2>Number Formatting</h2>
-            
+
             <section id="humanReadableNumber">
                 <h3>humanReadableNumber(number, options)</h3>
                 <p>Formats a number with various options:</p>
@@ -526,9 +526,9 @@ formatPercent(0.1234, { decimals: 1 })   // "12.3%"</code></pre>
                         <div class="code-dot"></div>
                     </div>
                     <div class="code-content">
-                        <pre><code class="language-typescript">formatDecimals(123.456, 2)               // "123.46" 
-formatDecimals(123.4, 2)                 // "123.40" 
-formatDecimals(123.456, 2, 'ceil')       // "123.46" 
+                        <pre><code class="language-typescript">formatDecimals(123.456, 2)               // "123.46"
+formatDecimals(123.4, 2)                 // "123.40"
+formatDecimals(123.456, 2, 'ceil')       // "123.46"
 formatDecimals(123.456, 2, 'floor')      // "123.45"</code></pre>
                     </div>
                 </div>
@@ -537,7 +537,7 @@ formatDecimals(123.456, 2, 'floor')      // "123.45"</code></pre>
 
         <section id="currency-formatting">
             <h2>Currency Formatting</h2>
-            
+
             <section id="formatCurrency">
                 <h3>formatCurrency(amount, currency?, locale?)</h3>
                 <p>Formats a number as currency:</p>
@@ -560,7 +560,7 @@ formatCurrency(1234.56, 'GBP', 'en-GB')  // "£1,234.56"</code></pre>
 
         <section id="price-calculations">
             <h2>Price Calculations</h2>
-            
+
             <section id="calculateDiscountPrice">
                 <h3>calculateDiscountPrice(price, discount)</h3>
                 <p>Calculates the final price after applying a discount:</p>
@@ -601,13 +601,13 @@ calculateDiscountPrice(150, 0, '%')    // 150</code></pre>
                 <p>Capitalizes the first letter of a string.</p>
                 <pre><code class="language-typescript">capitalize("hello") // "Hello"</code></pre>
             </section>
-            
+
             <section id="capitalizeWords">
                 <h3>capitalizeWords</h3>
                 <p>Capitalizes the first letter of each word in a string.</p>
                 <pre><code class="language-typescript">capitalizeWords("hello world") // "Hello World"</code></pre>
             </section>
-            
+
             <section id="truncate">
                 <h3>truncate</h3>
                 <p>Truncates a string to a specified length and adds an ellipsis.</p>
@@ -670,7 +670,7 @@ mask('1234567890', '*', 4)                // '1234******'
 mask('1234567890', '*', 7, 'start')       // '*******890'
 mask('1234567890', '*', 5, 'end')         // '12345*****'
 mask('camote2025', '*', 4)                // 'camote****'
-// default true 
+// default true
 mask('1234567890', '*', 6, 'end', false)  // '1234567890'
 </code></pre>
                 <h4>Scenarios:</h4>
@@ -707,7 +707,7 @@ pluralize('cat', 2)                        // 'cats'
 pluralize('box', 2)                        // 'boxes'
 pluralize('baby', 2)                       // 'babies'
 pluralize('person', 1, 'people')           // 'person'
-pluralize('person', 2, 'people')           // 'people' 
+pluralize('person', 2, 'people')           // 'people'
 pluralize("person", undefined, "people")   // "people"</code></pre>
                 <h4>Scenarios:</h4>
                 <ul>
@@ -739,7 +739,7 @@ pluralize("person", undefined, "people")   // "people"</code></pre>
             <section id="contains">
                 <h3>contains</h3>
                 <p>
-                    The <code>contains</code> function checks if a given substring exists within a string. 
+                    The <code>contains</code> function checks if a given substring exists within a string.
                     It can be configured to perform case-sensitive or case-insensitive searches, making it versatile for various text processing tasks.
                 </p>
                 <h4>Examples:</h4>
@@ -776,7 +776,7 @@ explode("Hello,World,Again", ",", 3) // ["Hello", "World", "Again"]
                 <h3>toUnicodes</h3>
                 <p>Converts a string into its Unicode escape sequence representation.</p>
                 <pre><code class="language-typescript">toUnicodes("Hello"); //"\u{0048}\u{0065}\u{006C}\u{006C}\u{006F}"
-toUnicodes("Hi 😀"); //" \u{0048}\u{0069}\u{0020}\u{1F600}" 
+toUnicodes("Hi 😀"); //" \u{0048}\u{0069}\u{0020}\u{1F600}"
 toUnicodes("Hello", "He"); // "He\u{006C}\u{006C}\u{006F}"
 toUnicodes("Hi 😀", ["H", "i"]); // "Hi\u{0020}\u{1F600}"</code></pre>
             </section>
@@ -784,15 +784,15 @@ toUnicodes("Hi 😀", ["H", "i"]); // "Hi\u{0020}\u{1F600}"</code></pre>
                 <h3>toHtmlEntities</h3>
                 <p>Converts a string into its HTML Entities representation.</p>
                 <pre><code class="language-typescript">toHtmlEntities("Hello");  // "&amp;#72;&#101;&amp;#108;&amp;#108;&amp;#111;"
-toHtmlEntities('Hi 😀'); // "&amp;#72;&amp;#105;&amp;#32;&amp;#128512;" 
+toHtmlEntities('Hi 😀'); // "&amp;#72;&amp;#105;&amp;#32;&amp;#128512;"
 toHtmlEntities("Hello", "He"); // "He&amp;#108;&amp;#108;&amp;#111;"
 toHtmlEntities("Hi 😀", ["H", "i"]); // "Hi&amp;#32;&amp;#128512;"</code></pre>
             </section>
             <section id="swapCase">
                 <h3>swapCase</h3>
                 <p>
-                    Swaps the case of each alphabetic character in a string. 
-                    Uppercase letters are converted to lowercase, and lowercase letters to uppercase. 
+                    Swaps the case of each alphabetic character in a string.
+                    Uppercase letters are converted to lowercase, and lowercase letters to uppercase.
                     Non-alphabetic characters remain unchanged.
                 </p>
                 <pre><code class="language-typescript">swapCase("Hello World");  // "hELLO wORLD"
@@ -834,8 +834,8 @@ filterArray([1, 2, 3, 4, 5, 6, 7, 8], (num) => num <= 4)         // [1, 2, 3, 4]
                 <h3>capitalizeEach</h3>
                 <p>Capitalizes the first letter of each word in each string within an array.</p>
                 <pre><code class="language-typescript">capitalizeEach(["hello world", "typescript rocks"])   // ["Hello World", "Typescript Rocks"]</code></pre>
-            </section>     
-            
+            </section>
+
             <section id="implode">
                 <h3>implode</h3>
                 <p>Converts an array into a comma-separated string.</p>
@@ -883,7 +883,7 @@ expect(removeEmptyKeysEntries(input)).toEqual(expectedOutput)  // true</code></p
                 <pre><code class="language-typescript">// Using a plain object
 objectToQueryString({ key1: 'value1', key2: 'value2' });
 // Returns: "key1=value1&key2=value2"
-        
+
 // Using a matrix (array of key-value pairs)
 objectToQueryString([['key1', 'value1'], ['key2', 'value2']]);
 // Returns: "key1=value1&key2=value2"
@@ -914,7 +914,7 @@ deepClone([1, { a: 2 }])                  // [1, { a: 2 }]
 deepClone(new Date(2024, 11, 20))         // Date object with the same date
 deepClone(object)                         // Deep copy of the object
 deepClone([{ a: 1 }, { b: 2 }])           // [{ a: 1 }, { b: 2 }]
-deepClone({ a: [1, 2, { b: 3 }] })        // { a: [1, 2, { b: 3 }] }  
+deepClone({ a: [1, 2, { b: 3 }] })        // { a: [1, 2, { b: 3 }] }
 </code></pre>
             </section>
 
@@ -981,9 +981,9 @@ deepSortAlphabetical([1, 2, 3], true)                     // [3, 2, 1]
             </section>
         </section>
 
-        <section id="date-validation">  
+        <section id="date-validation">
             <h2>Date Validation</h2>
-            
+
             <section id="isDateWithinRange">
                 <h3>isDateWithinRange(date, startDate, endDate)</h3>
                 <p>Checks if a date is within a specified range:</p>
@@ -1010,7 +1010,7 @@ isDateWithinRange(start, end)        // true (using default current date)</code>
         <section id="random-generation">
             <h2>Random Generation</h2>
             <p>A comprehensive set of functions for generating various types of random data.</p>
-            
+
             <section id="random-integers">
                 <h3>Integer Generation</h3>
                 <p>Functions for generating random integers with various constraints:</p>
@@ -1093,14 +1093,14 @@ generateRandomPassword(8, { lowercase: false, uppercase: false, numbers: false, 
 generateRandomPassword(8, { custom: "ABC123" });
 
 // Uses custom character set and excludes ambiguous characters
-generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" }); 
+generateRandomPassword(8, { exclude: 'O0Il1', custom: "ABC123" });
 
 // Generate strong password (enforces security rules)
 generateStrongPassword()    // e.g., "StrongP@ssw0"
 generateStrongPassword(16)  // e.g., "StrongP@ssw0rd#2"</code></pre>
                     </div>
                 </div>
-            </section>  
+            </section>
 
             <section id="random-colors">
                 <h3>Color Generation</h3>
@@ -1187,21 +1187,21 @@ generateRandom({ type: 'uuid' })                         // "123e4567-e89b-12d3-
     length?: number;       // Length of generated data
     type?: string;         // Type of data for arrays
     format?: string;       // Output format (e.g., 'hex', 'rgb')
-    
+
     // Number options
     min?: number;          // Minimum value
     max?: number;          // Maximum value
     decimals?: number;     // Number of decimal places
-    
+
     // String options
     case?: 'lower' | 'upper' | 'mixed  // Case for string generation
     symbols?: boolean;     // Include symbols
     numbers?: boolean;     // Include numbers
-    
+
     // Date options
     start?: Date;         // Start date for range
     end?: Date;           // End date for range
-    
+
     // Custom options
     template?: string;    // Custom template for generation
     exclude?: string[];   // Characters to exclude
@@ -1236,7 +1236,7 @@ const uuid: string = generateRandom('uuid')</code></pre>
             <section id="browser-support">
                 <h3>Browser Support</h3>
                 <p>This library is compatible with all modern browsers and Node.js environments. It's built using ES2018+ features and includes necessary polyfills for older environments.</p>
-                
+
                 <div class="code-window">
                     <div class="code-header">
                         <div class="code-dot"></div>
@@ -1252,7 +1252,7 @@ const uuid: string = generateRandom('uuid')</code></pre>
 &lt;/script&gt;</code></pre>
                     </div>
                 </div>
-    
+
                 <section id="supported-browsers">
                     <h4>Supported Browsers</h4>
                     <p>This library supports the following browsers:</p>
@@ -1296,7 +1296,7 @@ import 'regenerator-runtime/runtime</code></pre>
             </section>
 
             <section id="contributors">
-              
+
                 <h2>Contributors</h2>
                 <p>Thanks goes to these wonderful people who have contributed to this project:</p>
 
@@ -1333,10 +1333,10 @@ import 'regenerator-runtime/runtime</code></pre>
     </main>
 
     <div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" ><i class="fas fa-arrow-up"></i></div>
-    
+
     <script>
     window.onscroll = function() {
-        document.getElementById('back-to-top').style.display = 
+        document.getElementById('back-to-top').style.display =
             window.scrollY > 300 ? 'flex' : 'none';
     };
     </script>
@@ -1345,7 +1345,7 @@ import 'regenerator-runtime/runtime</code></pre>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
     <script>
     window.onscroll = function() {
-        document.getElementById('back-to-top').style.display = 
+        document.getElementById('back-to-top').style.display =
             window.scrollY > 300 ? 'flex' : 'none';
     };
     </script>
@@ -1358,7 +1358,7 @@ import 'regenerator-runtime/runtime</code></pre>
             function toggleSubmenu(link, subMenu) {
                 if (link.nextElementSibling && link.nextElementSibling.tagName === 'UL') {
                     link.classList.toggle('expanded');
-                    
+
                     // Expand this submenu
                     if (link.classList.contains('expanded')) {
                         // Calculate total height including all expanded children
@@ -1366,10 +1366,10 @@ import 'regenerator-runtime/runtime</code></pre>
                         subMenu.querySelectorAll('a.expanded + ul').forEach(child => {
                             totalHeight += child.scrollHeight;
                         });
-                        
+
                         // Set submenu height
                         subMenu.style.maxHeight = totalHeight + 'px';
-                        
+
                         // Update parent heights if this is a nested menu
                         let parent = link.closest('li').parentElement;
                         while (parent && parent.tagName === 'UL') {
@@ -1391,7 +1391,7 @@ import 'regenerator-runtime/runtime</code></pre>
                                 expandedLink.nextElementSibling.style.maxHeight = '0';
                             }
                         });
-                        
+
                         // Update parent heights
                         let parent = link.closest('li').parentElement;
                         while (parent && parent.tagName === 'UL') {
@@ -1448,7 +1448,7 @@ import 'regenerator-runtime/runtime</code></pre>
             window.addEventListener('scroll', function() {
                 const sections = document.querySelectorAll('section[id]');
                 let currentSection = '';
-                
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
@@ -1471,7 +1471,7 @@ import 'regenerator-runtime/runtime</code></pre>
             try {
                 const response = await fetch('https://api.github.com/repos/dev-rhynel/camote-utils/contributors');
                 const contributors = await response.json();
-                
+
                 const contributorsList = document.getElementById('contributors-list');
                 contributorsList.innerHTML = contributors
                     .map(contributor => `
@@ -1529,8 +1529,8 @@ import 'regenerator-runtime/runtime</code></pre>
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!sidebar.contains(e.target) && 
-                !menuToggle.contains(e.target) && 
+            if (!sidebar.contains(e.target) &&
+                !menuToggle.contains(e.target) &&
                 sidebar.classList.contains('active')) {
                 sidebar.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
