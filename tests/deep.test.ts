@@ -131,6 +131,13 @@ describe('deepCompare', () => {
     expect(differences).toEqual({ b: { c: 3 } });
   });
 
+  test('should return object for zero', () => {
+    const obj1 = { a: 33 };
+    const obj2 = { a: 0 };
+    const differences = deepCompare(obj1, obj2, true);
+    expect(differences).toEqual(obj2);
+  });
+
   test('should return false for unequal objects', () => {
     const obj1 = { a: 1, b: { c: 2 } };
     const obj2 = { a: 1, b: { c: 3 } };
@@ -158,6 +165,7 @@ describe('deepCompare', () => {
     const nestedDifferences = deepCompare(nestedObj1, nestedObj2);
     expect(nestedDifferences).toEqual(false);
   });
+
 });
 
 describe('deepExclude', () => {

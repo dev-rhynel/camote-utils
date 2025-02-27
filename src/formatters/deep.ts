@@ -120,27 +120,29 @@ export const deepCompare = (objectA: any, objectB: any, returnChanges: boolean =
     const originalKeys = Object.keys(originalObj)
     const compareKeys = Object.keys(toCompareObj)
 
-    // Check for extra keys in toCompareObj
     for (const key of compareKeys) {
       if (!originalKeys.includes(key)) {
         if (returnChanges) {
           changes[key] = toCompareObj[key]
         } else {
-          return false;
+          return false
         }
-      }
-    }
-
-    // Compare common keys
-    for (const key of originalKeys) {
-      if (key in toCompareObj) {
-        const compResult = deepCompare(originalObj[key], toCompareObj[key], returnChanges)
+      } else {
+        const compResult = deepCompare(
+          originalObj[key],
+          toCompareObj[key],
+          returnChanges
+        )
         if (returnChanges) {
-          if (compResult && (typeof compResult === 'object' ? Object.keys(compResult).length > 0 : true)) {
-            changes[key] = toCompareObj[key]
+          if (
+            compResult !== true &&
+            (typeof compResult !== 'object' ||
+              Object.keys(compResult).length > 0)
+          ) {
+            changes[key] = compResult
           }
         } else if (!compResult) {
-          return false;
+          return false
         }
       }
     }
