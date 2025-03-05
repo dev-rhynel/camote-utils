@@ -122,6 +122,7 @@
                         <ul>
                             <li><a href="#removeEmptyKeysEntries">removeEmptyKeysEntries</a></li>
                             <li><a href="#objectToQueryString">objectToQueryString</a></li>
+                            <li><a href="#objectFilterByKeys">objectFilterByKeys</a></li>
                         </ul>
                     </li>
                     <li>
@@ -901,6 +902,28 @@ objectToQueryString([]);
 objectToQueryString({});
 // Throws: Error: Invalid input format: Expected a non-empty object or a valid array format.</code></pre>
             </section>
+            <section id="objectFilterByKeys">
+                <h3>objectFilterByKeys</h3>
+                <p>Filters an object by keys and returns a new object with only the specified keys.</p>
+                <pre><code class="language-typescript">const input = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+}
+
+const keys = ['a', 'b']
+
+const expectedOutput = {
+    a: 1,
+    b: 2,
+}
+
+const output = objectFilterByKeys(input, keys)
+
+expect(output).toEqual(expectedOutput)  // true</code></pre>
+            </section>
+              
         </section>
 
         <section id="deep-manipulation">

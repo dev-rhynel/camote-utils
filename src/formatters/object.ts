@@ -55,3 +55,18 @@ export const objectToQueryString = (obj: Record<string, any> | Array<Array<any>>
   throw new Error("Invalid input format: Expected a non-empty object or a valid array format.")
 }
 
+// Function to filter a user object by dynamic keys
+export function objectFilterByKeys<T extends Record<string, any>>(
+  data: T,
+  keys: (keyof T)[]
+): Partial<T> {
+  const filteredData: Partial<T> = {}
+
+  keys.forEach(key => {
+    if (key in data) {
+      filteredData[key] = data[key]
+    }
+  })
+
+  return filteredData
+}

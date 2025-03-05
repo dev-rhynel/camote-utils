@@ -1,4 +1,4 @@
-import { removeEmptyKeysEntries, objectToQueryString } from './../src/formatters/object';
+import { removeEmptyKeysEntries, objectToQueryString, objectFilterByKeys } from './../src/formatters/object';
 
 describe('removeEmptyKeysEntries', () => {
   it('removes keys with empty values', () => {
@@ -101,3 +101,11 @@ describe('objectToQueryString', () => {
     expect(() => objectToQueryString(input)).toThrow(new Error("Invalid input format: Expected a non-empty object or a valid array format."));
   });
 });
+
+describe('objectFilterByKeys', () => {
+  it('should filter a user object by dynamic keys', () => {
+    const input = { a: 1, b: 2 }
+    const expectedOutput = { a: 1 } 
+    expect(objectFilterByKeys(input, ['a'])).toEqual(expectedOutput)
+  })
+})

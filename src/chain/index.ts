@@ -104,7 +104,12 @@ export class _ {
     }
 
     public objectToQueryString(): this {
-        this.value = objectFormatters.objectToQueryString(this.value);
+        this.value = objectFormatters.objectToQueryString(this.value)
+        return this
+    }
+
+    public objectFilterByKeys(keys: any[]): this {
+        this.value = objectFormatters.objectFilterByKeys(this.value, keys)
         return this
     }
 
