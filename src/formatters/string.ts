@@ -39,6 +39,16 @@ export const slugify = (str: string): string => {
     .replace(/^-+|-+$/g, "")
 }
 
+
+export const slugifyRevert = (str: string): string => {
+  return str
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ")
+}
+
 export const wordCount = (str: string): number => {
   return str.trim() === '' ? 0 : str.trim().split(/\s+/).length
 }
@@ -202,3 +212,5 @@ export const swapCase = (str: string): string => {
     return match === match.toUpperCase() ? match.toLowerCase() : match.toUpperCase()
   })
 }
+
+// ADD FORMAT FILE SIZE

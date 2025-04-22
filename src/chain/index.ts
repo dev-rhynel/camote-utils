@@ -119,6 +119,16 @@ export class _ {
         return this
     }
 
+    slugifyRevert(): _ {
+        this.value = stringFormatters.slugifyRevert(String(this.value))
+        return this
+    }
+
+    slugify(): _ {
+        this.value = stringFormatters.slugify(String(this.value))
+        return this
+    }
+
     truncate(length: number, ellipsis?: string): _ {
         this.value = stringFormatters.truncate(String(this.value), length, ellipsis)
         return this

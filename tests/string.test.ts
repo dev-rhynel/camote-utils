@@ -21,7 +21,8 @@ import {
   explode,
   toUnicodes,
   toHtmlEntities,
-  swapCase
+  swapCase,
+  slugifyRevert
 } from '../src/formatters/string';
 import { generateUUID } from '../src/random';
 
@@ -753,5 +754,49 @@ describe('swapCase', () => {
     const expectedOutput = 'uppercase';
     
     expect(swapCase(input)).toBe(expectedOutput);
+  });
+});
+
+describe('slugifyRevert', () => {
+  it('should convert a simple slug to title case', () => {
+    const input = 'hello-world';
+    const expectedOutput = 'Hello World';
+    expect(slugifyRevert(input)).toBe(expectedOutput);
+  });
+
+  it('should handle multiple hyphens and underscores', () => {
+    const input = 'hello--world___test';
+    const expectedOutput = 'Hello World Test';
+    expect(slugifyRevert(input)).toBe(expectedOutput);
+  });
+
+  it('should handle empty string', () => {
+    const input = '';
+    const expectedOutput = '';
+    expect(slugifyRevert(input)).toBe(expectedOutput);
+  });
+
+  it('should handle string with numbers', () => {
+    const input = 'hello-world-2025';
+    const expectedOutput = 'Hello World 2025';
+    expect(slugifyRevert(input)).toBe(expectedOutput);
+  });
+
+  it('should handle string with special characters', () => {
+    const input = 'hello-world-2025!';
+    const expectedOutput = 'Hello World 2025!';
+    expect(slugifyRevert(input)).toBe(expectedOutput);
+  });
+
+  it('should handle single word slug', () => {
+    const input = 'hello';
+    const expectedOutput = 'Hello';
+    expect(slugifyRevert(input)).toBe(expectedOutput);
+  });
+
+  it('should handle mixed case input', () => {
+    const input = 'hElLo-wOrLd';
+    const expectedOutput = 'Hello World';
+    expect(slugifyRevert(input)).toBe(expectedOutput);
   });
 });

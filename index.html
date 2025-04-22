@@ -87,6 +87,7 @@
                             <li><a href="#toKebabCase">toKebabCase</a></li>
                             <li><a href="#toSnakeCase">toSnakeCase</a></li>
                             <li><a href="#slugify">slugify</a></li>
+                            <li><a href="#slugifyRevert">slugifyRevert</a></li>
                             <li><a href="#wordCount">wordCount</a></li>
                             <li><a href="#pad">pad</a></li>
                             <li><a href="#mask">mask</a></li>
@@ -633,6 +634,11 @@ calculateDiscountPrice(150, 0, '%')    // 150</code></pre>
                 <h3>slugify</h3>
                 <p>Converts a string to a URL-friendly slug.</p>
                 <pre><code class="language-typescript">slugify("Hello World!") // "hello-world"</code></pre>
+            </section>
+            <section id="slugifyRevert">
+                <h3>slugifyRevert</h3>
+                <p>Converts a slug back to title case.</p>
+                <pre><code class="language-typescript">slugifyRevert("hello-world") // "Hello World"</code></pre>
             </section>
             <section id="wordCount">
                 <h3>wordCount</h3>
